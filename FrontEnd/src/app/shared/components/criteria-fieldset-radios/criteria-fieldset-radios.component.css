@@ -1,0 +1,55 @@
+:host {
+    width: 100%;
+}
+
+.fieldset {
+    border: 0.0625rem solid var(--color-primary);
+    display: flex;
+    height: 100%;
+    margin: 0;
+}
+
+.fieldset legend {
+    align-items: center;
+    background-color: transparent !important;
+    color: var(--color-text);
+    display: flex;
+    font-family: var(--font-family-asty);
+    font-size: var(--font-size-fieldset-legend);
+    font-weight: 300;
+    justify-content: space-between;
+    padding: 0 0.5rem 0 0.5rem;
+    width: 100%;
+}
+
+fieldset legend span {
+    transition: color var(--theme-delay);
+}
+
+.fieldset legend .selected {
+    display: flex;
+    align-items: center;
+}
+
+.fieldset legend .selected .icon {
+    font-size: 0.9375rem;
+    margin-left: 0.5rem;
+    position: relative;
+    top: -0.125rem;
+}
+
+.table-wrapper {
+    width: 100%;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+    border: 0.0625rem solid color-mix(in srgb, var(--color-primary) 30%, transparent) !important;
+}
+
+input::placeholder {
+    color: var(--color-text);
+}
+
+.extra-padding {
+    padding-top: 11px !important;
+}

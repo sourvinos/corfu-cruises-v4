@@ -1,0 +1,72 @@
+#dialog {
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 0 0 0 0;
+}
+
+#dialog-header {
+    border-bottom: 0.0625rem solid var(--color-dialog-areas-seperator);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 0 0 1rem 0;
+    padding: 1.5rem 2rem 1rem 2rem;
+}
+
+#dialog-header h1 {
+    color: var(--color-accent);
+}
+
+#dialog-header h6 {
+    color: var(--color-text);
+}
+
+#dialog-content {
+    height: 100%;
+    margin: 0 1rem 0 0 !important;
+    overflow-y: scroll;
+    padding: 0 0 0 2rem;
+}
+
+#dialog-footer {
+    border-top: 0.0625rem solid var(--color-dialog-areas-seperator);
+    display: flex;
+    margin: 1rem 0 0 0;
+    padding: 1rem 2rem 1rem 2rem;
+}
+
+#dialog-footer #align-right {
+    column-gap: 0.5rem;
+    display: flex;
+    margin: 0 0 0 auto;
+}
+
+.option {
+    border-radius: 0.25rem;
+    display: flex;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.option:hover {
+    background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+}
+
+.option-label {
+    color: var(--color-text);
+    display: flex;
+    font-family: var(--font-family-consolas);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    width: 100%;
+}
+
+.option-label:hover {
+    cursor: pointer;
+}
+
+.option-label span {
+    margin: 0.125rem 0 0 0.5rem;
+}

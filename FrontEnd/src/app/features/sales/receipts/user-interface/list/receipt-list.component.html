@@ -1,0 +1,163 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [featureIcon]="featureIcon" [feature]="feature" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div id="header-right">
+                <span id="criteria-caption">{{ getCriteria() }}</span>
+                <button (click)="onShowCriteriaDialog()" class="fab fab-with-no-background" mat-icon-button>
+                    <mat-icon class="material-icons-outlined">filter_alt</mat-icon>
+                </button>
+                <button (click)="onRefreshList()" class="fab fab-with-no-background" mat-icon-button>
+                    <mat-icon class="material-icons-outlined">refresh</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <ng-template [ngIf]="records.length > 0" [ngIfElse]="noData">
+            <div id="table-wrapper">
+                <p-contextMenu #contextMenu [model]="menuItems"></p-contextMenu>
+                <p-table #table (onFilter)="onFilterRecords($event)" [(contextMenuSelection)]="selectedRecord" [contextMenu]="contextMenu" [scrollable]="true" [(selection)]="selectedRecords" [value]="records" [virtualScrollItemSize]="32" [virtualScroll]="true" dataKey="invoiceId" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="no-border-bottom width-3"></th>
+                            <th class="no-border-bottom width-7" pSortableColumn="date.id">{{ getLabel("headerDate") }}</th>
+                            <th class="no-border-bottom width-11" pSortableColumn="shipOwner.description">{{ getLabel("headerShipOwner") }}</th>
+                            <th class="no-border-bottom width-11" pSortableColumn="customer.description">{{ getLabel("headerCustomer") }}</th>
+                            <th class="no-border-bottom width-11" pSortableColumn="documentType.description">{{ getLabel("headerDocumentType") }}</th>
+                            <th class="no-border-bottom width-4" pSortableColumn="invoiceNo">{{ getLabel("headerNo") }}</th>
+                            <th class="no-border-bottom width-6" pSortableColumn="grossAmount">{{ getLabel("headerGrossAmount") }}</th>
+                            <th class="width-3" rowspan="2" pSortableColumn="isEmailSent"><span class="icon center blue material-symbols-outlined">mail</span></th>
+                            <th class="width-3" rowspan="2" pSortableColumn="isCancelled"><span class="icon center orange material-symbols-outlined">upload_2</span></th>
+                        </tr>
+                        <tr>
+                            <th class="no-border-top width-3"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                            <th class="no-border-top width-7">
+                                <p-columnFilter [showMenu]="false" field="date" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="dropdownDates" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-11">
+                                <p-columnFilter [showMenu]="false" field="shipOwner" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="dropdownShipOwners" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-11">
+                                <p-columnFilter [showMenu]="false" field="customer" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="dropdownCustomers" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-11">
+                                <p-columnFilter [showMenu]="false" field="documentType" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="dropdownDocumentTypes" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-4">
+                                <p-columnFilter (input)="onFilter($event.target.value,'invoiceNo','contains')" class="center" field="invoiceNo"></p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-6">
+                                <p-columnFilter (input)="onFilter($event.target.value,'grossAmount','contains')" class="center" field="grossAmount"></p-columnFilter>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template let-record pTemplate="body">
+                        <tr (click)="onHighlightRow(record.invoiceId)" (contextmenu)="onHighlightRow(record.invoiceId)" (dblclick)="editRecord(record.invoiceId)" [attr.id]=record.invoiceId [pContextMenuRow]="record" style="height: 32px;">
+                            <td class="width-3"><span class="center no-overflow" style="padding-top: 0.25rem !important;"><p-tableCheckbox [value]="record"></p-tableCheckbox></span></td>
+                            <td class="width-7"><span class="center no-overflow">{{ record.date.description }}</span></td>
+                            <td class="width-11"><span>{{ record.shipOwner.description }}</span></td>
+                            <td class="width-11"><span>{{ record.customer.description }}</span></td>
+                            <td class="width-11"><span>{{ record.documentType.description }}</span></td>
+                            <td class="width-4"><span class="center no-overflow">{{ record.invoiceNo }}</span></td>
+                            <td class="width-6"><span class="right with-right-padding">{{ formatNumberToLocale(record.grossAmount) }}</span></td>
+                            <td class="width-3">
+                                <span class="center no-overflow">
+                                    <ng-template [ngIf]="record.isEmailPending && !record.isEmailSent" [ngIfElse]="noIcon">
+                                        <span class="icon center orange email material-symbols-outlined no-overflow">email</span>
+                                    </ng-template>
+                                    <ng-template [ngIf]="!record.isEmailPending && record.isEmailSent" [ngIfElse]="noIcon">
+                                        <span class="icon center blue email material-symbols-outlined no-overflow">email</span>
+                                    </ng-template>
+                                </span>
+                            </td>
+                            <td class="width-3">
+                                <span class="center no-overflow">
+                                    <ng-template [ngIf]="record.isCancelled != ''" [ngIfElse]="noIcon">
+                                        <span class="icon center orange material-symbols-outlined no-overflow">upload_2</span>
+                                    </ng-template>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </ng-template>
+
+    </div>
+
+    <div id="footer">
+        <button [matMenuTriggerFor]="menu" class="fab fab-with-no-background" mat-icon-button>
+            <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="primary">
+            <ng-container *ngTemplateOutlet="threeDotsMenu"></ng-container>
+        </mat-menu>
+        <table-total-filtered-records (resetTableFilters)="resetTableFilters()" [filteredRecordCount]="recordsFilteredCount" [recordCount]="records.length" [selectedRecordCount]="selectedRecords.length" [mustShowSelectedFilteredCount]="true"></table-total-filtered-records>
+        <div id="align-right">
+            <button (click)="onNewRecord()" class="primary" mat-flat-button>{{ getLabel("newRecord") | uppercase }}</button>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #threeDotsMenu>
+    <button (click)="buildAndOpenSelectedRecords()" mat-menu-item>
+        <span>Προεπισκόπηση επιλεγμένων</span>
+    </button>
+    <button (click)="addSelectedRecordsToEmailQueue()" mat-menu-item>
+        <span>Αποστολή επιλεγμένων με email</span>
+    </button>    
+    <button (click)="exportSelected()" mat-menu-item>
+        <span>{{ getLabel("exportSelected") }}</span>
+    </button>
+</ng-template>
+
+<ng-template #noData>
+    <cat-page icon="face" [header]="getLabel('noDataHeader')" [subHeader]="getLabel('noDataSubHeader')"></cat-page>
+</ng-template>
+
+<ng-template #noIcon>
+    <span class="icon center orange material-symbols-outlined no-overflow"></span>
+</ng-template>

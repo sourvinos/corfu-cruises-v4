@@ -1,0 +1,52 @@
+{
+    "name": "corfucruises",
+    "version": "3.0.0",
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve --hmr --host=127.0.0.1 --ssl --ssl-cert ssl\\localhost.crt --ssl-key ssl\\localhost.key",
+        "build": "ng build",
+        "lint": "eslint ./"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "16.2.12",
+        "@angular/common": "16.2.12",
+        "@angular/compiler": "16.2.12",
+        "@angular/core": "16.2.12",
+        "@angular/forms": "16.2.12",
+        "@angular/material": "16.2.12",
+        "@angular/material-moment-adapter": "16.2.12",
+        "@angular/platform-browser": "16.2.12",
+        "@angular/platform-browser-dynamic": "16.2.12",
+        "@angular/router": "16.2.12",
+        "@zxing/browser": "0.1.4",
+        "@zxing/library": "0.20.0",
+        "@zxing/ngx-scanner": "16.1.0",
+        "crypto-js": "4.2.0",
+        "dexie": "3.2.5",
+        "file-saver": "2.0.5",
+        "guid-typescript": "1.0.9",
+        "jwt-decode": "4.0.0",
+        "ngx-currency": "4.0.0",
+        "pdfmake": "0.2.9",
+        "pretty-print-json": "3.0.0",
+        "primeng": "16.9.1",
+        "rxjs": "7.8.1",
+        "stylelint": "16.2.1",
+        "tslib": "2.6.2",
+        "xlsx": "0.18.5",
+        "zone.js": "0.13.3"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "16.2.14",
+        "@angular/cli": "16.2.11",
+        "@angular/compiler-cli": "16.2.12",
+        "@types/file-saver": "2.0.7",
+        "@types/pdfmake": "0.2.9",
+        "@typescript-eslint/eslint-plugin": "7.0.2",
+        "@typescript-eslint/parser": "7.0.2",
+        "eslint": "8.57.0",
+        "stylelint-config-standard": "36.0.0",
+        "typescript": "5.1.6"
+    }
+}

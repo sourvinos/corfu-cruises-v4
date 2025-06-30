@@ -1,0 +1,25 @@
+<fieldset class="fieldset">
+    <legend>
+        <span>{{ getLabel(caption) }}</span>
+        <div class="selected">
+            <span class="selected-count">{{ getLabel("selected") }}: {{ isSelected() ? '1' : '0' }}</span>
+            <span class="icon">{{ getEmoji(isSelected() ? 'green-box' : 'red-box') }}</span>
+        </div>
+    </legend>
+    <div class="table-wrapper">
+        <p-table #table (onRowSelect)="onRowSelect()" (onRowUnselect)="onRowUnselect()" [(selection)]="localSelected" [scrollable]="true" [value]="array" [virtualScrollItemSize]="32" [virtualScroll]="true" datakey="id" scrollHeight="flex" selectionMode="single">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="less-top-padding width-2"></th>
+                    <th class="less-top-padding width-5"><input (input)="table.filter($event.target.value, 'description', 'contains')" [value]="$any(table).filters['description']?.value" class="p-inputtext"></th>
+                </tr>
+            </ng-template>
+            <ng-template let-element pTemplate="body">
+                <tr (click)="highlightRow(element.id)" [attr.id]=element.id style="height: 32px;">
+                    <td class="width-2"><span class="center no-overflow" style="padding-top: 0 !important;"><p-tableRadioButton [value]="element"></p-tableRadioButton></span></td>
+                    <td class="width-5"><span>{{ element.description }}</span></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</fieldset>

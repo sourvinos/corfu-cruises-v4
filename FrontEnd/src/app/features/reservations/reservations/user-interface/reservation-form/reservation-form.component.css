@@ -1,0 +1,132 @@
+:host {
+    height: 100%;
+}
+
+#header {
+    justify-content: space-between !important;
+}
+
+#header-buttons {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin: 0 1rem 0 0;
+}
+
+#general-tab, #passengers-tab {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+#table-wrapper {
+    margin: 0;
+}
+
+.group-input-field:last-child {
+    margin-top: auto;
+}
+
+#passenger-check-total-icon {
+    margin: -0.125rem 0 0 0.5rem;
+}
+
+.hide-autocomplete {
+    display: none;
+}
+
+.material-symbols-outlined:hover {
+    cursor: pointer;
+    margin: 0.125rem 0 0 0;
+}
+
+#ref-no, #total-pax {
+    background-color: var(--color-input-background);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-asty);
+    font-weight: 300;
+    height: 3.5rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    transition: background-color var(--theme-delay) !important;
+
+}
+
+#ref-no #ref-no-label {
+    color: var(--color-text);
+    font-size: 0.80rem;
+    text-align: center;
+    transition: color var(--theme-delay) !important;
+}
+
+#ref-no #ref-no-body {
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    margin-top: 0.75rem;
+    transform: scale(0.8, 2);
+}
+
+#total-pax-emoji {
+    font-size: 1.25rem;
+    margin: -0.5rem 0 0 0.625rem;
+}
+
+#voucher-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin: 1rem 1rem 0 0;
+}
+
+.date-picker-in-input-field {
+    display: flex;
+    margin: -0.1875rem 0.625rem -1rem 2rem;
+    width: 1rem !important;
+}
+
+.autocomplete-pickup-point {
+    display: flex;
+    gap: 0.5rem;
+    font-family: var(--font-family-ubuntu);
+    font-size: 0.875rem;
+}
+
+.autocomplete-pickup-point span {
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+.autocomplete-pickup-point span:nth-child(2) {
+    width: 60%;
+}
+
+.autocomplete-pickup-point span:nth-child(3) {
+    width: 30%;
+}
+
+.autocomplete-pickup-point span:nth-child(4) {
+    width: 10%;
+}
+
+#bottom-panel {
+    display: flex;
+    justify-content: space-between;
+}
+
+#right-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-calendar-body-cell.selected {
+    background-color: red !important;
+    border-radius: 50%
+}
+
+.drop-calendar {
+    width: 30rem
+}

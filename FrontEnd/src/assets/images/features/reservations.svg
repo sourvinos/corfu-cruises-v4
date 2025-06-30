@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   viewBox="0 0 24 24"
+   xml:space="preserve"
+   sodipodi:docname="reservations.svg"
+   width="24"
+   height="24"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs479" /><sodipodi:namedview
+   id="namedview477"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="true"
+   inkscape:deskcolor="#d1d1d1"
+   showgrid="false"
+   inkscape:zoom="33.916667"
+   inkscape:cx="12"
+   inkscape:cy="12"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<path
+   style="fill:#8cc1ea;stroke-width:0.0536747"
+   d="M 16.389643,1.0720312 H 22.25512 C 23.218522,1.0720312 24,1.6680469 24,2.4028125 V 22.669219 C 24,23.403984 23.218522,24 22.25512,24 H 1.7457406 C 0.78147768,24 0,23.403984 0,22.669219 V 2.4028125 C 0,1.6680469 0.78147768,1.0720312 1.7457406,1.0720312 h 5.8645552"
+   id="path448" />
+<polyline
+   style="fill:#ffffff"
+   points="327.421,78.553 392.043,78.553 392.043,456.317 119.957,456.317 119.957,78.553   184.585,78.553 "
+   id="polyline450"
+   transform="matrix(0.06146108,0,0,0.046875,-3.7340067,0)" />
+<path
+   style="fill:#f2ca7f;stroke-width:0.0536747"
+   d="M 16.389643,4.3835156 H 7.6107874 v -3.0525 C 7.6107874,0.59596875 8.3921422,0 9.3559749,0 h 5.2883571 c 0.963833,0 1.745188,0.59596875 1.745188,1.3310156 v 3.0525 z"
+   id="path452" />
+<rect
+   x="9.605691"
+   y="2.4776719"
+   style="fill:#79b1d6;stroke-width:0.0536747"
+   width="4.7884946"
+   height="0.85832816"
+   id="rect454" />
+<g
+   id="g464"
+   transform="matrix(0.06146108,0,0,0.046875,-3.7340067,0)">
+	<rect
+   x="209.743"
+   y="163.222"
+   style="fill:#898686"
+   width="139.735"
+   height="18.311001"
+   id="rect456" />
+	<rect
+   x="209.743"
+   y="370.09601"
+   style="fill:#898686"
+   width="139.735"
+   height="18.311001"
+   id="rect458" />
+	<rect
+   x="209.743"
+   y="301.138"
+   style="fill:#898686"
+   width="139.735"
+   height="18.311001"
+   id="rect460" />
+	<rect
+   x="209.743"
+   y="232.17999"
+   style="fill:#898686"
+   width="139.735"
+   height="18.311001"
+   id="rect462" />
+</g>
+<g
+   id="g474"
+   transform="matrix(0.06146108,0,0,0.046875,-3.7340067,0)">
+	<circle
+   style="fill:#f2ca7f"
+   cx="171.66901"
+   cy="172.377"
+   r="9.1549997"
+   id="circle466" />
+	<circle
+   style="fill:#f2ca7f"
+   cx="171.66901"
+   cy="241.33501"
+   r="9.1549997"
+   id="circle468" />
+	<circle
+   style="fill:#f2ca7f"
+   cx="171.66901"
+   cy="310.293"
+   r="9.1549997"
+   id="circle470" />
+	<circle
+   style="fill:#f2ca7f"
+   cx="171.66901"
+   cy="379.25101"
+   r="9.1549997"
+   id="circle472" />
+</g>
+</svg>

@@ -1,0 +1,42 @@
+<div class="table-wrapper">
+    <p-table #table [scrollable]="true" [virtualScrollItemSize]="32" [value]="records" [virtualScroll]="false" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="no-border-bottom width-15" pSortableColumn="customer.description">{{ getLabel("headerCustomer") }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="previous">{{ getLabel("headerPrevious") }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="periodBalance">{{ getLabel("headerRequested") }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="total">{{ getLabel("headerTotal") }}</th>
+            </tr>
+            <tr>
+                <th class="no-border-top width-15">
+                    <p-columnFilter (input)="onFilter($event.target.value,'customer.description','contains')" class="center" field="customer.description"></p-columnFilter>
+                </th>
+                <th class="no-border-top width-3">
+                    <p-columnFilter (input)="onFilter($event.target.value,'previous','contains')" class="center" field="previous"></p-columnFilter>
+                </th>
+                <th class="no-border-top width-3">
+                    <p-columnFilter (input)="onFilter($event.target.value,'periodBalance','contains')" class="center" field="periodBalance"></p-columnFilter>
+                </th>
+                <th class="no-border-top width-3">
+                    <p-columnFilter (input)="onFilter($event.target.value,'total','contains')" class="center" field="total"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template let-record pTemplate="body">
+            <tr style="height: 32px;">
+                <td class="width-15"><span>{{ record.customer.description }}</span></td>
+                <td class="right width-3"><span class="number right with-right-padding">{{ formatNumberToLocale(record.previous) }}</span></td>
+                <td class="right width-3"><span class="number right with-right-padding">{{ formatNumberToLocale(record.periodBalance) }}</span></td>
+                <td class="right width-3"><span class="number right with-right-padding">{{ formatNumberToLocale(record.total) }}</span></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <tr style="height: 32px;">
+                <td class="width-15"><span></span></td>
+                <td class="right width-3"><span class="number with-right-padding">{{ formatNumberToLocale(totals.previous) }}</span></td>
+                <td class="right width-3"><span class="number with-right-padding">{{ formatNumberToLocale(totals.periodBalance) }}</span></td>
+                <td class="right width-3"><span class="number with-right-padding">{{ formatNumberToLocale(totals.total) }}</span></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

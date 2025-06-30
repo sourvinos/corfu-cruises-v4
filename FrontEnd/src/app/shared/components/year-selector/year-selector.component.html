@@ -1,0 +1,16 @@
+<div id="button-wrapper">
+    <span id="year">{{ year }}</span>
+    <button [matMenuTriggerFor]="tables" class="fab fab-with-no-background" mat-icon-button>
+        <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+    </button>
+</div>
+
+<mat-menu #tables="matMenu" class="primary">
+    <ng-container *ngTemplateOutlet="yearsMenu"></ng-container>
+</mat-menu>
+
+<ng-template #yearsMenu>
+    <button *ngFor="let year of years" (click)="doNavigationTasks(year)" mat-menu-item>
+        <span>{{ year }}</span>
+    </button>
+</ng-template>

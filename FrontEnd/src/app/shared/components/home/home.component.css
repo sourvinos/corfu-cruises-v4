@@ -1,0 +1,8 @@
+#content {
+    background-color: transparent !important;
+    justify-content: flex-end;
+}
+
+#fake-footer {
+    padding: 2rem 0 2rem 0;
+}

@@ -1,0 +1,33 @@
+@model API.Infrastructure.Users.UserDetailsForEmailVM
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+
+<body>
+    <div id="wrapper">
+        <p style="font-family: Tahoma; font-size: 13px;">👋 Γεια σας, @Model.Displayname</p>
+        <div style="font-family: Tahoma; font-size: 13px;">Καλώς ήρθατε στην πλατφόρμα κρατήσεών μας.</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Λαμβάνετε αυτό το email επειδή έχουμε ανοίξει έναν νέο λογαριασμό για εσάς.</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Έχουμε επίσης ορίσει έναν προσωρινό κωδικό πρόσβασης, τον οποίο πρέπει να αλλάξετε ώστε να σας επιτραπεί η είσοδος.</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Παρακαλούμε κάντε κλικ στον παρακάτω σύνδεσμο και στη συνέχεια στο «Ξέχασα τον κωδικό μου» για να ορίσετε έναν νέο κωδικό πρόσβασης.</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px; text-decoration: none !important;"><a class="primary" href="@Model.Url">Ορισμός νέου κωδικού</a></div>
+        <p> </p>
+        <div style="font-family: Tahoma; font-size: 13px;">Ευχαριστούμε για τη συνεργασία,</div>
+        <div style="font-family: Tahoma; font-size: 13px;">η ομάδα της Corfu Cruises</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px;">τηλέφωνο επικοινωνίας: +30 26610 71150</div>
+        <div style="font-family: Tahoma; font-size: 13px;">email: corfucruises.com@gmail.com</div>
+        <div style="font-family: Tahoma; font-size: 13px;">website: www.corfucruises.com</div>
+        <div style="font-family: Tahoma; font-size: 13px;">web application: www.appcorfucruises.com</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px;">🚫 Σας παρακαλούμε μην απαντάτε σε αυτό το email.</div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [featureIcon]="featureIcon" [feature]="feature" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <div id="table-wrapper">
+            <p-table #table (onFilter)="filterRecords($event)" [scrollable]="true" [value]="records" [virtualScrollItemSize]="32" [virtualScroll]="true" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="no-border-bottom width-5" pSortableColumn="isActive">{{ getLabel("headerIsActive") }}</th>
+                        <th class="no-border-bottom width-25" pSortableColumn="ship.description">{{ getLabel("headerShipDescription") }}</th>
+                        <th class="no-border-bottom width-25" pSortableColumn="specialty.description">{{ getLabel("headerSpecialtyDescription") }}</th>
+                        <th class="no-border-bottom width-25" pSortableColumn="lastname">{{ getLabel("headerLastname") }}</th>
+                        <th class="no-border-bottom width-25" pSortableColumn="firstname">{{ getLabel("headerFirstname") }}</th>
+                    </tr>
+                    <tr>
+                        <th class="no-border-top width-5"><p-columnFilter field="isActive" type="boolean"></p-columnFilter></th>
+                        <th class="no-border-top width-25">
+                            <p-columnFilter [showMenu]="false" field="ship" matchMode="in">
+                                <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                    <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctShips" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="p-multiselect-option">
+                                                <span>{{ option.description }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </th>
+                        <th class="no-border-top width-25">
+                            <p-columnFilter [showMenu]="false" field="specialty" matchMode="in">
+                                <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                    <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctSpecialties" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="p-multiselect-option">
+                                                <span>{{ option.description }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </th>
+                        <th class="no-border-top width-25"><input (input)="table.filter($event.target.value, 'lastname', 'contains')" [value]="$any(table).filters['lastname']?.value" class="p-inputtext"></th>
+                        <th class="no-border-top width-25"><input (input)="table.filter($event.target.value, 'firstname', 'contains')" [value]="$any(table).filters['firstname']?.value" class="p-inputtext"></th>
+                    </tr>
+                </ng-template>
+                <ng-template let-record pTemplate="body">
+                    <tr (click)="highlightRow(record.id)" (dblclick)="editRecord(record.id)" [attr.id]=record.id style="height: 32px;">
+                        <td class="width-5"><span class="center no-left-padding no-overflow" style="font-size: 0.5rem; padding-top: 0 !important;">{{ getEmoji(record.isActive) }}</span></td>
+                        <td class="width-25"><span>{{ record.ship.description }}</span></td>
+                        <td class="width-25"><span>{{ record.specialty.description }}</span></td>
+                        <td class="width-25"><span>{{ record.lastname }}</span></td>
+                        <td class="width-25"><span>{{ record.firstname }}</span></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <table-total-filtered-records (resetTableFilters)="resetTableFilters()" [filteredRecordCount]="recordsFilteredCount" [recordCount]="records.length"></table-total-filtered-records>
+        <div id="align-right">
+            <button (click)="newRecord()" class="primary" mat-flat-button>{{ getLabel("newRecord") | uppercase }}</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,17 @@
+#form {
+    column-gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#comparison {
+    align-self: center;
+    color: var(--color-primary);
+    display: flex;
+    font-size: 1.875rem;
+    font-weight: 600;
+    justify-content: center;
+    margin: 0 0.5rem 0 0.5rem;
+}
+

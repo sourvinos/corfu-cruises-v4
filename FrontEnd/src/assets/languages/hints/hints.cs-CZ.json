@@ -1,0 +1,84 @@
+{
+    "labels": [
+        {
+            "id": "beginsOrEndsWithSpace",
+            "description": "Toto pole nesmí začínat ani končit mezerou"
+        },
+        {
+            "id": "containsIllegalCharacters",
+            "description": "Toto pole umožňuje pouze alfanumerické znaky nebo podtržítka"
+        },
+        {
+            "id": "doesNotContainDigits",
+            "description": "Toto pole musí obsahovat alespoň jednu číslici"
+        },
+        {
+            "id": "doesNotContainLowerCase",
+            "description": "Toto pole musí obsahovat alespoň jeden malý znak"
+        },
+        {
+            "id": "doesNotContainSymbol",
+            "description": "Toto pole musí obsahovat alespoň jeden symbol, tj. % nebo #."
+        },
+        {
+            "id": "doesNotContainUpperCase",
+            "description": "Toto pole musí obsahovat alespoň jeden velký znak"
+        },
+        {
+            "id": "invalid",
+            "description": "Toto pole je neplatné"
+        },
+        {
+            "id": "invalidRange",
+            "description": "Toto pole je mimo povolený rozsah"
+        },
+        {
+            "id": "invalidShort",
+            "description": "Neplatné"
+        },
+        {
+            "id": "maxLength",
+            "description": "Toto pole může být dlouhé až xx znaků"
+        },
+        {
+            "id": "minLength",
+            "description": "Toto pole musí mít alespoň xx znaků"
+        },
+        {
+            "id": "otherErrors",
+            "description": "Toto pole obsahuje chyby"
+        },
+        {
+            "id": "passwordsNoMatch",
+            "description": "Nové heslo a potvrzení nového hesla se neshodují"
+        },
+        {
+            "id": "remainingCharacters",
+            "description": "Můžete uvést až xx dalších znaků"
+        },
+        {
+            "id": "required",
+            "description": "Toto pole je povinné"
+        },
+        {
+            "id": "shouldBeEmptyPlusOrMinus",
+            "description": "Toto pole může být prázdné nebo může obsahovat symbol + nebo -."
+        },
+        {
+            "id": "shouldBeCapitalLetterOrSpace",
+            "description": "Povolena jsou pouze velká písmena latinky"
+        },
+        {
+            "id": "shouldBeCapitalLetter",
+            "description": "Povolena jsou pouze velká písmena latinky"
+        },
+        {
+            "id": "spacesNotAllowed",
+            "description": "Toto pole nesmí obsahovat mezery"
+        },
+        {
+            "id": "shouldBeOnlyNumbers",
+            "description": "The field must have numeric characters only"
+        }
+    ]
+}

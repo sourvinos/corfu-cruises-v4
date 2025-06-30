@@ -1,0 +1,9 @@
+#header-right {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-datepicker {
+    display: flex;
+}

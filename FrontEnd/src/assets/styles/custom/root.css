@@ -1,0 +1,157 @@
+@import url("https://fonts.cdnfonts.com/css/asty-cf-std");
+@import url('https://fonts.cdnfonts.com/css/fira-sans-extra-condensed');
+@import url('https://fonts.cdnfonts.com/css/segoe-ui-4');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Icons+Outlined");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display&display=swap');
+
+@import url("../custom/common-colors.css");
+
+@import url("../../themes/base.css");
+@import url("../custom/cube-loader.css");
+@import url("../custom/filter-pill.css");
+@import url("../custom/headers.css");
+@import url("../custom/skeleton.css");
+@import url("../custom/variables.css");
+@import url("../material/mat-autocomplete.css");
+@import url("../material/mat-button-toggle.css");
+@import url("../material/mat-button.css");
+@import url("../material/mat-card.css");
+@import url("../material/mat-checkbox.css");
+@import url("../material/mat-date-picker.css");
+@import url("../material/mat-date-range-picker.css");
+@import url("../material/mat-divider.css");
+@import url("../material/mat-expansion-panel");
+@import url("../material/mat-input.css");
+@import url("../material/mat-menu.css");
+@import url("../material/mat-radio.css");
+@import url("../material/mat-tab.css");
+@import url("../prime/prime-checkbox.css");
+@import url("../prime/prime-filter-input.css");
+@import url("../prime/prime-radio.css");
+@import url("../prime/prime-table-filters.css");
+@import url("../prime/prime-table-widths.css");
+@import url("../prime/prime-table.css");
+@import url("../prime/prime-tabview.css");
+
+@font-face {
+    font-family: Aka-Acid-CanterBold;
+    src: url("/assets/fonts/ACCanterBold.ttf");
+}
+
+@font-face {
+    font-family: Consolas;
+    src: url("/assets/fonts/Consolas.ttf");
+}
+
+* {
+    box-sizing: border-box !important;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    min-height: 100vh;
+    min-height: 100%;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.center {
+    justify-content: center !important;
+    padding: 0 0 0 0 !important;
+    text-align: center !important;
+}
+
+.right {
+    justify-content: flex-end !important;
+    text-align: end !important;
+}
+
+.accent {
+    color: var(--color-accent) !important;
+}
+
+.hidden {
+    visibility: hidden !important;
+}
+
+.no-display {
+    display: none !important;
+}
+
+.pi {
+    margin-top: 0;
+}
+
+.subscript {
+    font-size: 0.5rem;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.disabled:hover {
+    cursor: no-drop;
+    pointer-events: all;
+}
+
+.blue {
+    color: var(--color-blue);
+}
+
+.green {
+    color: var(--color-green);
+}
+
+.orange {
+    color: var(--color-orange);
+}
+
+::-webkit-scrollbar {
+    height: 0;
+    width: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: var(--color-accent);
+    border-radius: 0;
+    border-left: 0 solid rgb(0 0 0 /0%);
+    min-height: 5rem;
+}
+
+::placeholder {
+    transition: all var(--theme-delay);
+}
+
+::-ms-reveal {
+    display: none;
+}
+
+p {
+    color: var(--color-text) !important;
+    font-family: var(--font-family-ubuntu);
+    font-size: 1rem;
+    margin: 0;
+}

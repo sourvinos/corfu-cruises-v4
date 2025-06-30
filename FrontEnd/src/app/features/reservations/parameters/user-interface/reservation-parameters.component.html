@@ -1,0 +1,49 @@
+<div id="form-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <!-- Closing time -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('closingTime') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="1" formControlName="closingTime" matInput />
+                <mat-error *ngIf="closingTime.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!closingTime.hasError('required') && !closingTime.hasError('time')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- Phones -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('phones') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="2" formControlName="phones" matInput>
+                <mat-error *ngIf="phones.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="phones.hasError('maxlength')">{{ getHint("maxLength", phones.errors.maxlength.requiredLength) }}</mat-error>
+            </mat-form-field>
+            <!-- Email -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('email') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="3" formControlName="email" matInput>
+                <mat-error *ngIf="email.hasError('maxlength')">{{ getHint("maxLength", email.errors.maxlength.requiredLength) }}</mat-error>
+                <mat-error *ngIf="!email.hasError('maxlength') && email.hasError('email')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <div class="align-bottom">
+                <!-- Metadata -->
+                <metadata-panel [feature]="feature" [postAt]="form.value.postAt" [postUser]="form.value.postUser" [putAt]="form.value.putAt" [putUser]="form.value.putUser"></metadata-panel>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="onSave()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("saveButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>

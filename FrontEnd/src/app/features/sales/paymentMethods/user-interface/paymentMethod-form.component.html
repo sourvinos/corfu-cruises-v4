@@ -1,0 +1,63 @@
+<div id="form-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <!-- Description -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('description') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="1" formControlName="description" matInput>
+                <mat-error *ngIf="description.hasError('required')">{{ getHint("required") }}</mat-error>
+                <img [src]="getFlag('gr')" class="flag">
+            </mat-form-field>
+            <!-- DescriptionEn -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('description') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="2" formControlName="descriptionEn" matInput>
+                <mat-error *ngIf="descriptionEn.hasError('required')">{{ getHint("required") }}</mat-error>
+                <img [src]="getFlag('gb')" class="flag">
+            </mat-form-field>
+            <!-- Table 8.12 -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('myDataId') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="3" formControlName="myDataId" matInput>
+                <mat-error *ngIf="myDataId.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!myDataId.hasError('required') && myDataId.hasError('shouldBeOnlyNumbers')">{{ getHint("shouldBeOnlyNumbers") }}</mat-error>
+            </mat-form-field>
+            <div class="stacked-checkboxes">
+                <!-- Cash -->
+                <mat-checkbox formControlName="isCash">
+                    <span>{{ getLabel("isCash") }}</span>
+                </mat-checkbox>
+                <!-- Default -->
+                <mat-checkbox formControlName="isDefault">
+                    <span>{{ getLabel("isDefault") }}</span>
+                </mat-checkbox>
+                <!-- Active -->
+                <mat-checkbox formControlName="isActive">
+                    <span>{{ getLabel("isActive") }}</span>
+                </mat-checkbox>
+            </div>
+            <div class="align-bottom">
+                <!-- Metadata -->
+                <metadata-panel [feature]="feature" [postAt]="form.value.postAt" [postUser]="form.value.postUser" [putAt]="form.value.putAt" [putUser]="form.value.putUser"></metadata-panel>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="onDelete()" *ngIf="form.value.id !== 0" class="delete" mat-flat-button>{{ getLabel("deleteButton") | uppercase }}</button>
+            <button (click)="onSave()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("saveButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>

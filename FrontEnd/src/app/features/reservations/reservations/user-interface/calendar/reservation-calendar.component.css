@@ -1,0 +1,30 @@
+#header-right {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#refresh-warning {
+    color: var(--color-button-delete);
+    margin: 0.1875rem 1rem 0 0;
+}
+
+#refresh-warning:hover {
+    cursor: pointer;
+}
+
+#goto-today-button {
+    background-color: transparent !important;
+    box-shadow: none;
+    padding: 0.125rem 0 0 0 !important;
+}
+
+#goto-today-button span {
+    color: var(--color-accent) !important;
+}
+
+.day.has-schedule:hover {
+    cursor: pointer !important;
+    transform: scaleY(1.03);
+    transition: all 0.2s !important;
+}

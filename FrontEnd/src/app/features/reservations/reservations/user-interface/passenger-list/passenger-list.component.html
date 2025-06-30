@@ -1,0 +1,55 @@
+<div id="passenger-list">
+
+    <div *ngIf="passengers" id="table-wrapper">
+        <p-table #table [scrollable]="true" [value]="passengers" [virtualScrollItemSize]="32" [virtualScroll]="false" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="no-border-bottom width-5"></th>
+                    <th class="no-border-bottom width-20" pSortableColumn="lastname">{{ getLabel('headerLastname') }}</th>
+                    <th class="no-border-bottom width-20" pSortableColumn="firstname">{{ getLabel('headerFirstname') }}</th>
+                    <th class="no-border-bottom width-10" pSortableColumn="nationality.description">{{ getLabel('headerCountry') }}</th>
+                    <th class="no-border-bottom width-5"></th>
+                </tr>
+                <tr>
+                    <th class="no-border-top width-5"></th>
+                    <th class="no-border-top width-20"><input type="text" class="p-inputtext" (input)="table.filter($event.target.value, 'lastname', 'contains')" [value]="$any(table).filters['lastname']?.value"></th>
+                    <th class="no-border-top width-20"><input type="text" class="p-inputtext" (input)="table.filter($event.target.value, 'firstname', 'contains')" [value]="$any(table).filters['firstname']?.value"></th>
+                    <th class="no-border-top width-10"></th>
+                    <th class="no-border-top width-5"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-record>
+                <tr (click)="highlightRow(record.id)" (dblclick)="editRecord(record)" [attr.id]="record.id" [pSelectableRow]="record" style="height: 32px;">
+                    <td class="width-4">
+                        <span class="center no-overflow" style="font-size: 0.5rem; padding-top: 0 !important;">{{ getBoardingStatusIcon(record.isBoarded) }}</span>
+                    </td>
+                    <td class="width-20"><span>{{ record.lastname }}</span></td>
+                    <td class="width-20"><span>{{ record.firstname }}</span></td>
+                    <td class="align-vertical width-10">
+                        <span class="flag" style="width: 100%;">
+                            <img [src]="getNationalityIcon(record.nationality.code)" class="flag-with-border" />
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ record.nationality.description }}</span>
+                        </span>
+                    </td>
+                    <td class="width-5">
+                        <span class="center no-overflow">
+                            <span (click)="deleteRow(record)" style="font-size: 0.75rem;">{{ getEmoji('error') }}</span>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div id="footer">
+        <div class="passenger-count-wrapper">
+            <span class="material-icons-outlined primary">group</span>
+            <span class="passenger-count">{{ passengers != null ? passengers.length : 0 }}</span>
+        </div>
+        <button (click)="newRow()" [disabled]="checkTotalPaxAgainstPassengerCount()" class="secondary" mat-flat-button>
+            <mat-icon *ngIf="checkTotalPaxAgainstPassengerCount()" class="material-icons-outlined">lock</mat-icon>
+            <span>{{ getLabel("newPassengerButton") | uppercase }}</span>
+        </button>
+    </div>
+
+</div>

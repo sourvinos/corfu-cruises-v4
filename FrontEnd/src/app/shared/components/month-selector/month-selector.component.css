@@ -1,0 +1,20 @@
+#month-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+    background-color: var(--color-button-secondary);
+    border-radius: 50%;
+    border: 0.0625rem solid var(--color-button-secondary);
+    color: var(--color-background);
+    padding: 0.5rem !important;
+    text-align: center;
+    transition: all 0.25s !important;
+    width: 2rem;
+}
+
+button:hover {
+    transform: scale(1.2);
+}

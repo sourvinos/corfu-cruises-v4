@@ -1,0 +1,45 @@
+<div id="table-wrapper">
+    <div *ngFor="let port of portGroup" class="port">
+        <table>
+            <thead>
+                <tr>
+                    <th class="width-3">{{ getLabel("headerPort") }}</th>
+                    <th class="width-3">{{ getLabel('headerAdults') }}</th>
+                    <th class="width-3">{{ getLabel('headerKids') }}</th>
+                    <th class="width-3">{{ getLabel('headerFree') }}</th>
+                    <th class="width-3">Σ</th>
+                    <th class="width-3">Σ<span class="subscript">1</span></th>
+                    <th class="width-3">{{ getLabel('headerNoShow') }}</th>
+                    <th class="width-4">{{ getLabel('headerHasTransfer') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transfer of port.hasTransferGroup">
+                    <td></td>
+                    <td class="center">{{ transfer.adults | replaceZero }}</td>
+                    <td class="center">{{ transfer.kids | replaceZero }}</td>
+                    <td class="center">{{ transfer.free | replaceZero }}</td>
+                    <td class="center">{{ transfer.totalPax }}</td>
+                    <td class="center">{{ transfer.totalPassengers | replaceZero }}</td>
+                    <td class="center">{{ transfer.totalNoShow | replaceZero }}</td>
+                    <td [ngClass]="transfer.hasTransfer ? 'has-transfer' : 'no-transfer'" class="center">
+                        <span *ngIf="transfer.hasTransfer" style="font-size: 0.5rem; padding-top: 0 !important;">{{ getEmoji('green-box') }} </span>
+                        <span *ngIf="!transfer.hasTransfer" style="font-size: 0.5rem; padding-top: 0 !important;">{{ getEmoji('red-box') }}</span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>{{ port.port.description }}</td>
+                    <td class="center">{{ port.adults | replaceZero }}</td>
+                    <td class="center">{{ port.kids | replaceZero }}</td>
+                    <td class="center">{{ port.free | replaceZero }}</td>
+                    <td class="center">{{ port.totalPax }}</td>
+                    <td class="center">{{ port.totalPassengers | replaceZero }}</td>
+                    <td class="center">{{ port.totalNoShow | replaceZero }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

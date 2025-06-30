@@ -1,0 +1,43 @@
+<div class="table-wrapper">
+    <p-table #table [scrollable]="true" [virtualScrollItemSize]="32" [value]="records" [virtualScroll]="false" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="no-border-bottom width-15" pSortableColumn="customer.description">{{ getLabel("headerCustomer") }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="previousBalance">{{ getLabel("headerPreviousBalance") }}</th>
+                <th colspan="2">{{ getLabel("headerPeriod") }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="actualBalance">{{ getLabel("headerActualBalance") }}</th>
+            </tr>
+            <tr>
+                <th class="no-border-top width-15">
+                    <p-columnFilter (input)="onFilter($event.target.value,'customer.description','contains')" class="center" field="customer.description"></p-columnFilter>
+                </th>
+                <th class="no-border-top width-3">
+                    <p-columnFilter (input)="onFilter($event.target.value,'previousBalance','contains')" class="center" field="previousBalance"></p-columnFilter>
+                </th>
+                <th class="no-border-top width-3">{{ getLabel("headerDebit") }}</th>
+                <th class="no-border-top width-3">{{ getLabel("headerCredit") }}</th>
+                <th class="no-border-top width-3">
+                    <p-columnFilter (input)="onFilter($event.target.value,'actualBalance','contains')" class="center" field="actualBalance"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template let-record pTemplate="body">
+            <tr style="height: 32px;">
+                <td class="width-15"><span>{{ record.customer.description }}</span></td>
+                <td class="right width-3"><span class="number right with-right-padding">{{ formatNumberToLocale(record.previousBalance) }}</span></td>
+                <td class="right width-3"><span class="number right with-right-padding">{{ formatNumberToLocale(record.debit) }}</span></td>
+                <td class="right width-3"><span class="number right with-right-padding">{{ formatNumberToLocale(record.credit) }}</span></td>
+                <td class="right width-3"><span class="number right with-right-padding">{{ formatNumberToLocale(record.actualBalance) }}</span></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <tr style="height: 32px;">
+                <td class="width-15"><span></span></td>
+                <td class="right width-3"><span class="number with-right-padding">{{ formatNumberToLocale(totals.previousBalance) }}</span></td>
+                <td class="right width-3"><span class="number with-right-padding">{{ formatNumberToLocale(totals.debit) }}</span></td>
+                <td class="right width-3"><span class="number with-right-padding">{{ formatNumberToLocale(totals.credit) }}</span></td>
+                <td class="right width-3"><span class="number with-right-padding">{{ formatNumberToLocale(totals.actualBalance) }}</span></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

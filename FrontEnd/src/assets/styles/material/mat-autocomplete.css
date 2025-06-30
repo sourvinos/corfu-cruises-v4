@@ -1,0 +1,19 @@
+.mat-mdc-autocomplete-panel {
+    border-radius: 0 !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+    font-family: var(--font-family-ubuntu) !important;
+    font-size: 0.875rem !important;
+    width: 100% !important;
+}
+
+.mat-mdc-autocomplete-panel, .mat-mdc-menu-panel, .mat-mdc-option.mdc-list-item {
+    background-color: var(--color-background) !important;
+    color: var(--color-text) !important;
+}
+
+.mat-mdc-option.mat-mdc-option-active, .mat-mdc-menu-item:hover, .mat-mdc-option:hover {
+    background-color: var(--color-mat-menu-background-hover) !important;
+    color: var(--color-mat-menu-text-hover) !important;
+}

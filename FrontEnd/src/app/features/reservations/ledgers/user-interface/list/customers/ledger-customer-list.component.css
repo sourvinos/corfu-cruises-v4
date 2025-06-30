@@ -1,0 +1,16 @@
+#accordion-wrapper {
+    overflow-y: scroll !important;
+}
+
+.filter-pill .pill.no-margin {
+    background-color: var(--color-accent);
+    min-width: 0;
+}
+
+.filter-pill .pill.no-margin .mat-icon {
+    margin: 0 0 0 0 !important;
+}
+
+.checkbox-label {
+    margin: 0 0 0 0.5rem !important;
+}

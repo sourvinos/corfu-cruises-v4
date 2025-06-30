@@ -1,0 +1,15 @@
+<form [formGroup]="form" id="form">
+
+    <mat-form-field>
+        <mat-label>{{ getLabel('date') }}</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+            <input (dateChange)="emitFormValues($event)" [inputTabStop]="input" dataTabIndex="1" formControlName="fromDate" matStartDate>
+            <input (dateChange)="emitFormValues($event)" [inputTabStop]="input" dataTabIndex="2" formControlName="toDate" matEndDate>
+        </mat-date-range-input>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-hint>{{ getLabel("hint") }}</mat-hint>
+        <mat-error *ngIf="isInvalidDateRange()">{{ getHint("invalidDateRange") }}</mat-error>
+    </mat-form-field>
+
+</form>

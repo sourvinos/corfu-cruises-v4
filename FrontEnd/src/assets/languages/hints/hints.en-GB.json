@@ -1,0 +1,84 @@
+{
+    "labels": [
+        {
+            "id": "beginsOrEndsWithSpace",
+            "description": "This field can't begin or end with a space"
+        },
+        {
+            "id": "containsIllegalCharacters",
+            "description": "This field allows only alphanumeric characters or underscores"
+        },
+        {
+            "id": "doesNotContainDigits",
+            "description": "This field must have at least one digit"
+        },
+        {
+            "id": "doesNotContainLowerCase",
+            "description": "This field must have at least one lowercase character"
+        },
+        {
+            "id": "doesNotContainSymbol",
+            "description": "This field must have at least one symbol i.e. % or #"
+        },
+        {
+            "id": "doesNotContainUpperCase",
+            "description": "This field must have at least one uppercase character"
+        },
+        {
+            "id": "invalid",
+            "description": "This field is invalid"
+        },
+        {
+            "id": "invalidRange",
+            "description": "This field is outside the permitted range"
+        },
+        {
+            "id": "invalidShort",
+            "description": "Invalid"
+        },
+        {
+            "id": "maxLength",
+            "description": "This field can be up to xx characters long"
+        },
+        {
+            "id": "minLength",
+            "description": "This field must be at least xx characters long"
+        },
+        {
+            "id": "otherErrors",
+            "description": "This field has errors"
+        },
+        {
+            "id": "passwordsNoMatch",
+            "description": "New password and confirm new password do not match"
+        },
+        {
+            "id": "remainingCharacters",
+            "description": "You can give up to xx more characters"
+        },
+        {
+            "id": "required",
+            "description": "This field is required"
+        },
+        {
+            "id": "shouldBeEmptyPlusOrMinus",
+            "description": "This field may be blank or have the + or - symbol"
+        },
+        {
+            "id": "shouldBeCapitalLetterOrSpace",
+            "description": "Only Latin capital letters are allowed"
+        },
+        {
+            "id": "shouldBeFiveCapitalLetters",
+            "description": "Only five (5) Latin capital letters are allowed"
+        },
+        {
+            "id": "spacesNotAllowed",
+            "description": "This field can't contain spaces"
+        },
+        {
+            "id": "shouldBeOnlyNumbers",
+            "description": "The field must have numeric characters only"
+        }
+    ]
+}

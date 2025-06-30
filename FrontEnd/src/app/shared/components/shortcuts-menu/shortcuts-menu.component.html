@@ -1,0 +1,9 @@
+<div *ngIf=isAdmin() id="shortcuts-menu">
+    <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('reservations')" routerLink="/reservations">
+    <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('availability')" routerLink="/availability">
+    <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('boarding')" routerLink="/boarding">
+    <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('ledgers')" routerLink="/reservation-ledgers">
+    <mat-divider inset></mat-divider>
+    <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('invoices')" routerLink="/invoices">
+    <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('prices')" routerLink="/prices">
+</div>

@@ -1,0 +1,36 @@
+.cdk-overlay-connected-position-bounding-box {
+    margin-bottom: 0.5rem !important;
+}
+
+.mat-mdc-menu-content {
+    background-color: var(--color-menu-background) !important;
+}
+
+.mat-mdc-menu-item:hover .mat-mdc-menu-item-text {
+    background-color: var(--color-mat-menu-background-hover) !important;
+    color: var(--color-mat-menu-text-hover) !important;
+}
+
+.mat-mdc-menu-item:hover .mat-mdc-menu-item-text .mat-mdc-checkbox span {
+    background-color: var(--color-mat-menu-background-hover) !important;
+    color: var(--color-mat-menu-text-hover) !important;
+}
+
+.mat-mdc-menu-item-text .mat-mdc-checkbox .mdc-form-field .mdc-checkbox .mdc-checkbox__background {
+    border-color: var(--color-text) !important;
+}
+
+.mat-mdc-menu-item-text {
+    color: var(--color-text) !important;
+    font-family: var(--font-family-asty) !important;
+    font-size: var(--font-size-dropdown-menu-button) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0 !important;
+    margin: 0.1875rem 0 0 0 !important;
+}
+
+.mat-mdc-menu-submenu-icon {
+    color: var(--color-text) !important;
+    height: 0.4375rem !important;
+    right: 0.625rem !important;
+}

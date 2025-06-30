@@ -1,0 +1,82 @@
+.mat-mdc-dialog-container .mdc-dialog__title {
+    line-height: 0 !important;
+}
+
+#dialog {
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 2rem 2rem 1rem 2rem;
+}
+
+#dialog-header {
+    display: flex;
+    flex-direction: column;
+    line-height: 1rem;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    row-gap: 0.8rem;
+}
+
+#dialog-header h1 {
+    color: var(--color-accent);
+    font-weight: bold !important;
+}
+
+#dialog-header h6 {
+    color: var(--color-text);
+}
+
+#dialog-content {
+    height: 100%;
+    padding: 1rem 0 0 0 !important;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+}
+
+.option p-radiobutton.with-margin {
+    margin: 0.6rem 0 0 0;
+}
+
+.option-label {
+    color: var(--color-text);
+    font-family: var(--font-family-asty);
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin: 0.1875rem 0 0 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.option-label:hover {
+    background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+    cursor: pointer;
+}
+
+.option-label .option-message {
+    margin: 0.3rem 0 0 0;
+}
+
+.option-message {
+    color: var(--color-text);
+    font-family: var(--font-family-asty);
+    font-size: 0.875rem;
+    font-weight: 300;
+    margin: 0 0 0 1.5rem;
+}
+
+#dialog-footer {
+    margin: 0 0 0 auto;
+}

@@ -1,0 +1,59 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [featureIcon]="featureIcon" [feature]="feature" [icon]="featureIcon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div id="header-right">
+                <span id="criteria-caption">{{ getCriteria() }}</span>
+                <button (click)="onShowCriteriaDialog()" class="fab fab-with-no-background" mat-icon-button>
+                    <mat-icon class="material-icons-outlined">filter_alt</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <ng-template [ngIf]="shipOwnerRecordsA.length > 0" [ngIfElse]="noData">
+            <mat-tab-group mat-stretch-tabs="false" (selectedIndexChange)="onSelectedTabChange($event)">
+                <mat-tab label="Corfu Cruises">
+                    <div id="table-wrapper">
+                        <ledgerShipOwnerTable [records]="shipOwnerRecordsA" [criteria]="criteria"></ledgerShipOwnerTable>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Pandis Family">
+                    <div id="table-wrapper">
+                        <ledgerShipOwnerTable [records]="shipOwnerRecordsB" [criteria]="criteria"></ledgerShipOwnerTable>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Γενικά σύνολα">
+                    <div id="table-wrapper">
+                        <ledgerShipOwnerTable [records]="shipOwnerTotal"></ledgerShipOwnerTable>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </ng-template>
+
+    </div>
+
+    <div id="footer">
+        <button [matMenuTriggerFor]="menu" class="fab fab-with-no-background" mat-icon-button>
+            <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="primary">
+            <ng-container *ngTemplateOutlet="threeDotsMenu"></ng-container>
+        </mat-menu>
+        <div id="align-right">
+            <button (click)="onDoEmailTasks()" class="primary" mat-flat-button>{{ getLabel("printButton") | uppercase }}</button>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #threeDotsMenu>
+    <button [disabled]="isTotalTabSelected()" (click)="onDoPrintTasks()" mat-menu-item>
+        <span>{{ getLabel("previewSelected") }}</span>
+    </button>
+</ng-template>
+
+<ng-template #noData>
+    <cat-page icon="face" [header]="getLabel('noDataHeader')" [subHeader]="getLabel('noDataSubHeader')"></cat-page>
+</ng-template>

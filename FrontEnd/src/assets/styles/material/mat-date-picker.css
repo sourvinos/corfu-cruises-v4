@@ -1,0 +1,55 @@
+/* Wrapper */
+.mat-datepicker-content {
+    background-color: var(--color-secondary) !important;
+    padding: 1rem;
+}
+
+/* Header */
+.mat-calendar-header {
+    padding: 0 1.5rem 0 0.5rem !important;
+}
+
+/* Month selector */
+.mat-calendar-period-button > .mdc-button__label {
+    color: var(--color-button-text) !important;
+    top: -0.1875rem !important;
+}
+
+/* Month selector arrow */
+.mat-calendar-arrow {
+    fill: var(--color-button-text) !important;
+}
+
+/* Previous - Next */
+.mat-calendar-previous-button::after, .mat-calendar-next-button::after {
+    color: var(--color-button-text) !important;
+    top: -0.5rem !important;
+}
+
+/* Table */
+.mat-calendar-table-header th {
+    color: var(--color-button-text) !important;
+}
+
+.mat-calendar-body-label {
+    color: transparent !important;
+    padding: 0 !important;
+}
+
+.mat-calendar-body-cell-content {
+    color: var(--color-button-text) !important;
+}
+
+.mat-calendar-body-selected {
+    color: var(--color-button-text) !important;
+}
+
+/* Today */
+.mat-calendar-body-today {
+    background-color: var(--color-accent) !important;
+    border-color: transparent !important;
+}
+
+.mat-calendar-body-selected.mat-calendar-body-today {
+    box-shadow: none !important;
+}

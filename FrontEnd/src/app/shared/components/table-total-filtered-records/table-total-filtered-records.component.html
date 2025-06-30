@@ -1,0 +1,15 @@
+<div class="filter-pill">
+    <div class="pill">
+        <mat-icon class="material-icons-outlined">functions</mat-icon>
+        <div class="right description">{{ recordCount }}</div>
+    </div>
+    <div (click)="mustResetTableFilters()" *ngIf="showFilteredCount" class="pill reset-table-filter">
+        <mat-icon *ngIf="recordCount==filteredRecordCount" class="material-icons-outlined">filter_alt</mat-icon>
+        <mat-icon *ngIf="recordCount!=filteredRecordCount" class="material-icons-outlined">filter_alt_off</mat-icon>
+        <div class="right description">{{ filteredRecordCount }}</div>
+    </div>
+    <div *ngIf="mustShowSelectedFilteredCount" class="pill number">
+        <mat-icon class="material-symbols-outlined">select_all</mat-icon>
+        <div class="right description">{{ selectedRecordCount }}</div>
+    </div>
+</div>

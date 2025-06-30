@@ -1,0 +1,28 @@
+<div class="table-wrapper" style="overflow-y: scroll;">
+    <p-table #table [scrollable]="true" [virtualScrollItemSize]="32" [value]="records" [virtualScroll]="false" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="border-bottom border-top width-9">{{ getLabel("headerDate") }}</th>
+                <th class="border-bottom width-15">{{ getLabel("headerShipOwner") }}</th>
+                <th class="border-bottom width-50">{{ getLabel("headerDocumentTypeDescription") }}</th>
+                <th class="border-bottom width-4">{{ getLabel("headerDocumentTypeBatch") }}</th>
+                <th class="border-bottom width-4">{{ getLabel("headerInvoiceNo") }}</th>
+                <th class="border-bottom width-6">{{ getLabel("headerDebit") }}</th>
+                <th class="border-bottom width-6">{{ getLabel("headerCredit") }}</th>
+                <th class="border-bottom width-6">{{ getLabel("headerBalance") }}</th>
+            </tr>
+        </ng-template>
+        <ng-template let-record pTemplate="body">
+            <tr style="height: 32px;">
+                <td class="width-9"><span class="center">{{ record.formattedDate }}</span></td>
+                <td class="width-15"><span>{{ record.shipOwner.description }}</span></td>
+                <td class="width-50"><span>{{ record.documentType.description }}</span></td>
+                <td class="width-4"><span class="center">{{ record.documentType.batch }}</span></td>
+                <td class="width-4"><span class="center">{{ record.invoiceNo }}</span></td>
+                <td class="width-6"><span class="number right with-right-padding">{{ formatNumberToLocale(record.debit) }}</span></td>
+                <td class="width-6"><span class="number right with-right-padding">{{ formatNumberToLocale(record.credit) }}</span></td>
+                <td class="width-6"><span class="number right with-right-padding">{{ formatNumberToLocale(record.balance) }}</span></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

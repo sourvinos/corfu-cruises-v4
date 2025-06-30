@@ -1,0 +1,36 @@
+#grid-wrapper .p-element {
+    background-color: var(--color-background) !important;
+    color: var(--color-text);
+    transition: background-color var(--theme-delay), color var(--theme-delay);
+    width: 100% !important;
+}
+
+.p-tabview-nav-container {
+    margin-left: 0.1875rem !important;
+}
+
+.p-tabview .p-tabview-panels {
+    background-color: var(--color-background) !important;
+    padding: 1rem 0 1rem 0 !important;
+    transition: background-color var(--theme-delay);
+}
+
+.p-tabview .p-tabview-nav {
+    border: none !important;
+    background-color: var(--color-background) !important;
+    transition: background-color var(--theme-delay);
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    font-family: var(--font-family-asty);
+    font-size: 0.90rem;
+    font-weight: 300;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none;
+}
+
+.p-tabview .p-tabview-nav .p-tabview-ink-bar {
+    background-color: var(--color-button-secondary);
+}

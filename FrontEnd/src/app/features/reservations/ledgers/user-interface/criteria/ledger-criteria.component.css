@@ -1,0 +1,39 @@
+#form-wrapper {
+    height: 100%;
+    margin: 0 auto 0 auto;
+}
+
+#form {
+    display: flex;
+    flex-direction: column !important;
+    height: 100%;
+    row-gap: 0.5rem;
+}
+
+#form .group-input-field > date-range-picker {
+    width: 100%;
+}
+
+#form .group-input-field:first-child {
+    display: flex;
+    margin: 0 0 0 auto;
+    width: 25%;
+}
+
+#form .group-input-field:last-child {
+    column-gap: 0.5rem;
+    display: flex;
+    height: 100%;
+}
+
+@media (width <= 1366px) {
+    #form-wrapper {
+        width: 100%
+    }
+}
+
+@media (width > 1366px) {
+    #form-wrapper {
+        width: 80%
+    }
+}

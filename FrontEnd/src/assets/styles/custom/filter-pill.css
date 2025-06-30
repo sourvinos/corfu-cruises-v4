@@ -1,0 +1,62 @@
+.filter-pill {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-pill .pill {
+    align-items: center;
+    border-radius: 0.3125rem;
+    color: var(--color-button-text) !important;
+    display: flex;
+    flex-direction: row;
+    min-width: 5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.filter-pill .pill .mat-icon:first-child {
+    margin: 0 0.5rem 0 0;
+}
+
+.filter-pill .pill .mat-icon:not(:first-child) {
+    margin: 0 0.5rem 0 0.5rem;
+}
+
+.filter-pill .pill .description {
+    align-items: center;
+    color: var(--color-button-text);
+    display: flex;
+    font-family: var(--font-family-fira-sans-condensed);
+    font-weight: 300;
+    line-height: 0;
+    margin: 0.0625rem 0 0 auto;
+    transform: scaleY(1.8);
+}
+
+.filter-pill .pill .description .subscript {
+    margin: 0 0 -0.4rem 0;
+}
+
+.filter-pill .pill:nth-child(1) {
+    background-color: var(--color-criteria-a);
+}
+
+.filter-pill .pill:nth-child(2) {
+    background-color: var(--color-criteria-b);
+}
+
+.filter-pill .pill:nth-child(3) {
+    background-color: var(--color-criteria-c);
+}
+
+.filter-pill .pill:nth-child(4) {
+    background-color: var(--color-criteria-d);
+}
+
+.reset-table-filter:hover {
+    cursor: pointer;
+}
+
+.overbooked {
+    background-color: var(--color-button-delete) !important;
+    width: auto !important;
+}

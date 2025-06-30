@@ -1,0 +1,72 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div id="header-right">
+                <button (click)="doSelectedPeriodTasks()" class="transparent" id="goto-today-button" mat-mini-fab>
+                    <span class="material-symbols-outlined">today</span>
+                </button>
+                <year-selector (yearEmitter)="doTasksAfterYearSelection($event)" [year]="getSelectedYear()"></year-selector>
+            </div>
+        </div>
+
+        <div id="grid-wrapper">
+            <p-tabView>
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        {{ getLabel('ytd') }}
+                    </ng-template>
+                    <table [array]="ytd"></table>
+                </p-tabPanel>
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        {{ getLabel('destinations') }}
+                    </ng-template>
+                    <table [array]="destinations"></table>
+                </p-tabPanel>
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        {{ getLabel('customers') }}
+                    </ng-template>
+                    <table [array]="customers"></table>
+                </p-tabPanel>
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        {{ getLabel('drivers') }}
+                    </ng-template>
+                    <table [array]="drivers"></table>
+                </p-tabPanel>
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        {{ getLabel('ports') }}
+                    </ng-template>
+                    <table [array]="ports"></table>
+                </p-tabPanel>
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        {{ getLabel('ships') }}
+                    </ng-template>
+                    <table [array]="ships"></table>
+                </p-tabPanel>
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        {{ getLabel('nationalities') }}
+                    </ng-template>
+                    <table-nationalities [array]="nationalities"></table-nationalities>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="onClose()" class="primary" mat-flat-button>
+                <span>{{ getLabel("okButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>

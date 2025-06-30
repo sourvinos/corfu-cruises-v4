@@ -1,0 +1,92 @@
+<div id="form-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <!-- Date -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('date') }}</mat-label>
+                <input [inputTabStop]="input" [matDatepicker]="picker" dataTabIndex="1" formControlName="date" matInput>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="date.hasError('required')">{{ getHint("required") }}</mat-error>
+            </mat-form-field>
+            <!-- Destination -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('destination') }}</mat-label>
+                <input #inputAutoComplete #triggerDestination="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="destinations" dataTabIndex="2" formControlName="destination" matInput>
+                <div matSuffix style="display:flex">
+                    <button (click)="openOrCloseAutoComplete(triggerDestination, 'destination')" mat-icon-button type="button">
+                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                    </button>
+                </div>
+                <mat-error *ngIf="destination.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!destination.hasError('required') && destination.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- Port -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('port') }}</mat-label>
+                <input #inputAutoComplete #triggerPort="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="ports" dataTabIndex="3" formControlName="port" matInput>
+                <div matSuffix style="display:flex">
+                    <button (click)="openOrCloseAutoComplete(triggerPort, 'port')" mat-icon-button type="button">
+                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                    </button>
+                </div>
+                <mat-error *ngIf="port.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!port.hasError('required') && port.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- MaxPax -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('maxPax') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="4" formControlName="maxPax" matInput type="number">
+                <mat-error *ngIf="maxPax.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!maxPax.hasError('required') && maxPax.hasError('min') || maxPax.hasError('max')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- Time -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('time') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="5" formControlName="time" matInput />
+                <mat-error *ngIf="time.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!time.hasError('required') && !time.hasError('time')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <div class="stacked-checkboxes">
+                <!-- Active -->
+                <mat-checkbox formControlName="isActive">
+                    <span>{{ getLabel("isActive") }}</span>
+                </mat-checkbox>
+            </div>
+            <div class="align-bottom">
+                <!-- Metadata -->
+                <metadata-panel [feature]="feature" [postAt]="form.value.postAt" [postUser]="form.value.postUser" [putAt]="form.value.putAt" [putUser]="form.value.putUser"></metadata-panel>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="onDelete()" *ngIf="form.value.id !== 0" class="delete" mat-flat-button>{{ getLabel("deleteButton") | uppercase }}</button>
+            <button (click)="onSave()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("saveButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<mat-autocomplete #destinations="matAutocomplete" [displayWith]="autocompleteFields.bind(this, 'description')" autoActiveFirstOption>
+    <mat-option *ngFor="let option of dropdownDestinations | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>
+
+<mat-autocomplete #ports="matAutocomplete" [displayWith]="autocompleteFields.bind(this, 'description')" autoActiveFirstOption>
+    <mat-option *ngFor="let option of dropdownPorts | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>

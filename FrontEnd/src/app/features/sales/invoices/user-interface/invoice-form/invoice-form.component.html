@@ -1,0 +1,570 @@
+<div id="form-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div id="header-buttons">
+                <button class="fab fab-with-no-background transparent" mat-icon-button>
+                    <mat-icon [ngClass]="isEmailSent() ? 'vivid-color' : 'pale-color'" class="icon blue material-symbols-outlined">email</mat-icon>
+                </button>
+                <button class="fab fab-with-no-background transparent" mat-icon-button>
+                    <mat-icon [ngClass]="isSubmitted() ? 'vivid-color' : 'pale-color'" class="icon green material-symbols-outlined">upload_2</mat-icon>
+                </button>
+                <button class="fab fab-with-no-background transparent" mat-icon-button>
+                    <mat-icon [ngClass]="isCancelled() ? 'vivid-color' : 'pale-color'" class="icon orange material-symbols-outlined">upload_2</mat-icon>
+                </button>
+                <button [matMenuTriggerFor]="menu" class="fab fab-with-no-background" mat-icon-button>
+                    <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" class="primary" xPosition="before">
+                    <ng-container *ngTemplateOutlet="actionsMenu"></ng-container>
+                </mat-menu>
+            </div>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <mat-tab-group mat-stretch-tabs="false">
+                <mat-tab label="{{ getLabel('tab1') }}">
+                    <div id="invoice-tab">
+                        <div class="group-input-field">
+                            <!-- Issue date -->
+                            <mat-form-field>
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('date') }}</mat-label>
+                                <input [inputTabStop]="input" [matDatepicker]="datePicker" dataTabIndex="1" formControlName="date" matInput readonly>
+                                <mat-datepicker-toggle matIconSuffix [for]="datePicker" disabled></mat-datepicker-toggle>
+                                <mat-datepicker #datePicker></mat-datepicker>
+                                <mat-error *ngIf="date.hasError('required')">{{ getHint("required") }}</mat-error>
+                            </mat-form-field>
+                            <!-- Trip date -->
+                            <mat-form-field>
+                                <mat-label>{{ getLabel('tripDate') }}</mat-label>
+                                <input [inputTabStop]="input" [matDatepicker]="tripDatePicker" dataTabIndex="2" formControlName="tripDate" matInput>
+                                <mat-datepicker-toggle matIconSuffix [for]="tripDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #tripDatePicker></mat-datepicker>
+                                <mat-error *ngIf="tripDate.hasError('required')">{{ getHint("required") }}</mat-error>
+                            </mat-form-field>
+                            <!-- Ship -->
+                            <mat-form-field>
+                                <mat-icon *ngIf="!isEditingAllowed()" class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('ship') }}</mat-label>
+                                <input #inputAutoComplete #triggerShip="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="ships" [readonly]="!isEditingAllowed()" dataTabIndex="3" formControlName="ship" matInput>
+                                <div matSuffix style="display:flex">
+                                    <button (click)="openOrCloseAutoComplete(triggerShip, 'ship')" [disabled]="!isEditingAllowed()" mat-icon-button type="button">
+                                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                                    </button>
+                                </div>
+                                <mat-error *ngIf="ship.hasError('required')">{{ getHint("required") }}</mat-error>
+                                <mat-error *ngIf="!ship.hasError('required') && ship.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="group-input-field">
+                            <!-- Customer -->
+                            <mat-form-field>
+                                <mat-label>{{ getLabel('customer') }}</mat-label>
+                                <input #inputAutoComplete #triggerCustomer="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="customers" dataTabIndex="4" formControlName="customer" matInput>
+                                <div matSuffix style="display:flex">
+                                    <button (click)="openOrCloseAutoComplete(triggerCustomer, 'customer')" mat-icon-button type="button">
+                                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                                    </button>
+                                </div>
+                                <mat-error *ngIf="customer.hasError('required')">{{ getHint("required") }}</mat-error>
+                                <mat-error *ngIf="!customer.hasError('required') && customer.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+                            </mat-form-field>
+                            <!-- Destination -->
+                            <mat-form-field>
+                                <mat-label>{{ getLabel('destination') }}</mat-label>
+                                <input #inputAutoComplete #triggerDestination="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="destinations" dataTabIndex="5" formControlName="destination" matInput>
+                                <div matSuffix style="display:flex">
+                                    <button (click)="openOrCloseAutoComplete(triggerDestination, 'destination')" mat-icon-button type="button">
+                                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                                    </button>
+                                </div>
+                                <mat-error *ngIf="destination.hasError('required')">{{ getHint("required") }}</mat-error>
+                                <mat-error *ngIf="!destination.hasError('required') && destination.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="group-input-field">
+                            <!-- Document type abbreviation-->
+                            <mat-form-field style="width: 400px;">
+                                <mat-icon *ngIf="isEditingAllowed()" class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('documentTypeAbbreviation') }}</mat-label>
+                                <input #inputAutoComplete #triggerDocumentType="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="documentTypes" [readonly]="!isEditingAllowed()" dataTabIndex="6" formControlName="documentType" matInput>
+                                <div matSuffix style="display:flex">
+                                    <button (click)="openOrCloseAutoComplete(triggerDocumentType, 'documentType')" [disabled]="!isEditingAllowed()" mat-icon-button type="button">
+                                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                                    </button>
+                                </div>
+                                <mat-error *ngIf="documentType.hasError('required')">{{ getHint("required") }}</mat-error>
+                                <mat-error *ngIf="!documentType.hasError('required') && documentType.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+                            </mat-form-field>
+                            <!-- Document type description -->
+                            <mat-form-field>
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('documentTypeDescription') }}</mat-label>
+                                <input formControlName="documentTypeDescription" matInput readonly>
+                            </mat-form-field>
+                            <!-- Batch -->
+                            <mat-form-field style="width: 300px;">
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('batch') }}</mat-label>
+                                <input formControlName="batch" matInput readonly>
+                            </mat-form-field>
+                            <!-- No -->
+                            <mat-form-field style="width: 300px;">
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('no') }}</mat-label>
+                                <input [inputTabStop]="input" class="right" formControlName="invoiceNo" matInput type="number">
+                            </mat-form-field>
+                        </div>
+                        <div class="group-input-field">
+                            <!-- Net Amount -->
+                            <mat-form-field>
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('netAmount') }}</mat-label>
+                                <input currencyMask formControlName="netAmount" matInput readonly>
+                                <mat-error *ngIf="netAmount.hasError('required')">{{ getHint("required") }}</mat-error>
+                                <mat-error *ngIf="!netAmount.hasError('required') && netAmount.hasError('min') || netAmount.hasError('max')">{{ getHint("invalid") }}</mat-error>
+                            </mat-form-field>
+                            <!-- Vat Percent -->
+                            <mat-form-field>
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('vatPercent') }}</mat-label>
+                                <input currencyMask formControlName="vatPercent" matInput readonly>
+                            </mat-form-field>
+                            <!-- Vat Amount -->
+                            <mat-form-field>
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('vatAmount') }}</mat-label>
+                                <input currencyMask formControlName="vatAmount" matInput readonly>
+                            </mat-form-field>
+                            <!-- Gross Amount -->
+                            <mat-form-field>
+                                <mat-label>{{ getLabel('grossAmount') }}</mat-label>
+                                <input (blur)="onDoSummaryCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="7" formControlName="grossAmount" matInput>
+                                <mat-error *ngIf="grossAmount.hasError('required')">{{ getHint("required") }}</mat-error>
+                                <mat-error *ngIf="!grossAmount.hasError('required') && grossAmount.hasError('min') || grossAmount.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="group-input-field">
+                            <mat-form-field>
+                                <mat-label>{{ getLabel('paymentMethod') }}</mat-label>
+                                <input #inputAutoComplete #triggerPaymentMethod="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="paymentMethods" dataTabIndex="8" formControlName="paymentMethod" matInput>
+                                <div matSuffix style="display:flex">
+                                    <button (click)="openOrCloseAutoComplete(triggerPaymentMethod, 'paymentMethod')" mat-icon-button type="button">
+                                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                                    </button>
+                                </div>
+                                <mat-error *ngIf="paymentMethod.hasError('required')">{{ getHint("required") }}</mat-error>
+                                <mat-error *ngIf="!paymentMethod.hasError('required') && paymentMethod.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>{{ getLabel("remarks") }}</mat-label>
+                                <input [inputTabStop]="input" dataTabIndex="9" formControlName="remarks" matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="align-bottom">
+                            <!-- Metadata -->
+                            <metadata-panel [feature]="feature" [postAt]="form.value.postAt" [postUser]="form.value.postUser" [putAt]="form.value.putAt" [putUser]="form.value.putUser"></metadata-panel>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{ getLabel('tab2') }}">
+                    <div id="ports-tab">
+                        <div class="port" formGroupName="portA">
+                            <!-- Port A -->
+                            <mat-form-field class="hide-hint">
+                                <mat-label>{{ getLabel('port') }}</mat-label>
+                                <input formControlName="port_A_Description" matInput readonly>
+                            </mat-form-field>
+                            <!-- Adults -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("adults") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="1" formControlName="adults_A_WithTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="2" formControlName="adults_A_PriceWithTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input class="right" currencyMask formControlName="adults_A_AmountWithTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="3" formControlName="adults_A_WithoutTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="4" formControlName="adults_A_PriceWithoutTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="adults_A_AmountWithoutTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Kids -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("kids") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="5" formControlName="kids_A_WithTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="6" formControlName="kids_A_PriceWithTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="kids_A_AmountWithTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="7" formControlName="kids_A_WithoutTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="8" formControlName="kids_A_PriceWithoutTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="kids_A_AmountWithoutTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Free -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("free") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="9" formControlName="free_A_WithTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <div style="width:100%"></div>
+                                        <div style="width:100%"></div>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="10" formControlName="free_A_WithoutTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <div style="width:100%"></div>
+                                        <div style="width:100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Total -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("total") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input class="right" formControlName="total_A_Persons" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="total_A_Amount" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="port" formGroupName="portB">
+                            <!-- Port B -->
+                            <mat-form-field class="hide-hint">
+                                <mat-label>{{ getLabel('port') }}</mat-label>
+                                <input formControlName="port_B_Description" matInput readonly>
+                            </mat-form-field>
+                            <!-- Adults -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("adults") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="11" formControlName="adults_B_WithTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="12" formControlName="adults_B_PriceWithTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask currencyMask formControlName="adults_B_AmountWithTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="13" formControlName="adults_B_WithoutTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="14" formControlName="adults_B_PriceWithoutTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask currencyMask formControlName="adults_B_AmountWithoutTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Kids -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("kids") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="15" formControlName="kids_B_WithTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="16" formControlName="kids_B_PriceWithTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="kids_B_AmountWithTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="17" formControlName="kids_B_WithoutTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint price">
+                                            <mat-label>{{ getLabel('price') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" currencyMask dataTabIndex="18" formControlName="kids_B_PriceWithoutTransfer" matInput>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="kids_B_AmountWithoutTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Free -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("free") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="19" formControlName="free_B_WithTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <div style="width:100%"></div>
+                                        <div style="width:100%"></div>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input (blur)="onDoPortCalculations()" [inputTabStop]="input" class="right" dataTabIndex="20" formControlName="free_B_WithoutTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <div style="width:100%"></div>
+                                        <div style="width:100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Total -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("total") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input class="right" formControlName="total_B_Persons" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="total_B_Amount" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="port" formGroupName="portTotals">
+                            <!-- Port Totals -->
+                            <mat-form-field class="hide-hint">
+                                <mat-label class="hide-hint">{{ getLabel('total') }}</mat-label>
+                                <input formControlName="port_Totals_Description" matInput readonly>
+                            </mat-form-field>
+                            <!-- Adults -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("adults") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input class="right" formControlName="adults_Total_WithTransfer" matInput type="number" readonly>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="adults_TotalAmount_WithTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input class="right" formControlName="adults_Total_WithoutTransfer" matInput type="number" readonly>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="adults_TotalAmount_WithoutTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Kids -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("kids") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input class="right" formControlName="kids_Total_WithTransfer" matInput type="number" readonly>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="kids_TotalAmount_WithTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input class="right" formControlName="kids_Total_WithoutTransfer" matInput type="number" readonly>
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint total">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="kids_TotalAmount_WithoutTransfer" matInput readonly>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Free -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("free") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withTransfer') }}</mat-label>
+                                            <input class="right" formControlName="free_Total_WithTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <div style="width:100%"></div>
+                                    </div>
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('withoutTransfer') }}</mat-label>
+                                            <input class="right" formControlName="free_Total_WithoutTransfer" matInput type="number">
+                                        </mat-form-field>
+                                        <div style="width:100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Total -->
+                            <div class="per-age-group">
+                                <div class="header">{{ getLabel("total") }}</div>
+                                <div class="full-width">
+                                    <div class="group-input-field">
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input class="right" formControlName="total_Persons" matInput type="number">
+                                        </mat-form-field>
+                                        <mat-form-field class="hide-hint person">
+                                            <mat-label>{{ getLabel('total') }}</mat-label>
+                                            <input currencyMask formControlName="total_Amount" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{ getLabel('tab3') }}">
+                    <div id="aade-tab">
+                        <aade-panel [feature]="feature" [id]="form.value.aade.id" [uId]="form.value.aade.uId" [mark]="form.value.aade.mark" [markCancel]="form.value.aade.markCancel" [authenticationCode]="form.value.aade.authenticationCode" [iCode]="form.value.aade.iCode" [url]="form.value.aade.url" [discriminator]="form.value.aade.discriminator"></aade-panel>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <button (click)="onShowFormValue()" class="fab fab-with-no-background" mat-icon-button>
+            <span class="material-icons-outlined">pest_control</span>
+        </button>
+        <div id="align-right">
+            <button (click)="onDelete()" *ngIf="form.value.invoiceId !== ''" class="delete" mat-flat-button>{{ getLabel("deleteButton") | uppercase }}</button>
+            <button (click)="onSave()" [disabled]="!form.valid || form.value.invoiceId != '' || onComparePriceTotals() == false" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid || form.value.invoiceId != '' || onComparePriceTotals() == false" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("saveButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<mat-autocomplete #ships="matAutocomplete" (optionSelected)="updateFieldsAfterShipSelection($event.option.value)" autoActiveFirstOption [displayWith]="autocompleteFields.bind(this, 'description')">
+    <mat-option *ngFor="let option of dropdownShips | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>
+
+<mat-autocomplete #customers="matAutocomplete" (optionSelected)="updateFieldsAfterCustomerSelection($event.option.value) " autoActiveFirstOption [displayWith]="autocompleteFields.bind(this, 'description')">
+    <mat-option *ngFor="let option of dropdownCustomers | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>
+
+<mat-autocomplete #destinations="matAutocomplete" autoActiveFirstOption [displayWith]="autocompleteFields.bind(this, 'description')">
+    <mat-option *ngFor="let option of dropdownDestinations | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>
+
+<mat-autocomplete #documentTypes="matAutocomplete" (optionSelected)="updateFieldsAfterDocumentTypeSelection($event.option.value)" [displayWith]="autocompleteFields.bind(this, 'abbreviation')" autoActiveFirstOption>
+    <mat-option *ngFor="let option of dropdownDocumentTypes | async" [value]="option">
+        <div class="autocomplete-document-type">
+            <span>{{ option.abbreviation }}</span>
+            <span>{{ option.batch }}</span>
+        </div>
+    </mat-option>
+</mat-autocomplete>
+
+<mat-autocomplete #paymentMethods="matAutocomplete" autoActiveFirstOption [displayWith]="autocompleteFields.bind(this, 'description')">
+    <mat-option *ngFor="let option of dropdownPaymentMethods | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>
+
+<ng-template #actionsMenu>
+    <button (click)="onCreateAndOpenPdf()" mat-menu-item>
+        <span>{{ getLabel('printInvoice') }}</span>
+    </button>
+    <button (click)="onDoSubmitTasks()" [disabled]="!isSubmitPossible()" mat-menu-item>
+        <span>{{ getLabel('submitInvoice') }}</span>
+    </button>
+    <button (click)="onCancelInvoice()" [disabled]="!isCancelPossible()" mat-menu-item>
+        <span>{{ getLabel('cancelInvoice') }}</span>
+    </button>
+    <button (click)="onRetrievePrices()" mat-menu-item>
+        <span>{{ getLabel('retrievePrices') }}</span>
+    </button>
+</ng-template>

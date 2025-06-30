@@ -1,0 +1,24 @@
+* {
+    /*  Buttons */
+    --color-button-text: #ffffff;
+    --color-button-primary: #0077B6;
+    --color-button-primary-darker: #00507c;
+    --color-button-secondary: #ff9800;
+    --color-button-delete: #cf6755;
+    /* Criteria & Totals */
+    --color-criteria-a: #5f80a7;
+    --color-criteria-b: #e37328;
+    --color-criteria-c: #698984;
+    --color-criteria-d: #ca874c;
+    /* Custom calendar */
+    --color-background-saturday: #f29c6b;
+    --color-background-sunday: #f26513;
+    --color-background-today: #8dbf8f;
+    /* Material menus */
+    --color-mat-menu-background-hover: #0077B6;
+    --color-mat-menu-text-hover: #ffffff;
+    /* Material icons */
+    --color-blue: #a3c6f4;
+    --color-green: #8fbc8f;
+    --color-orange: #ff8c00;
+}

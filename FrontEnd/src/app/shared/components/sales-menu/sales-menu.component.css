@@ -1,0 +1,7 @@
+#button-wrapper {
+    padding: 0.3125rem 0.3125rem 0.3125rem 0.3125rem !important;
+}
+
+.mat-mdc-menu-item {
+    min-height: 0 !important;
+}

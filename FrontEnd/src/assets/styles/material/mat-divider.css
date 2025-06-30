@@ -1,0 +1,14 @@
+.mat-divider {
+    background-color: var(--color-secondary);
+    transition: background-color var(--theme-delay);
+}
+
+.mat-divider-horizontal {
+    margin: 0.6rem 0 0.6rem 0 !important;
+    width: 100%;
+}
+
+.mat-divider.mat-divider-vertical {
+    margin: 0;
+    width: 0.0625rem;
+}

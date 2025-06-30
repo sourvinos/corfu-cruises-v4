@@ -1,0 +1,32 @@
+#header {
+    margin: 0 auto 0 auto;
+}
+
+#form-wrapper {
+    height: 100%;
+    margin: 0 auto 0 auto;
+}
+
+#form {
+    display: flex;
+    flex-direction: column !important;
+    height: 100%;
+}
+
+#form .group-input-field {
+    column-gap: 0.5rem;
+    display: flex;
+    height: 100%;
+}
+
+@media (width <=1366px) {
+    #header, #form-wrapper {
+        width: 100%
+    }
+}
+
+@media (width > 1366px) {
+    #header, #form-wrapper {
+        width: 80%
+    }
+}

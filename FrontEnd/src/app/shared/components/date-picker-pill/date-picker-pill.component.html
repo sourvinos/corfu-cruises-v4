@@ -1,0 +1,19 @@
+<form [formGroup]="form" id="form">
+
+    <div class="date-picker-pill">
+        <mat-form-field class="hidden-date-field">
+            <input (dateChange)="doDateTasks($event)" [matDatepicker]="picker" formControlName="date" matInput>
+            <mat-datepicker #picker>
+                <mat-datepicker-actions>
+                    <button (click)="doTodayTasks()" class="accent" matDatepickerApply mat-flat-button>{{ getLabel('today') | uppercase }}</button>
+                    <button class="primary" mat-flat-button matDatepickerApply>{{ getLabel('ok') | uppercase }}</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+        <div (click)="picker.open()" class="opener">
+            <div class="right description">{{ formatDateToLocale(form.value.date) }}</div>
+            <mat-icon class="material-icons-outlined">calendar_month</mat-icon>
+        </div>
+    </div>
+
+</form>

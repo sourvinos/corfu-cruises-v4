@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box !important;
+}
+
+#dialog {
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: hidden;
+    padding: 2rem 2rem 2rem 2rem;
+    row-gap: 1rem;
+}
+
+#dialog-content {
+    color: var(--color-text);
+    display: flex;
+    font-family: var(--font-family-asty) !important;
+    font-weight: var(--font-weight-dialog-content) !important;
+    justify-content: center;
+    line-height: 2rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+#dialog-footer {
+    display: flex;
+    justify-content: center;
+    margin: auto 0 0 0;
+}
+
+#dialog-header {
+    display: flex;
+    justify-content: center;
+}
+
+.mdc-dialog__actions {
+    min-height: 0 !important;
+    border-top: none !important;
+    padding: 0 0 0 0 !important;
+}
+
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+}
+
+.path.check {
+    animation: dash-check 0.9s 0.35s ease-in-out forwards;
+    stroke-dashoffset: -100;
+}
+
+.path.circle {
+    animation: dash 0.9s ease-in-out;
+}
+
+.path.line {
+    animation: dash 0.9s 0.35s ease-in-out forwards;
+    stroke-dashoffset: 1000;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dash-check {
+    0% {
+        stroke-dashoffset: -100;
+    }
+    100% {
+        stroke-dashoffset: 900;
+    }
+}
+
+@keyframes dash-check {
+    0% {
+        stroke-dashoffset: -100;
+    }
+    100% {
+        stroke-dashoffset: 900;
+    }
+}
+
+svg {
+    display: block;
+    width: 100px;
+}

@@ -1,0 +1,19 @@
+<div id="content">
+
+    <div id="header">
+        <div id="logo">{{ getLabel("logo")}}</div>
+        <div class="main-header">{{ getLabel('step-1-sub-header') }}</div>
+        <language-menu></language-menu>
+    </div>
+
+    <div class="blurry" id="greeting-description">
+        {{ getLabel("step-1-description") }}
+    </div>
+
+    <div id="footer">
+        <button (click)="next()" class="accent" mat-flat-button>
+            <span>{{ getLabel("step-1-begin-button") | uppercase}}</span>
+        </button>
+    </div>
+
+</div>

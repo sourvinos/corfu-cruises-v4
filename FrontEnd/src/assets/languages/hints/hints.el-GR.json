@@ -1,0 +1,92 @@
+{
+    "labels": [
+        {
+            "id": "beginsOrEndsWithSpace",
+            "description": "Αυτό το πεδίο δεν μπορεί να αρχίζει ή να τελειώνει με κενό"
+        },
+        {
+            "id": "containsIllegalCharacters",
+            "description": "Αυτό το πεδίο επιτρέπει μόνο αλφαριθμητικούς χαρακτήρες ή υπογράμμιση (κάτω παύλα)"
+        },
+        {
+            "id": "doesNotContainDigits",
+            "description": "Το πεδίο πρέπει να έχει ένα τουλάχιστον ψηφίο"
+        },
+        {
+            "id": "doesNotContainLowerCase",
+            "description": "Το πεδίο πρέπει να έχει τουλάχιστον ένα πεζό χαρακτήρα"
+        },
+        {
+            "id": "doesNotContainSymbol",
+            "description": "Το πεδίο πρέπει να έχει τουλάχιστον ένα σύμβολο π.χ. % ή #"
+        },
+        {
+            "id": "doesNotContainUpperCase",
+            "description": "Το πεδίο πρέπει να έχει τουλάχιστον έναν κεφαλαίο χαρακτήρα"
+        },
+        {
+            "id": "invalid",
+            "description": "Αυτό το πεδίο είναι άκυρο"
+        },
+        {
+            "id": "invalidRange",
+            "description": "Το πεδίο είναι εκτός του επιτρεπόμενου εύρους"
+        },
+        {
+            "id": "invalidShort",
+            "description": "Λάθος"
+        },
+        {
+            "id": "maxLength",
+            "description": "Αυτό το πεδίο μπορεί να έχει μήκος έως xx χαρακτήρες"
+        },
+        {
+            "id": "minLength",
+            "description": "Αυτό το πεδίο πρέπει να έχει μήκος τουλάχιστον xx χαρακτήρες"
+        },
+        {
+            "id": "otherErrors",
+            "description": "Αυτό το πεδίο έχει λάθη"
+        },
+        {
+            "id": "passwordsNoMatch",
+            "description": "Ο νέος κωδικός και η επιβεβαίωση νέου κωδικού δεν συμφωνούν"
+        },
+        {
+            "id": "remainingCharacters",
+            "description": "Μπορείτε να δώσετε ακόμα έως και xx χαρακτήρες"
+        },
+        {
+            "id": "required",
+            "description": "Αυτό το πεδίο είναι υποχρεωτικό"
+        },
+        {
+            "id": "shouldBeEmptyPlusOrMinus",
+            "description": "Αυτό το πεδίο επιτρέπεται να είναι κενό ή να έχει το σύμβολο + ή -"
+        },
+        {
+            "id": "shouldBeCapitalLetterOrSpace",
+            "description": "Επιτρέπονται μόνο λατινικά κεφαλαία γράμματα"
+        },
+        {
+            "id": "shouldBeFiveCapitalLetters",
+            "description": "Επιτρέπονται μόνο πέντε (5) λατινικά κεφαλαία γράμματα"
+        },
+        {
+            "id": "spacesNotAllowed",
+            "description": "Αυτό το πεδίο δεν μπορεί να περιέχει κενά"
+        },
+        {
+            "id": "customerHint",
+            "description": "Προεραιτικά επιλέξτε τον πελάτη"
+        },
+        {
+            "id": "shouldBeOnlyNumbers",
+            "description": "Το πεδίο πρέπει να έχει μόνο αριθμητικούς χαρακτήρες"
+        },
+        {
+            "id": "invalidDateRange",
+            "description": "Το διάστημα δεν είναι σωστό"
+        }
+    ]
+}

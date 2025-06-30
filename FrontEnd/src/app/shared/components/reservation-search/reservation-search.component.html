@@ -1,0 +1,5 @@
+<div *ngIf=isLoggedIn() id="button-wrapper">
+    <button [style.color]="getIconColor()" (click)="onOpenDialog()" class="fab fab-with-no-background" mat-icon-button>
+        <mat-icon class="input-suffix material-icons-outlined">search</mat-icon>
+    </button>
+</div>

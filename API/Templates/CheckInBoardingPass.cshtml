@@ -1,0 +1,51 @@
+@model API.Features.CheckIn.CheckInBoardingPassReservationVM
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+
+<body>
+    <div id="wrapper" style="max-width: 600px;">
+        <p style="font-family: Tahoma; font-size: 13px;">👋 Dear guests,</p>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px;">Your reservation for <span style="font-weight: bold;">@Model.Destination.Description </span>is confirmed.</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px; font-weight: bold">Pickup details</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Date: @Model.Date</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Pickup point: @Model.PickupPoint.Description, @Model.PickupPoint.ExactPoint</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Time: @Model.PickupPoint.Time</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px; font-weight: bold">Reservation details</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Date: @Model.Date</div>
+        <div style="font-family: Tahoma; font-size: 13px;">RefNo: @Model.RefNo</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Ticket No: @Model.TicketNo</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Customer: @Model.Customer.Description</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Pax: @Model.TotalPax</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Phone number: @Model.Phones</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Remarks: @Model.Remarks</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px; font-weight: bold">Passenger names</div>
+        @foreach (var passenger in @Model.Passengers)
+        {
+            <div style="font-family: Tahoma; font-size: 13px;">@passenger.Lastname, @passenger.Firstname</div>
+        }
+        <p> </p>
+        <div><img style="@Model.Barcode; height: 200px; width: 200px; display:block;"></div>
+        <p> </p>
+        <div style="font-family: Tahoma; font-size: 13px; font-weight: bold">🥂 We wish you a pleasant trip and thank you for choosing Corfu Cruises.</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px;">Contact phones: +30 26610 71150, +30 26620 61400</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Email: corfucruises.com@gmail.com</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px;">www.corfucruises.com</div>
+        <div style="font-family: Tahoma; font-size: 13px;">www.appcorfucruises.com</div>
+        <p></p>
+        <div style="font-family: Tahoma; font-size: 13px;">🚫 Please don't reply to this email.</div>
+    </div>
+</body>
+
+</html>

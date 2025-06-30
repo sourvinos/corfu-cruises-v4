@@ -1,0 +1,9 @@
+:host {
+    margin-top: auto;
+}
+
+#button-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0.3125rem 0.3125rem 0.3125rem 0.3125rem !important;
+}

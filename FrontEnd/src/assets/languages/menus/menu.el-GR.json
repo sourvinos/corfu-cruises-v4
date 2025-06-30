@@ -1,0 +1,138 @@
+[
+    {
+        "id": "calendar",
+        "description": "Κρατήσεις"
+    },
+    {
+        "id": "availability",
+        "description": "Διαθεσιμότητα"
+    },
+    {
+        "id": "coachRoutes",
+        "description": "Δρομολόγια λεωφορείων"
+    },
+    {
+        "id": "registrars",
+        "description": "Καταγραφείς επιβατών"
+    },
+    {
+        "id": "ports",
+        "description": "Λιμάνια"
+    },
+    {
+        "id": "drivers",
+        "description": "Οδηγοί"
+    },
+    {
+        "id": "crewSpecialties",
+        "description": "Ειδικότητες πληρωμάτων"
+    },
+    {
+        "id": "customers",
+        "description": "Πελάτες"
+    },
+    {
+        "id": "shipCrews",
+        "description": "Πληρώματα"
+    },
+    {
+        "id": "ships",
+        "description": "Πλοία"
+    },
+    {
+        "id": "shipOwners",
+        "description": "Πλοιοκτήτες"
+    },
+    {
+        "id": "destinations",
+        "description": "Προορισμοί"
+    },
+    {
+        "id": "schedules",
+        "description": "Πρόγραμμα"
+    },
+    {
+        "id": "pickupPoints",
+        "description": "Σημεία παραλαβής"
+    },
+    {
+        "id": "genders",
+        "description": "Φύλα"
+    },
+    {
+        "id": "boarding",
+        "description": "Επιβίβαση"
+    },
+    {
+        "id": "manifest",
+        "description": "Κατάσταση πλοίου"
+    },
+    {
+        "id": "reservation-ledgers",
+        "description": "Καρτέλες πελατών"
+    },
+    {
+        "id": "statistics",
+        "description": "Στατιστικά"
+    },
+    {
+        "id": "reservation-parameters",
+        "description": "Παράμετροι"
+    },
+    {
+        "id": "users",
+        "description": "Χρήστες"
+    },
+    {
+        "id": "invoices",
+        "description": "Πωλήσεις"
+    },
+    {
+        "id": "transactions",
+        "description": "Εισπράξεις"
+    },
+    {
+        "id": "taxOffices",
+        "description": "Οικονομικές υπηρεσίες"
+    },
+    {
+        "id": "documentTypes",
+        "description": "Τύποι παραστατικών"
+    },
+    {
+        "id": "customers",
+        "description": "Πελάτες"
+    },
+    {
+        "id": "prices",
+        "description": "Τιμοκατάλογοι"
+    },
+    {
+        "id": "banks",
+        "description": "Τράπεζες"
+    },
+    {
+        "id": "bankAccounts",
+        "description": "Τραπεζικοί λογαριασμοί"
+    },
+    {
+        "id": "paymentMethods",
+        "description": "Τρόποι πληρωμής"
+    },
+    {
+        "id": "sales-ledgers",
+        "description": "Καρτέλα πελάτη"
+    },
+    {
+        "id": "balanceSheet",
+        "description": "Ισοζύγιο πελατών"
+    },
+    {
+        "id": "revenues",
+        "description": "Εσοδα πωλήσεων"
+    },
+    {
+        "id": "sales-parameters",
+        "description": "Παράμετροι"
+    }
+]

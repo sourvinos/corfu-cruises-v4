@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="24.000002"
+   height="24.000002"
+   viewBox="0 -1.12 2.1235502 2.1235502"
+   version="1.1"
+   id="svg21"
+   sodipodi:docname="general-settings.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs25" />
+  <sodipodi:namedview
+     id="namedview23"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="33.916664"
+     inkscape:cx="12.000001"
+     inkscape:cy="12.000001"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg21" />
+  <g
+     id="settings_preferences"
+     data-name="settings preferences"
+     transform="matrix(0.02999873,0,0,0.03098038,-20.020432,-55.842504)">
+    <g
+       id="Group_156"
+       data-name="Group 156">
+      <g
+         id="Group_154"
+         data-name="Group 154">
+        <path
+           id="Path_370"
+           data-name="Path 370"
+           d="m 680.736,1832.669 a 2.243,2.243 0 0 1 -2.234,2.236 h -1.817 a 2.249,2.249 0 0 1 -2.244,-2.236 v -64.076 a 2.245,2.245 0 0 1 2.244,-2.233 h 1.815 a 2.239,2.239 0 0 1 2.234,2.233 z"
+           fill="#516873" />
+      </g>
+      <g
+         id="Group_155"
+         data-name="Group 155">
+        <path
+           id="Path_371"
+           data-name="Path 371"
+           d="m 687.8,1794.474 a 10.212,10.212 0 1 1 -10.214,-10.209 10.209,10.209 0 0 1 10.214,10.209 z"
+           fill="#27b7ff" />
+        <path
+           id="Path_372"
+           data-name="Path 372"
+           d="m 683.6,1794.474 a 6.013,6.013 0 1 1 -6.015,-6.016 6.011,6.011 0 0 1 6.015,6.016 z"
+           fill="#ffffff" />
+      </g>
+    </g>
+    <g
+       id="Group_159"
+       data-name="Group 159">
+      <g
+         id="Group_157"
+         data-name="Group 157">
+        <path
+           id="Rectangle_39"
+           data-name="Rectangle 39"
+           d="m 2.236,0 h 1.82 A 2.233,2.233 0 0 1 6.29,2.233 V 66.312 A 2.232,2.232 0 0 1 4.058,68.544 H 2.234 A 2.234,2.234 0 0 1 0,66.311 V 2.236 A 2.236,2.236 0 0 1 2.236,0 Z"
+           transform="translate(699.627,1766.36)"
+           fill="#516873" />
+      </g>
+      <g
+         id="Group_158"
+         data-name="Group 158">
+        <path
+           id="Path_373"
+           data-name="Path 373"
+           d="m 712.984,1811.821 a 10.212,10.212 0 1 1 -10.21,-10.211 10.215,10.215 0 0 1 10.21,10.211 z"
+           fill="#27b7ff" />
+        <path
+           id="Path_374"
+           data-name="Path 374"
+           d="m 708.79,1811.821 a 6.016,6.016 0 1 1 -6.016,-6.015 6.015,6.015 0 0 1 6.016,6.015 z"
+           fill="#ffffff" />
+      </g>
+    </g>
+    <g
+       id="Group_162"
+       data-name="Group 162">
+      <g
+         id="Group_160"
+         data-name="Group 160">
+        <path
+           id="Rectangle_40"
+           data-name="Rectangle 40"
+           d="m 2.236,0 h 1.82 A 2.233,2.233 0 0 1 6.29,2.233 V 66.312 A 2.232,2.232 0 0 1 4.058,68.544 H 2.234 A 2.234,2.234 0 0 1 0,66.311 V 2.236 A 2.236,2.236 0 0 1 2.236,0 Z"
+           transform="translate(724.808,1766.36)"
+           fill="#516873" />
+      </g>
+      <g
+         id="Group_161"
+         data-name="Group 161">
+        <path
+           id="Path_375"
+           data-name="Path 375"
+           d="M 738.164,1783 A 10.209,10.209 0 1 1 727.955,1772.789 10.209,10.209 0 0 1 738.164,1783 Z"
+           fill="#27b7ff" />
+        <path
+           id="Path_376"
+           data-name="Path 376"
+           d="m 733.966,1783 a 6.013,6.013 0 1 1 -6.011,-6.016 6.015,6.015 0 0 1 6.011,6.016 z"
+           fill="#ffffff" />
+      </g>
+    </g>
+  </g>
+</svg>

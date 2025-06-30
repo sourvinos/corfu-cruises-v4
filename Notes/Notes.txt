@@ -1,0 +1,30 @@
+select username, createdDate, expiryTime from tokens
+	inner join aspnetusers on tokens.userId = aspnetusers.id;
+	
+select date, shipOwners.description, customers.description, documentTypes.description, invoiceNo, customers, grossAmount from transactions
+	inner join shipOwners on transactions.shipOwnerId = shipOwners.id
+    inner join customers on customerId = customers.id
+    inner join documentTypes on documentTypeId = documentTypes.id
+    where date <= '2024-05-31' and isCancelled = false
+    order by customers.description, date;
+
+select date, shipOwners.description, customers.description, documentTypes.description, invoiceNo, customers, grossAmount from transactions
+	inner join shipOwners on transactions.shipOwnerId = shipOwners.id
+    inner join customers on customerId = customers.id
+    inner join documentTypes on documentTypeId = documentTypes.id
+    where date <= '2024-05-31' and documentTypes.discriminatorId = 1 and transactions.shipOwnerId = 2 and isCancelled = false
+    order by customers.description, date;
+	
+ALTER TABLE transactions ADD INDEX CK_Transactions_YearDocumentTypeInvoiceNo ((year(date)), documentTypeId, invoiceNo);
+
+public void ConfigureLocalDevelopmentServices(IServiceCollection services) {
+	services.AddDbContextFactory<AppDbContext>(options =>
+		options.UseMySql(Configuration.GetConnectionString("LocalDevelopment"), new MySqlServerVersion(new Version(8, 0, 19)), builder => {
+			builder.EnableStringComparisonTranslations();
+			builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+
+			builder.EnableRetryOnFailure();
+
+		}));
+	ConfigureServices(services);
+}

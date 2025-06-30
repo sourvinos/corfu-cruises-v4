@@ -1,0 +1,31 @@
+<div id="dialog">
+
+    <div id="dialog-header">
+        <h1>{{ getLabel('header') }}</h1>
+        <h6>{{ getLabel('subHeader') }}</h6>
+    </div>
+
+    <div id="dialog-content">
+        <form [formGroup]="form" id="form">
+            <mat-form-field>
+                <mat-label>{{ getLabel('refNo') }}</mat-label>
+                <input formControlName="refNo" matInput>
+                <mat-error *ngIf="refNo.hasError('required')">{{ getHint("required") }}</mat-error>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div id="dialog-footer">
+        <div id="align-right">
+            <button (click)="onClose()" class="transparent" mat-flat-button tabindex="-1">
+                <span>{{ getLabel("cancelButton") | uppercase }}</span>
+            </button>
+            <button (click)="onSearch()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("okButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,50 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <div id="form-wrapper">
+            <form [formGroup]="form" id="form">
+                <div class="group-input-field">
+                    <!-- Date range -->
+                    <date-range-picker [parentDateRange]="getDateRange()" (outputValues)="doDateTasks($event)"></date-range-picker>
+                    <mat-form-field>
+                        <mat-label>{{ getLabel('maxPax') }}</mat-label>
+                        <input class="right" formControlName="maxPax" matInput type="number">
+                        <mat-error *ngIf="maxPax.hasError('required')">{{ getHint("required") }}</mat-error>
+                        <mat-error *ngIf="!maxPax.hasError('required') && maxPax.hasError('min') || maxPax.hasError('max')">{{ getHint("invalid") }}</mat-error>
+                    </mat-form-field>
+                    <!-- Time -->
+                    <mat-form-field>
+                        <mat-label>{{ getLabel('time') }}</mat-label>
+                        <input formControlName="time" matInput />
+                        <mat-error *ngIf="time.hasError('required')">{{ getHint("required") }}</mat-error>
+                        <mat-error *ngIf="!time.hasError('required') && !time.hasError('time')">{{ getHint("invalid") }}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="group-input-field">
+                    <!-- Destinations -->
+                    <criteria-fieldset-radios (outputSelected)="doArrayTasks($event,'selectedDestinations')" [array]="destinations" [caption]="'destination'" [feature]="feature" [selected]="selectedDestinations"></criteria-fieldset-radios>
+                    <!-- Ports -->
+                    <criteria-fieldset-radios (outputSelected)="doArrayTasks($event,'selectedPorts')" [array]="ports" [caption]="'port'" [feature]="feature" [selected]="selectedPorts"></criteria-fieldset-radios>
+                    <!-- Weekdays -->
+                    <criteria-fieldset-weekdays (outputSelected)="doArrayTasks($event,'selectedWeekdays')" [caption]="'weekdays'" [feature]="feature" [selected]="selectedWeekdays"></criteria-fieldset-weekdays>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="onSave()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("saveButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>

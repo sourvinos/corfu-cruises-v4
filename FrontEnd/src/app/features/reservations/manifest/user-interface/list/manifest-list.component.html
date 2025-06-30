@@ -1,0 +1,167 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div class="filter-pill">
+                <div class="pill date">
+                    <mat-icon class="material-symbols-outlined">calendar_month</mat-icon>
+                    <div class="description">{{ formatDateToLocale() }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="table-wrapper">
+            <mat-tab-group mat-stretch-tabs="false">
+                <mat-tab label="{{ getLabel('tab1') }}">
+                    <p-table #passengersTable (onFilter)="filterPassengers($event)" [scrollable]="true" [value]="passengers" [virtualScrollItemSize]="32" [virtualScroll]="true" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="no-border-bottom width-5">#</th>
+                                <th class="no-border-bottom width-10" pSortableColumn="refNo">{{ getLabel('headerRefNo') }}</th>
+                                <th class="no-border-bottom width-25" pSortableColumn="lastname">{{ getLabel('headerLastname') }}</th>
+                                <th class="no-border-bottom width-25" pSortableColumn="firstname">{{ getLabel('headerFirstname') }}</th>
+                                <th class="no-border-bottom width-25" pSortableColumn="nationality.description">{{ getLabel("headerCountry") }}</th>
+                                <th class="no-border-bottom width-10" pSortableColumn="gender.description">{{ getLabel("headerGender") }}</th>
+                            </tr>
+                            <tr>
+                                <th class="no-border-top width-5"></th>
+                                <th class="no-border-top width-10"><input (input)="passengersTable.filter($event.target.value, 'refNo', 'contains')" [disabled]="passengers.length==0" [value]="$any(passengersTable).filters['refNo']?.value" class="p-inputtext"></th>
+                                <th class="no-border-top width-25"><input (input)="passengersTable.filter($event.target.value, 'lastname', 'contains')" [disabled]="passengers.length==0" [value]="$any(passengersTable).filters['lastname']?.value" class="p-inputtext"></th>
+                                <th class="no-border-top width-25"><input (input)="passengersTable.filter($event.target.value, 'firstname', 'contains')" [disabled]="passengers.length==0" [value]="$any(passengersTable).filters['firstname']?.value" class="p-inputtext"></th>
+                                <th class="no-border-top width-25">
+                                    <p-columnFilter [showMenu]="false" field="nationality" matchMode="in">
+                                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                            <p-multiSelect (onChange)="filter($event.value)" [disabled]="isFilterDisabled()" [ngModel]="value" [options]="distinctNationalities" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                                <ng-template let-option pTemplate="item">
+                                                    <div class="p-multiselect-option">
+                                                        <span>{{ option.description }}</span>
+                                                    </div>
+                                                </ng-template>
+                                            </p-multiSelect>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                </th>
+                                <th class="no-border-top width-10">
+                                    <p-columnFilter [showMenu]="false" field="gender" matchMode="in">
+                                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                            <p-multiSelect (onChange)="filter($event.value)" [disabled]="isFilterDisabled()" [ngModel]="value" [options]="distinctGenders" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                                <ng-template let-option pTemplate="item">
+                                                    <div class="p-multiselect-option">
+                                                        <span>{{ option.description }}</span>
+                                                    </div>
+                                                </ng-template>
+                                            </p-multiSelect>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template let-i="rowIndex + 1" let-passenger pTemplate="body">
+                            <tr [attr.id]=passenger.id [pSelectableRow]="passenger" style="height: 32px">
+                                <td class="width-5" style="font-family: 'Ubuntu Mono' !important;"><span class="right" style="margin-top: 0 !important; padding: 0.0625rem 0.5rem 0 0 !important">{{ i }}</span></td>
+                                <td class="width-10"><span class="center no-overflow">{{ passenger.refNo }}</span></td>
+                                <td class="width-25"><span>{{ passenger.lastname }}</span></td>
+                                <td class="width-25"><span>{{ passenger.firstname }}</span></td>
+                                <td class="width-25" class="align-vertical width-10">
+                                    <span class="flag" style="width: 100%;">
+                                        <img [src]="getNationalityIcon(passenger.nationality.code)" class="flag-with-border" />
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ passenger.nationality.description }}</span>
+                                    </span>
+                                </td>
+                                <td class="width-10"><span>{{ passenger.gender.description }}</span></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </mat-tab>
+                <mat-tab label="{{ getLabel('tab2') }}">
+                    <p-table #crewTable (onFilter)="filterCrew($event)" [scrollable]="true" [value]="crew" [virtualScrollItemSize]="32" [virtualScroll]="true" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="width-3">#</th>
+                                <th class="width-25" pSortableColumn="lastname">{{ getLabel('headerLastname') }}</th>
+                                <th class="width-25" pSortableColumn="firstname">{{ getLabel('headerFirstname') }}</th>
+                                <th class="width-25" pSortableColumn="nationality.description">{{ getLabel("headerCountry") }}</th>
+                                <th class="width-22" pSortableColumn="gender.description">{{ getLabel("headerGender") }}</th>
+                            </tr>
+                            <tr>
+                                <th class="width-3"></th>
+                                <th class="width-25"><input (input)="crewTable.filter($event.target.value, 'lastname', 'contains')" [disabled]="passengers.length==0" [value]="$any(crewTable).filters['lastname']?.value" class="p-inputtext"></th>
+                                <th class="width-25"><input (input)="crewTable.filter($event.target.value, 'firstname', 'contains')" [disabled]="passengers.length==0" [value]="$any(crewTable).filters['firstname']?.value" class="p-inputtext"></th>
+                                <th class="width-25">
+                                    <p-columnFilter [showMenu]="false" field="nationality" matchMode="in">
+                                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                            <p-multiSelect (onChange)="filter($event.value)" [disabled]="isFilterDisabled()" [ngModel]="value" [options]="distinctNationalities" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                                <ng-template let-option pTemplate="item">
+                                                    <div class="p-multiselect-option">
+                                                        <span>{{ option.description }}</span>
+                                                    </div>
+                                                </ng-template>
+                                            </p-multiSelect>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                </th>
+                                <th class="width-22">
+                                    <p-columnFilter [showMenu]="false" field="gender" matchMode="in">
+                                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                            <p-multiSelect (onChange)="filter($event.value)" [disabled]="isFilterDisabled()" [ngModel]="value" [options]="distinctGenders" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                                <ng-template let-option pTemplate="item">
+                                                    <div class="p-multiselect-option">
+                                                        <span>{{ option.description }}</span>
+                                                    </div>
+                                                </ng-template>
+                                            </p-multiSelect>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template let-i="rowIndex + 1" let-passenger pTemplate="body">
+                            <tr [attr.id]=passenger.id [pSelectableRow]="passenger" style="height: 32px">
+                                <td class="width-3" style="font-family: 'Ubuntu Mono' !important;"><span class="right" style="margin-top: 0 !important; padding: 0.0625rem 0.5rem 0 0 !important">{{ i }}</span></td>
+                                <td class="width-25"><span>{{ passenger.lastname }}</span></td>
+                                <td class="width-25"><span>{{ passenger.firstname }}</span></td>
+                                <td class="width-25" class="align-vertical width-10">
+                                    <span class="flag" style="width: 100%;">
+                                        <img [src]="getNationalityIcon(passenger.nationality.code)" class="flag-with-border" />
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ passenger.nationality.description }}</span>
+                                    </span>
+                                </td>
+                                <td class="width-22"><span>{{ passenger.gender.description }}</span></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <table-total-filtered-records (resetTableFilters)="resetTableFilters()" [filteredRecordCount]="passengersFilteredCount" [recordCount]="passengers.length"></table-total-filtered-records>
+        <div id="align-right">
+            <button [disabled]="passengers.length==0" class="no-right-border-radius primary" mat-flat-button>
+                <mat-icon *ngIf="passengers.length==0" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("createFiles") | uppercase }}</span>
+            </button>
+            <button [disabled]="passengers.length==0" [matMenuTriggerFor]="saveMenu" class="no-left-border-radius primary-darker" mat-flat-button>
+                <mat-icon class="big material-symbols-outlined">expand_less</mat-icon>
+            </button>
+            <mat-menu #saveMenu="matMenu" class="primary" xPosition="before">
+                <ng-container *ngTemplateOutlet="saveMenuTemplate"></ng-container>
+            </mat-menu>
+        </div>
+    </div>
+
+    <ng-template #saveMenuTemplate>
+        <button (click)="doExportTasks('passengers')" mat-menu-item>
+            <span>{{ getLabel("createFilePassengers") }}</span>
+        </button>
+        <button (click)="doExportTasks('crew')" mat-menu-item>
+            <span>{{ getLabel("createFileCrew") }}</span>
+        </button>
+    </ng-template>
+
+
+</div>

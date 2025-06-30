@@ -1,0 +1,227 @@
+[
+    {
+        "feature": "snackbarMessages",
+        "labels": [
+            {
+                "error": 200,
+                "message": "Vše OK."
+            },
+            {
+                "error": 400,
+                "message": "Model je neplatný."
+            },
+            {
+                "error": 401,
+                "message": "Ověření se nezdařilo."
+            },
+            {
+                "error": 402,
+                "message": "Η ΑΑΔΕ δεν ενημερώθηκε."
+            },
+            {
+                "error": 404,
+                "message": "Tento záznam nelze nalézt."
+            },
+            {
+                "error": 409,
+                "message": "Rezervace není ojedinělá. Zkontrolujte datum, destinaci, zákazníka a číslo letenky."
+            },
+            {
+                "error": 410,
+                "message": "U vámi poskytnutých informací jsme nezjistili žádné odchylky. Zkontrolujte datum, destinaci a místo vyzvednutí."
+            },
+            {
+                "error": 412,
+                "message": "Heslo nelze změnit. Je možné, že aktuální heslo je špatné."
+            },
+            {
+                "error": 414,
+                "message": "RefNo již existuje. Zkuste to prosím znovu."
+            },
+            {
+                "error": 415,
+                "message": "Tento záznam byl již aktualizován jiným uživatelem!"
+            },
+            {
+                "error": 416,
+                "message": "Pokud je uživatel správce, musí mít připojený klient 'hvězdičku'."
+            },
+            {
+                "error": 417,
+                "message": "Pokud uživatel není správce, připojený klient musí mít 'hvězdičku'."
+            },
+            {
+                "error": 418,
+                "message": "Pokud uživatel není správce, připojený klient musí mít 'hvězdičku'."
+            },
+            {
+                "error": 431,
+                "message": "Po odjezdu lodi není možné rezervaci přidat nebo změnit."
+            },
+            {
+                "error": 433,
+                "message": "Rezervaci nelze uložit, protože je zakázáno přeplácet rezervace."
+            },
+            {
+                "error": 459,
+                "message": "Nové rezervace s převodem v době, kdy máme zavřeno, nejsou povoleny. Kontaktujte prosím správce."
+            },
+            {
+                "error": 467,
+                "message": "Εντοπίστηκαν κενά στις εγγραφές των παραστατικών."
+            },
+            {
+                "error": 491,
+                "message": "Tento záznam je používán a nelze jej smazat."
+            },
+            {
+                "error": 492,
+                "message": "Nemůžeme pokračovat. Ujistěte se prosím, že uživatelské jméno a/nebo e-mail nepatří jinému uživateli."
+            },
+            {
+                "error": 493,
+                "message": "Přístupový řád již existuje."
+            },
+            {
+                "error": 500,
+                "message": "Něco se pokazilo, ale bylo to nahlášeno."
+            },
+            {
+                "id": "authenticationFailed",
+                "message": "Ověření se nezdařilo."
+            },
+            {
+                "id": "maximumBalanceExceeded",
+                "message": "Překročili jste svůj úvěrový limit. Kontaktujte prosím správce."
+            },
+            {
+                "id": "emailSent",
+                "message": "Právě jsme vám poslali email."
+            },
+            {
+                "id": "emailNotSent",
+                "message": "Nyní vám nemůžeme poslat e-mail, zkuste to prosím za chvíli znovu."
+            },
+            {
+                "id": "formIsDirty",
+                "message": "Než budete pokračovat, musí být všechny změny uloženy."
+            },
+            {
+                "id": "noRecordsSelected",
+                "message": "Nevybrali jste žádné záznamy."
+            },
+            {
+                "id": "selectedPricesMustBelongToSameCustomer",
+                "message": "Vybrané záznamy musí patřit stejnému zákazníkovi."
+            },
+            {
+                "id": "noVideoDevicesFound",
+                "message": "Na vašem zařízení nejsou žádné kamery."
+            },
+            {
+                "id": "unableToResetPassword",
+                "message": "Nové heslo nelze uložit. Odkaz v zaslaném e-mailu již nemusí být platný."
+            },
+            {
+                "id": "noContactWithServer",
+                "message": "Z databáze není žádná odpověď."
+            },
+            {
+                "id": "featureNotAvailable",
+                "message": "Tato možnost zatím není k dispozici."
+            },
+            {
+                "id": "reservationCreated",
+                "message": "RefNo "
+            },
+            {
+                "id": "success",
+                "message": "Vše OK."
+            },
+            {
+                "id": "warning",
+                "message": "Máme tento záznam smazat?"
+            },
+            {
+                "id": "confirmLogout",
+                "message": "Potvrďte, že se chcete odhlásit!"
+            },
+            {
+                "id": "passwordCanBeChangedOnlyByAccountOwner",
+                "message": "Heslo může změnit pouze vlastník účtu."
+            },
+            {
+                "id": "askToRefreshCalendar",
+                "message": "Zaznamenali jsme změny ve velikosti kalendáře. Chcete, abychom jej aktualizovali o nové údaje?"
+            },
+            {
+                "id": "resolutionWarning",
+                "message": "Rozlišení vaší obrazovky je příliš nízké na to, aby se aplikace správně zobrazovala. Potřebujete alespoň 1280x800 pixelů. Pokračujte na vlastní nebezpečí!"
+            },
+            {
+                "id": "reservationNotFound",
+                "message": "Vaše rezervace nebyla nalezena"
+            },
+            {
+                "id": "helpDialog",
+                "message": "Můžete se obrátit na místo, kde jste rezervaci provedli, nebo na jednoho z nás na telefonním čísle +30 26610 71150 nebo +30 26620 61400."
+            },
+            {
+                "id": "twoPointReservationValidation",
+                "message": "Zkontrolujte, zda nechybí žádné údaje o cestujícím a zda byla rezervace uložena."
+            },
+            {
+                "id": "threePointReservationValidation",
+                "message": "Zkontrolujte, zda nechybí žádné údaje o cestujícím, zda jste zadali e-mail a zda byla rezervace uložena."
+            },
+            {
+                "id": "errorsInRegistrars",
+                "message": "Údaje o cestujících na této lodi nejsou správné. Pro každou loď by měli existovat dva aktivní registrátoři, z nichž jeden by měl být deklarován jako aktivní."
+            },
+            {
+                "id": "priceRetrieverHasErrors",
+                "message": "Δεν μπορούμε να ανακτήσουμε τις χρεώσεις επειδή πρέπει να δώσετε την ημερομηνία, τον πελάτη και τον προορισμό."
+            },
+            {
+                "id": "priceRetrieverIsEmpty",
+                "message": "Δεν βρήκαμε καμμία χρέωση για την ημερομηνία, τον πελάτη και τον προορισμό ή οι χρεώσεις δεν είναι πλήρεις."
+            },
+            {
+                "id": "priceRetrieverIsValid",
+                "message": "Οι χρεώσεις ανακτήθηκαν!"
+            },
+            {
+                "id": "confirmDeleteDexieDB",
+                "message": "Chcete pokračovat v obnovování? Pokud se proces dokončí bez chyb, budete se muset znovu přihlásit."
+            },
+            {
+                "id": "selectedReservationsMustBeSameShip",
+                "message": "Βεβαιωθείτε ότι έχετε επιλέξει κρατήσεις του ίδιου πλοίου και του ίδιου προορισμού."
+            },
+            {
+                "id": "confirmCancelInvoice",
+                "message": "Αν συνεχίσετε, το παραστατικό θα πάρει ΜΑΡΚ ακύρωσης και δεν θα εμφανίζεται στις οικονομικές καταστάσεις."
+            },
+            {
+                "id": "helpDialog",
+                "message": "Můžete se obrátit na místo, kde jste rezervaci provedli, nebo na jednoho z nás na telefonním čísle +30 26610 71150 nebo +30 26620 61400"
+            },
+            {
+                "id": "checkInAfterDepartureIsNotAllowed",
+                "message": "Vaše rezervace byla nalezena, ale přihlášení po odjezdu lodi není povoleno"
+            },
+            {
+                "id": "customerDataIsInvalid",
+                "message": "Η τιμολόγηση δεν μπορεί να συνεχιστεί επειδή τα στοιχεία του πελάτη είναι ελλειπή ή λάθος."
+            },
+            {
+                "id": "customerAadeDoesNotExist",
+                "message": "Η εγγραφή δεν βρέθηκε. Βεβαιωθείτε ότι ο ΑΦΜ είναι σωστός και ότι έχει έδρα την Ελλάδα."
+            },
+            {
+                "id": "customerVatNumberIsDuplicate",
+                "message": "Όλα εντάξει, αλλά ο ΑΦΜ υπάρχει ήδη. Ισως θα πρέπει να ελέγξετε το αρχείο σας"
+            }
+        ]
+    }
+]

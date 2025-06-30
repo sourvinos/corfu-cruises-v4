@@ -1,0 +1,104 @@
+<div id="dialog-wrapper">
+
+    <div id="dialog-header">
+        <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+    </div>
+
+    <div id="dialog-content">
+        <form [formGroup]="form" id="form">
+            <!-- Lastname -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('lastname') }}</mat-label>
+                <input (input)="convertToUpperCase('lastname')" [inputTabStop]="input" dataTabIndex="1" formControlName="lastname" matInput>
+                <mat-error *ngIf="lastname.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!lastname.hasError('required') && lastname.hasError('shouldBeCapitalLetterOrSpace')">{{ getHint("shouldBeCapitalLetterOrSpace") }}</mat-error>
+            </mat-form-field>
+            <!-- Firstname -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('firstname') }}</mat-label>
+                <input (input)="convertToUpperCase('firstname')" [inputTabStop]="input" dataTabIndex="2" formControlName="firstname" matInput>
+                <mat-error *ngIf="firstname.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!firstname.hasError('required') && firstname.hasError('shouldBeCapitalLetterOrSpace')">{{ getHint("shouldBeCapitalLetterOrSpace") }}</mat-error>
+            </mat-form-field>
+            <!-- Nationality -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('nationality') }}</mat-label>
+                <input #inputAutoComplete #triggerNationality="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="nationalities" dataTabIndex="3" formControlName="nationality" matInput>
+                <div matSuffix style="display:flex">
+                    <button (click)="openOrCloseAutoComplete(triggerNationality, 'nationality')" mat-icon-button type="button">
+                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                    </button>
+                </div>
+                <mat-error *ngIf="nationality.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!nationality.hasError('required') && nationality.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- Gender -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('gender') }}</mat-label>
+                <input #inputAutoComplete #triggerGender="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="genders" dataTabIndex="4" formControlName="gender" matInput>
+                <div matSuffix style="display:flex">
+                    <button (click)="openOrCloseAutoComplete(triggerGender, 'gender')" mat-icon-button type="button">
+                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                    </button>
+                </div>
+                <mat-error *ngIf="gender.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!gender.hasError('required') && gender.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- Birthdate -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('birthdate') }}</mat-label>
+                <input (blur)="convertFutureDateToPast()" [inputTabStop]="input" [matDatepicker]="picker" dataTabIndex="5" formControlName="birthdate" matInput>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="birthdate.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!birthdate.hasError('required') && birthdate.hasError('ageIsLessThanOneHundredYears')">{{ getHint("invalidRange") }}</mat-error>
+            </mat-form-field>
+            <!-- Special care -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('specialCare') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="6" formControlName="specialCare" matInput>
+                <mat-error *ngIf="specialCare.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="specialCare.hasError('maxlength')">{{ getHint("maxLength", specialCare.errors.maxlength.requiredLength) }}</mat-error>
+            </mat-form-field>
+            <!-- Remarks -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('remarks') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="7" formControlName="remarks" matInput>
+                <mat-error *ngIf="remarks.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="remarks.hasError('maxlength')">{{ getHint("maxLength", remarks.errors.maxlength.requiredLength) }}</mat-error>
+            </mat-form-field>
+            <!-- IsBoarded -->
+            <div id="is-boarded">
+                <mat-checkbox [class]="!isAdmin() ? 'disabled': null" formControlName="isBoarded">
+                    <mat-icon *ngIf="!isAdmin()" class="material-icons-outlined small">lock</mat-icon>
+                    <span>{{ getLabel("isBoarded") }}</span>
+                </mat-checkbox>
+            </div>
+        </form>
+    </div>
+
+    <div id="dialog-footer">
+        <div id="align-right">
+            <button (click)="onClose()" class="transparent" mat-flat-button tabindex="-1">
+                <span>{{ getLabel("cancelButton") | uppercase }}</span>
+            </button>
+            <button (click)="onSave()" [disabled]="!form.valid" class="primary" mat-flat-button tabindex="-1">
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("okButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<mat-autocomplete #genders="matAutocomplete" [displayWith]="autocompleteFields.bind(this, 'description')" autoActiveFirstOption>
+    <mat-option *ngFor="let option of dropdownGenders | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>
+
+<mat-autocomplete #nationalities="matAutocomplete" [displayWith]="autocompleteFields.bind(this, 'description')" (optionSelected)="updateFieldsAfterNationalitySelection($event.option.value)" autoActiveFirstOption>
+    <mat-option *ngFor="let option of dropdownNationalities | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>

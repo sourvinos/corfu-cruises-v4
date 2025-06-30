@@ -1,0 +1,42 @@
+<div id="button-wrapper">
+    <button [matMenuTriggerFor]="languages" class="fab fab-with-no-background" mat-icon-button>
+        <mat-icon class="material-symbols-outlined">g_translate</mat-icon>
+    </button>
+</div>
+
+<mat-menu #languages="matMenu" class="primary">
+    <ng-container *ngTemplateOutlet="languagesMenu"></ng-container>
+</mat-menu>
+
+<ng-template #languagesMenu>
+    <button (click)="onChangelanguage('el-GR')" mat-menu-item>
+        <div class="content">
+            <img src="/assets/images/languages/el-GR.svg">
+            <span>Ελληνικά</span>
+        </div>
+    </button>
+    <button (click)="onChangelanguage('en-GB')" mat-menu-item>
+        <div class="content">
+            <img src="/assets/images/languages/en-GB.svg">
+            <span>English</span>
+        </div>
+    </button>
+    <button (click)="onChangelanguage('de-DE')" mat-menu-item>
+        <div class="content">
+            <img src="/assets/images/languages/de-DE.svg">
+            <span>Deutsch</span>
+        </div>
+    </button>
+    <button (click)="onChangelanguage('cs-CZ')" mat-menu-item>
+        <div class="content">
+            <img src="/assets/images/languages/cs-CZ.svg">
+            <span>Česky</span>
+        </div>
+    </button>
+    <button (click)="onChangelanguage('fr-FR')" mat-menu-item>
+        <div class="content">
+            <img src="/assets/images/languages/fr-FR.svg">
+            <span>Française</span>
+        </div>
+    </button>
+</ng-template>

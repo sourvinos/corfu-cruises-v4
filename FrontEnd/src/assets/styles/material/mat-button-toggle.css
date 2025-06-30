@@ -1,0 +1,29 @@
+.mat-button-toggle-group {
+    border: none !important;
+}
+
+.mat-button-toggle-label-content {
+    line-height: 2.25rem !important;
+    transform: scale(0.8, 1.4);
+}
+
+.mat-button-toggle {
+    background-color: color-mix(in srgb, var(--color-button-secondary) 80%, transparent) !important;
+    border: none !important;
+    color: var(--color-button-text) !important;
+    height: 2.125rem;
+    transition: background-color 0.2s !important;
+}
+
+.mat-button-toggle:first-child {
+    border-radius: 3.125rem 0 0 3.125rem !important;
+}
+
+.mat-button-toggle:last-child {
+    border-radius: 0 3.125rem 3.125rem 0 !important;
+}
+
+.mat-button-toggle-checked {
+    background-color: var(--color-button-secondary) !important;
+    color: var(--color-button-text) !important;
+}

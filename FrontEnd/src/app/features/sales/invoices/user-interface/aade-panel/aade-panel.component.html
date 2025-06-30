@@ -1,0 +1,38 @@
+<div class="group-input-field hide-hint">
+    <form [formGroup]="form" id="form">
+        <mat-form-field>
+            <mat-label>{{ getLabel('uId') }}</mat-label>
+            <input formControlName="uId" matInput readonly>
+        </mat-form-field>
+        <div class="group-input-field">
+            <mat-form-field>
+                <mat-label>{{ getLabel('mark') }}</mat-label>
+                <input formControlName="mark" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel('markCancel') }}</mat-label>
+                <input formControlName="markCancel" matInput readonly>
+            </mat-form-field>
+        </div>
+        <div class="group-input-field">
+            <mat-form-field>
+                <mat-label>{{ getLabel('authenticationCode') }}</mat-label>
+                <input formControlName="authenticationCode" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel('iCode') }}</mat-label>
+                <input formControlName="iCode" matInput readonly>
+            </mat-form-field>
+        </div>
+        <div class="group-input-field">
+            <mat-form-field>
+                <mat-label>{{ getLabel('url') }}</mat-label>
+                <input formControlName="url" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel('discriminator') }}</mat-label>
+                <input formControlName="discriminator" matInput readonly>
+            </mat-form-field>
+        </div>
+    </form>
+</div>

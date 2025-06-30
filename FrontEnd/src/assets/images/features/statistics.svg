@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   height="24.000002"
+   width="24"
+   version="1.1"
+   id="Layer_1"
+   viewBox="0 0 15.36 15.360001"
+   xml:space="preserve"
+   sodipodi:docname="statistics.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs508" /><sodipodi:namedview
+   id="namedview506"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="true"
+   inkscape:deskcolor="#d1d1d1"
+   showgrid="false"
+   inkscape:zoom="33.916664"
+   inkscape:cx="12.000001"
+   inkscape:cy="12.029485"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+
+
+
+<polyline
+   style="fill:#000000;fill-opacity:1"
+   points="160,441.6 160,386.928 352,386.928 352,435.2 "
+   id="polyline487"
+   transform="matrix(0.03,0,0,0.0334099,0,-0.87293387)" /><path
+   d="M 11.36016,15.360001 H 3.99984 C 3.58176,15.360001 3.24,14.979395 3.24,14.513795 v 0 c 0,-0.4656 0.34176,-0.846206 0.75984,-0.846206 h 7.35984 c 0.41808,0 0.75984,0.380606 0.75984,0.846206 v 0 c 4.8e-4,0.465066 -0.34128,0.846206 -0.75936,0.846206 z"
+   id="path489"
+   style="stroke-width:0.0316591" /><path
+   style="fill:#e04f5f;stroke-width:0.0316591"
+   d="M 14.4,10.691168 H 0.96 C 0.432,10.691168 0,10.210065 0,9.6220512 V 1.0691168 C 0,0.48110256 0.432,0 0.96,0 H 14.4 c 0.528,0 0.96,0.48110256 0.96,1.0691168 v 8.5529344 c 0,0.5880138 -0.432,1.0691168 -0.96,1.0691168 z"
+   id="path491" /><g
+   id="g503"
+   transform="matrix(0.03,0,0,0.0334099,0,-0.87293387)">
+	<polygon
+   style="fill:#ffffff"
+   points="103.088,236.496 91.776,225.184 179.392,137.584 311.04,209.408 414.096,129.264 423.904,141.888 312.576,228.464 182.24,157.376 "
+   id="polygon493" />
+	<circle
+   style="fill:#ffffff"
+   cx="421.56799"
+   cy="135.56799"
+   r="24.176001"
+   id="circle495" />
+	<circle
+   style="fill:#ffffff"
+   cx="97.440002"
+   cy="237.168"
+   r="24.176001"
+   id="circle497" />
+	<circle
+   style="fill:#ffffff"
+   cx="178.92799"
+   cy="148.20799"
+   r="24.176001"
+   id="circle499" />
+	<circle
+   style="fill:#ffffff"
+   cx="311.80801"
+   cy="217.424"
+   r="24.176001"
+   id="circle501" />
+</g>
+</svg>

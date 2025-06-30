@@ -1,0 +1,27 @@
+#form-wrapper {
+    height: 100%;
+    margin: 0 auto 0 auto;
+    width: 80%;
+}
+
+#form {
+    display: flex;
+    flex-direction: column !important;
+    height: 100%;
+}
+
+#form .group-input-field > date-range-picker {
+    width: 100%;
+}
+
+#form .group-input-field:first-child {
+    column-gap: 0.5rem;
+    display: flex;
+    width: 100%;
+}
+
+#form .group-input-field:last-child {
+    column-gap: 0.5rem;
+    display: flex;
+    height: 100%;
+}

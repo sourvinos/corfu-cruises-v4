@@ -1,0 +1,46 @@
+#form-wrapper {
+    gap: 0 !important;
+}
+
+#content {
+    background-color: transparent !important;
+}
+
+#header {
+    justify-content: center !important;
+}
+
+#columns {
+    align-items: center;
+    display: flex;
+    padding: 0 1.5rem 0 1.5rem;
+}
+
+#columns .mat-mdc-checkbox {
+    width: 100%;
+}
+
+#columns button {
+    margin-left: auto;
+}
+
+#forgot-password {
+    color: var(--color-text);
+    display: flex;
+    font-family: var(--font-family-asty);
+    font-size: 0.8rem;
+    font-weight: 100;
+    justify-content: flex-end;
+    text-align: end;
+    transition: color var(--theme-delay);
+    width: 100%;
+}
+
+#forgot-password:hover {
+    cursor: pointer;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+}

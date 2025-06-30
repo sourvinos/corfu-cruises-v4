@@ -1,0 +1,50 @@
+<div id="form-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <mat-form-field>
+                <mat-label>{{ getLabel('username') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="1" formControlName="username" matInput>
+                <mat-error *ngIf="username.hasError('required')">{{ getHint("required") }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel('password') }}</mat-label>
+                <input [inputTabStop]="input" [type]="hidePassword ? 'password' : 'text'" dataTabIndex="2" formControlName="password" matInput>
+                <div matSuffix style="display:flex">
+                    <button (click)="hidePassword = !hidePassword" mat-icon-button type="button">
+                        <mat-icon class="input-suffix material-icons-outlined extra-top-margin small">{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                    </button>
+                </div>
+                <mat-error *ngIf="password.hasError('required')">{{ getHint("required") }}</mat-error>
+            </mat-form-field>
+            <div id="columns">
+                <mat-checkbox formControlName="noRobot">
+                    <span>{{ getLabel("noRobotCheckbox") }}</span>
+                </mat-checkbox>
+                <div id="forgot-password">
+                    <span (click)="onForgotPassword()">{{ getLabel("forgotPasswordButton") }}</span>
+                </div>
+            </div>
+        </form>
+
+        <main-footer></main-footer>
+
+    </div>
+
+    <div id="footer">
+        <button (click)="onLogin()" [disabled]="!form.valid" class="primary" id="login-button" mat-flat-button>
+            <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+            <span>{{ getLabel("loginButton") | uppercase }}</span>
+        </button>
+    </div>
+
+    <div *ngIf="isLoading | async">
+        <loading-spinner></loading-spinner>
+    </div>
+
+</div>

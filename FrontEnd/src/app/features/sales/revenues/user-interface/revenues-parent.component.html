@@ -1,0 +1,64 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [featureIcon]="featureIcon" [feature]="feature" [icon]="featureIcon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div id="header-right">
+                <span id="criteria-caption">{{ getCriteria() }}</span>
+                <button (click)="onShowCriteriaDialog()" class="fab fab-with-no-background" mat-icon-button>
+                    <mat-icon class="material-icons-outlined">filter_alt</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <ng-template [ngIf]="shipOwnerFilteredTotal.length > 0" [ngIfElse]="noData">
+            <mat-tab-group mat-stretch-tabs="false" (selectedIndexChange)="onSelectedTabChange()">
+                <mat-tab label="Corfu Cruises">
+                    <div id="table-wrapper">
+                        <revenuesShipOwnerTable [records]="shipOwnerFilteredRecordsA" [criteria]="criteria"></revenuesShipOwnerTable>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Pandis Family">
+                    <div id="table-wrapper">
+                        <revenuesShipOwnerTable [records]="shipOwnerFilteredRecordsB" [criteria]="criteria"></revenuesShipOwnerTable>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Γενικά σύνολα">
+                    <div id="table-wrapper">
+                        <revenuesShipOwnerTable [records]="shipOwnerFilteredTotal"></revenuesShipOwnerTable>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </ng-template>
+
+    </div>
+
+    <div id="footer">
+        <button [matMenuTriggerFor]="menu" class="fab fab-with-no-background" mat-icon-button>
+            <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="primary">
+            <ng-container *ngTemplateOutlet="utilityMenu"></ng-container>
+        </mat-menu>
+        <div id="align-right">
+            <button [disabled]="shipOwnerTotal.length==0" (click)="onExportTasks()" class="primary" mat-flat-button>
+                <mat-icon *ngIf="shipOwnerTotal.length==0" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("exportButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #utilityMenu>
+    <button [disabled]="shipOwnerTotal.length==0" (click)="onToggleZeroBalanceRows()" mat-menu-item>
+        <mat-checkbox [(ngModel)]="showZeroBalanceRow">
+            <span>{{ getLabel('zeroBalanceRowVisibility') }}</span>
+        </mat-checkbox>
+    </button>
+</ng-template>
+
+<ng-template #noData>
+    <cat-page icon="face" [header]="getLabel('noDataHeader')" [subHeader]="getLabel('noDataSubHeader')"></cat-page>
+</ng-template>

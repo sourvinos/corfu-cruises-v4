@@ -1,0 +1,88 @@
+<div id="table-wrapper">
+    <p-table #table [(selection)]="selectedRecords" [scrollable]="true" [value]="customer.reservations" [virtualScrollItemSize]="32" [virtualScroll]="false" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="no-border-bottom width-3"></th>
+                <th class="no-border-bottom width-5" pSortableColumn="date">{{ getLabel('headerDate') }}</th>
+                <th class="no-border-bottom width-6" pSortableColumn="destination.abbreviation">{{ getLabel('headerDestination') }}</th>
+                <th class="no-border-bottom width-6" pSortableColumn="pickupPoint.description">{{ getLabel('headerPickupPoint') }}</th>
+                <th class="no-border-bottom width-6" pSortableColumn="ship.abbreviation">{{ getLabel('headerShip') }}</th>
+                <th class="no-border-bottom width-6" pSortableColumn="port.abbreviation">{{ getLabel('headerPort') }}</th>
+                <th class="no-border-bottom width-5" pSortableColumn="refNo">{{ getLabel('headerRefNo') }}</th>
+                <th class="no-border-bottom width-5" pSortableColumn="ticketNo">{{ getLabel('headerTicket') }}</th>
+                <th class="no-border-bottom width-4" pSortableColumn="hasTransfer">{{ getLabel('headerHasTransfer') }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="adults">{{ getLabel('headerAdults') }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="kids">{{ getLabel('headerKids') }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="free">{{ getLabel('headerFree') }}</th>
+                <th class="no-border-bottom width-3" pSortableColumn="totalPax">Σ</th>
+                <th class="no-border-bottom width-3" pSortableColumn="embarkedPassengers">Σ<span class="subscript">1</span></th>
+                <th class="no-border-bottom width-3" pSortableColumn="totalNoShow">{{ getLabel('headerNoShow') }}</th>
+                <th class="no-border-bottom width-3">{{ getLabel('headerRemarks') }}</th>
+            </tr>
+            <tr>
+                <th class="no-border-top width-3"><p-tableHeaderCheckbox (click)="onValidateSelection()"></p-tableHeaderCheckbox></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+                <th class="no-border-top"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-reservation>
+            <tr (click)="highlightRow(reservation.reservationId)" [attr.id]=reservation.reservationId style="height: 32px;">
+                <td class="width-3"><span class="center no-overflow"><p-tableCheckbox (click)="onValidateSelection()" [value]="reservation"></p-tableCheckbox></span></td>
+                <td class="width-5"><span class="center no-overflow">{{ formatDateToLocale(reservation.date) }}</span></td>
+                <td class="width-6"><span class="center no-overflow">{{ reservation.destination.abbreviation }}</span></td>
+                <td class="width-6"><span>{{ reservation.pickupPoint.description }}</span></td>
+                <td class="width-6">
+                    <span *ngIf="reservation.ship.abbreviation == '(EMPTY)'" class="center no-overflow" style="font-size: 0.5rem; padding-top: 0 !important;">{{ getEmoji('null') }}</span>
+                    <span *ngIf="reservation.ship.abbreviation != '(EMPTY)'" class="center no-overflow">{{ reservation.ship.abbreviation }}</span>
+                <td class="center width-6"><span class="center no-overflow">{{ reservation.port.abbreviation }}</span></td>
+                <td class="center width-5"><span class="center no-overflow">{{ reservation.refNo }}</span></td>
+                <td class="width-5"><span>{{ reservation.ticketNo }}</span></td>
+                <td [ngClass]="reservation.hasTransfer ? 'has-transfer' : 'no-transfer'" class="emoji width-4">
+                    <span class="center no-overflow">
+                        <span *ngIf=" reservation.hasTransfer" style="font-size: 0.5rem; padding-top: 0 !important;">{{ getEmoji('green-box') }} </span>
+                        <span *ngIf="!reservation.hasTransfer" style="font-size: 0.5rem; padding-top: 0 !important;">{{ getEmoji('red-box') }}</span>
+                    </span>
+                </td>
+                <td class="width-3"><span class="number right with-right-padding">{{ reservation.adults | replaceZero }}</span></td>
+                <td class="width-3"><span class="number right with-right-padding">{{ reservation.kids | replaceZero }}</span></td>
+                <td class="width-3"><span class="number right with-right-padding">{{ reservation.free | replaceZero }}</span></td>
+                <td class="width-3"><span class="number right with-right-padding">{{ reservation.totalPax }}</span></td>
+                <td class="width-3"><span class="number right with-right-padding">{{ reservation.embarkedPassengers | replaceZero }}</span></td>
+                <td class="width-3"><span class="number right with-right-padding">{{ reservation.totalNoShow | replaceZero }}</span></td>
+                <td class="width-3">
+                    <span class="center no-overflow">
+                        <span (click)="showRemarks(reservation.remarks)" [ngClass]="hasRemarks(reservation.remarks)?'clickable':''" *ngIf="hasRemarks(reservation.remarks)" class="remarks">{{ getEmoji('remarks') }}</span>
+                    </span>
+                </td>
+            </tr>
+            <tr *ngIf="hasRemarks(reservation.remarks)" [ngClass]="getRemarksRowVisibility() ? '' : 'no-display'" style="height: 32px;">
+                <td class="right" colspan="15" style="padding: 0 0.3125rem 0 0.3125rem;">{{ reservation.remarks }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer" let-columns>
+            <tr>
+                <td colspan="9"></td>
+                <td class="right"><span class="number with-right-padding">{{ customer.adults | replaceZero }}</span></td>
+                <td class="right"><span class="number with-right-padding">{{ customer.kids | replaceZero }}</span></td>
+                <td class="right"><span class="number with-right-padding">{{ customer.free | replaceZero }}</span></td>
+                <td class="right"><span class="number with-right-padding">{{ customer.totalPax | replaceZero }}</span></td>
+                <td class="right"><span class="number with-right-padding">{{ customer.totalEmbarked | replaceZero }}</span></td>
+                <td class="right"><span class="number with-right-padding">{{ customer.totalNoShow | replaceZero }}</span></td>
+                <td></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

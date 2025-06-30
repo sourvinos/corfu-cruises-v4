@@ -1,0 +1,84 @@
+{
+    "labels": [
+        {
+            "id": "beginsOrEndsWithSpace",
+            "description": "Ce champ ne peut pas commencer ou se terminer par un espace"
+        },
+        {
+            "id": "containsIllegalCharacters",
+            "description": "Ce champ n'autorise que les caractères alphanumériques ou les traits de soulignement"
+        },
+        {
+            "id": "doesNotContainDigits",
+            "description": "Ce champ doit comporter au moins un chiffre"
+        },
+        {
+            "id": "doesNotContainLowerCase",
+            "description": "Ce champ doit comporter au moins un caractère minuscule"
+        },
+        {
+            "id": "doesNotContainSymbol",
+            "description": "Ce champ doit contenir au moins un symbole, par exemple % ou #"
+        },
+        {
+            "id": "doesNotContainUpperCase",
+            "description": "Ce champ doit comporter au moins une majuscule"
+        },
+        {
+            "id": "invalid",
+            "description": "Ce champ n'est pas valide"
+        },
+        {
+            "id": "invalidRange",
+            "description": "Ce champ est en dehors de la plage autorisée"
+        },
+        {
+            "id": "invalidShort",
+            "description": "Non valide"
+        },
+        {
+            "id": "maxLength",
+            "description": "Ce champ peut contenir jusqu'à xx caractères"
+        },
+        {
+            "id": "minLength",
+            "description": "Ce champ doit comporter au moins xx caractères"
+        },
+        {
+            "id": "otherErrors",
+            "description": "Ce champ contient des erreurs"
+        },
+        {
+            "id": "passwordsNoMatch",
+            "description": "Le nouveau mot de passe et la confirmation du nouveau mot de passe ne correspondent pas"
+        },
+        {
+            "id": "remainingCharacters",
+            "description": "Vous pouvez donner jusqu'à xx caractères supplémentaires"
+        },
+        {
+            "id": "required",
+            "description": "Ce champ est obligatoire"
+        },
+        {
+            "id": "shouldBeEmptyPlusOrMinus",
+            "description": "Ce champ peut être vide ou comporter le symbole + ou -."
+        },
+        {
+            "id": "shouldBeCapitalLetterOrSpace",
+            "description": "Seules les lettres majuscules latines sont autorisées"
+        },
+        {
+            "id": "shouldBeCapitalLetter",
+            "description": "Seules les lettres majuscules latines sont autorisées"
+        },
+        {
+            "id": "spacesNotAllowed",
+            "description": "Ce champ ne peut pas contenir d'espaces"
+        },
+        {
+            "id": "shouldBeOnlyNumbers",
+            "description": "The field must have numeric characters only"
+        }
+    ]
+}

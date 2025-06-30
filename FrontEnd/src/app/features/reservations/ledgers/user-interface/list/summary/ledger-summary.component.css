@@ -1,0 +1,51 @@
+#table-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table > thead > tr > th {
+    background-color: var(--color-background);
+    border: 0.0625rem solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+    color: var(--color-text) !important;
+    font-family: var(--font-family-asty) !important;
+    font-size: var(--font-size-table-header) !important;
+    font-weight: 300 !important;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    text-align: center !important;
+    transition: all var(--theme-delay);
+}
+
+table > tbody > tr > td {
+    border: 0.0625rem solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+    color: var(--color-text);
+    font-family: var(--font-family-asty) !important;
+    font-size: var(--font-size-table-row);
+    font-weight: 300;
+    overflow: hidden !important;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    transition: all var(--theme-delay);
+}
+
+table > tfoot > tr > td {
+    background-color: var(--color-background);
+    border: 0.0625rem solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+    color: var(--color-text) !important;
+    font-family: var(--font-family-asty) !important;
+    font-size: var(--font-size-table-header) !important;
+    font-weight: 300 !important;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    text-align: center !important;
+    transition: all var(--theme-delay);
+}
+
+table > tfoot > tr > td:first-child {
+    width: 10rem;
+}

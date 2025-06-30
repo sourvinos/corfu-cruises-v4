@@ -1,0 +1,22 @@
+<div *ngIf=isAdmin() id="button-wrapper">
+    <button [matMenuTriggerFor]="menu" class="fab fab-with-no-background" mat-icon-button>
+        <mat-icon class="material-icons-outlined">paid</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="primary">
+        <button (click)="doNavigation('invoices',true)" mat-menu-item><span>{{ getLabel('invoices') }}</span></button>
+        <button (click)="doNavigation('receipts',true)" mat-menu-item> <span>{{ getLabel('transactions') }}</span></button>
+        <mat-divider></mat-divider>
+        <button (click)="doNavigation('customers',true)" mat-menu-item>{{ getLabel("customers") }}</button>
+        <button (click)="doNavigation('taxOffices',true)" mat-menu-item>{{ getLabel("taxOffices") }}</button>
+        <button (click)="doNavigation('prices',true)" mat-menu-item>{{ getLabel("prices") }}</button>
+        <button (click)="doNavigation('banks',true)" mat-menu-item>{{ getLabel("banks") }}</button>
+        <button (click)="doNavigation('bankAccounts',true)" mat-menu-item>{{ getLabel("bankAccounts") }}</button>
+        <button (click)="doNavigation('documentTypes',true)" mat-menu-item>{{ getLabel("documentTypes") }}</button>
+        <button (click)="doNavigation('paymentMethods',true)" mat-menu-item>{{ getLabel("paymentMethods") }}</button>
+        <mat-divider></mat-divider>
+        <button (click)="doNavigation('sales-ledgers',true)" mat-menu-item>{{ getLabel("sales-ledgers") }}</button>
+        <button (click)="doNavigation('balanceSheet',true)" mat-menu-item>{{ getLabel("balanceSheet")}}</button>
+        <button (click)="doNavigation('revenues',true)" mat-menu-item>{{ getLabel("revenues")}}</button>
+        <mat-divider></mat-divider>
+        <button (click)="doNavigation('sales-parameters',true)" mat-menu-item>{{ getLabel("sales-parameters")}}</button></mat-menu>
+</div>

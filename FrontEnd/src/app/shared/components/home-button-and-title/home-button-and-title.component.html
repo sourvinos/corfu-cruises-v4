@@ -1,0 +1,9 @@
+<div id="navigation">
+    <button *ngIf="parentUrl != null" [routerLink]="[parentUrl]" class="fab fab-with-no-background" mat-icon-button>
+        <mat-icon class="material-icons-outlined">arrow_back</mat-icon>
+    </button>
+    <div id="title">
+        <img *ngIf="featureIcon" [src]="getFeatureIcon()" style="height: 2.375rem; width: 2.375rem" (load)="loadImage()" [ngClass]="imageIsLoading()" id="feature-icon">
+        <h1>{{ getLabel() }}</h1>
+    </div>
+</div>

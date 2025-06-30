@@ -1,0 +1,30 @@
+<div id="wrapper">
+
+    <div id="topbar">
+        <logo></logo>
+        <user-menu></user-menu>
+    </div>
+
+    <div id="center">
+        <div id="leftbar">
+            <reservations-menu></reservations-menu>
+            <sales-menu></sales-menu>
+            <language-menu></language-menu>
+            <theme-selector></theme-selector>
+        </div>
+        <div id="main">
+            <div id="outer-content" [@routeAnimation]="o.isActivated?o.activatedRoute:''">
+                <router-outlet #o="outlet"></router-outlet>
+            </div>
+        </div>
+        <div id="rightbar">
+            <reservation-search></reservation-search>
+            <logout></logout>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="isLoading">
+    <loading-spinner></loading-spinner>
+</div>

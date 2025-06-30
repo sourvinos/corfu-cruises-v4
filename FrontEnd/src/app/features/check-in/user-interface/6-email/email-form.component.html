@@ -1,0 +1,32 @@
+<div id="content">
+
+    <div id="header">
+        <div id="step-caption">
+            <span class="material-symbols-outlined step-number">counter_4</span>
+            <span class="step-header">{{ getLabel("step-6-header") }}</span>
+        </div>
+        <div class="main-header">{{ getLabel("step-6-sub-header") }}</div>
+        <help></help>
+    </div>
+
+    <form [formGroup]="form" class="blurry" id="form">
+        <mat-form-field>
+            <mat-label>{{ getLabel("step-6-email") }}</mat-label>
+            <input formControlName="email" matInput>
+            <mat-hint>{{ getLabel("step-6-email-hint") }}</mat-hint>
+            <mat-error *ngIf="email.hasError('required')">{{ getHint("required") }}</mat-error>
+            <mat-error *ngIf="email.hasError('maxlength')">{{ getHint("maxLength", email.errors.maxlength.requiredLength) }}</mat-error>
+            <mat-error *ngIf="!email.hasError('required') && !email.hasError('maxlength') && email.hasError('email')">{{ getHint("invalid") }}</mat-error>
+        </mat-form-field>
+    </form>
+
+    <div id="footer">
+        <button (click)="previous()" class="primary" mat-flat-button>
+            <span>{{ getLabel("previous") | uppercase }}</span>
+        </button>
+        <button (click)="next()" [disabled]="!form.valid" class="accent" mat-flat-button>
+            <span>{{ getLabel("next") | uppercase }}</span>
+        </button>
+    </div>
+
+</div>

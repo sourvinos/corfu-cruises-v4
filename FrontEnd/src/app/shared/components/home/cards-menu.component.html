@@ -1,0 +1,32 @@
+<div id="cards-menu">
+    <mat-card (click)="doNavigation('reservations',true)">
+        <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('reservations')" style="height: 6.25rem; margin-left: 1rem; width: 6.25rem">
+        <mat-card-title>{{ getLabel("reservationsTitle") }}</mat-card-title>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>{{ getLabel("reservationsSubTitle") }}</mat-card-subtitle>
+    </mat-card>
+    <mat-card (click)="doNavigation('availability',true)">
+        <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('availability')" style="height: 6.25rem; margin-left: 1rem; width: 6.25rem">
+        <mat-card-title>{{ getLabel("availabilityTitle") }}</mat-card-title>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>{{ getLabel("availabilitySubTitle") }}</mat-card-subtitle>
+    </mat-card>
+    <mat-card *ngIf="isAdmin()" (click)="doNavigation('invoices',true)">
+        <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('invoices')" style="height: 6.25rem; margin-left: 1rem; width: 6.25rem">
+        <mat-card-title>{{ getLabel("invoicesTitle") }}</mat-card-title>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>{{ getLabel("invoicesSubTitle") }}</mat-card-subtitle>
+    </mat-card>
+    <mat-card *ngIf="isAdmin()" (click)="doNavigation('boarding',true)">
+        <img (load)="loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('boarding')" style="height: 6.25rem; margin-left: 1rem; width: 6.25rem">
+        <mat-card-title>{{ getLabel("boardingTitle") }}</mat-card-title>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>{{ getLabel("boardingSubTitle") }}</mat-card-subtitle>
+    </mat-card>
+    <mat-card *ngIf="!isAdmin()" (click)="doNavigation('reservation-ledgers',true)">
+        <img (load)=" loadImage()" [ngClass]="imageIsLoading()" [src]="getIcon('ledgers')" style="height: 6.25rem; margin-left: 1rem; width: 6.25rem">
+        <mat-card-title>{{ getLabel("ledgersTitle") }}</mat-card-title>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>{{ getLabel("ledgersSubTitle") }}</mat-card-subtitle>
+    </mat-card>
+</div>

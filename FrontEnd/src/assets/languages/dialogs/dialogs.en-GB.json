@@ -1,0 +1,247 @@
+[
+    {
+        "feature": "snackbarMessages",
+        "labels": [
+            {
+                "error": 200,
+                "message": "Everything OK."
+            },
+            {
+                "error": 400,
+                "message": "The model is invalid."
+            },
+            {
+                "error": 401,
+                "message": "Authentication wasn't successful."
+            },
+            {
+                "error": 402,
+                "message": "Η ΑΑΔΕ δεν ενημερώθηκε."
+            },
+            {
+                "error": 404,
+                "message": "This record can not be found."
+            },
+            {
+                "error": 409,
+                "message": "The reservation is not unique. Check the date, destination, customer and ticket number."
+            },
+            {
+                "error": 410,
+                "message": "We did not find any departures with the information you provided. Check the date, destination and pickup point."
+            },
+            {
+                "error": 412,
+                "message": "The password cannot be changed. Possibly, the current password id wrong."
+            },
+            {
+                "error": 414,
+                "message": "The RefNo already exists. Please try again."
+            },
+            {
+                "error": 415,
+                "message": "This record has already been updated by another user!"
+            },
+            {
+                "error": 416,
+                "message": "When the user is an admin, the connected client must have an 'asterisk'"
+            },
+            {
+                "error": 417,
+                "message": "When the user is not an admin, the connected client must be given"
+            },
+            {
+                "error": 418,
+                "message": "When the user is not an admin, the connected client must be given"
+            },
+            {
+                "error": 431,
+                "message": "It's not possible to add or change a reservation after the ship's departure."
+            },
+            {
+                "error": 433,
+                "message": "The reservation cannot be saved because overbooking is prohibited."
+            },
+            {
+                "error": 459,
+                "message": "New reservations with transfer while we are closed are not allowed. Please contact an administrator."
+            },
+            {
+                "error": 467,
+                "message": "Εντοπίστηκαν κενά στις εγγραφές των παραστατικών."
+            },
+            {
+                "error": 491,
+                "message": "This record is in use and can't be deleted."
+            },
+            {
+                "error": 492,
+                "message": "We are unable to continue. Please make sure that the username and/or the email don't belong to another user."
+            },
+            {
+                "error": 493,
+                "message": "The approach order already exists."
+            },
+            {
+                "error": 500,
+                "message": "Something went not so well, but it has been reported."
+            },
+            {
+                "id": "authenticationFailed",
+                "message": "Authentication was not successful."
+            },
+            {
+                "id": "maximumBalanceExceeded",
+                "message": "You have exceeded your debit limit. Please contact an administrator."
+            },
+            {
+                "id": "emailSent",
+                "message": "We have just scheduled to send you an email five (5) minutes from now."
+            },
+            {
+                "id": "emailNotSent",
+                "message": "We can't send you an email right now, please try again in a little while."
+            },
+            {
+                "id": "formIsDirty",
+                "message": "Before you continue, all changes must be saved."
+            },
+            {
+                "id": "noRecordsSelected",
+                "message": "You have not selected any records."
+            },
+            {
+                "id": "selectedPricesMustBelongToSameCustomer",
+                "message": "The selected records must belong to the same customer."
+            },
+            {
+                "id": "noVideoDevicesFound",
+                "message": "There are no cameras on your device."
+            },
+            {
+                "id": "unableToResetPassword",
+                "message": "The new password cannot be saved. The link in the email you were sent may no longer be valid."
+            },
+            {
+                "id": "noContactWithServer",
+                "message": "There is no response from the database."
+            },
+            {
+                "id": "featureNotAvailable",
+                "message": "This option is not yet available."
+            },
+            {
+                "id": "reservationCreated",
+                "message": "RefNo "
+            },
+            {
+                "id": "success",
+                "message": "Everything OK."
+            },
+            {
+                "id": "warning",
+                "message": "Shall we delete this record?"
+            },
+            {
+                "id": "confirmLogout",
+                "message": "Please confirm that you want to logout!"
+            },
+            {
+                "id": "passwordCanBeChangedOnlyByAccountOwner",
+                "message": "The password can be changed only by the owner of the account."
+            },
+            {
+                "id": "askToRefreshCalendar",
+                "message": "We have detected changes in the size of the calendar. Do you want us to update it with new data?"
+            },
+            {
+                "id": "resolutionWarning",
+                "message": "Your screen resolution is too low for the app to display correctly. You need at least 1280x800 pixels. Continue at your own risk!"
+            },
+            {
+                "id": "reservationNotFound",
+                "message": "Your reservation wasn't found."
+            },
+            {
+                "id": "helpDialog",
+                "message": "You can contact the place where you made the reservation or one of us at +30 26610 71150 or +30 26620 61400."
+            },
+            {
+                "id": "twoPointReservationValidation",
+                "message": "Make sure that no passenger details are missing and that the reservation has been saved."
+            },
+            {
+                "id": "threePointReservationValidation",
+                "message": "Make sure that no passenger details are missing, that you have provided the email and that the reservation has been saved."
+            },
+            {
+                "id": "errorsInRegistrars",
+                "message": "The passenger registrars for this ship are not correct. For each ship there should be two active registrars, one of which should be declared as active."
+            },
+            {
+                "id": "priceRetrieverHasErrors",
+                "message": "Δεν μπορούμε να ανακτήσουμε τις χρεώσεις επειδή πρέπει να δώσετε την ημερομηνία, τον πελάτη και τον προορισμό."
+            },
+            {
+                "id": "providerNotUpdated",
+                "message": "Ο πάροχος δεν ενημερώθηκε."
+            },
+            {
+                "id": "priceRetrieverIsEmpty",
+                "message": "Δεν βρήκαμε καμμία χρέωση για την ημερομηνία, τον πελάτη και τον προορισμό ή οι χρεώσεις δεν είναι πλήρεις."
+            },
+            {
+                "id": "priceRetrieverIsValid",
+                "message": "Οι χρεώσεις ανακτήθηκαν!"
+            },
+            {
+                "id": "confirmDeleteDexieDB",
+                "message": "Do you want to continue with the refresh? If the process is completed without errors you will need to log back in."
+            },
+            {
+                "id": "selectedReservationsMustBeSameShip",
+                "message": "Βεβαιωθείτε ότι έχετε επιλέξει κρατήσεις του ίδιου πλοίου και του ίδιου προορισμού."
+            },
+            {
+                "id": "confirmCancelInvoice",
+                "message": "Αν συνεχίσετε, το παραστατικό θα πάρει ΜΑΡΚ ακύρωσης και δεν θα εμφανίζεται στις οικονομικές καταστάσεις."
+            },
+            {
+                "id": "helpDialog",
+                "message": "You can contact the place where you made the reservation or one of us at +30 26610 71150 or +30 26620 61400"
+            },
+            {
+                "id": "checkInAfterDepartureIsNotAllowed",
+                "message": "Your reservation was found, but check-in after the ship's departure is not allowed"
+            },
+            {
+                "id": "customerDataIsInvalid",
+                "message": "Η τιμολόγηση δεν μπορεί να συνεχιστεί επειδή τα στοιχεία του πελάτη είναι ελλειπή ή λάθος."
+            },
+            {
+                "id": "customerAadeDoesNotExist",
+                "message": "Η εγγραφή δεν βρέθηκε. Βεβαιωθείτε ότι ο ΑΦΜ είναι σωστός και ότι έχει έδρα την Ελλάδα."
+            },
+            {
+                "id": "customerVatNumberIsDuplicate",
+                "message": "Όλα εντάξει, αλλά ο ΑΦΜ υπάρχει ήδη. Ισως θα πρέπει να ελέγξετε το αρχείο σας."
+            },
+            {
+                "id": "invoiceIsAlreadySaved",
+                "message": "Εγινε προσπάθεια να καταχωρηθεί το παραστατικό δύο φορές, αλλά χωρίς επιτυχία"
+            },
+            {
+                "error": 463,
+                "message": "Εγινε προσπάθεια να καταχωρηθεί το ίδιο παραστατικό για δεύτερη φορά, αλλά αποτράπηκε!"
+            },
+            {
+                "error": 469,
+                "message": "You have reached your daily pax limit. Please contact an administrator."
+            },
+            {
+                "error": 501,
+                "message": "Ο πάροχος δεν ανταποκρίνεται. Παρακαλούμε δοκιμάστε ξανά λίγο αργότερα"
+            }
+        ]
+    }
+]

@@ -1,0 +1,63 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [featureIcon]="featureIcon" [feature]="feature" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div id="header-right">
+                <span [ngClass]="isSizeChanged ? 'visible' : 'hidden'" (click)="askToRefreshCalendar()" class="material-symbols-outlined warning" id="refresh-warning">warning</span>
+                <button (click)="doSelectedPeriodTasks('today')" class="transparent" id="goto-today-button" mat-mini-fab>
+                    <span class="material-symbols-outlined">today</span>
+                </button>
+                <year-selector (yearEmitter)="doTasksAfterYearSelection($event)" [year]="getSelectedYear()"></year-selector>
+            </div>
+        </div>
+
+        <div id="table-wrapper">
+            <div id="days">
+                <div *ngFor="let day of calendar" [attr.id]="day.date" [ngClass]="{ 'saturday':isSaturday(day.date), 'sunday':isSunday(day.date), 'is-today':isToday(day.date), 'has-schedule':dayHasSchedule(day) }" class="day">
+                    <div class="day-data">
+                        <div class="weekday">{{ getLocaleWeekdayName(day.date) }}</div>
+                        <div class="date">{{ day.value }}</div>
+                        <div class="month">{{ getLocaleMonthName(day.date) }}</div>
+                        <div class="year">{{ getYear(day.date) }}</div>
+                    </div>
+                    <div *ngIf="day.destinations.length > 0" class="reservation-data">
+                        <div class="reservation">
+                            <div *ngFor="let destination of day.destinations" (click)="doNewReservationTasks(day.date, destination)" class="destinations">
+                                <div class="destination-description">{{ destination.abbreviation }}</div>
+                                <div class="ports" *ngFor="let port of destination.ports">
+                                    <div class="port-description">{{ port.abbreviation }}</div>
+                                    <div class="port-description">{{ port.freePax }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="day.destinations.length > 0 && isAdmin()" (click)="showApiObject(day)" class="api-object">
+                        <span class="material-icons-outlined">bug_report</span>
+                    </div>
+                    <div *ngIf="day.destinations.length == 0" class="no-reservation-data">
+                        <span class="material-icons-outlined">do_not_disturb</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="period-scroller">
+            <button (click)="doSelectedPeriodTasks('previous')" class="transparent" mat-mini-fab>
+                <span class="material-icons-outlined">chevron_left</span>
+            </button>
+            <button (click)="doSelectedPeriodTasks('next')" class="transparent" mat-mini-fab>
+                <span class="material-icons-outlined">chevron_right</span>
+            </button>
+        </div>
+        <month-selector (monthEmitter)="doTasksAfterMonthSelection($event)"></month-selector>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="newRecord()" class="primary" mat-flat-button>{{ getLabel("newRecord") | uppercase }}</button>
+        </div>
+    </div>
+
+</div>

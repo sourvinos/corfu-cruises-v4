@@ -1,0 +1,39 @@
+.mdc-card {
+    align-items: flex-start;
+    backdrop-filter: blur(--blur) !important;
+    background-color: color-mix(in srgb, var(--color-background) 30%, transparent) !important;
+    border-radius: 0.3125rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start;
+    padding: 2rem 1rem 2rem 1rem !important;
+    transition: all 0.25s !important;
+    width: 17rem;
+}
+
+.mdc-card:hover {
+    background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent) !important;
+    cursor: pointer;
+}
+
+.mat-mdc-card-title {
+    color: var(--color-text) !important;
+    font-family: var(--font-family-asty) !important;
+    font-size: 1.25rem !important;
+    font-weight: 300 !important;
+    margin: 0 0 0 0.5rem !important;
+    transition: color var(--theme-delay);
+}
+
+.mat-mdc-card-subtitle {
+    color: var(--color-text) !important;
+    font-family: var(--font-family-asty) !important;
+    font-weight: 300 !important;
+    line-height: 1.25rem !important;
+    margin: 0 0 0 0.5rem !important;
+    transition: color var(--theme-delay);
+}
+
+.mat-mdc-card img {
+    margin: 0 0 1rem 1rem;
+}

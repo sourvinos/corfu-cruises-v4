@@ -1,0 +1,88 @@
+[
+    {
+        "feature": "months",
+        "labels": [
+            {
+                "id": "01",
+                "description": "January"
+            },
+            {
+                "id": "02",
+                "description": "February"
+            },
+            {
+                "id": "03",
+                "description": "March"
+            },
+            {
+                "id": "04",
+                "description": "April"
+            },
+            {
+                "id": "05",
+                "description": "May"
+            },
+            {
+                "id": "06",
+                "description": "June"
+            },
+            {
+                "id": "07",
+                "description": "July"
+            },
+            {
+                "id": "08",
+                "description": "August"
+            },
+            {
+                "id": "09",
+                "description": "September"
+            },
+            {
+                "id": "10",
+                "description": "October"
+            },
+            {
+                "id": "11",
+                "description": "November"
+            },
+            {
+                "id": "12",
+                "description": "December"
+            }
+        ]
+    },
+    {
+        "feature": "weekdays",
+        "labels": [
+            {
+                "id": "0",
+                "description": "Sunday"
+            },
+            {
+                "id": "1",
+                "description": "Monday"
+            },
+            {
+                "id": "2",
+                "description": "Tuesday"
+            },
+            {
+                "id": "3",
+                "description": "Wednesday"
+            },
+            {
+                "id": "4",
+                "description": "Thursday"
+            },
+            {
+                "id": "5",
+                "description": "Friday"
+            },
+            {
+                "id": "6",
+                "description": "Saturday"
+            }
+        ]
+    }
+]

@@ -1,0 +1,85 @@
+<div id="content">
+
+    <div id="header">
+        <div id="step-caption">
+            <span class="material-symbols-outlined step-number">counter_1</span>
+            <span class="step-header">{{ getLabel("search-header") }}</span>
+        </div>
+        <div class="main-header">{{ getLabel("step-2-sub-step-caption") }}</div>
+        <help></help>
+    </div>
+
+    <form [formGroup]="form" class="blurry" id="form">
+        <mat-radio-group formControlName="hasRefNo">
+            <mat-radio-button [value]="options[0].id">
+                {{ getLabel('step-2-yes') }}
+            </mat-radio-button>
+            <mat-radio-button [value]="options[1].id">
+                {{ getLabel('step-2-no') }}
+            </mat-radio-button>
+        </mat-radio-group>
+        <!-- RefNo = Yes -->
+        <ng-template [ngIf]="form.value.hasRefNo == 1">
+            <mat-form-field>
+                <mat-label>{{ getLabel('step-2-refNo') }}</mat-label>
+                <input formControlName="refNo" matInput>
+                <mat-hint>{{ getLabel("step-2-refNo-hint") }}</mat-hint>
+                <mat-error *ngIf="refNo.hasError('required')">{{ getHint("required") }}</mat-error>
+            </mat-form-field>
+        </ng-template>
+        <!-- RefNo = No -->
+        <ng-template [ngIf]="form.value.hasRefNo == 2">
+            <div id="complex-group" formGroupName="complexGroup">
+                <!-- Date -->
+                <div class="group-field">
+                    <mat-form-field id="date">
+                        <mat-label>{{ getLabel('step-2-date') }}</mat-label>
+                        <input (dateChange)="patchFormWithSelectedDate($event)" [matDatepicker]="picker" formControlName="date" matInput>
+                        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                        <mat-datepicker #picker>
+                            <mat-datepicker-actions>
+                                <button (click)="doTodayTasks()" class="accent" mat-flat-button matDatepickerApply>{{ getLabel('today') }}</button>
+                                <button class="primary" mat-flat-button matDatepickerApply>{{ getLabel("ok") }}</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                        <mat-hint>{{ getLabel("step-2-date-hint") }}</mat-hint>
+                        <mat-error *ngIf="date.hasError('required')">{{ getHint("invalid") }}</mat-error>
+                    </mat-form-field>
+                </div>
+                <!-- Destination -->
+                <mat-form-field>
+                    <mat-label>{{ getLabel('step-2-destination') }}</mat-label>
+                    <mat-select [(value)]="selectedDestination" formControlName="destination">
+                        <mat-option *ngFor="let p of destinations" [value]="p">
+                            {{ p.description }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>{{ getLabel("step-2-destination-hint") }}</mat-hint>
+                    <mat-error *ngIf="destination.hasError('required')">{{ getHint("required") }}</mat-error>
+                    <mat-error *ngIf="!destination.hasError('required') && destination.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+                </mat-form-field>
+                <!-- Lastname -->
+                <mat-form-field>
+                    <mat-label>{{ getLabel("step-2-lastname") }}</mat-label>
+                    <input formControlName="lastname" matInput>
+                    <mat-hint>{{ getLabel("step-2-lastname-hint") }}</mat-hint>
+                    <mat-error *ngIf="lastname.hasError('required')">{{ getHint("required") }}</mat-error>
+                </mat-form-field>
+                <!-- Firstname -->
+                <mat-form-field>
+                    <mat-label>{{ getLabel("step-2-firstname") }}</mat-label>
+                    <input formControlName="firstname" matInput>
+                    <mat-hint>{{ getLabel("step-2-firstname-hint") }}</mat-hint>
+                    <mat-error *ngIf="firstname.hasError('required')">{{ getHint("required") }}</mat-error>
+                </mat-form-field>
+            </div>
+        </ng-template>
+    </form>
+
+    <div id="footer">
+        <button [disabled]="requiredFieldsShouldBeGiven()" (click)="onSearch()" class="accent" mat-flat-button>
+            <span>{{ getLabel("next") | uppercase}}</span>
+        </button>
+    </div>
+
+</div>

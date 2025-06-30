@@ -1,0 +1,86 @@
+<div id="content">
+
+    <div id="header">
+        <div id="step-caption">
+            <span class="material-symbols-outlined step-number">counter_2</span>
+            <span class="step-header">{{ getLabel("step-3-header") }}</span>
+        </div>
+        <div class="main-header">{{ getLabel("step-3-sub-header") }}</div>
+        <help></help>
+    </div>
+
+    <div id="scrollable">
+        <form [formGroup]="reservationForm" class="blurry" id="form">
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-date") }}</mat-label>
+                <input formControlName="date" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-refNo") }}</mat-label>
+                <input formControlName="refNo" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-ticketNo") }}</mat-label>
+                <input formControlName="ticketNo" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-destination") }}</mat-label>
+                <input formControlName="destination" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-customer") }}</mat-label>
+                <input formControlName="customer" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-pickupPoint") }}</mat-label>
+                <input formControlName="pickupPoint" matInput readonly>
+            </mat-form-field>
+            <div class="horizontal">
+                <mat-form-field>
+                    <mat-label>{{ getLabel("step-3-exactPoint") }}</mat-label>
+                    <input formControlName="exactPoint" matInput readonly>
+                </mat-form-field>
+                <mat-form-field id="time">
+                    <mat-label>{{ getLabel("step-3-time") }}</mat-label>
+                    <input formControlName="time" matInput readonly>
+                </mat-form-field>
+            </div>
+            <div class="horizontal">
+                <mat-form-field>
+                    <mat-label>{{ getLabel("step-3-adults") }}</mat-label>
+                    <input formControlName="adults" matInput readonly>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ getLabel("step-3-kids") }}</mat-label>
+                    <input formControlName="kids" matInput readonly>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ getLabel("step-3-free") }}</mat-label>
+                    <input formControlName="free" matInput readonly>
+                </mat-form-field>
+            </div>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-totalPax") }}</mat-label>
+                <input formControlName="totalPax" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-phones") }}</mat-label>
+                <input formControlName="phones" matInput readonly>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ getLabel("step-3-remarks") }}</mat-label>
+                <input formControlName="remarks" matInput readonly>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div id="footer">
+        <button (click)="previous()" class="primary" mat-flat-button>
+            <span>{{ getLabel("previous") | uppercase }}</span>
+        </button>
+        <button (click)="next()" class="accent" mat-flat-button>
+            <span>{{ getLabel("next") | uppercase }}</span>
+        </button>
+    </div>
+
+</div>

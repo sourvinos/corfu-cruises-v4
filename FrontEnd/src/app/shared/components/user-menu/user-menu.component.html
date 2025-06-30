@@ -1,0 +1,6 @@
+<div *ngIf=isLoggedIn()>
+    <div (click)="onEditConnectedUser()" class="transparent" id="connected-user" mat-flat-button>
+        <mat-icon class="material-symbols-outlined">account_circle</mat-icon>
+        <span>{{ getDisplayName() }}</span>
+    </div>
+</div>

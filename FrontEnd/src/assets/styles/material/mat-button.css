@@ -1,0 +1,135 @@
+.mdc-button .mat-icon.big {
+    font-size: 22px !important;
+    top: -0.125rem;
+    left: -0.3125rem;
+    width: 1.3125rem !important;
+    height: 22px !important;
+}
+
+.mdc-button .mat-icon {
+    font-size: 0.75rem !important;
+    height: 0.75rem !important;
+    margin: 0.125rem 0 0 0 !important;
+    width: 0.75rem !important;
+}
+
+.mdc-button .mdc-button__label {
+    color: var(--color-button-text) !important;
+    font-family: var(--font-family-fira-sans-condensed) !important;
+    font-size: var(--font-size-button) !important;
+    font-weight: 300 !important;
+    margin-top: 0.25rem !important;
+    transform: scale(1, 1.4);
+}
+
+.mat-mdc-icon-button {
+    --mat-mdc-button-persistent-ripple-color: transparent !important;
+    width: auto !important;
+}
+
+button {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    box-shadow: none !important;
+    color: var(--color-button-text) !important;
+    column-gap: 0.5rem;
+    cursor: default !important;
+    display: flex !important;
+    justify-content: center;
+    min-width: 0 !important;
+    outline: 0 !important;
+}
+
+button:not(.mat-calendar-body-cell) {
+    padding: 0 1.5rem 0.125rem 1.5rem !important;
+}
+
+button.fab {
+    height: 2.375rem !important;
+    padding: 0 !important;
+    transition: color var(--theme-delay) !important;
+    width: 2.375rem !important;
+}
+
+button.fab-with-background {
+    background-color: var(--color-accent);
+}
+
+button.fab-with-no-background {
+    background-color: transparent;
+    color: var(--color-text) !important;
+}
+
+button.fab:hover {
+    background-color: var(--color-button-fab-hover);
+}
+
+button.delete {
+    background-color: var(--color-button-delete) !important;
+}
+
+button.primary {
+    background-color: var(--color-button-primary) !important;
+}
+
+button.primary-darker {
+    background-color: var(--color-button-primary-darker) !important;
+}
+
+button.secondary {
+    background-color: var(--color-button-secondary) !important;
+}
+
+button.accent {
+    background-color: var(--color-accent) !important;
+}
+
+button.tab {
+    padding-bottom: 0.3125rem;
+}
+
+button.tab:first-child {
+    margin-right: 1rem;
+}
+
+button.transparent {
+    background-color: transparent !important;
+    transition: color var(--theme-delay) !important;
+}
+
+button.transparent:hover {
+    background-color: var(--color-transparent-button-hover) !important;
+}
+
+button.transparent > .mdc-button__label {
+    color: var(--color-transparent-button) !important;
+    transition: color var(--theme-delay) !important;
+}
+
+button.no-right-border-radius {
+    border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+button.no-left-border-radius {
+    border-radius: 0 0.25rem 0.25rem 0 !important;
+    margin-left: -0.5rem !important;
+    padding: 0 0 0 18px !important;
+}
+
+button:disabled {
+    cursor: not-allowed !important;
+    pointer-events: all !important;
+}
+
+button:not(:disabled) {
+    cursor: pointer !important;
+}
+
+button .mat-mdc-menu-item-text .content {
+    display: flex;
+}
+
+button .mat-mdc-menu-item-text .content span {
+    margin: 0.1875rem 0 0 0.5rem;
+}

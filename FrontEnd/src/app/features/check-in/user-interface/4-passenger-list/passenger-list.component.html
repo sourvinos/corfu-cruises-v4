@@ -1,0 +1,50 @@
+<div id="content">
+
+    <div id="header">
+        <div id="step-caption">
+            <span class="material-symbols-outlined step-number">counter_3</span>
+            <span class="step-header">{{ getLabel("step-4-header") }}</span>
+        </div>
+        <div class="main-header">{{ getLabel("step-3-sub-header") }}</div>
+        <help></help>
+    </div>
+
+    <div *ngIf="checkTotalPaxAgainstPassengerCount()" id="new-passenger-button">
+        <button (click)="showEmptyPassengerForm()" class="accent" mat-flat-button>
+            <span>{{ getLabel("step-4-new-passenger-button") | uppercase }}</span>
+        </button>
+    </div>
+
+    <div class="blurry" id="scrollable">
+        <div id="table-wrapper">
+            <p-table #table [scrollable]="true" [value]="reservation.passengers" [virtualScrollItemSize]="32" [virtualScroll]="false" dataKey="id" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+                <ng-template pTemplate="body" let-record>
+                    <tr (click)="highlightRow(record.id)" [attr.id]="record.id" [pSelectableRow]="record" style="height: 32px;">
+                        <td class=""><span>{{ record.lastname }}</span></td>
+                        <td class=""><span>{{ record.firstname }}</span></td>
+                        <td class="width-2">
+                            <span class="center" style="padding: 0 0 0 0 !important;">
+                                <span (click)="editPassenger(record)" class="center" style="font-size: 0.75rem;">{{ getEmoji('edit') }}</span>
+                            </span>
+                        </td>
+                        <td class="width-2">
+                            <span class="center" style="padding: 0 0 0 0 !important;">
+                                <span (click)="deletePassenger(record)" class="center" style="font-size: 0.75rem;">{{ getEmoji('error') }}</span>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div id="footer">
+        <button (click)="previous()" class="primary" mat-flat-button>
+            <span>{{ getLabel("previous") | uppercase }}</span>
+        </button>
+        <button [disabled]="checkTotalPaxAgainstPassengerCount()" (click)="next()" class="accent" mat-flat-button>
+            <span>{{ getLabel("next") | uppercase }}</span>
+        </button>
+    </div>
+
+</div>

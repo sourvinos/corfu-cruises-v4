@@ -1,0 +1,153 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 100%;
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+#days {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-between;
+}
+
+#period-scroller button span.material-icons-outlined {
+    color: var(--color-accent);
+    font-size: 2.5rem;
+}
+
+#period-scroller button {
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    margin-right: 1rem !important;
+    transition: all 0.25s !important;
+}
+
+#period-scroller {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.day {
+    background-color: color-mix(in srgb, var(--color-calendar-day) 30%, transparent);
+    border-radius: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 7.7rem;
+    min-width: 7.7rem;
+    padding: 1.8rem 1rem 1.8rem 1rem;
+    transition: background-color var(--theme-delay) !important;
+}
+
+.day-data .date {
+    color: var(--color-text);
+    font-family: var(--font-family-asty);
+    font-size: 1.8rem;
+    font-weight: 100;
+    margin-top: 0.3125rem;
+    text-align: center;
+    transition: color var(--theme-delay) !important;
+    width: 3rem;
+}
+
+.day-data .weekday, .day-data .month, .day-data .year {
+    color: var(--color-text);
+    font-family: var(--font-family-asty);
+    font-size: 0.8rem;
+    font-weight: 100;
+    margin-top: 0.2rem;
+    transition: color var(--theme-delay) !important;
+}
+
+.day-data {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.day.has-schedule {
+    cursor: revert;
+}
+
+.destination-description {
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform: scale(1, 1.5);
+    white-space: nowrap;
+}
+
+.destinations {
+    border-radius: 0.625rem;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-asty);
+    font-size: 0.8rem;
+    font-weight: 100;
+    justify-content: space-between;
+    margin: 0.4rem 0;
+    padding: 1rem 1rem 1rem 1rem;
+    transition: color var(--theme-delay) !important;
+}
+
+.is-today {
+    background-color: var(--color-background-today) !important;
+}
+
+.no-reservation-data span {
+    color: #00000023;
+    font-size: 4rem;
+}
+
+.no-reservation-data {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.pax {
+    color: var(--color-text);
+    font-family: var(--font-family-asty);
+    font-size: 1.2rem;
+    font-weight: 100;
+    margin: auto auto 1rem auto;
+    text-align: center;
+    transition: color var(--theme-delay) !important;
+}
+
+.reservation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.reservation-data {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.saturday {
+    background-color: var(--color-background-saturday);
+}
+
+.sunday {
+    background-color: var(--color-background-sunday);
+}

@@ -1,0 +1,19 @@
+* {
+    --color-background: #fefefe;
+    --color-button-fab-hover: #f1f1f1;
+    --color-calendar-day: #dbdbdb;
+    --color-dialog-areas-seperator: #ebebeb;
+    --color-dialog-background: #fefefe;
+    --color-flag-border: #000000;
+    --color-input-background: #f9f9f9;
+    --color-input-error: #ff8a82;
+    --color-logo: #000000;
+    --color-menu-background: #ffffff;
+    --color-secondary: #7BB7DD;
+    --color-table-row-percentage: #ffcdb2;
+    --color-text: #000000;
+    --color-transparent-button-hover: #ffffff;
+    --color-transparent-button: #000000;
+    --color-tab-active: #00ffff0f;
+    --color-table-header-footer: #f5fefe;
+}

@@ -1,0 +1,31 @@
+<div id="dialog">
+
+    <div id="dialog-header">
+        <h1>{{ getLabel('header') }}</h1>
+        <h6>{{ getLabel('subHeader') }}</h6>
+    </div>
+
+    <div id="dialog-content">
+        <form [formGroup]="form">
+            <div *ngFor="let option of options" class="option">
+                <p-radioButton [inputId]="option.id" [value]="option" class="with-margin" formControlName="selectedOption"></p-radioButton>
+                <label class="option-label" [for]="option.id">
+                    <div>{{ getLabel('option' + option.id) }}</div>
+                    <div class="option-message">{{ getLabel('option' + option.id + 'message') }}</div>
+                </label>
+            </div>
+        </form>
+    </div>
+
+    <div id="dialog-footer">
+        <div id="align-right">
+            <mat-dialog-actions>
+                <button (click)="save()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                    <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                    <span>{{ getLabel("okButton") | uppercase }}</span>
+                </button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+
+</div>

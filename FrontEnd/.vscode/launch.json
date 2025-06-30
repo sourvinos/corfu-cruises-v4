@@ -1,0 +1,18 @@
+// To dubug in Chrome, remove the runtimeExecutable
+// To debug in Brave, add "runtimeExecutable": "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe",
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "FrontEnd Debug",
+            "type": "chrome",
+            "runtimeExecutable": "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe",
+            "request": "launch",
+            "preLaunchTask": "npm: start",
+            "url": "https://localhost:4200",
+            "skipFiles": [
+                "**/node_modules/**"
+            ]
+        }
+    ]
+}

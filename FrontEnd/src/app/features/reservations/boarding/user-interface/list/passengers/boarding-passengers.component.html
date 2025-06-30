@@ -1,0 +1,75 @@
+<div id="form-wrapper">
+
+    <div id="form-header">
+        <span style="color: var(--color-accent);">{{ getLabel('headerRefNo') }}: </span><span style="color: var(--color-text)">{{ reservation.refNo }}</span>&nbsp;&nbsp;
+        <span style="color: var(--color-accent);">{{ getLabel('headerTicketNo') }}: </span><span style="color: var(--color-text)">{{ reservation.ticketNo }}</span>
+    </div>
+
+    <div id="dialog-content">
+        <div id="table-wrapper">
+            <p-table #table [scrollable]="true" [value]="reservation.passengers" [virtualScrollItemSize]="32" [virtualScroll]="false" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="width-10" pSortableColumn="lastname">{{ getLabel('headerLastname')}}</th>
+                        <th class="width-10" pSortableColumn="firstname">{{ getLabel('headerFirstname') }}</th>
+                        <th class="width-10" pSortableColumn="nationalityDescription">{{ getLabel('headerCountry') }}</th>
+                        <th class="width-5" pSortableColumn="isBoarded">{{ getLabel('headerBoardingStatus') }}</th>
+                    </tr>
+                    <tr>
+
+                        <th class="width-10"><input (input)="table.filter($event.target.value, 'lastname', 'contains')" [disabled]="isFilterDisabled()" [value]="$any(table).filters['lastname']?.value" class="p-inputtext"></th>
+                        <th class="width-10"><input (input)="table.filter($event.target.value, 'firstname', 'contains')" [disabled]="isFilterDisabled()" [value]="$any(table).filters['firstname']?.value" class="p-inputtext"></th>
+                        <th class="width-10">
+                            <p-columnFilter [showMenu]="false" field="nationality" matchMode="in">
+                                <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                    <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctNationalities" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="p-multiselect-option">
+                                                <span>{{ option.description }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </th>
+                        <th class="width-5"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-passenger>
+                    <tr style="height: 32px;">
+                        <td class="width-10"><span>{{ passenger.lastname }}</span></td>
+                        <td class="width-10"><span>{{ passenger.firstname }}</span></td>
+                        <td class="align-vertical width-10">
+                            <span class="flag" style="width: 100%;">
+                                <img [src]="getNationalityIcon(passenger.nationality.code)" class="flag-with-border" />
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ passenger.nationality.description }}</span>
+                            </span>
+                        </td>
+                        <td (click)="toggleBoardingStatus(passenger)" [ngClass]="passenger.isBoarded ? 'complete' : 'pending'" class="center boarding-status width-5">
+                            <span class="center no-left-padding">
+                                <span *ngIf="passenger.isBoarded" style="margin-top: -0.125rem; font-size: 0.5rem;">{{ getEmoji('green-box') }}</span>
+                                <span *ngIf="!passenger.isBoarded" style="margin-top: -0.125rem; font-size: 0.5rem;">{{ getEmoji('red-box') }}</span>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div id="dialog-footer">
+        <div *ngIf="missingPassengers()" id="missing-passengers">
+            <span style="font-size: 1.75rem">{{ getEmoji('error') }}</span>
+            <span *ngIf="countMissingPassengers() == 1">{{ getLabel("missingPassenger") }}</span>
+            <span *ngIf="countMissingPassengers() > 1">{{ getLabel("missingPassengers", countMissingPassengers().toString()) }}</span>
+        </div>
+        <div id="align-right">
+            <button (click)="doBoarding(true, reservation.passengers)" [disabled]="isEmbarkAllAllowed()" class="secondary" mat-flat-button>
+                <mat-icon *ngIf="isEmbarkAllAllowed()" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel('embarkAllPassengers') | uppercase }}</span>
+            </button>
+            <button (click)="close()" class="primary" mat-flat-button>{{ getLabel('okButton') | uppercase }}</button>
+        </div>
+    </div>
+
+</div>

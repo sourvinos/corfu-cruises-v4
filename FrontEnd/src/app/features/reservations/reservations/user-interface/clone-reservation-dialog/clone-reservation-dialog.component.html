@@ -1,0 +1,29 @@
+<div id="dialog">
+
+    <div id="dialog-header">
+        <h1>{{ getLabel('header') }}</h1>
+        <h6>{{ getLabel('subHeader') }}</h6>
+    </div>
+
+    <div id="dialog-content">
+        <!-- <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>calendar_today</mat-icon>
+        </button> -->
+        <!-- <mat-menu #appMenu="matMenu" class="drop-calendar"> -->
+        <div (click)="$event.stopPropagation()">
+            <mat-card class="demo-inline-calendar-card">
+                <mat-calendar #calendar (selectedChange)="select($event,calendar)" [dateClass]="isSelected"></mat-calendar>
+            </mat-card>
+        </div>
+        <!-- </mat-menu> -->
+        <pre>{{daysSelected|json}}</pre>
+    </div>
+
+    <div id="dialog-footer">
+        <mat-dialog-actions>
+            <button (click)="onClose()" class="transparent" id="abort" mat-flat-button tabindex="-1">{{ getLabel('cancelButton') | uppercase }}</button>
+            <button (click)="onSave()" mat-flat-button class="primary" id="ok" tabindex="-1" mat-dialog-close="true">{{ getLabel('okButton') | uppercase }}</button>
+        </mat-dialog-actions>
+    </div>
+
+</div>

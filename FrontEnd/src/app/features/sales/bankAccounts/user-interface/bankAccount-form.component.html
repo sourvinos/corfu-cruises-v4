@@ -1,0 +1,76 @@
+<div id="form-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <!-- Shipowner -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('shipOwner') }}</mat-label>
+                <input #inputAutoComplete #triggerShipOwner="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="shipOwners" dataTabIndex="1" formControlName="shipOwner" matInput>
+                <div matSuffix style="display:flex">
+                    <button (click)="openOrCloseAutoComplete(triggerShipOwner, 'shipOwner')" mat-icon-button type="button">
+                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                    </button>
+                </div>
+                <mat-error *ngIf="shipOwner.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!shipOwner.hasError('required') && shipOwner.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- Bank -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('bank') }}</mat-label>
+                <input #inputAutoComplete #triggerBank="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="banks" dataTabIndex="2" formControlName="bank" matInput>
+                <div matSuffix style="display:flex">
+                    <button (click)="openOrCloseAutoComplete(triggerBank, 'bank')" mat-icon-button type="button">
+                        <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
+                    </button>
+                </div>
+                <mat-error *ngIf="bank.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="!bank.hasError('required') && bank.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
+            </mat-form-field>
+            <!-- Iban -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('iban') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="3" formControlName="iban" matInput>
+                <mat-error *ngIf="iban.hasError('required')">{{ getHint("required") }}</mat-error>
+            </mat-form-field>
+            <div class="stacked-checkboxes">
+                <!-- Active -->
+                <mat-checkbox formControlName="isActive">
+                    <span>{{ getLabel("isActive") }}</span>
+                </mat-checkbox>
+            </div>
+            <div class="align-bottom">
+                <!-- Metadata -->
+                <metadata-panel [feature]="feature" [postAt]="form.value.postAt" [postUser]="form.value.postUser" [putAt]="form.value.putAt" [putUser]="form.value.putUser"></metadata-panel>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="onDelete()" *ngIf="form.value.id !== 0" class="delete" mat-flat-button>{{ getLabel("deleteButton") | uppercase }}</button>
+            <button (click)="onSave()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("saveButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<mat-autocomplete #shipOwners="matAutocomplete" [displayWith]="autocompleteFields.bind(this, 'description')" autoActiveFirstOption>
+    <mat-option *ngFor="let option of dropdownShipOwners | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>
+
+<mat-autocomplete #banks="matAutocomplete" [displayWith]="autocompleteFields.bind(this, 'description')" autoActiveFirstOption>
+    <mat-option *ngFor="let option of dropdownBanks | async" [value]="option">
+        {{ option.description }}
+    </mat-option>
+</mat-autocomplete>

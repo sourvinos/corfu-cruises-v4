@@ -1,0 +1,63 @@
+:host {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+#outer-content {
+    background-color: var(--color-background);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
+
+#content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    max-width: 480px;
+    overflow-y: hidden;
+    padding: 1rem 0 1rem 0;
+    width: 85%;
+}
+
+#step-caption {
+    column-gap: 1rem;
+    display: flex;
+    font-family: var(--font-family-segoe-ui);
+    font-size: 1rem;
+    justify-content: center;
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+}
+
+#footer {
+    column-gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    margin: auto 0 0 0;
+}
+
+#scrollable {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0 0 1rem 0;
+    overflow-y: scroll;
+    padding: 0 1rem 0 1rem;
+    width: 100%;
+}
+
+.horizontal {
+    display: flex;
+    flex-direction: row;
+}

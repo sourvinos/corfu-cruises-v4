@@ -1,0 +1,43 @@
+.mat-mdc-radio-button .mdc-radio .mdc-form-field > label {
+    color: var(--color-text) !important;
+    font-family: var(--font-family-asty) !important;
+    font-weight: 200;
+}
+
+.mdc-radio {
+    height: 100% !important;
+}
+
+.mdc-radio__background {
+    display: block !important;
+}
+
+.mat-mdc-radio-group {
+    display: flex !important;
+    flex-direction: column !important;
+    row-gap: 1rem;
+}
+
+.mat-mdc-radio-button .mdc-radio {
+    padding: 0 0 0 1px !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked + .mdc-radio__background .mdc-radio__outer-circle {
+    border-color: var(--color-accent) !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled + .mdc-radio__background .mdc-radio__inner-circle {
+    border-color: var(--color-accent) !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:not(:checked) + .mdc-radio__background .mdc-radio__outer-circle {
+    border-color: var(--color-accent) !important;
+}
+
+.mat-mdc-radio-button > .mdc-form-field > .mdc-label {
+    transition: color var(--theme-delay) !important;
+}
+
+.mat-mdc-radio-button > .mdc-form-field > .mdc-label:hover {
+    cursor: pointer !important;
+}

@@ -1,0 +1,28 @@
+* {
+    /* Font names */
+    --font-family-asty: "Asty CF Std";
+    --font-family-consolas: "Consolas";
+    --font-family-fira-sans-condensed: "Fira Sans Extra Condensed";
+    --font-family-logo: "Aka-Acid-CanterBold";
+    --font-family-monospace: "Inconsolata";
+    --font-family-segoe-ui: "Segoe UI";
+    --font-family-ubuntu: "Ubuntu Mono";
+    /* Font weights */
+    --font-weight-dialog-content: 300 !important;
+    --font-weight-logo: 400;
+    /* Sizes */
+    --font-size-button: 1.125rem;
+    --font-size-dropdown-menu-button: 0.8125rem;
+    --font-size-dialog-text: 1rem;
+    --font-size-dialog: 1.5rem;
+    --font-size-fieldset-legend: 0.8rem;
+    --font-size-h1: 1rem;
+    --font-size-h6: 0.875rem;
+    --font-size-logo-text: 2.5rem;
+    --font-size-table-header: 0.8125rem;
+    --font-size-table-row: 0.75rem;
+    --font-size-mat-expansion-header: 0.875rem;
+    /* Misc */
+    --blur: 10rem;
+    --theme-delay: 1s;
+}

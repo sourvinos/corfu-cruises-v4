@@ -1,0 +1,7 @@
+:host {
+    width: 100% !important;
+}
+
+.fill {
+    background: linear-gradient(to right, var(--color-table-row-percentage) var(--fill), transparent 0%);
+}

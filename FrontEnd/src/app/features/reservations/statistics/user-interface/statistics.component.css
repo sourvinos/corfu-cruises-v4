@@ -1,0 +1,26 @@
+#content {
+    width: 100%;
+}
+
+#header-right {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#goto-today-button {
+    background-color: transparent !important;
+    box-shadow: none;
+    padding: 0.125rem 0 0 0 !important;
+}
+
+#goto-today-button span {
+    color: var(--color-accent) !important;
+}
+
+#grid-wrapper {
+    column-gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    height: 0;
+}

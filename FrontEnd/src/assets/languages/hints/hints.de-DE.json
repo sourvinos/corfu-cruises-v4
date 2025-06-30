@@ -1,0 +1,84 @@
+{
+    "labels": [
+        {
+            "id": "beginsOrEndsWithSpace",
+            "description": "Dieses Feld darf nicht mit einem Leerzeichen beginnen oder enden"
+        },
+        {
+            "id": "containsIllegalCharacters",
+            "description": "Dieses Feld sind nur alphanumerische Zeichen oder Unterstriche erlaubt"
+        },
+        {
+            "id": "doesNotContainDigits",
+            "description": "Dieses Feld muss mindestens eine Ziffer haben"
+        },
+        {
+            "id": "doesNotContainLowerCase",
+            "description": "Dieses Feld muss mindestens einen Kleinbuchstaben enthalten"
+        },
+        {
+            "id": "doesNotContainSymbol",
+            "description": "Dieses Feld muss mindestens ein Symbol enthalten, z. B. % oder #"
+        },
+        {
+            "id": "doesNotContainUpperCase",
+            "description": "Dieses Feld muss mindestens einen Großbuchstaben enthalten"
+        },
+        {
+            "id": "invalid",
+            "description": "Dieses Feld ist ungültig"
+        },
+        {
+            "id": "invalidRange",
+            "description": "Dieses Feld liegt außerhalb des zulässigen Bereichs"
+        },
+        {
+            "id": "invalidShort",
+            "description": "Ungültiges"
+        },
+        {
+            "id": "maxLength",
+            "description": "Dieses Feld kann bis zu xx Zeichen lang sein"
+        },
+        {
+            "id": "minLength",
+            "description": "Dieses Feld muss mindestens xx Zeichen lang sein"
+        },
+        {
+            "id": "otherErrors",
+            "description": "Dieses Feld enthält Fehler"
+        },
+        {
+            "id": "passwordsNoMatch",
+            "description": "Neues Passwort und Bestätigung des neuen Passworts stimmen nicht überein"
+        },
+        {
+            "id": "remainingCharacters",
+            "description": "Sie können bis zu xx weitere Zeichen eingeben"
+        },
+        {
+            "id": "required",
+            "description": "Dieses Feld ist erforderlich"
+        },
+        {
+            "id": "shouldBeEmptyPlusOrMinus",
+            "description": "Dieses Feld darf leer sein oder das Symbol + oder - enthalten"
+        },
+        {
+            "id": "shouldBeCapitalLetterOrSpace",
+            "description": "Nur lateinische Großbuchstaben sind erlaubt"
+        },
+        {
+            "id": "shouldBeCapitalLetter",
+            "description": "Nur lateinische Großbuchstaben sind erlaubt"
+        },
+        {
+            "id": "spacesNotAllowed",
+            "description": "Dieses Feld darf keine Leerzeichen enthalten"
+        },
+        {
+            "id": "shouldBeOnlyNumbers",
+            "description": "The field must have numeric characters only"
+        }
+    ]
+}

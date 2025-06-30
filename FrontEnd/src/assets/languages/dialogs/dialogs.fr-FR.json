@@ -1,0 +1,227 @@
+[
+    {
+        "feature": "snackbarMessages",
+        "labels": [
+            {
+                "error": 200,
+                "message": "Tout est OK."
+            },
+            {
+                "error": 400,
+                "message": "Le modèle n'est pas valide."
+            },
+            {
+                "error": 401,
+                "message": "L'authentification n'a pas réussi."
+            },
+            {
+                "error": 402,
+                "message": "Η ΑΑΔΕ δεν ενημερώθηκε."
+            },
+            {
+                "error": 404,
+                "message": "L'enregistrement n'est pas trouve."
+            },
+            {
+                "error": 409,
+                "message": "La réservation n'est pas unique. Vérifiez la date, la destination, le client et le numéro de billet."
+            },
+            {
+                "error": 410,
+                "message": "Nous n'avons trouvé aucun départ avec les informations que vous avez fournies. Vérifiez la date, la destination et le lieu de prise en charge."
+            },
+            {
+                "error": 412,
+                "message": "Le mot de passe ne peut pas être modifié. Il est possible que le mot de passe actuel soit erroné."
+            },
+            {
+                "error": 414,
+                "message": "RefNo existe déjà. Veuillez réessayer."
+            },
+            {
+                "error": 415,
+                "message": "Cet enregistrement a déjà été mis à jour par un autre utilisateur!"
+            },
+            {
+                "error": 416,
+                "message": "Lorsque l'utilisateur est un administrateur, le client connecté doit avoir un 'astérisque'."
+            },
+            {
+                "error": 417,
+                "message": "Lorsque l'utilisateur n'est pas un administrateur, le client connecté doit être doté d'un 'astérisque'."
+            },
+            {
+                "error": 418,
+                "message": "Lorsque l'utilisateur n'est pas un administrateur, le client connecté doit être doté d'un 'astérisque'."
+            },
+            {
+                "error": 431,
+                "message": "Il n'est pas possible d'ajouter ou de modifier une réservation après le départ du navire."
+            },
+            {
+                "error": 433,
+                "message": "La réservation ne peut pas être sauvegardée car la surréservation est interdite."
+            },
+            {
+                "error": 459,
+                "message": "Les nouvelles réservations avec transfert pendant notre fermeture ne sont pas autorisées. Veuillez contacter un administrateur."
+            },
+            {
+                "error": 467,
+                "message": "Εντοπίστηκαν κενά στις εγγραφές των παραστατικών."
+            },
+            {
+                "error": 491,
+                "message": "Cet enregistrement est en cours d'utilisation et ne peut pas être supprimé."
+            },
+            {
+                "error": 492,
+                "message": "Nous ne sommes pas en mesure de continuer. Veuillez vous assurer que le nom d'utilisateur et/ou l'email n'appartiennent pas à un autre utilisateur."
+            },
+            {
+                "error": 493,
+                "message": "L'ordre d'approche existe déjà."
+            },
+            {
+                "error": 500,
+                "message": "Quelque chose a mal tourné, mais cela a été signalé."
+            },
+            {
+                "id": "authenticationFailed",
+                "message": "Authentification échouée."
+            },
+            {
+                "id": "maximumBalanceExceeded",
+                "message": "Vous avez dépassé votre limite de crédit. Veuillez contacter un administrateur."
+            },
+            {
+                "id": "emailSent",
+                "message": "Nous venons de vous envoyer un email."
+            },
+            {
+                "id": "emailNotSent",
+                "message": "Nous ne pouvons pas vous envoyer d'e-mail pour le moment, veuillez réessayer dans un petit moment."
+            },
+            {
+                "id": "formIsDirty",
+                "message": "Avant de continuer, les modifications doivent être enregistrées."
+            },
+            {
+                "id": "noRecordsSelected",
+                "message": "Vous n'avez pas sélectionné d'inscriptions."
+            },
+            {
+                "id": "selectedPricesMustBelongToSameCustomer",
+                "message": "Les enregistrements sélectionnés doivent appartenir au même client."
+            },
+            {
+                "id": "noVideoDevicesFound",
+                "message": "Aucune caméra trouvée sur votre appareil."
+            },
+            {
+                "id": "unableToResetPassword",
+                "message": "Le nouveau mot de passe ne peut pas être enregistré. Le lien contenu dans l'e-mail qui vous a été envoyé n'est peut-être plus valide."
+            },
+            {
+                "id": "noContactWithServer",
+                "message": "Il n'y a pas de réponse de la base de données."
+            },
+            {
+                "id": "featureNotAvailable",
+                "message": "Cette option n'est pas encore disponible."
+            },
+            {
+                "id": "reservationCreated",
+                "message": "RefNo "
+            },
+            {
+                "id": "success",
+                "message": "Tout est OK."
+            },
+            {
+                "id": "warning",
+                "message": "Devons-nous supprimer cette entrée?"
+            },
+            {
+                "id": "confirmLogout",
+                "message": "Veuillez confirmer que vous souhaitez vous déconnecter!"
+            },
+            {
+                "id": "passwordCanBeChangedOnlyByAccountOwner",
+                "message": "Le mot de passe ne peut être modifié que par le propriétaire du compte."
+            },
+            {
+                "id": "askToRefreshCalendar",
+                "message": "Nous avons constaté des changements dans la taille du calendrier. Souhaitez-vous que nous l'actualisions avec les nouvelles données?"
+            },
+            {
+                "id": "resolutionWarning",
+                "message": "La résolution de votre écran est trop faible pour que l'application s'affiche correctement. Vous avez besoin d'au moins 1280x800 pixels. Continuez à vos risques et périls!"
+            },
+            {
+                "id": "reservationNotFound",
+                "message": "Votre réservation n'a pas été trouvée"
+            },
+            {
+                "id": "helpDialog",
+                "message": "Vous pouvez contacter le lieu où vous avez effectué la réservation ou l'un de nous au +30 26610 71150 ou au +30 26620 61400"
+            },
+            {
+                "id": "twoPointReservationValidation",
+                "message": "Assurez-vous qu'il ne manque aucune information sur le passager et que la réservation a été enregistrée."
+            },
+            {
+                "id": "threePointReservationValidation",
+                "message": "Assurez-vous qu'il ne manque aucune information sur le passager, que vous avez fourni l'adresse électronique et que la réservation a été enregistrée."
+            },
+            {
+                "id": "errorsInRegistrars",
+                "message": "Les registres des passagers de ce navire ne sont pas corrects. Pour chaque navire, il devrait y avoir deux bureaux d'enregistrement actifs, dont l'un devrait être déclaré comme actif."
+            },
+            {
+                "id": "priceRetrieverHasErrors",
+                "message": "Δεν μπορούμε να ανακτήσουμε τις χρεώσεις επειδή πρέπει να δώσετε την ημερομηνία, τον πελάτη και τον προορισμό."
+            },
+            {
+                "id": "priceRetrieverIsEmpty",
+                "message": "Δεν βρήκαμε καμμία χρέωση για την ημερομηνία, τον πελάτη και τον προορισμό ή οι χρεώσεις δεν είναι πλήρεις."
+            },
+            {
+                "id": "priceRetrieverIsValid",
+                "message": "Οι χρεώσεις ανακτήθηκαν!"
+            },
+            {
+                "id": "confirmDeleteDexieDB",
+                "message": "Souhaitez-vous poursuivre l'actualisation ? Si le processus se termine sans erreur, vous devrez vous reconnecter."
+            },
+            {
+                "id": "selectedReservationsMustBeSameShip",
+                "message": "Βεβαιωθείτε ότι έχετε επιλέξει κρατήσεις του ίδιου πλοίου και του ίδιου προορισμού."
+            },
+            {
+                "id": "confirmCancelInvoice",
+                "message": "Αν συνεχίσετε, το παραστατικό θα πάρει ΜΑΡΚ ακύρωσης και δεν θα εμφανίζεται στις οικονομικές καταστάσεις."
+            },
+            {
+                "id": "helpDialog",
+                "message": "Vous pouvez contacter le lieu où vous avez effectué la réservation ou l'un de nous au +30 26610 71150 ou au +30 26620 61400"
+            },
+            {
+                "id": "checkInAfterDepartureIsNotAllowed",
+                "message": "Votre réservation a été trouvée, mais l'enregistrement après le départ du navire n'est pas autorisé"
+            },
+            {
+                "id": "customerDataIsInvalid",
+                "message": "Η τιμολόγηση δεν μπορεί να συνεχιστεί επειδή τα στοιχεία του πελάτη είναι ελλειπή ή λάθος."
+            },
+            {
+                "id": "customerAadeDoesNotExist",
+                "message": "Η εγγραφή δεν βρέθηκε. Βεβαιωθείτε ότι ο ΑΦΜ είναι σωστός και ότι έχει έδρα την Ελλάδα."
+            },
+            {
+                "id": "customerVatNumberIsDuplicate",
+                "message": "Όλα εντάξει, αλλά ο ΑΦΜ υπάρχει ήδη. Ισως θα πρέπει να ελέγξετε το αρχείο σας"
+            }
+        ]
+    }
+]

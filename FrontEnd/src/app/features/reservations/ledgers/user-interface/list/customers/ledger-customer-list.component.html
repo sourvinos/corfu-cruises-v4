@@ -1,0 +1,69 @@
+<div id="list-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+            <div class="filter-pill">
+                <div class="pill date">
+                    <mat-icon class="material-symbols-outlined">calendar_month</mat-icon>
+                    <div class="description">{{ formatDateToLocale(criteriaPanels.fromDate, true, true) }} - {{ formatDateToLocale(criteriaPanels.toDate, true, true) }}</div>
+                </div>
+                <div (click)="expandAll()" class="clickable no-margin pill">
+                    <mat-icon class="material-icons-outlined">keyboard_double_arrow_down</mat-icon>
+                </div>
+                <div (click)="collapseAll()" class="accent clickable no-margin pill">
+                    <mat-icon class="material-icons-outlined">keyboard_double_arrow_up</mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <div id="accordion-wrapper">
+            <mat-accordion multi>
+                <mat-expansion-panel *ngFor="let customer of records">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>{{ customer.customer.description }}</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <ledger-customer-reservations [customer]="customer" [remarksRowVisibility]="getRemarksRowVisibility()" (outputSelected)="processEmittedRecords($event)"></ledger-customer-reservations>
+                        <ledger-customer-summary [portGroup]="customer.ports"></ledger-customer-summary>
+                        <div id="align-right" style="padding: 0 0.5rem 0 0 !important;">
+                            <button *ngIf="isAdmin()" (click)="doSalesTasks()" class="transparent" mat-flat-button>
+                                <span>{{ getLabel("createInvoiceButton") | uppercase }}</span>
+                            </button>
+                            <button (click)="exportSelected(customer)" class="secondary" mat-flat-button>
+                                <span>{{ getLabel("createPdfButton") | uppercase }}</span>
+                            </button>
+                        </div>
+                    </ng-template>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <button [matMenuTriggerFor]="menu" class="fab fab-with-no-background" mat-icon-button>
+            <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="primary">
+            <ng-container *ngTemplateOutlet="contextMenu"></ng-container>
+        </mat-menu>
+        <table-total-filtered-records [filteredRecordCount]="records.length" [recordCount]="records.length" [showFilteredCount]="false"></table-total-filtered-records>
+        <div id="align-right">
+            <button [disabled]="records.length==0" (click)="exportAll()" class="primary" mat-flat-button>
+                <mat-icon *ngIf="records.length==0" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("createPdfButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #contextMenu>
+    <button (click)="toggleRemarksRowVisibility()" mat-menu-item>
+        <mat-checkbox [(ngModel)]="remarksRowVisibility">
+            <span>{{ getLabel('remarksOnNewLine') }}</span>
+        </mat-checkbox>
+    </button>
+</ng-template>

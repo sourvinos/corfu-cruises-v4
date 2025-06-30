@@ -1,0 +1,3673 @@
+[
+    {
+        "feature": "loginForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Přihlášení"
+            },
+            {
+                "id": "username",
+                "description": " Uživatelské jméno"
+            },
+            {
+                "id": "password",
+                "description": "Heslo"
+            },
+            {
+                "id": "noRobotCheckbox",
+                "description": "Nejsem robot"
+            },
+            {
+                "id": "forgotPasswordButton",
+                "description": "Zapomněl jsem heslo"
+            },
+            {
+                "id": "loginButton",
+                "description": "Přihlášení"
+            }
+        ]
+    },
+    {
+        "feature": "customerList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Zákazníci"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Zkr."
+            },
+            {
+                "id": "headerPhones",
+                "description": "Phony"
+            },
+            {
+                "id": "headerEmail",
+                "description": "Email"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            },
+            {
+                "id": "contextMenuEdit",
+                "description": "Επεξεργασία"
+            }
+        ]
+    },
+    {
+        "feature": "customerForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Zákazník"
+            },
+            {
+                "id": "tab1",
+                "description": "Obecné"
+            },
+            {
+                "id": "tab2",
+                "description": "Kontakt"
+            },
+            {
+                "id": "description",
+                "description": "Zkr."
+            },
+            {
+                "id": "fullDescription",
+                "description": "Název"
+            },
+            {
+                "id": "vatNumber",
+                "description": "Daňové číslo"
+            },
+            {
+                "id": "taxOffice",
+                "description": "Finanční úřad"
+            },
+            {
+                "id": "branch",
+                "description": "Číslo pobočky"
+            },
+            {
+                "id": "profession",
+                "description": "Povolání"
+            },
+            {
+                "id": "street",
+                "description": "Ulice"
+            },
+            {
+                "id": "number",
+                "description": "Číslo"
+            },
+            {
+                "id": "postalCode",
+                "description": "Poštovní kód"
+            },
+            {
+                "id": "city",
+                "description": "Město"
+            },
+            {
+                "id": "nationality",
+                "description": "Země"
+            },
+            {
+                "id": "personInCharge",
+                "description": "Odpovědná osoba"
+            },
+            {
+                "id": "phones",
+                "description": "Telefonní čísla"
+            },
+            {
+                "id": "email",
+                "description": "Email"
+            },
+            {
+                "id": "balanceLimit",
+                "description": "Dluhový limit"
+            },
+            {
+                "id": "remarks",
+                "description": "Remarques"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "searchAadeRegistry",
+                "description": "Αναζήτηση στοιχείων στο μητρώο επιχειρήσεων"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "destinationList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Destinace"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerAbbreviation",
+                "description": "Zkr."
+            },
+            {
+                "id": "headerDescription",
+                "description": "Popis"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "destinationForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Destinace"
+            },
+            {
+                "id": "abbreviation",
+                "description": "Zkr."
+            },
+            {
+                "id": "description",
+                "description": "Popis"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "driverList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Řidiči"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerFullname",
+                "description": "Celé jméno"
+            },
+            {
+                "id": "headerPhones",
+                "description": "Telefony"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "driverForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Řidič"
+            },
+            {
+                "id": "description",
+                "description": "Jméno"
+            },
+            {
+                "id": "phones",
+                "description": "Telefonní čísla"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "pickupPointList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Nástupní místa"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerRouteAbbreviation",
+                "description": "Trasa"
+            },
+            {
+                "id": "headerPortAbbreviation",
+                "description": "Přístav"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Popis"
+            },
+            {
+                "id": "headerExactPoint",
+                "description": "Přesné místo"
+            },
+            {
+                "id": "headerTime",
+                "description": "Čas"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            },
+            {
+                "id": "createPdf",
+                "description": "Vytvořit PDF"
+            }
+        ]
+    },
+    {
+        "feature": "pickupPointForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Nástupní místo"
+            },
+            {
+                "id": "coachRoute",
+                "description": "Trasa"
+            },
+            {
+                "id": "port",
+                "description": "Přístav"
+            },
+            {
+                "id": "description",
+                "description": "Popis"
+            },
+            {
+                "id": "exactPoint",
+                "description": "Přesné místo"
+            },
+            {
+                "id": "time",
+                "description": "Čas"
+            },
+            {
+                "id": "remarks",
+                "description": "Komentáře"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "portList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Přístavy"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerStopOrder",
+                "description": "Pořadí přístupu"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Popis"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "portForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Přístavt"
+            },
+            {
+                "id": "abbreviation",
+                "description": "Zkr."
+            },
+            {
+                "id": "description",
+                "description": "Popis"
+            },
+            {
+                "id": "locode",
+                "description": "UN/Locode"
+            },
+            {
+                "id": "stopOrder",
+                "description": "Pořadí přístupu"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "coachRouteList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Autobusové trasy"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktiv"
+            },
+            {
+                "id": "headerHasTransfer",
+                "description": "Transfer"
+            },
+            {
+                "id": "headerAbbreviation",
+                "description": "Zkr."
+            },
+            {
+                "id": "headerDescription",
+                "description": "Popis"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "coachRouteForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Trasa"
+            },
+            {
+                "id": "abbreviation",
+                "description": "Zkr."
+            },
+            {
+                "id": "description",
+                "description": "Popis"
+            },
+            {
+                "id": "port",
+                "description": "Přístav"
+            },
+            {
+                "id": "hasTransfer",
+                "description": "Má transfer"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "userList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Uživatelé"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerIsAdmin",
+                "description": "Admin"
+            },
+            {
+                "id": "headerUsername",
+                "description": "Uživatelské jméno"
+            },
+            {
+                "id": "headerDisplayname",
+                "description": "Zobrazené jméno"
+            },
+            {
+                "id": "headerEmail",
+                "description": "Email"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "editUserForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Uživatel"
+            },
+            {
+                "id": "username",
+                "description": "Uživatelské jméno"
+            },
+            {
+                "id": "displayname",
+                "description": "Zobrazené jméno"
+            },
+            {
+                "id": "customer",
+                "description": "Připojený zákazník"
+            },
+            {
+                "id": "email",
+                "description": "Email"
+            },
+            {
+                "id": "isFirstFieldFocused",
+                "description": "Automatické zaměření na první pole formuláře"
+            },
+            {
+                "id": "isAdmin",
+                "description": "Admin"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "changePasswordButton",
+                "description": "Změna hesla"
+            },
+            {
+                "id": "emailUserDetails",
+                "description": "Odesílání dat na e-mail"
+            },
+            {
+                "id": "deleteDexieDB",
+                "description": "Aktualizace tabulek prohlížeče"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "newUserForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Uživatel"
+            },
+            {
+                "id": "username",
+                "description": "Uživatelské jméno"
+            },
+            {
+                "id": "displayname",
+                "description": "Zobrazené jméno"
+            },
+            {
+                "id": "email",
+                "description": "Email"
+            },
+            {
+                "id": "password",
+                "description": "Heslo"
+            },
+            {
+                "id": "confirmPassword",
+                "description": "Potvrďte Heslo"
+            },
+            {
+                "id": "customer",
+                "description": "Propojený zákazník"
+            },
+            {
+                "id": "isFirstFieldFocused",
+                "description": "Automatické zaměření na první pole formuláře"
+            },
+            {
+                "id": "isAdmin",
+                "description": "Admin"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "changePasswordForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Změnit heslo"
+            },
+            {
+                "id": "currentPassword",
+                "description": "Současné heslo"
+            },
+            {
+                "id": "newPassword",
+                "description": "Nové heslo"
+            },
+            {
+                "id": "confirmPassword",
+                "description": "Potvrďte nové heslo"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "reservationList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Denní hlášení rezervací"
+            },
+            {
+                "id": "assignToDriverButton",
+                "description": "Přiřaďte cestující řidiči"
+            },
+            {
+                "id": "assignToPortButton",
+                "description": "Změna výchozího přístavu"
+            },
+            {
+                "id": "assignToShipButton",
+                "description": "Vytvoření seznamu před nástupem do letadla"
+            },
+            {
+                "id": "createPdfButton",
+                "description": "Vytvořit PDF"
+            },
+            {
+                "id": "rangeDelete",
+                "description": "Odstranění vybraných záznamů"
+            },
+            {
+                "id": "createReservationsPdfButton",
+                "description": "Tisk vybraných záznamů"
+            },
+            {
+                "id": "newButton",
+                "description": "Nový"
+            },
+            {
+                "id": "headerDate",
+                "description": "Datum"
+            },
+            {
+                "id": "headerRefNo",
+                "description": "RefNo"
+            },
+            {
+                "id": "headerTicketNo",
+                "description": "Vstupenka"
+            },
+            {
+                "id": "headerPlusMinus",
+                "description": "+/-"
+            },
+            {
+                "id": "headerDestination",
+                "description": "Destinace"
+            },
+            {
+                "id": "headerRoute",
+                "description": "Trasa"
+            },
+            {
+                "id": "headerCustomer",
+                "description": "Zákazník"
+            },
+            {
+                "id": "headerPickupPoint",
+                "description": "Místo vyzvednutí"
+            },
+            {
+                "id": "headerAdults",
+                "description": "D"
+            },
+            {
+                "id": "headerKids",
+                "description": "D"
+            },
+            {
+                "id": "headerFree",
+                "description": "Z"
+            },
+            {
+                "id": "headerTotal",
+                "description": "Pax"
+            },
+            {
+                "id": "headerDriver",
+                "description": "Řidič"
+            },
+            {
+                "id": "headerPort",
+                "description": "Přístav A"
+            },
+            {
+                "id": "headerPortAlternate",
+                "description": "Přístav B"
+            },
+            {
+                "id": "headerShip",
+                "description": "Loď"
+            },
+            {
+                "id": "headerTime",
+                "description": "Čas"
+            }
+        ]
+    },
+    {
+        "feature": "reservationForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Rezervaci"
+            },
+            {
+                "id": "date",
+                "description": "Datum"
+            },
+            {
+                "id": "destination",
+                "description": "Destinace"
+            },
+            {
+                "id": "customer",
+                "description": "Zákazník"
+            },
+            {
+                "id": "pickupPoint",
+                "description": "Místo vyzvednutí"
+            },
+            {
+                "id": "exactPoint",
+                "description": "Přesné místo"
+            },
+            {
+                "id": "time",
+                "description": "Čas"
+            },
+            {
+                "id": "ticketNo",
+                "description": "Jízdenku"
+            },
+            {
+                "id": "adults",
+                "description": "Dospělí"
+            },
+            {
+                "id": "kids",
+                "description": "Děti"
+            },
+            {
+                "id": "free",
+                "description": "Zdarma"
+            },
+            {
+                "id": "totalPax",
+                "description": "Celkem"
+            },
+            {
+                "id": "driver",
+                "description": "Řidič"
+            },
+            {
+                "id": "port",
+                "description": "Přístav A"
+            },
+            {
+                "id": "portAlternate",
+                "description": "Přístav B"
+            },
+            {
+                "id": "ship",
+                "description": "Loď"
+            },
+            {
+                "id": "email",
+                "description": "EMail"
+            },
+            {
+                "id": "phones",
+                "description": "Telefony"
+            },
+            {
+                "id": "remarks",
+                "description": "Komentáře"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "printBoardingPass",
+                "description": "Tisk palubního lístku"
+            },
+            {
+                "id": "emailBoardingPass",
+                "description": "Odeslání palubní vstupenky na e-mail"
+            },
+            {
+                "id": "toggle-button-general",
+                "description": "Obecné"
+            },
+            {
+                "id": "toggle-button-passengers",
+                "description": "Pasažéři"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            },
+            {
+                "id": "saveAndKeepFormOpen",
+                "description": "Save and keep form open"
+            }
+        ]
+    },
+    {
+        "feature": "forgotPasswordForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Zapomněl jsem heslo"
+            },
+            {
+                "id": "email",
+                "description": "Email"
+            },
+            {
+                "id": "submitButton",
+                "description": "Pokračovat"
+            }
+        ]
+    },
+    {
+        "feature": "resetPasswordForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Vytvořte nové heslo"
+            },
+            {
+                "id": "password",
+                "description": "Nové heslo"
+            },
+            {
+                "id": "confirmPassword",
+                "description": "Potvrďte nové heslo"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "dialog",
+        "labels": [
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Zrušit"
+            }
+        ]
+    },
+    {
+        "feature": "assignToDriver",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Výběr ovladače"
+            },
+            {
+                "id": "subHeader",
+                "description": "Vyberte řidiče, který přepraví cestující do přístavu."
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Zrušit"
+            }
+        ]
+    },
+    {
+        "feature": "assignToPort",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Změna výchozího přístavu"
+            },
+            {
+                "id": "subHeader",
+                "description": "Vyberte, který bude nový přístav odjezdu"
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Zrušit"
+            }
+        ]
+    },
+    {
+        "feature": "assignToShip",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Výběr lodi"
+            },
+            {
+                "id": "subHeader",
+                "description": "Vyberte loď, která přepraví cestující do cílové destinace."
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "cancelButton",
+                "description": "ZRUŠIT"
+            }
+        ]
+    },
+    {
+        "feature": "shipList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Lodě"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Název"
+            },
+            {
+                "id": "headerIMO",
+                "description": "IMO"
+            },
+            {
+                "id": "newRecord",
+                "description": "NOVÁ"
+            }
+        ]
+    },
+    {
+        "feature": "shipForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Loď"
+            },
+            {
+                "id": "abbreviation",
+                "description": "Zkr."
+            },
+            {
+                "id": "description",
+                "description": "Název"
+            },
+            {
+                "id": "shipOwner",
+                "description": "Majitel lodi"
+            },
+            {
+                "id": "imo",
+                "description": "ΙΜΟ"
+            },
+            {
+                "id": "flag",
+                "description": "Vlajka"
+            },
+            {
+                "id": "registryNo",
+                "description": "Registrační číslo"
+            },
+            {
+                "id": "manager",
+                "description": "Manažer"
+            },
+            {
+                "id": "managerInGreece",
+                "description": "Manažer v Řecku"
+            },
+            {
+                "id": "agent",
+                "description": "Agenti"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "scheduleCreateForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Nový rozvrh"
+            },
+            {
+                "id": "destination",
+                "description": "Destinace"
+            },
+            {
+                "id": "port",
+                "description": "Přístav"
+            },
+            {
+                "id": "maxPax",
+                "description": "Max pax"
+            },
+            {
+                "id": "time",
+                "description": "Čas odjezdu"
+            },
+            {
+                "id": "weekdays",
+                "description": "Dny"
+            },
+            {
+                "id": "filterPlaceholder",
+                "description": "Napište něco..."
+            },
+            {
+                "id": "selected",
+                "description": "Vybrané"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "passengerList",
+        "labels": [
+            {
+                "id": "headerLastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "headerFirstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "headerCountry",
+                "description": "Národnost"
+            },
+            {
+                "id": "newPassengerButton",
+                "description": "Nový pasažér"
+            }
+        ]
+    },
+    {
+        "feature": "passengerForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Pasažér"
+            },
+            {
+                "id": "lastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "firstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "nationality",
+                "description": "Národnost"
+            },
+            {
+                "id": "birthdate",
+                "description": "Datum narození"
+            },
+            {
+                "id": "gender",
+                "description": "Rod"
+            },
+            {
+                "id": "specialCare",
+                "description": "Speciální péče"
+            },
+            {
+                "id": "remarks",
+                "description": "Komentáře"
+            },
+            {
+                "id": "isBoarded",
+                "description": "Odbavený"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Zrušit"
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            }
+        ]
+    },
+    {
+        "feature": "genderList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Rods"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Popis"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "genderForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Rod"
+            },
+            {
+                "id": "description",
+                "description": "Popis"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "boardingCriteria",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Nalodění"
+            },
+            {
+                "id": "filterPlaceholder",
+                "description": "Napište něco..."
+            },
+            {
+                "id": "date",
+                "description": "Datum"
+            },
+            {
+                "id": "destinations",
+                "description": "Destinace"
+            },
+            {
+                "id": "ports",
+                "description": "Přístavy"
+            },
+            {
+                "id": "ships",
+                "description": "Lodě"
+            },
+            {
+                "id": "selected",
+                "description": "Vybrané"
+            },
+            {
+                "id": "searchButton",
+                "description": "Vyhledávání"
+            }
+        ]
+    },
+    {
+        "feature": "boardingList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Nalodění"
+            },
+            {
+                "id": "headerBoardingStatus",
+                "description": "S"
+            },
+            {
+                "id": "headerRefNo",
+                "description": "RefNo"
+            },
+            {
+                "id": "headerTicketNo",
+                "description": "Vstupenka"
+            },
+            {
+                "id": "headerDestination",
+                "description": "Destinace"
+            },
+            {
+                "id": "headerCustomer",
+                "description": "Zákazník"
+            },
+            {
+                "id": "headerPickupPoint",
+                "description": "Místo vyzvednutí"
+            },
+            {
+                "id": "headerDriver",
+                "description": "Řidič"
+            },
+            {
+                "id": "headerPort",
+                "description": "Přístav"
+            },
+            {
+                "id": "headerShip",
+                "description": "Loď"
+            },
+            {
+                "id": "headerPax",
+                "description": "Pax"
+            },
+            {
+                "id": "headerPlusMinus",
+                "description": "+/-"
+            },
+            {
+                "id": "headerLastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "headerFirstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "headerCountry",
+                "description": "Země"
+            },
+            {
+                "id": "boardedFilter",
+                "description": "NALODĚNÍ"
+            },
+            {
+                "id": "indeterminateFilter",
+                "description": "NEURČITÝ"
+            },
+            {
+                "id": "pendingFilter",
+                "description": "NEVYŘÍZENÝ"
+            },
+            {
+                "id": "createPDF",
+                "description": "Vytvořit PDF"
+            },
+            {
+                "id": "scanOpenButton",
+                "description": "Skenování voucheru"
+            },
+            {
+                "id": "scan-close-button",
+                "description": "X"
+            },
+            {
+                "id": "embarkAllPassengers",
+                "description": "Embark vše"
+            },
+            {
+                "id": "missingPassenger",
+                "description": "Žádné údaje pro 1 pasažér"
+            },
+            {
+                "id": "missingPassengers",
+                "description": "Žádné údaje pro xx pasažéři"
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "remarksOnNewLine",
+                "description": "Zobrazit komentáře na samostatném řádku"
+            }
+        ]
+    },
+    {
+        "feature": "ledgerCriteria",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Knihy zákazníků"
+            },
+            {
+                "id": "filterPlaceholder",
+                "description": "Napište něco..."
+            },
+            {
+                "id": "customers",
+                "description": "Zákazník"
+            },
+            {
+                "id": "destinations",
+                "description": "Destinace"
+            },
+            {
+                "id": "ports",
+                "description": "Přístavy"
+            },
+            {
+                "id": "ships",
+                "description": "Loď"
+            },
+            {
+                "id": "selected",
+                "description": "Vybrané"
+            },
+            {
+                "id": "searchButton",
+                "description": "Vyhledávání"
+            }
+        ]
+    },
+    {
+        "feature": "ledgerList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Knihy zákazníků"
+            },
+            {
+                "id": "headerDate",
+                "description": "Datum"
+            },
+            {
+                "id": "headerDestination",
+                "description": "Destinace"
+            },
+            {
+                "id": "headerPickupPoint",
+                "description": "Místo vyzvednutí"
+            },
+            {
+                "id": "headerShip",
+                "description": "Loď"
+            },
+            {
+                "id": "headerPort",
+                "description": "Přístavt"
+            },
+            {
+                "id": "headerRefNo",
+                "description": "RefNo"
+            },
+            {
+                "id": "headerTicket",
+                "description": "Vstupenka"
+            },
+            {
+                "id": "headerHasTransfer",
+                "description": "Transfer"
+            },
+            {
+                "id": "headerAdults",
+                "description": "Do"
+            },
+            {
+                "id": "headerKids",
+                "description": "Dí"
+            },
+            {
+                "id": "headerFree",
+                "description": "Z"
+            },
+            {
+                "id": "headerNoShow",
+                "description": "N/S"
+            },
+            {
+                "id": "headerRemarks",
+                "description": "K"
+            },
+            {
+                "id": "createInvoiceButton",
+                "description": "Vystavení faktury"
+            },
+            {
+                "id": "createPdfButton",
+                "description": "Vytvořit PDF"
+            },
+            {
+                "id": "remarksOnNewLine",
+                "description": "Zobrazit komentáře na samostatném řádku"
+            }
+        ]
+    },
+    {
+        "feature": "manifestCriteria",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Seznam cestujících"
+            },
+            {
+                "id": "filterPlaceholder",
+                "description": "Napište něco..."
+            },
+            {
+                "id": "date",
+                "description": "Datum"
+            },
+            {
+                "id": "destinations",
+                "description": "Destinace"
+            },
+            {
+                "id": "ports",
+                "description": "Přístavy"
+            },
+            {
+                "id": "ships",
+                "description": "Lodě"
+            },
+            {
+                "id": "selected",
+                "description": "Vybrané"
+            },
+            {
+                "id": "searchButton",
+                "description": "Vyhledávání"
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Zrušit"
+            }
+        ]
+    },
+    {
+        "feature": "manifestList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Seznam cestujících"
+            },
+            {
+                "id": "tab1",
+                "description": "Cestující"
+            },
+            {
+                "id": "tab2",
+                "description": "Posádka"
+            },
+            {
+                "id": "headerLastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "headerFirstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "headerCountry",
+                "description": "Země"
+            },
+            {
+                "id": "headerGender",
+                "description": "Rod"
+            },
+            {
+                "id": "createFiles",
+                "description": "Vytvořit soubory"
+            },
+            {
+                "id": "createFilePassengers",
+                "description": "Cestující"
+            },
+            {
+                "id": "createFileCrew",
+                "description": "Osádka"
+            }
+        ]
+    },
+    {
+        "feature": "shipOwnerList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Πλοιοκτήτες"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Ενεργός"
+            },
+            {
+                "id": "headerName",
+                "description": "Επωνυμία ή όνομα"
+            },
+            {
+                "id": "headerPhones",
+                "description": "Τηλέφωνα"
+            },
+            {
+                "id": "headerEmail",
+                "description": "Email"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            },
+            {
+                "id": "contextMenuEdit",
+                "description": "Επεξεργασία"
+            }
+        ]
+    },
+    {
+        "feature": "shipOwnerForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Πλοιοκτήτης"
+            },
+            {
+                "id": "tab1",
+                "description": "Γενικά"
+            },
+            {
+                "id": "tab2",
+                "description": "Επικοινωνία"
+            },
+            {
+                "id": "tab3",
+                "description": "myData"
+            },
+            {
+                "id": "description",
+                "description": "Επωνυμία ή όνομα"
+            },
+            {
+                "id": "vatNumber",
+                "description": "ΑΦΜ"
+            },
+            {
+                "id": "taxOffice",
+                "description": "ΔΟΥ"
+            },
+            {
+                "id": "branch",
+                "description": "Αρ. εγκατάστασης"
+            },
+            {
+                "id": "profession",
+                "description": "Δραστηριότητα"
+            },
+            {
+                "id": "street",
+                "description": "Οδός"
+            },
+            {
+                "id": "number",
+                "description": "Αριθμός"
+            },
+            {
+                "id": "city",
+                "description": "Πόλη"
+            },
+            {
+                "id": "postalCode",
+                "description": "ΤΚ"
+            },
+            {
+                "id": "nationality",
+                "description": "Χώρα"
+            },
+            {
+                "id": "personInCharge",
+                "description": "Υπεύθυνος επικοινωνίας"
+            },
+            {
+                "id": "phones",
+                "description": "Τηλέφωνα"
+            },
+            {
+                "id": "email",
+                "description": "Email"
+            },
+            {
+                "id": "isGroupJP",
+                "description": "Ομιλος εταιριών JP"
+            },
+            {
+                "id": "demoUrl",
+                "description": "Url δοκιμών"
+            },
+            {
+                "id": "demoUsername",
+                "description": "Χρήστης δοκιμών"
+            },
+            {
+                "id": "demoSubscriptionKey",
+                "description": "Κωδικός δοκιμών"
+            },
+            {
+                "id": "liveUrl",
+                "description": "Url"
+            },
+            {
+                "id": "liveUsername",
+                "description": "Χρήστης"
+            },
+            {
+                "id": "liveSubscriptionKey",
+                "description": "Κωδικός"
+            },
+            {
+                "id": "isChannelActive",
+                "description": "Ενεργό κανάλι"
+            },
+            {
+                "id": "isDemoMyData",
+                "description": "Λειτουργία δοκιμών"
+            },
+            {
+                "id": "vatPercent",
+                "description": "Συντελεστής ΦΠΑ"
+            },
+            {
+                "id": "isActive",
+                "description": "Ενεργός"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            },
+            {
+                "id": "searchAadeRegistry",
+                "description": "Αναζήτηση στοιχείων στο μητρώο επιχειρήσεων"
+            }
+        ]
+    },
+    {
+        "feature": "shipRouteList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Trasy lodí"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerFromPort",
+                "description": "Odjezdový přístav"
+            },
+            {
+                "id": "headerViaPort",
+                "description": "Mezilehlé přístavy přiblížení"
+            },
+            {
+                "id": "headerToPort",
+                "description": "Cílový přístav"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "shipRouteForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Trasa"
+            },
+            {
+                "id": "description",
+                "description": "Jméno"
+            },
+            {
+                "id": "fromPort",
+                "description": "Přístav vyplutí"
+            },
+            {
+                "id": "fromTime",
+                "description": "Čas"
+            },
+            {
+                "id": "viaPort",
+                "description": "Mezilehlý Přístav"
+            },
+            {
+                "id": "viaTime",
+                "description": "Čas"
+            },
+            {
+                "id": "toPort",
+                "description": "Cílový mezilehlý"
+            },
+            {
+                "id": "toTime",
+                "description": "Čas"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "registrarList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Registrátors"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerIsPrimary",
+                "description": "Hlavní"
+            },
+            {
+                "id": "headerFullname",
+                "description": "Celé jméno"
+            },
+            {
+                "id": "headerShipDescription",
+                "description": "Loď"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "registrarForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Registrátor"
+            },
+            {
+                "id": "fullname",
+                "description": "Celé jméno"
+            },
+            {
+                "id": "ship",
+                "description": "Loď"
+            },
+            {
+                "id": "phones",
+                "description": "Telefony"
+            },
+            {
+                "id": "email",
+                "description": "Email"
+            },
+            {
+                "id": "fax",
+                "description": "Fax"
+            },
+            {
+                "id": "address",
+                "description": "Adresa"
+            },
+            {
+                "id": "isPrimary",
+                "description": "Hlavní"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "shipCrewList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Osazenstvos"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerShipDescription",
+                "description": "Loď"
+            },
+            {
+                "id": "headerSpecialtyDescription",
+                "description": "Specializace"
+            },
+            {
+                "id": "headerLastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "headerFirstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "headerBirthdate",
+                "description": "Datum narození"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "shipCrewForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Osazenstvo"
+            },
+            {
+                "id": "lastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "firstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "birthdate",
+                "description": "Datum narození"
+            },
+            {
+                "id": "ship",
+                "description": "Loď"
+            },
+            {
+                "id": "nationality",
+                "description": "Národnost"
+            },
+            {
+                "id": "specialty",
+                "description": "Specializace"
+            },
+            {
+                "id": "gender",
+                "description": "Rod"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "scheduleList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Rozvrh"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "headerDate",
+                "description": "Datum"
+            },
+            {
+                "id": "headerYear",
+                "description": "Rok"
+            },
+            {
+                "id": "headerDestinationDescription",
+                "description": "Destinace"
+            },
+            {
+                "id": "headerPortDescription",
+                "description": "Přístav"
+            },
+            {
+                "id": "headerMaxPax",
+                "description": "Max Pax"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "scheduleEditForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Rozvrh"
+            },
+            {
+                "id": "date",
+                "description": "Datum"
+            },
+            {
+                "id": "destination",
+                "description": "Destinace"
+            },
+            {
+                "id": "port",
+                "description": "Přístav"
+            },
+            {
+                "id": "maxPax",
+                "description": "Max Pax"
+            },
+            {
+                "id": "time",
+                "description": "Čas odjezdu"
+            },
+            {
+                "id": "isActive",
+                "description": "Aktivní"
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Smazat"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "reservationsCalendar",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Kalendář rezervací"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "availabilityCalendar",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Dostupnost"
+            },
+            {
+                "id": "newRecord",
+                "description": "Nový rekord"
+            }
+        ]
+    },
+    {
+        "feature": "cachedReservationDialog",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Pozor"
+            },
+            {
+                "id": "subHeader",
+                "description": "Zjistili jsme, že rezervace byla dočasně uložena. Co máme udělat?"
+            },
+            {
+                "id": "option1",
+                "description": "Nahradit"
+            },
+            {
+                "id": "option1message",
+                "description": "Pole formuláře budou nahrazena rezervací uloženou v mezipaměti. Ta zůstane v nezměněné podobě, dokud neprovedete normální uložení. Poté, pokud je uložení úspěšně dokončeno, bude rezervace uložená v mezipaměti odstraněna."
+            },
+            {
+                "id": "option2",
+                "description": "Odstranit"
+            },
+            {
+                "id": "option2message",
+                "description": "Budeme mít za to, že rezervace uložená v mezipaměti vás nezajímá, a trvale ji odstraníme."
+            },
+            {
+                "id": "option3",
+                "description": "Nic"
+            },
+            {
+                "id": "option3message",
+                "description": "Ničeho se nedotkneme. Pole formuláře a rezervace uložená v mezipaměti zůstanou tak, jak jsou."
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            }
+        ]
+    },
+    {
+        "feature": "reservationparameters",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Nastavení"
+            },
+            {
+                "id": "closingTime",
+                "description": "Zavírací doba"
+            },
+            {
+                "id": "phones",
+                "description": "Phony"
+            },
+            {
+                "id": "email",
+                "description": "Email"
+            },
+            {
+                "id": "emailΤooltip",
+                "description": "Jedná se o e-mail, který bude vytištěn v zápatí odesílaných e-mailů."
+            },
+            {
+                "id": "post",
+                "description": "Prvotní zadání"
+            },
+            {
+                "id": "put",
+                "description": "Poslední aktualizace"
+            },
+            {
+                "id": "saveButton",
+                "description": "Uložit"
+            }
+        ]
+    },
+    {
+        "feature": "date-picker-pill",
+        "labels": [
+            {
+                "id": "today",
+                "description": "Dnes"
+            },
+            {
+                "id": "ok",
+                "description": "Ok"
+            }
+        ]
+    },
+    {
+        "feature": "date-range-picker",
+        "labels": [
+            {
+                "id": "date",
+                "description": "Rozsah data"
+            },
+            {
+                "id": "hint",
+                "description": "Vyberte rozsah data"
+            },
+            {
+                "id": "today",
+                "description": "Dnes"
+            },
+            {
+                "id": "ok",
+                "description": "Ok"
+            }
+        ]
+    },
+    {
+        "feature": "statistics",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Statistiky"
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "ytd",
+                "description": "YTD"
+            },
+            {
+                "id": "destinations",
+                "description": "Destinace"
+            },
+            {
+                "id": "customers",
+                "description": "Zákazníci"
+            },
+            {
+                "id": "ports",
+                "description": "Přístavy"
+            },
+            {
+                "id": "drivers",
+                "description": "Řidiči"
+            },
+            {
+                "id": "ships",
+                "description": "Lodě"
+            },
+            {
+                "id": "nationalities",
+                "description": "Národnosti"
+            },
+            {
+                "id": "description",
+                "description": "Popis"
+            },
+            {
+                "id": "pax",
+                "description": "Pax"
+            },
+            {
+                "id": "actual-pax",
+                "description": "Actual pax"
+            },
+            {
+                "id": "no-show",
+                "description": "N/S"
+            }
+        ]
+    },
+    {
+        "feature": "search-reservation",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Vyhledání rezervace"
+            },
+            {
+                "id": "subHeader",
+                "description": "Pomocí refNo nebo jízdenky"
+            },
+            {
+                "id": "refNo",
+                "description": "RefNo nebo jízdenku"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Zrušit"
+            },
+            {
+                "id": "okButton",
+                "description": "Vyhledávání"
+            }
+        ]
+    },
+    {
+        "feature": "cardsMenu",
+        "labels": [
+            {
+                "id": "reservationsTitle",
+                "description": "Rezervace"
+            },
+            {
+                "id": "reservationsSubTitle",
+                "description": "Zobrazte kalendář a upravte své rezervace."
+            },
+            {
+                "id": "availabilityTitle",
+                "description": "Dostupnost"
+            },
+            {
+                "id": "availabilitySubTitle",
+                "description": "Zkontrolujte volná místa na exkurzi a proveďte novou rezervaci."
+            },
+            {
+                "id": "invoicesTitle",
+                "description": "Prodej"
+            },
+            {
+                "id": "invoicesSubTitle",
+                "description": "Spravujte prodej svých služeb a vystavujte faktury."
+            },
+            {
+                "id": "boardingTitle",
+                "description": "Nalodění"
+            },
+            {
+                "id": "boardingSubTitle",
+                "description": "Spravujte vstup cestujících na palubu."
+            },
+            {
+                "id": "ledgersTitle",
+                "description": "Moje kniha"
+            },
+            {
+                "id": "ledgersSubTitle",
+                "description": "Zobrazení rezervací na určité časové období."
+            },
+            {
+                "id": "transactionsTitle",
+                "description": "Transakce"
+            },
+            {
+                "id": "transactionsSubTitle",
+                "description": "Přijímat peníze od zákazníků a vystavovat účtenky."
+            }
+        ]
+    },
+    {
+        "feature": "delete-range",
+        "labels": [
+            {
+                "id": "label",
+                "description": "Bezpečnostní kód"
+            },
+            {
+                "id": "instructions",
+                "description": "Chcete-li pokračovat, musíte zkopírovat následující kód do pole 'Bezpečnostní kód'"
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Zrušit"
+            }
+        ]
+    },
+    {
+        "feature": "priceList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τιμοκατάλογοι"
+            },
+            {
+                "id": "clonePrices",
+                "description": "Δημιουργία αντιγράφων"
+            },
+            {
+                "id": "rangeDelete",
+                "description": "Διαγραφή επιλεγμένων εγγραφών"
+            },
+            {
+                "id": "headerCustomerDescription",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "headerDestinationDescription",
+                "description": "Προορισμός"
+            },
+            {
+                "id": "headerPortDescription",
+                "description": "Λιμάνι"
+            },
+            {
+                "id": "headerFrom",
+                "description": "Από"
+            },
+            {
+                "id": "headerTo",
+                "description": "Εως"
+            },
+            {
+                "id": "headerAdults",
+                "description": "Ενήλικες"
+            },
+            {
+                "id": "headerAdultsWithTransfer",
+                "description": "w/ transfer"
+            },
+            {
+                "id": "headerAdultsWithoutTransfer",
+                "description": "w/o transfer"
+            },
+            {
+                "id": "headerKids",
+                "description": "Παιδιά"
+            },
+            {
+                "id": "headerKidsWithTransfer",
+                "description": "w/ transfer"
+            },
+            {
+                "id": "headerKidsWithoutTransfer",
+                "description": "w/o transfer"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            }
+        ]
+    },
+    {
+        "feature": "priceForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τιμοκατάλογος"
+            },
+            {
+                "id": "customer",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "destination",
+                "description": "Προορισμός"
+            },
+            {
+                "id": "port",
+                "description": "Λιμάνι"
+            },
+            {
+                "id": "from",
+                "description": "Από"
+            },
+            {
+                "id": "to",
+                "description": "Εως"
+            },
+            {
+                "id": "adultsWithTransfer",
+                "description": "Ενήλικες w/ transfer"
+            },
+            {
+                "id": "adultsWithoutTransfer",
+                "description": "Ενήλικες w/o transfer"
+            },
+            {
+                "id": "kidsWithTransfer",
+                "description": "Παιδιά w/ transfer"
+            },
+            {
+                "id": "kidsWithoutTransfer",
+                "description": "Παιδιά w/o transfer"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            }
+        ]
+    },
+    {
+        "feature": "clonePrices",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Επιλογή πελατών"
+            },
+            {
+                "id": "subHeader",
+                "description": "Επιλέξτε τους πελάτες στους οποίους θα γίνουν οι αντιγραφές των επιλεγμένων εγγραφών."
+            },
+            {
+                "id": "okButton",
+                "description": "OK"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Ακυρο"
+            }
+        ]
+    },
+    {
+        "feature": "taxOfficeList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Οικονομικές υπηρεσίες"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            }
+        ]
+    },
+    {
+        "feature": "taxOfficeForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Οικονομική υπηρεσία"
+            },
+            {
+                "id": "description",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "isActive",
+                "description": "Ενεργή"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            }
+        ]
+    },
+    {
+        "feature": "paymentMethodList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τρόποι πληρωμής"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Ενεργός"
+            },
+            {
+                "id": "headerIsCash",
+                "description": "Μετρητά"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            },
+            {
+                "id": "contextMenuEdit",
+                "description": "Επεξεργασία"
+            }
+        ]
+    },
+    {
+        "feature": "paymentMethodForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τρόπος πληρωμής"
+            },
+            {
+                "id": "description",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "myDataId",
+                "description": "Πίνακας 8.12"
+            },
+            {
+                "id": "isCash",
+                "description": "Μετρητά"
+            },
+            {
+                "id": "isDefault",
+                "description": "Εξ' ορισμού προεπιλογή"
+            },
+            {
+                "id": "isActive",
+                "description": "Ενεργός"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            }
+        ]
+    },
+    {
+        "feature": "documentTypeList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τύποι παραστατικών"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Ενεργό"
+            },
+            {
+                "id": "headerShipOwner",
+                "description": "Πλοιοκτήτης"
+            },
+            {
+                "id": "headerShip",
+                "description": "Πλοίο"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "headerBatch",
+                "description": "Σειρά"
+            },
+            {
+                "id": "headerTable8_1",
+                "description": "Πίνακας 8.1"
+            },
+            {
+                "id": "headerTable8_8",
+                "description": "Πίνακας 8.8"
+            },
+            {
+                "id": "headerTable8_9",
+                "description": "Πίνακας 8.9"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            }
+        ]
+    },
+    {
+        "feature": "documentTypeForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τύπος παραστατικού"
+            },
+            {
+                "id": "tab1",
+                "description": "Γενικά"
+            },
+            {
+                "id": "tab2",
+                "description": "myData"
+            },
+            {
+                "id": "shipOwner",
+                "description": "Πλοιοκτήτης"
+            },
+            {
+                "id": "ship",
+                "description": "Πλοίο"
+            },
+            {
+                "id": "abbreviation",
+                "description": "Συντ."
+            },
+            {
+                "id": "description",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "batch",
+                "description": "Σειρά"
+            },
+            {
+                "id": "customers",
+                "description": "Πελάτες"
+            },
+            {
+                "id": "suppliers",
+                "description": "Προμηθευτές"
+            },
+            {
+                "id": "refersToInvoice",
+                "description": "Χρεωστική ή πιστωτική τιμολόγηση"
+            },
+            {
+                "id": "refersToReceipt",
+                "description": "Είσπραξη ή πληρωμή"
+            },
+            {
+                "id": "isMyData",
+                "description": "Ενημερώνει myDATA"
+            },
+            {
+                "id": "table8_1",
+                "description": "Πίνακας 8.1"
+            },
+            {
+                "id": "table8_8",
+                "description": "Πίνακας 8.8"
+            },
+            {
+                "id": "table8_9",
+                "description": "Πίνακας 8.9"
+            },
+            {
+                "id": "isDefault",
+                "description": "Εξ' ορισμού προεπιλογή"
+            },
+            {
+                "id": "isActive",
+                "description": "Ενεργό"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            }
+        ]
+    },
+    {
+        "feature": "invoiceList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Πωλήσεις"
+            },
+            {
+                "id": "headerDate",
+                "description": "Ημερομηνία"
+            },
+            {
+                "id": "headerShipOwnerDescription",
+                "description": "Εκδότης"
+            },
+            {
+                "id": "headerCustomerDescription",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "headerDestinationDescription",
+                "description": "Προορισμός"
+            },
+            {
+                "id": "headerShipDescription",
+                "description": "Πλοίο"
+            },
+            {
+                "id": "headerDocumentTypeDescription",
+                "description": "Τύπος παραστατικού"
+            },
+            {
+                "id": "headerDocumentTypeBatch",
+                "description": "Σειρά"
+            },
+            {
+                "id": "headerNo",
+                "description": "Νο"
+            },
+            {
+                "id": "headerGrossAmount",
+                "description": "Αξία"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            }
+        ]
+    },
+    {
+        "feature": "invoiceForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Παραστατικό πώλησης"
+            },
+            {
+                "id": "tab1",
+                "description": "Γενικά"
+            },
+            {
+                "id": "tab2",
+                "description": "Αναλυτικά"
+            },
+            {
+                "id": "tab3",
+                "description": "myData"
+            },
+            {
+                "id": "date",
+                "description": "Ημερομηνία έκδοσης"
+            },
+            {
+                "id": "tripDate",
+                "description": "Ημερομηνία εκδρομής"
+            },
+            {
+                "id": "documentTypeAbbreviation",
+                "description": "Παραστατικό"
+            },
+            {
+                "id": "documentTypeDescription",
+                "description": "Περιγραφή παραστατικού"
+            },
+            {
+                "id": "no",
+                "description": "Νο"
+            },
+            {
+                "id": "batch",
+                "description": "Σειρά"
+            },
+            {
+                "id": "paymentMethod",
+                "description": "Τρόπος πληρωμής"
+            },
+            {
+                "id": "customer",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "destination",
+                "description": "Προορισμός"
+            },
+            {
+                "id": "ship",
+                "description": "Πλοίο"
+            },
+            {
+                "id": "netAmount",
+                "description": "Καθαρή αξία"
+            },
+            {
+                "id": "vatPercent",
+                "description": "Ποσοστό ΦΠΑ"
+            },
+            {
+                "id": "vatAmount",
+                "description": "Αξία ΦΠΑ"
+            },
+            {
+                "id": "grossAmount",
+                "description": "Σύνολο με ΦΠΑ"
+            },
+            {
+                "id": "remarks",
+                "description": "Komentáře"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "toggleButtonGeneral",
+                "description": "Γενικα"
+            },
+            {
+                "id": "toggleButtonAnalysis",
+                "description": "Αναλυση"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Ακυρο"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            },
+            {
+                "id": "printInvoice",
+                "description": "Εκτύπωση"
+            },
+            {
+                "id": "emailInvoice",
+                "description": "Αποστολή με email"
+            },
+            {
+                "id": "submitInvoice",
+                "description": "Επανυποβολή"
+            },
+            {
+                "id": "cancelInvoice",
+                "description": "Ακύρωση"
+            },
+            {
+                "id": "retrievePrices",
+                "description": "Ανάκτηση χρεώσεων"
+            },
+            {
+                "id": "uId",
+                "description": "UID"
+            },
+            {
+                "id": "mark",
+                "description": "ΜΑρΚ"
+            },
+            {
+                "id": "markCancel",
+                "description": "ΜΑρΚ Ακύρωσης"
+            },
+            {
+                "id": "url",
+                "description": "URL"
+            },
+            {
+                "id": "port",
+                "description": "Λιμάνι"
+            },
+            {
+                "id": "adults",
+                "description": "Ενήλικες"
+            },
+            {
+                "id": "kids",
+                "description": "Παιδιά"
+            },
+            {
+                "id": "free",
+                "description": "Δωρεάν"
+            },
+            {
+                "id": "withTransfer",
+                "description": "w/ transfer"
+            },
+            {
+                "id": "withoutTransfer",
+                "description": "w/o transfer"
+            },
+            {
+                "id": "price",
+                "description": "Χρέωση"
+            },
+            {
+                "id": "total",
+                "description": "Σύνολο"
+            }
+        ]
+    },
+    {
+        "feature": "invoicePortForm",
+        "labels": [
+            {
+                "id": "port",
+                "description": "Λιμάνι"
+            },
+            {
+                "id": "adults",
+                "description": "Ενήλικες"
+            },
+            {
+                "id": "kids",
+                "description": "Παιδιά"
+            },
+            {
+                "id": "free",
+                "description": "Δωρεάν"
+            },
+            {
+                "id": "withTransfer",
+                "description": "w/ transfer"
+            },
+            {
+                "id": "withoutTransfer",
+                "description": "w/o transfer"
+            },
+            {
+                "id": "price",
+                "description": "Χρέωση"
+            },
+            {
+                "id": "total",
+                "description": "Σύνολο"
+            },
+            {
+                "id": "totalAmount",
+                "description": "Σύνολο αξίας"
+            },
+            {
+                "id": "portTotals",
+                "description": "Σύνολα λιμανιών"
+            }
+        ]
+    },
+    {
+        "feature": "receiptList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Εισπράξεις"
+            },
+            {
+                "id": "headerDate",
+                "description": "Ημερομηνία"
+            },
+            {
+                "id": "headerShipOwner",
+                "description": "Εκδότης"
+            },
+            {
+                "id": "headerCustomerDescription",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "headerDocumentTypeDescription",
+                "description": "Τύπος παραστατικού"
+            },
+            {
+                "id": "headerDocumentTypeBatch",
+                "description": "Σειρά"
+            },
+            {
+                "id": "headerNo",
+                "description": "Νο"
+            },
+            {
+                "id": "headerGrossAmount",
+                "description": "Αξία"
+            },
+            {
+                "id": "createFile",
+                "description": "Δημιουργία αρχείου xls"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            }
+        ]
+    },
+    {
+        "feature": "receiptForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Είσπραξη"
+            },
+            {
+                "id": "date",
+                "description": "Ημερομηνία"
+            },
+            {
+                "id": "tripDate",
+                "description": "Ημερομηνία αναφοράς"
+            },
+            {
+                "id": "shipOwner",
+                "description": "Πλοιοκτήτης"
+            },
+            {
+                "id": "documentTypeAbbreviation",
+                "description": "Παραστατικό"
+            },
+            {
+                "id": "documentTypeDescription",
+                "description": "Περιγραφή παραστατικού"
+            },
+            {
+                "id": "no",
+                "description": "Νο"
+            },
+            {
+                "id": "batch",
+                "description": "Σειρά"
+            },
+            {
+                "id": "paymentMethod",
+                "description": "Τρόπος πληρωμής"
+            },
+            {
+                "id": "customer",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "grossAmount",
+                "description": "Σύνολο αξίας"
+            },
+            {
+                "id": "remarks",
+                "description": "Σχόλια"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            },
+            {
+                "id": "printInvoice",
+                "description": "Εκτύπωση"
+            },
+            {
+                "id": "emailInvoice",
+                "description": "Αποστολή με email"
+            },
+            {
+                "id": "cancelInvoice",
+                "description": "Ακύρωση"
+            }
+        ]
+    },
+    {
+        "feature": "ledgerCriteria",
+        "labels": [
+            {
+                "id": "customer",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "searchButton",
+                "description": "Αναζητηση"
+            }
+        ]
+    },
+    {
+        "feature": "salesLedger",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Λογιστική καρτέλα πελάτη"
+            },
+            {
+                "id": "headerDate",
+                "description": "Ημερομηνία"
+            },
+            {
+                "id": "headerShipOwner",
+                "description": "Πλοιοκτήτης"
+            },
+            {
+                "id": "headerDocumentTypeDescription",
+                "description": "Τύπος παραστατικού"
+            },
+            {
+                "id": "headerDocumentTypeBatch",
+                "description": "Σειρά"
+            },
+            {
+                "id": "headerInvoiceNo",
+                "description": "Νο"
+            },
+            {
+                "id": "headerDebit",
+                "description": "Χρέωση"
+            },
+            {
+                "id": "headerCredit",
+                "description": "Πίστωση"
+            },
+            {
+                "id": "headerBalance",
+                "description": "Υπόλοιπο"
+            },
+            {
+                "id": "printButton",
+                "description": "Αποστολη με email"
+            }
+        ]
+    },
+    {
+        "feature": "check-in",
+        "labels": [
+            {
+                "id": "logo",
+                "description": "Corfu Cruises"
+            },
+            {
+                "id": "step-1-sub-header",
+                "description": "Check-in"
+            },
+            {
+                "id": "step-1-description",
+                "description": "Odbavení z mobilního telefonu nebo tabletu a rychlý nástup bez zpoždění"
+            },
+            {
+                "id": "step-1-begin-button",
+                "description": "Pojďme!"
+            },
+            {
+                "id": "search-header",
+                "description": "Identifikace"
+            },
+            {
+                "id": "step-2-sub-header",
+                "description": "Vaši rezervaci musíme najít v našem systému."
+            },
+            {
+                "id": "step-2-sub-step-caption",
+                "description": "Máte RefNo číslo rezervace?"
+            },
+            {
+                "id": "step-2-yes",
+                "description": "Ano, mám"
+            },
+            {
+                "id": "step-2-no",
+                "description": "Ne, nemám"
+            },
+            {
+                "id": "step-2-refNo",
+                "description": "RefNo"
+            },
+            {
+                "id": "step-2-refNo-hint",
+                "description": "Zadejte číslo RefNo bez mezer"
+            },
+            {
+                "id": "step-2-date",
+                "description": "Datum"
+            },
+            {
+                "id": "step-2-date-hint",
+                "description": "Kdy se vaše cesta koná?"
+            },
+            {
+                "id": "step-2-destination",
+                "description": "Destinace"
+            },
+            {
+                "id": "step-2-destination-hint",
+                "description": "Kam jste se rozhodli jet?"
+            },
+            {
+                "id": "step-2-lastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "step-2-lastname-hint",
+                "description": "Zadejte jedno z příjmení, které jste uvedli"
+            },
+            {
+                "id": "step-2-firstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "step-2-firstname-hint",
+                "description": "Zadejte křestní jméno výše uvedeného příjmení"
+            },
+            {
+                "id": "step-3-header",
+                "description": "Údaje o rezervaci"
+            },
+            {
+                "id": "step-3-sub-header",
+                "description": "Ujistěte se, že je vše správně"
+            },
+            {
+                "id": "step-3-date",
+                "description": "Datum"
+            },
+            {
+                "id": "step-3-refNo",
+                "description": "RefNo"
+            },
+            {
+                "id": "step-3-ticketNo",
+                "description": "Vstupenka"
+            },
+            {
+                "id": "step-3-destination",
+                "description": "Destinace"
+            },
+            {
+                "id": "step-3-customer",
+                "description": "Zákazník"
+            },
+            {
+                "id": "step-3-pickupPoint",
+                "description": "Místo vyzvednutí"
+            },
+            {
+                "id": "step-3-exactPoint",
+                "description": "Přesné místo"
+            },
+            {
+                "id": "step-3-time",
+                "description": "Čas"
+            },
+            {
+                "id": "step-3-adults",
+                "description": "Dospělí"
+            },
+            {
+                "id": "step-3-kids",
+                "description": "Děti"
+            },
+            {
+                "id": "step-3-free",
+                "description": "Zdarma"
+            },
+            {
+                "id": "step-3-totalPax",
+                "description": "Total pax"
+            },
+            {
+                "id": "step-3-phones",
+                "description": "Telefony"
+            },
+            {
+                "id": "step-3-remarks",
+                "description": "Komentáře"
+            },
+            {
+                "id": "step-4-header",
+                "description": "Údaje o cestujících"
+            },
+            {
+                "id": "step-4-new-passenger-button",
+                "description": "Nový cestující"
+            },
+            {
+                "id": "step-5-header",
+                "description": "Cestující"
+            },
+            {
+                "id": "step-5-lastname",
+                "description": "Příjmení"
+            },
+            {
+                "id": "step-5-firstname",
+                "description": "Jméno"
+            },
+            {
+                "id": "step-5-nationality",
+                "description": "Národnost"
+            },
+            {
+                "id": "step-5-gender",
+                "description": "Pohlaví"
+            },
+            {
+                "id": "step-5-birthdate",
+                "description": "Datum narození"
+            },
+            {
+                "id": "step-5-ok",
+                "description": "OK"
+            },
+            {
+                "id": "step-5-cancel",
+                "description": "Zrušit"
+            },
+            {
+                "id": "step-6-header",
+                "description": "Odeslat e-mail"
+            },
+            {
+                "id": "step-6-sub-header",
+                "description": "Uveďte e-mail, na který vám zašleme palubní vstupenku"
+            },
+            {
+                "id": "step-6-email",
+                "description": "E-mail"
+            },
+            {
+                "id": "step-7-header",
+                "description": "Vše je hotovo!"
+            },
+            {
+                "id": "completion-description",
+                "description": "Právě jsme vám poslali e-mail s palubním lístkem. Pokud jste jej neobdrželi, zkontrolujte, zda jste zadali správný e-mail a zda jste zkontrolovali složku se spamem."
+            },
+            {
+                "id": "completion-thank-you",
+                "description": "Přejeme vám příjemnou cestu a děkujeme, že jste si vybrali Corfu Cruises."
+            },
+            {
+                "id": "help",
+                "description": "Pro nápovědu klikněte zde"
+            },
+            {
+                "id": "today",
+                "description": "Dnes"
+            },
+            {
+                "id": "ok",
+                "description": "OK"
+            },
+            {
+                "id": "cancel",
+                "description": "Zrušit"
+            },
+            {
+                "id": "next",
+                "description": "Další"
+            },
+            {
+                "id": "previous",
+                "description": "Předchozí"
+            }
+        ]
+    },
+    {
+        "feature": "bankList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τράπεζες"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Ενεργή"
+            },
+            {
+                "id": "headerDescription",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            }
+        ]
+    },
+    {
+        "feature": "bankForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τράπεζα"
+            },
+            {
+                "id": "description",
+                "description": "Περιγραφή"
+            },
+            {
+                "id": "isActive",
+                "description": "Ενεργή"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            }
+        ]
+    },
+    {
+        "feature": "bankAccountList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τραπεζικοί λογαριασμοί"
+            },
+            {
+                "id": "headerIsActive",
+                "description": "Ενεργός"
+            },
+            {
+                "id": "headerBankDescription",
+                "description": "Τράπεζα"
+            },
+            {
+                "id": "headerShipOwnerDescription",
+                "description": "Πλοιοκτήτης"
+            },
+            {
+                "id": "headerIban",
+                "description": "IBAN"
+            },
+            {
+                "id": "newRecord",
+                "description": "Νεα εγγραφη"
+            }
+        ]
+    },
+    {
+        "feature": "bankAccountForm",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Τραπεζικός λογαριασμός"
+            },
+            {
+                "id": "bank",
+                "description": "Τράπεζα"
+            },
+            {
+                "id": "shipOwner",
+                "description": "Πλοιοκτήτης"
+            },
+            {
+                "id": "iban",
+                "description": "IBAN"
+            },
+            {
+                "id": "isActive",
+                "description": "Ενεργός"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "deleteButton",
+                "description": "Διαγραφη"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            }
+        ]
+    }
+]

@@ -1,0 +1,3 @@
+{
+    "dotnet.defaultSolution": "API.Integration.Tests.sln"
+}

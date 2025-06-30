@@ -1,0 +1,54 @@
+#form-wrapper {
+    width: 99.5%;
+}
+
+#search-button {
+    margin: 0.5rem 0 0 0;
+}
+
+#dialog {
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 0 0 0 0;
+}
+
+#dialog-header {
+    border-bottom: 0.0625rem solid color-mix(in srgb, var(--color-transparent-button-hover) 30%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 0 0 1rem 0;
+    padding: 1.5rem 2rem 1rem 2rem;
+}
+
+#dialog-header h1 {
+    color: var(--color-accent);
+}
+
+#dialog-header h6 {
+    color: var(--color-text);
+}
+
+#dialog-content {
+    height: 100%;
+    margin: 1rem 4rem 0 4rem !important;
+    overflow-y: hidden;
+}
+
+#dialog-footer {
+    border-top: 0.0625rem solid color-mix(in srgb, var(--color-transparent-button-hover) 30%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem 2rem 1rem 2rem;
+
+}
+
+#dialog-footer #align-right {
+    column-gap: 0.5rem;
+    display: flex;
+    margin: 0 0 0 auto;
+}

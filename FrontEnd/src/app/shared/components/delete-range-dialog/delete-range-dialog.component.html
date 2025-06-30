@@ -1,0 +1,36 @@
+<div id="dialog">
+
+    <div id="dialog-content">
+        <div id="dialog-image">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                <circle class="path circle" fill="none" stroke="#F0E16D" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+                <polyline class="path check" fill="none" stroke="#FFED61" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="66,30 66,80" />
+                <polyline class="path check" fill="none" stroke="#FFED61" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="66,95 66,100" />
+            </svg>
+        </div>
+        <div id="dialog-text">
+            <form [formGroup]="form" id="form">
+                <mat-form-field>
+                    <mat-label>{{ getLabel('label') }}</mat-label>
+                    <input dataTabIndex="-1" formControlName="confirmationCode" matInput>
+                    <mat-error *ngIf="confirmationCode.hasError('required')">{{ getHint("required") }}</mat-error>
+                </mat-form-field>
+            </form>
+            <div id="hint">
+                {{ getLabel('instructions') }}
+            </div>
+            <div id="random-string">{{ randomString }}</div>
+        </div>
+    </div>
+
+    <div id="dialog-footer">
+        <mat-dialog-actions>
+            <button mat-flat-button class="transparent" id="abort" tabindex="-1" (click)="onClose()">{{ getLabel('cancelButton') | uppercase }}</button>
+            <button (click)="onDelete()" [disabled]="!form.valid || randomString != form.value.confirmationCode" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid || randomString != form.value.confirmationCode" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("okButton") | uppercase }}</span>
+            </button>
+        </mat-dialog-actions>
+    </div>
+
+</div>

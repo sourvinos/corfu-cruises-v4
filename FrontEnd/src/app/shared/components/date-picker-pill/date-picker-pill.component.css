@@ -1,0 +1,38 @@
+.hidden-date-field {
+    content-visibility: hidden;
+    left: -17.5rem;
+    position: absolute;
+    top: 4.5rem;
+}
+
+.date-picker-pill {
+    background-color: var(--color-button-primary);
+    border-radius: 0.3125rem;
+    display: flex;
+    margin: 0 1rem 0 0;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.date-picker-pill .opener .description {
+    align-items: center;
+    color: var(--color-button-text);
+    display: flex;
+    font-family: var(--font-family-fira-sans-condensed);
+    font-weight: 300;
+    line-height: 0;
+    margin: 0.0625rem 0 0 auto;
+    transform: scaleY(1.8);
+}
+
+.material-icons-outlined {
+    color: var(--color-button-text);
+    margin: 0 0 0 0.8125rem;
+}
+
+.date-picker-pill > div {
+    display: flex;
+}
+
+.date-picker-pill:hover {
+    cursor: pointer;
+}

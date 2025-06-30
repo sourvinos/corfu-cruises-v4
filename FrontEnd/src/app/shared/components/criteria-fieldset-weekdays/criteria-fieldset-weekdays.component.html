@@ -1,0 +1,29 @@
+<fieldset class="fieldset">
+    <legend>
+        <span>{{ getLabel(caption) }}</span>
+        <div class="selected">
+            <span class="selected-count">{{ getLabel("selected") }}: {{ selected.length }}</span>
+            <span class="icon">{{ getEmoji(selected.length > 0 ? 'green-box' : 'red-box') }}</span>
+        </div>
+    </legend>
+    <div class="table-wrapper">
+        <p-table #table (onHeaderCheckboxToggle)="onHeaderCheckboxToggle($event,'selected')" (onRowSelect)="onRowSelect($event,'selected')" (onRowUnselect)="onRowUnselect($event,'selected')" [(selection)]="selected" [scrollable]="true" [value]="weekdays" [virtualScrollItemSize]="32" [virtualScroll]="true" datakey="id" scrollHeight="flex" selectionMode="multiple">
+            <ng-template pTemplate="header">
+                <!-- <tr>
+                    <th class="width-2"></th>
+                    <th class="width-5"></th>
+                </tr> -->
+                <tr>
+                    <th class="width-2" style="padding-top: 13px;"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                    <th class="width-5" style="padding-top: 13px;"><input (input)="table.filter($event.target.value, 'description', 'contains')" [value]="$any(table).filters['description']?.value" class="p-inputtext"></th>
+                </tr>
+            </ng-template>
+            <ng-template let-element pTemplate="body">
+                <tr (click)="highlightRow(element.id)" [attr.id]=element.id style="height: 32px;">
+                    <td class="width-2"><span class="no-left-padding center" style="margin-right: -4px; padding-top: 0.3125rem !important;"><p-tableCheckbox [value]="element"></p-tableCheckbox></span></td>
+                    <td class="width-5"><span>{{ element.description | uppercase }}</span></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</fieldset>
