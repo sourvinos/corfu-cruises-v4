@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace API.Infrastructure.Users {
 
-    public class EmailUserSender : IEmailSender {
+    public class EmailUserSender : IEmailUserSender {
 
         private readonly EmailUserSettings emailUserSettings;
         private readonly IReservationParametersRepository parametersRepo;
@@ -49,7 +49,7 @@ namespace API.Infrastructure.Users {
                     Displayname = model.Displayname,
                     Email = model.Email,
                     Url = model.Url,
-                    CompanyPhones = parametersRepo.GetAsync().Result.Phones
+                    CompanyPhones = ""
                 });
         }
 

@@ -8,6 +8,7 @@ namespace API.Infrastructure.EmailServices {
         public string Initiator { get; set; }
         public Guid EntityId { get; set; }
         public byte Priority { get; set; }
+        public bool IsCompleted { get; set; }
         public string PostAt { get; set; }
 
     }

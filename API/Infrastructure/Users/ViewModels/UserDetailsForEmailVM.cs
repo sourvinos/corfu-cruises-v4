@@ -7,7 +7,6 @@ namespace API.Infrastructure.Users {
         public string Email { get; set; }
         public string Subject { get; set; }
         public string CompanyPhones { get; set; }
-        public string LogoTextBase64 { get; set; }
         public string Url { get; set; }
 
     }

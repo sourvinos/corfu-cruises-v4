@@ -35,6 +35,7 @@ using API.Infrastructure.Auth;
 using API.Infrastructure.Users;
 using Microsoft.Extensions.DependencyInjection;
 using API.Infrastructure.Account;
+using API.Infrastructure.EmailServices;
 
 namespace API.Infrastructure.Extensions {
 
@@ -122,6 +123,9 @@ namespace API.Infrastructure.Extensions {
             #region shared
             services.AddScoped<Token>();
             services.AddTransient<IEmailAccountSender, EmailAccountSender>();
+            services.AddTransient<IEmailQueueRepository, EmailQueueRepository>();
+            services.AddTransient<IEmailUserSender, EmailUserSender>();
+            services.AddTransient<ICheckInSendToEmail, CheckInSendToEmail>();
             #endregion
             #region checkIn
             services.AddTransient<ICheckInReadRepository, CheckInReadRepository>();

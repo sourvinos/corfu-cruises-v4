@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using API.Infrastructure.Users;
 
 namespace API.Infrastructure.Account {
 

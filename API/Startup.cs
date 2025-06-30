@@ -1,15 +1,10 @@
 using System;
-using API.Features.CheckIn;
-using API.Features.Sales.Invoices;
-using API.Features.Sales.Receipts;
-using API.Infrastructure.Account;
 using API.Infrastructure.Auth;
 using API.Infrastructure.Classes;
 using API.Infrastructure.EmailServices;
 using API.Infrastructure.Extensions;
 using API.Infrastructure.Helpers;
 using API.Infrastructure.Middleware;
-using API.Infrastructure.Users;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
