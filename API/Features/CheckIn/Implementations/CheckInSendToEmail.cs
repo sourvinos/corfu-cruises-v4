@@ -35,7 +35,7 @@ namespace API.Features.CheckIn {
             var message = new MimeMessage { Sender = MailboxAddress.Parse(emailCheckInSettings.Username) };
             message.From.Add(new MailboxAddress(emailCheckInSettings.From, emailCheckInSettings.Username));
             message.To.Add(MailboxAddress.Parse(reservation.Email));
-            message.Subject = "Your reservation is ready!";
+            message.Subject = "✨ Your reservation is ready!";
             message.Body = new BodyBuilder { HtmlBody = await BuildTemplate(reservation) }.ToMessageBody();
             return message;
         }

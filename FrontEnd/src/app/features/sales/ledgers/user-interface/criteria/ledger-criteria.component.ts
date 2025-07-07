@@ -43,19 +43,7 @@ export class LedgerCriteriaDialogComponent {
 
     //#endregion
 
-    constructor(
-        @Inject(MAT_DIALOG_DATA) public data: any,
-        private dateHelperService: DateHelperService,
-        private dexieService: DexieService,
-        private dialogRef: MatDialogRef<LedgerCriteriaDialogComponent>,
-        private formBuilder: FormBuilder,
-        private helperService: HelperService,
-        private interactionService: InteractionService,
-        private messageHintService: MessageInputHintService,
-        private messageLabelService: MessageLabelService,
-        private ngZone: NgZone,
-        private sessionStorageService: SessionStorageService,
-    ) { }
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dateHelperService: DateHelperService, private dexieService: DexieService, private dialogRef: MatDialogRef<LedgerCriteriaDialogComponent>, private formBuilder: FormBuilder, private helperService: HelperService, private interactionService: InteractionService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private ngZone: NgZone, private sessionStorageService: SessionStorageService,) { }
 
     //#region lifecycle hooks
 

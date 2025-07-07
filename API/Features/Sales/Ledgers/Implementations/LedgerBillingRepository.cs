@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using API.Features.Sales.Transactions;
 using AutoMapper;
 using System.Threading.Tasks;
+using API.Infrastructure.EmailServices;
 
 namespace API.Features.Sales.Ledgers {
 
@@ -27,8 +28,8 @@ namespace API.Features.Sales.Ledgers {
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<LedgerVM>> GetForLedger(string fromDate, string toDate, int customerId, int? shipOwnerId) {
-            var connectedCustomerId = GetConnectedCustomerIdForConnectedUser();
+        public async Task<IEnumerable<LedgerVM>> GetForLedger(bool ignoreConnectedUserIdentity, string fromDate, string toDate, int customerId, int? shipOwnerId) {
+            var connectedCustomerId = ignoreConnectedUserIdentity ? null : GetConnectedCustomerIdForConnectedUser();
             var records = await context.Transactions
                 .AsNoTracking()
                 .Include(x => x.Customer)
@@ -119,6 +120,14 @@ namespace API.Features.Sales.Ledgers {
                 .Where(x => x.CustomerId == customerId)
                 .ToListAsync();
             return mapper.Map<IEnumerable<TransactionsBase>, IEnumerable<LedgerVM>>(records);
+        }
+
+        public async Task<IEnumerable<EmailLedgerSaleQueue>> GetFromChildTable(string entityId) {
+            var x = await context.EmailLedgerSaleQueues
+                .AsNoTracking()
+                .Where(x => x.EntityId.ToString() == entityId)
+                .ToListAsync();
+            return x;
         }
 
         private static LedgerVM BuildTotalLine(decimal debit, decimal credit, decimal balance, string label) {

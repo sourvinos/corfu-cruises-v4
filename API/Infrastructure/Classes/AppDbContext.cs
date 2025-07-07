@@ -37,7 +37,8 @@ namespace API.Infrastructure.Classes {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        #region DbSets - Reservations
+        #region Reservations
+
         public DbSet<CoachRoute> CoachRoutes { get; set; }
         public DbSet<CrewSpecialty> CrewSpecialties { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -56,8 +57,11 @@ namespace API.Infrastructure.Classes {
         public DbSet<Ship> Ships { get; set; }
         public DbSet<ShipCrew> ShipCrews { get; set; }
         public DbSet<ShipOwner> ShipOwners { get; set; }
+
         #endregion
-        #region DbSets - Sales
+
+        #region Sales
+
         public DbSet<Bank> Banks { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
@@ -69,10 +73,15 @@ namespace API.Infrastructure.Classes {
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<TaxOffice> TaxOffices { get; set; }
         public DbSet<TransactionsBase> Transactions { get; set; }
+
         #endregion
-        #region DbSets - Common
+
+        #region Common
+
         public DbSet<Token> Tokens { get; set; }
         public DbSet<EmailQueue> EmailQueues { get; set; }
+        public DbSet<EmailLedgerSaleQueue> EmailLedgerSaleQueues { get; set; }
+
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {

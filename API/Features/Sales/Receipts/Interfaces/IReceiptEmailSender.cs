@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
+using API.Infrastructure.EmailServices;
 
 namespace API.Features.Sales.Receipts {
 
     public interface IReceiptEmailSender {
 
-        Task SendReceiptsToEmail(EmailReceiptVM model);
+        Task SendReceiptToEmail(EmailQueue emailQueue, string email);
 
     }
 

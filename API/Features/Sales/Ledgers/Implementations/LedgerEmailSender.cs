@@ -32,8 +32,6 @@ namespace API.Features.Sales.Ledgers {
             this.parametersRepo = parametersRepo;
         }
 
-        #region public methods
-
         public async Task SendLedgerToEmail(EmailLedgerVM model) {
             using var smtp = new SmtpClient();
             smtp.Connect(emailInvoiceSettings.SmtpClient, emailInvoiceSettings.Port);
@@ -49,16 +47,12 @@ namespace API.Features.Sales.Ledgers {
             return new FileStreamResult(memoryStream, "application/pdf");
         }
 
-        #endregion
-
-        #region private methods
-
         private async Task<MimeMessage> BuildLedgerMessage(EmailLedgerVM model) {
             var customer = GetCustomerAsync(model.CustomerId).Result;
             var message = new MimeMessage { Sender = MailboxAddress.Parse(emailInvoiceSettings.Username) };
             message.From.Add(new MailboxAddress(emailInvoiceSettings.From, emailInvoiceSettings.Username));
             message.To.Add(MailboxAddress.Parse(customer.Email));
-            message.Subject = "📧 Λογιστική καρτέλα και ανάλυση λογαριασμού";
+            message.Subject = "✨ Λογιστική καρτέλα και ανάλυση λογαριασμού";
             var builder = new BodyBuilder { HtmlBody = await BuildEmailLedgerTemplate(customer.Email) };
             foreach (var filename in model.Filenames) {
                 builder.Attachments.Add(Path.Combine("Reports" + Path.DirectorySeparatorChar + "Ledgers" + Path.DirectorySeparatorChar + filename));
@@ -98,8 +92,6 @@ namespace API.Features.Sales.Ledgers {
                 };
             }
         }
-
-        #endregion
 
     }
 

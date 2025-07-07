@@ -14,10 +14,11 @@ namespace API.Infrastructure.EmailServices {
 
         public EmailQueueRepository(AppDbContext appDbContext, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) { }
 
-        public async Task<EmailQueue> GetFirst() {
+        public async Task<EmailQueue> GetFirstNotCompleted() {
             var x = await context.EmailQueues
+                .Where(x => !x.IsCompleted)
                 .OrderBy(x => x.Priority).ThenBy(x => x.PostAt)
-                .FirstOrDefaultAsync(x => !x.IsCompleted);
+                .FirstOrDefaultAsync();
             return x;
         }
 

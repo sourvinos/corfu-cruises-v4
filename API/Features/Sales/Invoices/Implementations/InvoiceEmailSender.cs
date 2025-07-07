@@ -1,8 +1,6 @@
-using API.Features.Reservations.Customers;
 using API.Features.Reservations.Parameters;
+using API.Infrastructure.EmailServices;
 using API.Infrastructure.Helpers;
-using API.Infrastructure.Responses;
-using AutoMapper;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
@@ -18,67 +16,51 @@ namespace API.Features.Sales.Invoices {
         #region variables
 
         private readonly EmailInvoiceSettings emailInvoiceSettings;
-        private readonly ICustomerRepository customerRepo;
-        private readonly IMapper mapper;
         private readonly IReservationParametersRepository parametersRepo;
 
         #endregion
 
-        public InvoiceEmailSender(ICustomerRepository customerRepo, IOptions<EmailInvoiceSettings> emailInvoiceSettings, IMapper mapper, IReservationParametersRepository parametersRepo) {
-            this.customerRepo = customerRepo;
+        public InvoiceEmailSender(IOptions<EmailInvoiceSettings> emailInvoiceSettings, IReservationParametersRepository parametersRepo) {
             this.emailInvoiceSettings = emailInvoiceSettings.Value;
-            this.mapper = mapper;
             this.parametersRepo = parametersRepo;
         }
 
-        #region public methods
-
-        public async Task SendInvoicesToEmail(EmailInvoicesVM model) {
+        public async Task SendInvoiceToEmail(EmailQueue emailQueue, string email) {
             using var smtp = new SmtpClient();
             smtp.Connect(emailInvoiceSettings.SmtpClient, emailInvoiceSettings.Port);
             smtp.Authenticate(emailInvoiceSettings.Username, emailInvoiceSettings.Password);
-            await smtp.SendAsync(await BuildInvoiceMessage(model));
+            await smtp.SendAsync(await BuildInvoiceMessage(emailQueue, email));
             smtp.Disconnect(true);
         }
 
-        #endregion
-
-        #region private methods
-
-        private async Task<MimeMessage> BuildInvoiceMessage(EmailInvoicesVM model) {
-            var customer = GetCustomerAsync(model.CustomerId).Result;
+        private async Task<MimeMessage> BuildInvoiceMessage(EmailQueue emailQueue, string email) {
             var message = new MimeMessage { Sender = MailboxAddress.Parse(emailInvoiceSettings.Username) };
             message.From.Add(new MailboxAddress(emailInvoiceSettings.From, emailInvoiceSettings.Username));
-            message.To.AddRange(BuildReceivers(customer.Email));
-            message.Subject = "📩 Ηλεκτρονική αποστολή παραστατικών";
-            var builder = new BodyBuilder { HtmlBody = await BuildEmailInvoiceTemplate(customer.Email) };
-            foreach (var filename in model.Filenames) {
-                builder.Attachments.Add(Path.Combine("Reports" + Path.DirectorySeparatorChar + "Invoices" + Path.DirectorySeparatorChar + filename));
-            }
+            message.To.AddRange(BuildReceivers(email));
+            message.Subject = "✨ Αποστολή παραστατικών παροχής υπηρεσιών";
+            var builder = new BodyBuilder { HtmlBody = await BuildEmailInvoiceTemplate() };
+            builder.Attachments.Add(Path.Combine("Reports" + Path.DirectorySeparatorChar + "Invoices" + Path.DirectorySeparatorChar + emailQueue.EntityId.ToString() + ".pdf"));
             message.Body = builder.ToMessageBody();
             return message;
         }
 
         private static InternetAddressList BuildReceivers(string email) {
-            InternetAddressList x = new();
+            InternetAddressList internetAddressList = new();
             var emails = email.Split(",");
             foreach (string address in emails) {
-                x.Add(MailboxAddress.Parse(EmailHelpers.BeValidEmailAddress(address.Trim()) ? address.Trim() : "postmaster@appcorfucruises.com"));
+                internetAddressList.Add(MailboxAddress.Parse(EmailHelpers.BeValidEmailAddress(address.Trim()) ? address.Trim() : "postmaster@appcorfucruises.com"));
             }
-            return x;
+            return internetAddressList;
         }
 
-        private async Task<string> BuildEmailInvoiceTemplate(string email) {
+        private async Task<string> BuildEmailInvoiceTemplate() {
             RazorLightEngine engine = new RazorLightEngineBuilder()
                 .UseEmbeddedResourcesProject(Assembly.GetEntryAssembly())
                 .Build();
-            return await engine.CompileRenderStringAsync(
-                "key",
-                LoadEmailInvoiceTemplateFromFile(),
-                new EmailInvoiceTemplateVM {
-                    Email = email,
-                    CompanyPhones = parametersRepo.GetAsync().Result.Phones,
-                });
+            return await engine.CompileRenderStringAsync("key", LoadEmailInvoiceTemplateFromFile(), new EmailInvoiceTemplateVM {
+                Email = parametersRepo.GetAsync().Result.Email,
+                CompanyPhones = parametersRepo.GetAsync().Result.Phones,
+            });
         }
 
         private static string LoadEmailInvoiceTemplateFromFile() {
@@ -88,19 +70,6 @@ namespace API.Features.Sales.Invoices {
             str.Close();
             return template;
         }
-
-        private async Task<EmailInvoiceCustomerVM> GetCustomerAsync(int id) {
-            var x = await customerRepo.GetByIdAsync(id, false);
-            if (x != null) {
-                return mapper.Map<Customer, EmailInvoiceCustomerVM>(x);
-            } else {
-                throw new CustomException() {
-                    ResponseCode = 404
-                };
-            }
-        }
-
-        #endregion
 
     }
 
