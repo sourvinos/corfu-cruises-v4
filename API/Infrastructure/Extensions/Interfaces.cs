@@ -104,6 +104,7 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IInvoiceValidation, InvoiceValidation>();
             services.AddTransient<IInvoiceXmlRepository, InvoiceXmlRepository>();
             services.AddTransient<ILedgerEmailSender, LedgerEmailSender>();
+            services.AddTransient<ILedgerPdfBuilder, LedgerPdfBuilder>();
             services.AddTransient<ILedgerSalesRepository, LedgerSalesRepository>();
             services.AddTransient<IPaymentMethodRepository, PaymentMethodRepository>();
             services.AddTransient<IPaymentMethodValidation, PaymentMethodValidation>();
