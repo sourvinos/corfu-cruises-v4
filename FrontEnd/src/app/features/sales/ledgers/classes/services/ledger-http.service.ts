@@ -17,11 +17,11 @@ export class LedgerHttpService extends HttpDataService {
     }
 
     get(criteria: LedgerPdfCriteriaVM): Observable<LedgerVM[]> {
-        return this.http.request<LedgerVM[]>('post', this.url + '/buildLedger', { body: criteria })
+        return this.http.request<LedgerVM[]>('post', this.url + '/getLedger', { body: criteria })
     }
 
     buildPdf(criteria: LedgerPdfCriteriaVM): Observable<any> {
-        return this.http.request<LedgerVM[]>('post', this.url + '/buildLedgerPdf', { body: criteria })
+        return this.http.request<LedgerVM[]>('post', this.url + '/buildPdf', { body: criteria })
     }
 
     emailLedger(criteria: EmailLedgerVM): Observable<any> {

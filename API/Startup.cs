@@ -100,10 +100,6 @@ namespace API {
             services.Configure<TokenSettings>(options => Configuration.GetSection("TokenSettings").Bind(options));
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
             services.AddHostedService<EmailQueueService>();
-            // services.AddHostedService<ReceiptEmailScheduleService>();
-            // services.AddHostedService<SendWelcomeEmailScheduleService>();
-            // services.AddHostedService<SendResetPasswordEmailScheduleService>();
-            // services.AddHostedService<CheckInEmailScheduleService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

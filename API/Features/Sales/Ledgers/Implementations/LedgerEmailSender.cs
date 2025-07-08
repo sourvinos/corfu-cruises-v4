@@ -4,7 +4,6 @@ using API.Infrastructure.Helpers;
 using API.Infrastructure.Responses;
 using AutoMapper;
 using MailKit.Net.Smtp;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using RazorLight;
@@ -38,13 +37,6 @@ namespace API.Features.Sales.Ledgers {
             smtp.Authenticate(emailInvoiceSettings.Username, emailInvoiceSettings.Password);
             await smtp.SendAsync(await BuildLedgerMessage(model));
             smtp.Disconnect(true);
-        }
-
-        public FileStreamResult OpenPdf(string filename) {
-            var fullpathname = Path.Combine("Reports" + Path.DirectorySeparatorChar + "Ledgers" + Path.DirectorySeparatorChar + filename);
-            byte[] byteArray = File.ReadAllBytes(fullpathname);
-            MemoryStream memoryStream = new(byteArray);
-            return new FileStreamResult(memoryStream, "application/pdf");
         }
 
         private async Task<MimeMessage> BuildLedgerMessage(EmailLedgerVM model) {

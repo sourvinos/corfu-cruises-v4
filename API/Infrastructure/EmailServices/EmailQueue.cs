@@ -10,7 +10,6 @@ namespace API.Infrastructure.EmailServices {
         public byte Priority { get; set; }
         public bool IsCompleted { get; set; }
         public string PostAt { get; set; }
-        // public EmailLedgerSaleQueue EmailLedgerSaleQueue { get; set; }
 
     }
 

@@ -279,7 +279,6 @@ namespace API.Features.Reservations.Reservations {
         [Authorize(Roles = "admin")]
         [ServiceFilter(typeof(ModelValidationAttribute))]
         public ResponseWithBody Post([FromBody] IEnumerable<CloneReservationVM> reservations) {
-            // var z = reservationUpdateRepo.AttachMetadataToPostDto(mapper.Map<CloneReservationVM, Reservation>(reservation));
             var x = reservationCloneRepo.Clone(reservations);
             return new ResponseWithBody {
                 Code = 200,
