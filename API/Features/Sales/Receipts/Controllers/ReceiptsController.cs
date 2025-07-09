@@ -134,66 +134,6 @@ namespace API.Features.Sales.Receipts {
             };
         }
 
-        [HttpPatch("[action]")]
-        [Authorize(Roles = "admin")]
-        public async Task<Response> PatchInvoicesWithEmailPending([FromBody] string[] invoiceIds) {
-            foreach (var invoiceId in invoiceIds) {
-                var x = await receiptRepo.GetByIdForPatchEmailSent(invoiceId);
-                if (x != null) {
-                    receiptRepo.UpdateIsEmailPending(x, invoiceId);
-                } else {
-                    throw new CustomException() {
-                        ResponseCode = 404
-                    };
-                }
-            }
-            return new Response {
-                Code = 200,
-                Icon = Icons.Info.ToString(),
-                Message = ApiMessages.OK()
-            };
-        }
-
-        [HttpPatch("[action]")]
-        [Authorize(Roles = "admin")]
-        public async Task<Response> PatchReceiptsWithEmailPending([FromBody] string[] invoiceIds) {
-            foreach (var invoiceId in invoiceIds) {
-                var x = await receiptRepo.GetByIdForPatchEmailSent(invoiceId);
-                if (x != null) {
-                    receiptRepo.UpdateIsEmailPending(x, invoiceId);
-                } else {
-                    throw new CustomException() {
-                        ResponseCode = 404
-                    };
-                }
-            }
-            return new Response {
-                Code = 200,
-                Icon = Icons.Info.ToString(),
-                Message = ApiMessages.OK()
-            };
-        }
-
-        [HttpPatch("[action]")]
-        [Authorize(Roles = "admin")]
-        public async Task<Response> PatchReceiptsWithEmailSent([FromBody] string[] invoiceIds) {
-            foreach (var invoiceId in invoiceIds) {
-                var x = await receiptRepo.GetByIdForPatchEmailSent(invoiceId);
-                if (x != null) {
-                    receiptRepo.UpdateIsEmailSent(x, invoiceId);
-                } else {
-                    throw new CustomException() {
-                        ResponseCode = 404
-                    };
-                }
-            }
-            return new Response {
-                Code = 200,
-                Icon = Icons.Info.ToString(),
-                Message = ApiMessages.OK()
-            };
-        }
-
         [HttpPatch("isCancelled/{invoiceId}")]
         [Authorize(Roles = "admin")]
         public async Task<Response> PatchIsCancelled(string invoiceId) {

@@ -50,24 +50,6 @@ namespace API.Features.Sales.Invoices {
             return mapper.Map<IEnumerable<Invoice>, IEnumerable<InvoiceListVM>>(invoices);
         }
 
-        public InvoicePdfVM GetFirstWithEmailPending() {
-            var invoice = context.Invoices
-                .AsNoTracking()
-                .Include(x => x.Customer).ThenInclude(x => x.TaxOffice)
-                .Include(x => x.Customer).ThenInclude(x => x.Nationality)
-                .Include(x => x.Destination)
-                .Include(x => x.Ship).ThenInclude(x => x.ShipOwner).ThenInclude(x => x.TaxOffice)
-                .Include(x => x.Ship).ThenInclude(x => x.ShipOwner).ThenInclude(x => x.Nationality)
-                .Include(x => x.Ship).ThenInclude(x => x.ShipOwner).ThenInclude(x => x.BankAccounts.Where(x => x.IsActive)).ThenInclude(x => x.Bank)
-                .Include(x => x.DocumentType)
-                .Include(x => x.PaymentMethod)
-                .Include(x => x.Aade)
-                .Include(x => x.InvoicesPorts).ThenInclude(x => x.Port)
-                .Where(x => x.IsEmailPending)
-                .FirstOrDefault();
-            return mapper.Map<Invoice, InvoicePdfVM>(invoice);
-        }
-
         public async Task<Invoice> GetByIdAsync(string invoiceId, bool includeTables) {
             return includeTables
                 ? await context.Invoices

@@ -144,42 +144,6 @@ namespace API.Infrastructure.Users {
 
         }
 
-        [HttpPatch("[action]")]
-        [Authorize(Roles = "user, admin")]
-        public async Task<Response> PatchUserWithNewEmailPending([FromQuery] string id) {
-            var x = await userRepo.GetByIdAsync(id);
-            if (x != null) {
-                await userRepo.UpdateIsNewEmailPendingAsync(x);
-            } else {
-                throw new CustomException() {
-                    ResponseCode = 404
-                };
-            }
-            return new Response {
-                Code = 200,
-                Icon = Icons.Info.ToString(),
-                Message = ApiMessages.OK()
-            };
-        }
-
-        [HttpPatch("[action]/{userId}")]
-        [Authorize(Roles = "user, admin")]
-        public async Task<Response> PatchUserWithResetPasswordEmailPending(string userId) {
-            var x = await userRepo.GetByIdAsync(userId);
-            if (x != null) {
-                await userRepo.UpdateIsResetPasswordEmailPendingAsync(x);
-            } else {
-                throw new CustomException() {
-                    ResponseCode = 404
-                };
-            }
-            return new Response {
-                Code = 200,
-                Icon = Icons.Info.ToString(),
-                Message = ApiMessages.OK()
-            };
-        }
-
     }
 
 }

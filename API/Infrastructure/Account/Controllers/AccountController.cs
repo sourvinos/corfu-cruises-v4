@@ -80,24 +80,6 @@ namespace API.Infrastructure.Account {
             }
         }
 
-        [AllowAnonymous]
-        [HttpPatch("[action]")]
-        public async Task<Response> PatchUserWithResetEmailPending([FromBody] ForgotPasswordRequestVM form) {
-            var x = await userManager.FindByEmailAsync(form.Email);
-            if (x != null) {
-                await userRepo.UpdateIsResetPasswordEmailPendingAsync(x);
-            } else {
-                throw new CustomException() {
-                    ResponseCode = 404
-                };
-            }
-            return new Response {
-                Code = 200,
-                Icon = Icons.Info.ToString(),
-                Message = ApiMessages.OK()
-            };
-        }
-
         [HttpGet("[action]")]
         [Authorize]
         public string GetConnectedUserId() {

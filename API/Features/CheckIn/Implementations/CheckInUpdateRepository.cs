@@ -32,15 +32,12 @@ namespace API.Features.CheckIn {
         public void UpdateEmail(Reservation reservation, string email) {
             using var transaction = context.Database.BeginTransaction();
             reservation.Email = email;
-            reservation.IsEmailPending = true;
-            reservation.IsEmailSent = false;
             context.Reservations.Attach(reservation);
             context.Entry(reservation).Property(x => x.Email).IsModified = true;
-            context.Entry(reservation).Property(x => x.IsEmailPending).IsModified = true;
-            context.Entry(reservation).Property(x => x.IsEmailSent).IsModified = true;
             context.SaveChanges();
             DisposeOrCommit(transaction);
         }
+
 
         private void AddPassengers(List<Passenger> passengers) {
             if (passengers.Any(x => x.Id == 0)) {

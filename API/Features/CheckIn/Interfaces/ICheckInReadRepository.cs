@@ -8,9 +8,6 @@ namespace API.Features.CheckIn {
         Task<Reservation> GetByRefNo(string refNo);
         Task<Reservation> GetByDate(string date, int destinationId, string lastname, string firstname);
         Task<Reservation> GetByIdAsync(string reservationId, bool includeTables);
-        Reservation GetFirstWithEmailPending();
-        Task<Reservation> GetByIdForPatchEmailSent(string reservationId);
-        Task SendReservationToEmail(BoardingPassReservationVM reservation);
 
     }
 

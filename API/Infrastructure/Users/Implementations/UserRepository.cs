@@ -98,34 +98,6 @@ namespace API.Infrastructure.Users {
             return new string(chars);
         }
 
-        public async Task<bool> UpdateIsNewEmailPendingAsync(UserExtended user) {
-            user.IsNewEmailPending = true;
-            user.IsNewEmailSent = false;
-            var result = await userManager.UpdateAsync(user);
-            return result.Succeeded;
-        }
-
-        public async Task<bool> UpdateIsNewEmailSentAsync(UserExtended user) {
-            user.IsNewEmailPending = false;
-            user.IsNewEmailSent = true;
-            var result = await userManager.UpdateAsync(user);
-            return result.Succeeded;
-        }
-
-        public async Task<bool> UpdateIsResetPasswordEmailPendingAsync(UserExtended user) {
-            user.IsResetPasswordEmailPending = true;
-            user.IsResetPasswordEmailSent = false;
-            var result = await userManager.UpdateAsync(user);
-            return result.Succeeded;
-        }
-
-        public async Task<bool> UpdateIsResetPasswordEmailSentAsync(UserExtended user) {
-            user.IsResetPasswordEmailPending = false;
-            user.IsResetPasswordEmailSent = true;
-            var result = await userManager.UpdateAsync(user);
-            return result.Succeeded;
-        }
-
         private async Task<bool> UpdateUser(UserExtended entity, UserUpdateDto entityToUpdate, string role) {
             entity.Displayname = entityToUpdate.Displayname;
             entity.IsFirstFieldFocused = entityToUpdate.IsFirstFieldFocused;

@@ -53,26 +53,6 @@ namespace API.Features.Sales.Invoices {
             return invoice.ShipOwnerId = ship.ShipOwnerId;
         }
 
-        public void UpdateIsEmailSent(Invoice invoice, string invoiceId) {
-            using var transaction = context.Database.BeginTransaction();
-            invoice.IsEmailSent = true;
-            context.Invoices.Attach(invoice);
-            context.Entry(invoice).Property(x => x.IsEmailSent).IsModified = true;
-            context.SaveChanges();
-            DisposeOrCommit(transaction);
-        }
-
-        public void UpdateIsEmailPending(Invoice invoice, string invoiceId) {
-            using var transaction = context.Database.BeginTransaction();
-            invoice.IsEmailPending = true;
-            invoice.IsEmailSent = false;
-            context.Invoices.Attach(invoice);
-            context.Entry(invoice).Property(x => x.IsEmailPending).IsModified = true;
-            context.Entry(invoice).Property(x => x.IsEmailSent).IsModified = true;
-            context.SaveChanges();
-            DisposeOrCommit(transaction);
-        }
-
         public void UpdateIsCancelled(Invoice invoice, string invoiceId) {
             using var transaction = context.Database.BeginTransaction();
             invoice.IsCancelled = true;

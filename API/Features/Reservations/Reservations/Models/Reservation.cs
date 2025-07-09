@@ -32,8 +32,6 @@ namespace API.Features.Reservations.Reservations {
         public int TotalPax { get; set; }
         public string Email { get; set; }
         public string Phones { get; set; }
-        public bool IsEmailPending { get; set; }
-        public bool IsEmailSent { get; set; }
         public string Remarks { get; set; }
         public List<Passenger> Passengers { get; set; }
         // Metadata

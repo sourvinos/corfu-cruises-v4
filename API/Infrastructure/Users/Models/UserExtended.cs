@@ -12,10 +12,6 @@ namespace API.Infrastructure.Users {
         public string Displayname { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsFirstFieldFocused { get; set; }
-        public bool IsNewEmailPending { get; set; }
-        public bool IsNewEmailSent { get; set; }
-        public bool IsResetPasswordEmailPending { get; set; }
-        public bool IsResetPasswordEmailSent { get; set; }
         public bool IsActive { get; set; }
         // Metadata
         public string PostAt { get; set; }

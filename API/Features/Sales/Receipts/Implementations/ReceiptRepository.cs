@@ -67,21 +67,6 @@ namespace API.Features.Sales.Receipts {
                     .SingleOrDefaultAsync();
         }
 
-        public ReceiptPdfVM GetFirstWithEmailPending() {
-            var receipt = context.Receipts
-                .AsNoTracking()
-                .Include(x => x.Customer).ThenInclude(x => x.TaxOffice)
-                .Include(x => x.Customer).ThenInclude(x => x.Nationality)
-                .Include(x => x.ShipOwner).ThenInclude(x => x.TaxOffice)
-                .Include(x => x.ShipOwner).ThenInclude(x => x.Nationality)
-                .Include(x => x.ShipOwner).ThenInclude(x => x.BankAccounts.Where(x => x.IsActive)).ThenInclude(x => x.Bank)
-                .Include(x => x.DocumentType)
-                .Include(x => x.PaymentMethod)
-                .Where(x => x.IsEmailPending)
-                .FirstOrDefault();
-            return mapper.Map<Receipt, ReceiptPdfVM>(receipt);
-        }
-
         public async Task<Receipt> GetByIdForPdfAsync(string invoiceId) {
             return await context.Receipts
                 .AsNoTracking()
@@ -94,26 +79,6 @@ namespace API.Features.Sales.Receipts {
                 .Include(x => x.PaymentMethod)
                 .Where(x => x.InvoiceId.ToString() == invoiceId)
                 .SingleOrDefaultAsync();
-        }
-
-        public void UpdateIsEmailPending(Receipt receipt, string invoiceId) {
-            using var transaction = context.Database.BeginTransaction();
-            receipt.IsEmailPending = true;
-            receipt.IsEmailSent = false;
-            context.Receipts.Attach(receipt);
-            context.Entry(receipt).Property(x => x.IsEmailPending).IsModified = true;
-            context.Entry(receipt).Property(x => x.IsEmailSent).IsModified = true;
-            context.SaveChanges();
-            DisposeOrCommit(transaction);
-        }
-
-        public void UpdateIsEmailSent(Receipt invoice, string invoiceId) {
-            using var transaction = context.Database.BeginTransaction();
-            invoice.IsEmailSent = true;
-            context.Receipts.Attach(invoice);
-            context.Entry(invoice).Property(x => x.IsEmailSent).IsModified = true;
-            context.SaveChanges();
-            DisposeOrCommit(transaction);
         }
 
         public void UpdateIsCancelled(Receipt invoice, string invoiceId) {

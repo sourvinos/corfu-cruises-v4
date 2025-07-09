@@ -119,7 +119,7 @@ namespace API.Infrastructure.EmailServices {
         }
 
         private async Task SendInvoiceAsync(EmailQueue emailQueue) {
-            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 5) {
+            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
                 var x = await invoiceReadRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
                 if (x != null) {
                     invoicePdfRepo.BuildPdf(mapper.Map<Invoice, InvoicePdfVM>(x));
@@ -137,7 +137,7 @@ namespace API.Infrastructure.EmailServices {
         }
 
         private async Task SendReceiptAsync(EmailQueue emailQueue) {
-            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 5) {
+            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
                 var x = await receiptRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
                 if (x != null) {
                     receiptPdfRepo.BuildPdf(mapper.Map<Receipt, ReceiptPdfVM>(x));
@@ -155,7 +155,7 @@ namespace API.Infrastructure.EmailServices {
         }
 
         private async Task SendSaleLedgerAsync(EmailQueue emailQueue) {
-            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 5) {
+            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
                 var response = ledgerEmailSender.SendLedgerToEmail(await ledgerPdfBuilder.CreatePdfLedger(emailQueue));
                 if (response.Exception == null) {
                     emailQueue.IsCompleted = true;

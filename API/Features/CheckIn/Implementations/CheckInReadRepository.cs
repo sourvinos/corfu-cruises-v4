@@ -72,24 +72,6 @@ namespace API.Features.CheckIn {
                 .SingleOrDefaultAsync();
         }
 
-        public Reservation GetFirstWithEmailPending() {
-            var x = context.Reservations
-                .AsNoTracking()
-                .Include(x => x.Customer)
-                .Include(x => x.Destination)
-                .Include(x => x.Passengers).ThenInclude(x => x.Gender)
-                .Include(x => x.Passengers).ThenInclude(x => x.Nationality)
-                .Include(x => x.Passengers).ThenInclude(x => x.Occupant)
-                .Include(x => x.PickupPoint)
-                .Where(x => x.IsEmailPending)
-                .FirstOrDefault();
-            return x;
-        }
-
-        public Task SendReservationToEmail(BoardingPassReservationVM reservation) {
-            throw new NotImplementedException();
-        }
-
     }
 
 }
