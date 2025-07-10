@@ -96,7 +96,7 @@
             },
             {
                 "id": "emailSent",
-                "message": "We have just scheduled to send you an email five (5) minutes from now."
+                "message": "Within the next five (5) minutes you will receive an email with instructions."
             },
             {
                 "id": "emailNotSent",

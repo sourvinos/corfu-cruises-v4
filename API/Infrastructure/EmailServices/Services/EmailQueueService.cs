@@ -46,7 +46,7 @@ namespace API.Infrastructure.EmailServices {
 
         #endregion
 
-        public EmailQueueService(ILedgerPdfBuilder ledgerPdfBuilder, AppDbContext dbContext, ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailQueueRepository queueRepo, IEmailUserDetailsSender emailUserDetailsSender, IInvoiceEmailSender emailInvoiceSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, ILedgerEmailSender emailSender, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptEmailSender emailReceiptSender, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
+        public EmailQueueService(AppDbContext dbContext, ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailQueueRepository queueRepo, IEmailUserDetailsSender emailUserDetailsSender, IInvoiceEmailSender emailInvoiceSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, ILedgerEmailSender emailSender, ILedgerPdfBuilder ledgerPdfBuilder, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptEmailSender emailReceiptSender, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
             this.appDbContext = dbContext;
             this.checkInSendToEmail = checkInSendToEmail;
             this.emailAccountSender = emailAccountSender;
@@ -68,7 +68,7 @@ namespace API.Infrastructure.EmailServices {
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
-                await Task.Delay(TimeSpan.FromSeconds(value: 60), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.EmailSecondsDelay), stoppingToken);
                 var x = await emailQueueRepo.GetFirstNotCompleted();
                 if (x != null) {
                     if (x.Initiator == "ResetPassword") { SendResetPassword(x); }

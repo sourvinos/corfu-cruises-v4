@@ -16,6 +16,10 @@ export class UserService extends HttpDataService {
 
     //#region public methods
 
+    public getUserFromEmail(email: string): Observable<any> {
+        return this.http.get<any>(this.url + '/getByEmail/' + email)
+    }
+
     public updatePassword(formData: ChangePasswordViewModel): Observable<any> {
         return this.http.post<any>(this.url + '/changePassword/', formData)
     }

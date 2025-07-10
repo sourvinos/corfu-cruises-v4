@@ -40,12 +40,6 @@ namespace API.Features.Sales.DocumentTypes {
 
         [HttpGet("[action]")]
         [Authorize(Roles = "user, admin")]
-        public async Task<IEnumerable<DocumentTypeBrowserVM>> GetForBrowserRetailAsync() {
-            return await documentTypeRepo.GetForBrowserAsync(3);
-        }
-
-        [HttpGet("[action]")]
-        [Authorize(Roles = "user, admin")]
         public async Task<IEnumerable<DocumentTypeBrowserVM>> GetForBrowserReceiptAsync() {
             return await documentTypeRepo.GetForBrowserAsync(2);
         }

@@ -50,6 +50,11 @@ namespace API.Infrastructure.Users {
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<UserExtended> GetByEmailAsync(string email) {
+            return await userManager.Users
+                .SingleOrDefaultAsync(x => x.Email == email);
+        }
+
         public async Task CreateAsync(UserExtended entity, string password) {
             using var transaction = context.Database.BeginTransaction();
             var result = await userManager.CreateAsync(entity, password);

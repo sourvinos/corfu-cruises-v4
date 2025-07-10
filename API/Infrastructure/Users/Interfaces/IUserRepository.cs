@@ -8,6 +8,7 @@ namespace API.Infrastructure.Users {
 
         Task<IEnumerable<UserListVM>> GetAsync();
         Task<UserExtended> GetByIdAsync(string id);
+        Task<UserExtended> GetByEmailAsync(string email);
         Task CreateAsync(UserExtended entity, string password);
         Task<bool> UpdateAdminAsync(UserExtended entity, UserUpdateDto userToUpdate);
         Task<bool> UpdateSimpleUserAsync(UserExtended entity, UserUpdateDto userToUpdate);

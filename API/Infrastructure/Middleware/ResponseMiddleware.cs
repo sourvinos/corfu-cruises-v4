@@ -23,7 +23,7 @@ namespace API.Infrastructure.Middleware {
         }
 
         public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next) {
-            try {
+            try {                                                                                                                                                                               
                 await next(httpContext);
             }
             catch (CustomException exception) {

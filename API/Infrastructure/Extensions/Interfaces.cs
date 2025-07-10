@@ -123,10 +123,10 @@ namespace API.Infrastructure.Extensions {
             #endregion
             #region shared
             services.AddScoped<Token>();
+            services.AddTransient<ICheckInSendToEmail, CheckInSendToEmail>();
             services.AddTransient<IEmailAccountSender, EmailAccountSender>();
             services.AddTransient<IEmailQueueRepository, EmailQueueRepository>();
             services.AddTransient<IEmailUserDetailsSender, EmailUserDetailsSender>();
-            services.AddTransient<ICheckInSendToEmail, CheckInSendToEmail>();
             #endregion
             #region checkIn
             services.AddTransient<ICheckInReadRepository, CheckInReadRepository>();

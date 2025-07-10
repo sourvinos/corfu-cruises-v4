@@ -61,6 +61,18 @@ namespace API.Infrastructure.Users {
             }
         }
 
+        [HttpGet("getByEmail/{email}")]
+        [AllowAnonymous]
+        public async Task<ResponseWithBody> GetByEmailAsync(string email) {
+            var x = await userRepo.GetByEmailAsync(email);
+            return new ResponseWithBody {
+                Code = 200,
+                Icon = Icons.Info.ToString(),
+                Message = ApiMessages.OK(),
+                Body = x != null ? x.Id : ""
+            };
+        }
+
         [HttpPost]
         [Authorize(Roles = "admin")]
         [ServiceFilter(typeof(ModelValidationAttribute))]
