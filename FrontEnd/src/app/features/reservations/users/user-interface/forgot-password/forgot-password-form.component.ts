@@ -33,7 +33,7 @@ export class ForgotPasswordFormComponent {
 
     //#endregion
 
-    constructor(private emojiService: EmojiService, private formBuilder: FormBuilder, private helperService: HelperService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private emailQueueHttpService: EmailQueueHttpService, private userService: UserService) { }
+    constructor(private emailQueueHttpService: EmailQueueHttpService, private emojiService: EmojiService, private formBuilder: FormBuilder, private helperService: HelperService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private userService: UserService) { }
 
     //#region lifecycle hooks
 

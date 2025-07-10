@@ -8,6 +8,8 @@ import { map, startWith } from 'rxjs/operators'
 import { CryptoService } from 'src/app/shared/services/crypto.service'
 import { DexieService } from 'src/app/shared/services/dexie.service'
 import { DialogService } from 'src/app/shared/services/modal-dialog.service'
+import { EmailQueueDto } from 'src/app/shared/classes/email-queue-dto'
+import { EmailQueueHttpService } from 'src/app/shared/services/email-queue-http.service'
 import { EmojiService } from 'src/app/shared/services/emoji.service'
 import { FormResolved } from 'src/app/shared/classes/form-resolved'
 import { HelperService } from 'src/app/shared/services/helper.service'
@@ -30,7 +32,7 @@ import { ValidationService } from '../../../../../shared/services/validation.ser
 
 export class EditUserFormComponent {
 
-    //#region common #7
+    //#region common 
 
     private record: UserReadDto
     public feature = 'editUserForm'
@@ -42,21 +44,21 @@ export class EditUserFormComponent {
 
     //#endregion
 
-    //#region specific #2
+    //#region specific
 
     private mirrorRecord: UserReadDto
     private mustGoBackAfterSave = true
 
     //#endregion
 
-    //#region autocompletes #2
+    //#region autocompletes
 
     public isAutoCompleteDisabled = true
     public dropdownCustomers: Observable<SimpleEntity[]>
 
     //#endregion
 
-    constructor(private activatedRoute: ActivatedRoute, private cryptoService: CryptoService, private dexieService: DexieService, private dialogService: DialogService, private emojiService: EmojiService, private formBuilder: FormBuilder, private helperService: HelperService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private router: Router, private sessionStorageService: SessionStorageService, private userService: UserService) { }
+    constructor(private activatedRoute: ActivatedRoute, private cryptoService: CryptoService, private dexieService: DexieService, private dialogService: DialogService, private emailQueueHttpService: EmailQueueHttpService, private emojiService: EmojiService, private formBuilder: FormBuilder, private helperService: HelperService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private router: Router, private sessionStorageService: SessionStorageService, private userService: UserService) { }
 
     //#region lifecycle hooks
 
@@ -130,19 +132,17 @@ export class EditUserFormComponent {
     }
 
     public onEmailUserDetais(): void {
-        if (this.helperService.deepEqual(this.form.value, this.mirrorRecord)) {
-            this.userService.patchUserWithNewEmailPending(this.form.value.id).subscribe({
-                complete: () => {
+        this.userService.getUserFromEmail(this.form.value.email).subscribe({
+            next: (x) => {
+                if (x.body != '') {
+                    this.emailQueueHttpService.save(this.createEmailQueueObject(x)).subscribe(() => {
+                        this.helperService.doPostSaveFormTasks(this.messageDialogService.emailSent(), 'ok', this.parentUrl, true)
+                    })
+                } else {
                     this.helperService.doPostSaveFormTasks(this.messageDialogService.emailSent(), 'ok', this.parentUrl, true)
-                },
-                error: () => {
-                    this.helperService.doPostSaveFormTasks(this.messageDialogService.emailNotSent(), 'error', this.parentUrl, true)
                 }
-            })
-        } else {
-            this.mustGoBackAfterSave = false
-            this.dialogService.open(this.messageDialogService.formIsDirty(), 'error', ['ok'])
-        }
+            }
+        })
     }
 
     public openOrCloseAutoComplete(trigger: MatAutocompleteTrigger, element: any): void {
@@ -152,6 +152,15 @@ export class EditUserFormComponent {
     //#endregion
 
     //#region private methods
+
+    private createEmailQueueObject(z: { body: any }): EmailQueueDto {
+        return {
+            initiator: 'UserDetails',
+            entityId: z.body,
+            priority: 2,
+            isCompleted: false
+        }
+    }
 
     private editUserFromList(): void {
         this.parentUrl = '/users'
