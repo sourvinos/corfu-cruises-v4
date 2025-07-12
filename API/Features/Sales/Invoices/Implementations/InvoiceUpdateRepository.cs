@@ -54,8 +54,8 @@ namespace API.Features.Sales.Invoices {
         }
 
         public void UpdateEmailStatus(Invoice invoice, string invoiceId, bool isEmailPending, bool isEmailSent) {
-            invoice.IsEmailPending = false;
-            invoice.IsEmailSent = true;
+            invoice.IsEmailPending = isEmailPending;
+            invoice.IsEmailSent = isEmailSent;
             context.Entry(invoice).Property(x => x.IsEmailPending).IsModified = true;
             context.Entry(invoice).Property(x => x.IsEmailSent).IsModified = true;
             context.SaveChanges();

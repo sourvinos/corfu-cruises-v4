@@ -80,6 +80,14 @@ namespace API.Features.Sales.Receipts {
                 .SingleOrDefaultAsync();
         }
 
+        public void UpdateEmailStatus(Receipt receipt, string receiptId, bool isEmailPending, bool isEmailSent) {
+            receipt.IsEmailPending = isEmailPending;
+            receipt.IsEmailSent = isEmailSent;
+            context.Entry(receipt).Property(x => x.IsEmailPending).IsModified = true;
+            context.Entry(receipt).Property(x => x.IsEmailSent).IsModified = true;
+            context.SaveChanges();
+        }
+
         public void UpdateIsCancelled(Receipt invoice, string invoiceId) {
             using var transaction = context.Database.BeginTransaction();
             invoice.IsCancelled = true;

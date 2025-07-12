@@ -10,6 +10,8 @@ namespace API.Features.Sales.Receipts {
         Task<IEnumerable<ReceiptListVM>> GetForPeriodAsync(ReceiptListCriteriaVM criteria);
         Task<Receipt> GetByIdAsync(string transactionId, bool includeTables);
         Task<Receipt> GetByIdForPdfAsync(string receiptId);
+        Task<Receipt> GetByIdForPatchEmailSent(string receiptId);
+        void UpdateEmailStatus(Receipt receipt, string receiptId, bool isEmailPending, bool isEmailSent);
         Task<int> IncreaseReceiptNoAsync(ReceiptWriteDto receipt);
         void UpdateIsCancelled(Receipt receipt, string receiptId);
 

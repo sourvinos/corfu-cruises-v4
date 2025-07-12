@@ -198,6 +198,7 @@ namespace API.Features.Sales.Invoices {
                 Message = ApiMessages.OK()
             };
         }
+
         [HttpPatch("isCancelled/{invoiceId}")]
         [Authorize(Roles = "admin")]
         public async Task<Response> PatchIsCancelled(string invoiceId) {

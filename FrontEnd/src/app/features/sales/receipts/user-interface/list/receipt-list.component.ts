@@ -8,6 +8,8 @@ import { formatNumber } from '@angular/common'
 import { CriteriaDateRangeDialogComponent } from 'src/app/shared/components/criteria-date-range-dialog/criteria-date-range-dialog.component'
 import { DateHelperService } from '../../../../../shared/services/date-helper.service'
 import { DialogService } from 'src/app/shared/services/modal-dialog.service'
+import { EmailQueueDto } from 'src/app/shared/classes/email-queue-dto'
+import { EmailQueueHttpService } from 'src/app/shared/services/email-queue-http.service'
 import { EmojiService } from '../../../../../shared/services/emoji.service'
 import { HelperService } from '../../../../../shared/services/helper.service'
 import { InteractionService } from '../../../../../shared/services/interaction.service'
@@ -63,7 +65,7 @@ export class ReceiptListComponent {
 
     //#endregion
 
-    constructor(private dateHelperService: DateHelperService, private dialogService: DialogService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private localStorageService: LocalStorageService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private receiptHttpService: ReceiptHttpService, private receiptListExportService: ReceiptListExportService, private router: Router, private sessionStorageService: SessionStorageService, public dialog: MatDialog) { }
+    constructor(private dateHelperService: DateHelperService, private dialogService: DialogService, private emailQueueHttpService: EmailQueueHttpService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private localStorageService: LocalStorageService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private receiptHttpService: ReceiptHttpService, private receiptListExportService: ReceiptListExportService, private router: Router, private sessionStorageService: SessionStorageService, public dialog: MatDialog) { }
 
     //#region lifecycle hooks
 
@@ -113,6 +115,13 @@ export class ReceiptListComponent {
                     this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
                 }
             })
+        }
+    }
+
+    public doSelectedRecordsTasks(): void {
+        if (this.isAnyRowSelected()) {
+            this.addSelectedRecordsToEmailQueue()
+            this.patchSelectedRecordsWithEmailPending()
         }
     }
 
@@ -220,21 +229,15 @@ export class ReceiptListComponent {
     //#region private methods
 
     public addSelectedRecordsToEmailQueue(): void {
-        if (this.isAnyRowSelected()) {
-            const ids = []
-            this.selectedRecords.forEach(record => {
-                ids.push(record.invoiceId)
+        const ids = []
+        this.selectedRecords.forEach(record => {
+            ids.push(record.invoiceId)
+        })
+        ids.forEach(id => {
+            this.emailQueueHttpService.save(this.createEmailQueueObject(id)).subscribe(() => {
+                console.log(id + ' sent')
             })
-            this.receiptHttpService.patchReceiptsWithEmailPending(ids).subscribe({
-                next: () => {
-                    this.onRefreshList()
-                    this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, false)
-                },
-                error: (errorFromInterceptor) => {
-                    this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
-                }
-            })
-        }
+        })
     }
 
     private addSelectedRecordToSelectedRecords(record: ReceiptListVM): void {
@@ -270,6 +273,15 @@ export class ReceiptListComponent {
                 isActive: true
             }
         })
+    }
+
+    private createEmailQueueObject(id: string): EmailQueueDto {
+        return {
+            initiator: 'Receipts',
+            entityId: id,
+            priority: 3,
+            isCompleted: false
+        }
     }
 
     private deleteStoredFilters(): void {
@@ -337,8 +349,7 @@ export class ReceiptListComponent {
             {
                 label: 'Αποστολή με email', command: (): void => {
                     this.addSelectedRecordToSelectedRecords(this.selectedRecord)
-                    this.addSelectedRecordsToEmailQueue()
-                    // this.processSelectedRecords()
+                    this.doSelectedRecordsTasks()
                 }
             }
         ]
@@ -367,6 +378,22 @@ export class ReceiptListComponent {
 
     private navigateToRecord(id: any): void {
         this.router.navigate([this.url, id])
+    }
+
+    private patchSelectedRecordsWithEmailPending(): void {
+        const ids = []
+        this.selectedRecords.forEach(record => {
+            ids.push(record.invoiceId)
+        })
+        this.receiptHttpService.patchInvoiceEmails(ids).subscribe({
+            next: () => {
+                this.onRefreshList()
+                this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, false)
+            },
+            error: (errorFromInterceptor) => {
+                this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
+            }
+        })
     }
 
     private populateDropdownFilters(): void {

@@ -66,22 +66,7 @@ export class InvoiceListComponent {
 
     //#endregion
 
-    constructor(
-        private dateHelperService: DateHelperService,
-        private dialogService: DialogService,
-        private emailQueueHttpService: EmailQueueHttpService,
-        private emojiService: EmojiService,
-        private helperService: HelperService,
-        private interactionService: InteractionService,
-        private invoiceHttpPdfService: InvoiceHttpPdfService,
-        private invoiceHttpService: InvoiceHttpDataService,
-        private localStorageService: LocalStorageService,
-        private messageDialogService: MessageDialogService,
-        private messageLabelService: MessageLabelService,
-        private router: Router,
-        private sessionStorageService: SessionStorageService,
-        public dialog: MatDialog,
-    ) { }
+    constructor(private dateHelperService: DateHelperService, private dialogService: DialogService, private emailQueueHttpService: EmailQueueHttpService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private invoiceHttpPdfService: InvoiceHttpPdfService, private invoiceHttpService: InvoiceHttpDataService, private localStorageService: LocalStorageService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private router: Router, private sessionStorageService: SessionStorageService, public dialog: MatDialog) { }
 
     //#region lifecycle hooks
 
