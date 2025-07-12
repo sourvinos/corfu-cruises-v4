@@ -179,6 +179,25 @@ namespace API.Features.Sales.Invoices {
             }
         }
 
+        [HttpPatch("[action]")]
+        [Authorize(Roles = "admin")]
+        public async Task<Response> PatchInvoiceEmails([FromBody] string[] invoiceIds) {
+            foreach (var invoiceId in invoiceIds) {
+                var x = await invoiceReadRepo.GetByIdForPatchEmailSent(invoiceId);
+                if (x != null) {
+                    invoiceUpdateRepo.UpdateEmailStatus(x, invoiceId, true, false);
+                } else {
+                    throw new CustomException() {
+                        ResponseCode = 404
+                    };
+                }
+            }
+            return new Response {
+                Code = 200,
+                Icon = Icons.Info.ToString(),
+                Message = ApiMessages.OK()
+            };
+        }
         [HttpPatch("isCancelled/{invoiceId}")]
         [Authorize(Roles = "admin")]
         public async Task<Response> PatchIsCancelled(string invoiceId) {

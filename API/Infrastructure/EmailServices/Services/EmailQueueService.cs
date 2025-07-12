@@ -37,6 +37,7 @@ namespace API.Infrastructure.EmailServices {
         private readonly IInvoiceReadRepository invoiceReadRepo;
         private readonly ILedgerEmailSender ledgerEmailSender;
         private readonly ILedgerPdfBuilder ledgerPdfBuilder;
+        private readonly IInvoiceUpdateRepository invoiceUpdateRepo;
         private readonly IMapper mapper;
         private readonly IReceiptEmailSender emailReceiptSender;
         private readonly IReceiptPdfRepository receiptPdfRepo;
@@ -46,9 +47,10 @@ namespace API.Infrastructure.EmailServices {
 
         #endregion
 
-        public EmailQueueService(AppDbContext dbContext, ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailQueueRepository queueRepo, IEmailUserDetailsSender emailUserDetailsSender, IInvoiceEmailSender emailInvoiceSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, ILedgerEmailSender emailSender, ILedgerPdfBuilder ledgerPdfBuilder, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptEmailSender emailReceiptSender, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
+        public EmailQueueService(IInvoiceUpdateRepository invoiceUpdateRepo, AppDbContext dbContext, ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailQueueRepository queueRepo, IEmailUserDetailsSender emailUserDetailsSender, IInvoiceEmailSender emailInvoiceSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, ILedgerEmailSender emailSender, ILedgerPdfBuilder ledgerPdfBuilder, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptEmailSender emailReceiptSender, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
             this.appDbContext = dbContext;
             this.checkInSendToEmail = checkInSendToEmail;
+            this.invoiceUpdateRepo = invoiceUpdateRepo;
             this.emailAccountSender = emailAccountSender;
             this.emailInvoiceSender = emailInvoiceSender;
             this.emailQueueRepo = queueRepo;
@@ -74,7 +76,7 @@ namespace API.Infrastructure.EmailServices {
                     if (x.Initiator == "ResetPassword") { SendResetPassword(x); }
                     if (x.Initiator == "UserDetails") { await SendUserDetailsAsync(x); }
                     if (x.Initiator == "CheckIn") { await SendReservationAsync(x); }
-                    if (x.Initiator == "Sales") { await SendInvoiceAsync(x); }
+                    if (x.Initiator == "Sales") { await DoInvoiceTasks(x); }
                     if (x.Initiator == "Receipts") { await SendReceiptAsync(x); }
                     if (x.Initiator == "SaleLedgers") { await SendSaleLedgerAsync(x); }
                 }
@@ -118,21 +120,26 @@ namespace API.Infrastructure.EmailServices {
             }
         }
 
-        private async Task SendInvoiceAsync(EmailQueue emailQueue) {
+        private async Task DoInvoiceTasks(EmailQueue emailQueue) {
             if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
                 var x = await invoiceReadRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
-                if (x != null) {
-                    invoicePdfRepo.BuildPdf(mapper.Map<Invoice, InvoicePdfVM>(x));
-                    var response = emailInvoiceSender.SendInvoiceToEmail(emailQueue, x.Customer.Email);
-                    if (response.Exception == null) {
-                        emailQueue.IsCompleted = true;
-                        appDbContext.SaveChanges();
-                    }
-                } else {
-                    throw new CustomException() {
-                        ResponseCode = 404
-                    };
+                var response = SendInvoiceToEmailAsync(x, emailQueue);
+                if (response.Exception == null) {
+                    invoiceUpdateRepo.UpdateEmailStatus(x, x.InvoiceId.ToString(), false, true);
                 }
+                // var x = await invoiceReadRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
+                // if (x != null) {
+                //     invoicePdfRepo.BuildPdf(mapper.Map<Invoice, InvoicePdfVM>(x));
+                //     var response = emailInvoiceSender.SendInvoiceToEmail(emailQueue, x.Customer.Email);
+                //     if (response.Exception == null) {
+                //         emailQueue.IsCompleted = true;
+                //         await appDbContext.SaveChangesAsync();
+                //     }
+                // } else {
+                //     throw new CustomException() {
+                //         ResponseCode = 404
+                //     };
+                // }
             }
         }
 
@@ -162,6 +169,23 @@ namespace API.Infrastructure.EmailServices {
                     appDbContext.SaveChanges();
                 }
             }
+        }
+
+        private async Task SendInvoiceToEmailAsync(Invoice invoice, EmailQueue emailQueue) {
+            var x = await invoiceReadRepo.GetByIdForPdfAsync(invoice.InvoiceId.ToString());
+            if (x != null) {
+                invoicePdfRepo.BuildPdf(mapper.Map<Invoice, InvoicePdfVM>(x));
+                var response = emailInvoiceSender.SendInvoiceToEmail(emailQueue, x.Customer.Email);
+                if (response.Exception == null) {
+                    emailQueue.IsCompleted = true;
+                    await appDbContext.SaveChangesAsync();
+                }
+            } else {
+                throw new CustomException() {
+                    ResponseCode = 404
+                };
+            }
+
         }
 
     }

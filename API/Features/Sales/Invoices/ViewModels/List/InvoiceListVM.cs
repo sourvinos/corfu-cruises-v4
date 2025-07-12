@@ -13,6 +13,8 @@ namespace API.Features.Sales.Invoices {
         public SimpleEntity Ship { get; set; }
         public SimpleEntity ShipOwner { get; set; }
         public decimal GrossAmount { get; set; }
+        public bool IsEmailPending { get; set; }
+        public bool IsEmailSent { get; set; }
         public InvoiceListAadeVM Aade { get; set; }
 
     }

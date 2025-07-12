@@ -38,8 +38,8 @@ export class InvoiceHttpDataService extends HttpDataService {
         return this.http.put<any>(this.url + '/invoiceOxygen', aadeVM)
     }
 
-    public patchInvoicesWithEmailPending(invoiceIds: string[]): Observable<any> {
-        return this.http.patch<any>(this.url + '/patchInvoicesWithEmailPending', invoiceIds)
+    public patchInvoiceEmails(invoiceIds: string[]): Observable<any> {
+        return this.http.patch<any>(this.url + '/patchInvoiceEmails', invoiceIds)
     }
 
     public patchInvoiceWithIsCancelled(invoiceId: string): Observable<any> {

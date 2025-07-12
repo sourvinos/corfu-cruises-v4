@@ -53,6 +53,14 @@ namespace API.Features.Sales.Invoices {
             return invoice.ShipOwnerId = ship.ShipOwnerId;
         }
 
+        public void UpdateEmailStatus(Invoice invoice, string invoiceId, bool isEmailPending, bool isEmailSent) {
+            invoice.IsEmailPending = false;
+            invoice.IsEmailSent = true;
+            context.Entry(invoice).Property(x => x.IsEmailPending).IsModified = true;
+            context.Entry(invoice).Property(x => x.IsEmailSent).IsModified = true;
+            context.SaveChanges();
+        }
+
         public void UpdateIsCancelled(Invoice invoice, string invoiceId) {
             using var transaction = context.Database.BeginTransaction();
             invoice.IsCancelled = true;

@@ -28,6 +28,8 @@ namespace API.Features.Sales.Transactions {
         public decimal PreviousBalance { get; set; }
         public decimal NewBalance { get; set; }
         public string Remarks { get; set; }
+        public bool IsEmailPending { get; set; }
+        public bool IsEmailSent { get; set; }
         public bool IsCancelled { get; set; }
         // Navigation
         public DocumentType DocumentType { get; set; }

@@ -8,6 +8,8 @@ import { formatNumber } from '@angular/common'
 import { CriteriaDateRangeDialogComponent } from './../../../../../shared/components/criteria-date-range-dialog/criteria-date-range-dialog.component'
 import { DateHelperService } from '../../../../../shared/services/date-helper.service'
 import { DialogService } from '../../../../../shared/services/modal-dialog.service'
+import { EmailQueueDto } from 'src/app/shared/classes/email-queue-dto'
+import { EmailQueueHttpService } from 'src/app/shared/services/email-queue-http.service'
 import { EmojiService } from '../../../../../shared/services/emoji.service'
 import { HelperService } from '../../../../../shared/services/helper.service'
 import { InteractionService } from '../../../../../shared/services/interaction.service'
@@ -64,7 +66,22 @@ export class InvoiceListComponent {
 
     //#endregion
 
-    constructor(private dateHelperService: DateHelperService, private dialogService: DialogService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private invoiceHttpPdfService: InvoiceHttpPdfService, private invoiceHttpService: InvoiceHttpDataService, private localStorageService: LocalStorageService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private router: Router, private sessionStorageService: SessionStorageService, public dialog: MatDialog) { }
+    constructor(
+        private dateHelperService: DateHelperService,
+        private dialogService: DialogService,
+        private emailQueueHttpService: EmailQueueHttpService,
+        private emojiService: EmojiService,
+        private helperService: HelperService,
+        private interactionService: InteractionService,
+        private invoiceHttpPdfService: InvoiceHttpPdfService,
+        private invoiceHttpService: InvoiceHttpDataService,
+        private localStorageService: LocalStorageService,
+        private messageDialogService: MessageDialogService,
+        private messageLabelService: MessageLabelService,
+        private router: Router,
+        private sessionStorageService: SessionStorageService,
+        public dialog: MatDialog,
+    ) { }
 
     //#region lifecycle hooks
 
@@ -155,24 +172,43 @@ export class InvoiceListComponent {
         this.router.navigate([this.url + '/new'])
     }
 
-    public addSelectedRecordsToEmailQueue(): void {
+    public doSelectedRecordsTasks(): void {
         if (this.isAnyRowSelected()) {
-            const ids = []
-            this.selectedRecords.forEach(record => {
-                if (record.aade.mark) {
-                    ids.push(record.invoiceId)
-                }
-            })
-            this.invoiceHttpService.patchInvoicesWithEmailPending(ids).subscribe({
-                next: () => {
-                    this.onRefreshList()
-                    this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, false)
-                },
-                error: (errorFromInterceptor) => {
-                    this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
-                }
-            })
+            this.addSelectedRecordsToEmailQueue()
+            this.patchSelectedRecordsWithEmailPending()
         }
+    }
+
+    private addSelectedRecordsToEmailQueue(): void {
+        const ids = []
+        this.selectedRecords.forEach(record => {
+            if (record.aade.mark) {
+                ids.push(record.invoiceId)
+            }
+        })
+        ids.forEach(id => {
+            this.emailQueueHttpService.save(this.createEmailQueueObject(id)).subscribe(() => {
+                console.log(id + ' sent')
+            })
+        })
+    }
+
+    private patchSelectedRecordsWithEmailPending(): void {
+        const ids = []
+        this.selectedRecords.forEach(record => {
+            if (record.aade.mark) {
+                ids.push(record.invoiceId)
+            }
+        })
+        this.invoiceHttpService.patchInvoiceEmails(ids).subscribe({
+            next: () => {
+                this.onRefreshList()
+                this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, false)
+            },
+            error: (errorFromInterceptor) => {
+                this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
+            }
+        })
     }
 
     public buildAndOpenSelectedRecords(): void {
@@ -266,6 +302,15 @@ export class InvoiceListComponent {
         })
     }
 
+    private createEmailQueueObject(id: string): EmailQueueDto {
+        return {
+            initiator: 'Sales',
+            entityId: id,
+            priority: 2,
+            isCompleted: false
+        }
+    }
+
     private deleteStoredFilters(): void {
         this.sessionStorageService.deleteItems([{ 'item': 'invoiceList-filters', 'when': 'always' }])
     }
@@ -333,7 +378,7 @@ export class InvoiceListComponent {
             {
                 label: this.getLabel('contextMenuEmail'), command: (): void => {
                     this.addSelectedRecordToSelectedRecords(this.selectedRecord)
-                    this.addSelectedRecordsToEmailQueue()
+                    this.doSelectedRecordsTasks()
                 }
             }
         ]
