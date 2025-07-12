@@ -11,7 +11,7 @@ using API.Infrastructure.EmailServices;
 
 namespace API.Features.Sales.Receipts {
 
-    public class ReceiptEmailSender : IReceiptEmailSender {
+    public class ReceiptEmailSender : IEmailReceiptSender {
 
         #region variables
 

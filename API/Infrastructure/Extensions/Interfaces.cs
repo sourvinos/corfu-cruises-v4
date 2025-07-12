@@ -89,17 +89,19 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IUserValidation<IUser>, UserValidation>();
             #endregion
             #region sales
+            services.AddTransient<IBalanceSheetRepository, BalanceSheetRepository>();
             services.AddTransient<IBankAccountRepository, BankAccountRepository>();
             services.AddTransient<IBankAccountValidation, BankAccountValidation>();
             services.AddTransient<IBankRepository, BankRepository>();
             services.AddTransient<IBankValidation, BankValidation>();
             services.AddTransient<IDocumentTypeRepository, DocumentTypeRepository>();
             services.AddTransient<IDocumentTypeValidation, DocumentTypeValidation>();
+            services.AddTransient<IEmailInvoiceSender, InvoiceEmailSender>();
+            services.AddTransient<IEmailReceiptSender, ReceiptEmailSender>();
             services.AddTransient<IInvoiceCalculateBalanceRepo, InvoiceCalculateBalanceRepo>();
-            services.AddTransient<IInvoiceEmailSender, InvoiceEmailSender>();
+            services.AddTransient<IInvoiceJsonRepository, InvoiceJsonRepository>();
             services.AddTransient<IInvoicePdfRepository, InvoicePdfRepository>();
             services.AddTransient<IInvoiceReadRepository, InvoiceReadRepository>();
-            services.AddTransient<IInvoiceJsonRepository, InvoiceJsonRepository>();
             services.AddTransient<IInvoiceUpdateRepository, InvoiceUpdateRepository>();
             services.AddTransient<IInvoiceValidation, InvoiceValidation>();
             services.AddTransient<IInvoiceXmlRepository, InvoiceXmlRepository>();
@@ -112,14 +114,12 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IPriceRepository, PriceRepository>();
             services.AddTransient<IPriceValidation, PriceValidation>();
             services.AddTransient<IReceiptCalculateBalanceRepo, ReceiptCalculateBalanceRepo>();
-            services.AddTransient<IReceiptEmailSender, ReceiptEmailSender>();
             services.AddTransient<IReceiptPdfRepository, ReceiptPdfRepository>();
             services.AddTransient<IReceiptRepository, ReceiptRepository>();
             services.AddTransient<IReceiptValidation, ReceiptValidation>();
+            services.AddTransient<IRevenuesRepository, RevenuesRepository>();
             services.AddTransient<ITaxOfficeRepository, TaxOfficeRepository>();
             services.AddTransient<ITaxOfficeValidation, TaxOfficeValidation>();
-            services.AddTransient<IBalanceSheetRepository, BalanceSheetRepository>();
-            services.AddTransient<IRevenuesRepository, RevenuesRepository>();
             #endregion
             #region shared
             services.AddScoped<Token>();

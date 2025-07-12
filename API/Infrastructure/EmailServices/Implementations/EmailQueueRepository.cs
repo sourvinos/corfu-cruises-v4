@@ -16,9 +16,14 @@ namespace API.Infrastructure.EmailServices {
 
         public async Task<EmailQueue> GetFirstNotCompleted() {
             return await context.EmailQueues
-                .Where(x => !x.IsCompleted)
+                .Where(x => !x.IsSent)
                 .OrderBy(x => x.Priority).ThenBy(x => x.PostAt)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<EmailQueue> GetByIdAsync(int id) {
+            return await context.EmailQueues
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
     }

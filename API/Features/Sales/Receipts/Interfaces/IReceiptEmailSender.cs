@@ -3,7 +3,7 @@ using API.Infrastructure.EmailServices;
 
 namespace API.Features.Sales.Receipts {
 
-    public interface IReceiptEmailSender {
+    public interface IEmailReceiptSender {
 
         Task SendReceiptToEmail(EmailQueue emailQueue, string email);
 

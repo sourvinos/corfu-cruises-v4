@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace API.Features.Sales.Invoices {
 
-    public class InvoiceEmailSender : IInvoiceEmailSender {
+    public class InvoiceEmailSender : IEmailInvoiceSender {
 
         #region variables
 

@@ -69,7 +69,6 @@ namespace API.Features.Sales.Receipts {
 
         public async Task<Receipt> GetByIdForPdfAsync(string invoiceId) {
             return await context.Receipts
-                .AsNoTracking()
                 .Include(x => x.Customer).ThenInclude(x => x.TaxOffice)
                 .Include(x => x.Customer).ThenInclude(x => x.Nationality)
                 .Include(x => x.ShipOwner).ThenInclude(x => x.TaxOffice)

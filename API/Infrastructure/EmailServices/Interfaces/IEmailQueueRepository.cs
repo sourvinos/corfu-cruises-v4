@@ -6,6 +6,7 @@ namespace API.Infrastructure.EmailServices {
     public interface IEmailQueueRepository : IRepository<EmailQueue> {
 
         Task<EmailQueue> GetFirstNotCompleted();
+        Task<EmailQueue> GetByIdAsync(int id);
 
     }
 

@@ -16,15 +16,13 @@ namespace API.Features.Sales.Receipts {
 
         private readonly IMapper mapper;
         private readonly IReceiptCalculateBalanceRepo receiptCalculateBalanceRepo;
-        private readonly IReceiptEmailSender emailSender;
         private readonly IReceiptPdfRepository receiptPdfRepo;
         private readonly IReceiptRepository receiptRepo;
         private readonly IReceiptValidation receiptValidation;
 
         #endregion
 
-        public ReceiptsController(IMapper mapper, IReceiptCalculateBalanceRepo receiptCalculateBalanceRepo, IReceiptEmailSender emailSender, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository transactionRepo, IReceiptValidation transactionValidation) {
-            this.emailSender = emailSender;
+        public ReceiptsController(IMapper mapper, IReceiptCalculateBalanceRepo receiptCalculateBalanceRepo, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository transactionRepo, IReceiptValidation transactionValidation) {
             this.mapper = mapper;
             this.receiptCalculateBalanceRepo = receiptCalculateBalanceRepo;
             this.receiptPdfRepo = receiptPdfRepo;
