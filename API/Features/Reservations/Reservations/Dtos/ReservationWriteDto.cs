@@ -32,7 +32,7 @@ namespace API.Features.Reservations.Reservations {
         public string PostUser { get; set; }
         public string PutAt { get; set; }
         public string PutUser { get; set; }
-        // Navigation
+        // Passengers
         public List<PassengerWriteDto> Passengers { get; set; }
 
     }

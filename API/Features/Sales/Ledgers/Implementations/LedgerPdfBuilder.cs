@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Infrastructure.Classes;
 using API.Infrastructure.EmailServices;
@@ -28,16 +27,15 @@ namespace API.Features.Sales.Ledgers {
             return new FileStreamResult(memoryStream, "application/pdf");
         }
 
-        public async Task<string> CreatePdfLedger(LedgerCriteria criteria) {
-            var emailQueue = new EmailLedgerSaleQueue {
+        public async Task<string> CreatePdfLedger(LedgerCriteria criteria, int shipOwnerId) {
+            var emailQueue = new EmailQueue {
                 FromDate = criteria.FromDate,
                 ToDate = criteria.ToDate,
-                CustomerId = criteria.CustomerId,
-                ShipOwnerId = (int)criteria.ShipOwnerId
+                CustomerId = criteria.CustomerId
             };
             var linesPerPage = 55;
             var linesPrinted = 0;
-            var ledger = await ProcessLedger(emailQueue);
+            var ledger = await ProcessLedger(emailQueue, shipOwnerId);
             var locale = CultureInfo.CreateSpecificCulture("el-GR");
             GlobalFontSettings.FontResolver = new FileFontResolver();
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -70,69 +68,16 @@ namespace API.Features.Sales.Ledgers {
                 gfx.DrawString(ledger[i].Credit.ToString("N2", locale), monotypeFont, XBrushes.Black, new XPoint(516 - ledger[i].Credit.ToString("N2", locale).Length * 3, verticalPosition));
                 gfx.DrawString(ledger[i].Balance.ToString("N2", locale), monotypeFont, XBrushes.Black, new XPoint(576 - ledger[i].Balance.ToString("N2", locale).Length * 3, verticalPosition));
             }
-            var filename = criteria.CustomerId.ToString() + "-" + criteria.ShipOwnerId.ToString() + ".pdf";
+            var filename = criteria.CustomerId.ToString() + "-" + shipOwnerId.ToString() + ".pdf";
             var fullpathname = Path.Combine("Reports" + Path.DirectorySeparatorChar + "Ledgers" + Path.DirectorySeparatorChar + filename);
             document.Save(fullpathname);
             return filename;
         }
 
-        public async Task<EmailLedgerVM> CreatePdfLedger(EmailQueue emailQueue) {
-            var childTable = await ledgerSaleRepo.GetFromChildTable(emailQueue.EntityId.ToString());
-            var emailLedgerVM = new EmailLedgerVM {
-                CustomerId = childTable.First().CustomerId,
-                Filenames = new List<string>()
-            };
-            foreach (var x in childTable) {
-                var z = await ledgerSaleRepo.GetForLedger(true, x.FromDate.ToString(), x.ToDate.ToString(), x.CustomerId, x.ShipOwnerId);
-                if (z != null) {
-                    var linesPerPage = 55;
-                    var linesPrinted = 0;
-                    var ledger = await ProcessLedger(x);
-                    var locale = CultureInfo.CreateSpecificCulture("el-GR");
-                    GlobalFontSettings.FontResolver = new FileFontResolver();
-                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-                    PdfDocument document = new();
-                    PdfPage page = document.AddPage();
-                    XFont logoFont = new("ACCanterBold", 20);
-                    XFont robotoMonoFont = new("RobotoMono", 6);
-                    XFont monotypeFont = new("MonoType", 6);
-                    XGraphics gfx = XGraphics.FromPdfPage(page);
-                    gfx.DrawString(ledger[1].ShipOwner.Description, logoFont, XBrushes.Black, new XPoint(40, 40));
-                    gfx.DrawString("ΚΑΡΤΕΛΑ ΠΕΛΑΤΗ: " + ledger[1].Customer.Description, robotoMonoFont, XBrushes.Black, new XPoint(40, 53));
-                    gfx.DrawString("ΔΙΑΣΤΗΜΑ: " + DateHelpers.FormatDateStringToLocaleString(DateHelpers.DateToISOString(x.FromDate)) + " - " + DateHelpers.FormatDateStringToLocaleString(DateHelpers.DateToISOString(x.ToDate)), robotoMonoFont, XBrushes.Black, new XPoint(40, 62));
-                    PrintColumnHeaders(gfx, robotoMonoFont);
-                    int verticalPosition = 100;
-                    for (int i = 0; i < ledger.Count; i++) {
-                        verticalPosition += 12;
-                        linesPrinted++;
-                        if (linesPrinted > linesPerPage) {
-                            page = document.AddPage();
-                            gfx = XGraphics.FromPdfPage(page);
-                            linesPrinted = 0;
-                            verticalPosition = 100;
-                            PrintColumnHeaders(gfx, robotoMonoFont);
-                        }
-                        gfx.DrawString(DateHelpers.FormatDateStringToLocaleString(ledger[i].Date), robotoMonoFont, XBrushes.Black, new XPoint(40, verticalPosition));
-                        gfx.DrawString(ledger[i].DocumentType.Description, robotoMonoFont, XBrushes.Black, new XPoint(80, verticalPosition));
-                        gfx.DrawString(ledger[i].DocumentType.Batch, robotoMonoFont, XBrushes.Black, new XPoint(220, verticalPosition));
-                        gfx.DrawString(ledger[i].InvoiceNo, robotoMonoFont, XBrushes.Black, new XPoint(270, verticalPosition));
-                        gfx.DrawString(ledger[i].Debit.ToString("N2", locale), monotypeFont, XBrushes.Black, new XPoint(456 - ledger[i].Debit.ToString("N2", locale).Length * 3, verticalPosition));
-                        gfx.DrawString(ledger[i].Credit.ToString("N2", locale), monotypeFont, XBrushes.Black, new XPoint(516 - ledger[i].Credit.ToString("N2", locale).Length * 3, verticalPosition));
-                        gfx.DrawString(ledger[i].Balance.ToString("N2", locale), monotypeFont, XBrushes.Black, new XPoint(576 - ledger[i].Balance.ToString("N2", locale).Length * 3, verticalPosition));
-                    }
-                    var filename = x.CustomerId.ToString() + "-" + x.ShipOwnerId.ToString() + ".pdf";
-                    var fullpathname = Path.Combine("Reports" + Path.DirectorySeparatorChar + "Ledgers" + Path.DirectorySeparatorChar + filename);
-                    document.Save(fullpathname);
-                    emailLedgerVM.Filenames.Add(filename);
-                }
-            }
-            return emailLedgerVM;
-        }
-
-        private async Task<List<LedgerVM>> ProcessLedger(EmailLedgerSaleQueue criteria) {
-            var records = ledgerSaleRepo.BuildBalanceForLedger(await ledgerSaleRepo.GetForLedger(true, DateHelpers.DateToISOString(criteria.FromDate), DateHelpers.DateToISOString(criteria.ToDate), criteria.CustomerId, criteria.ShipOwnerId));
-            var previous = ledgerSaleRepo.BuildPrevious(records, DateHelpers.DateToISOString(criteria.FromDate));
-            var requested = ledgerSaleRepo.BuildRequested(records, DateHelpers.DateToISOString(criteria.FromDate));
+        private async Task<List<LedgerVM>> ProcessLedger(EmailQueue criteria, int shipOwnerId) {
+            var records = ledgerSaleRepo.BuildBalanceForLedger(await ledgerSaleRepo.GetForLedger(true, DateHelpers.DateToISOString((System.DateTime)criteria.FromDate), DateHelpers.DateToISOString((System.DateTime)criteria.ToDate), (int)criteria.CustomerId, shipOwnerId));
+            var previous = ledgerSaleRepo.BuildPrevious(records, DateHelpers.DateToISOString((System.DateTime)criteria.FromDate));
+            var requested = ledgerSaleRepo.BuildRequested(records, DateHelpers.DateToISOString((System.DateTime)criteria.FromDate));
             var total = ledgerSaleRepo.BuildTotal(records);
             return ledgerSaleRepo.MergePreviousRequestedAndTotal(previous, requested, total);
         }

@@ -1,8 +1,11 @@
 export interface EmailQueueDto {
 
     initiator: string
-    entityId: string
+    entityId?: string
+    fromDate?: string,
+    toDate?: string
+    customerId?: number
     priority: number
-    isCompleted: boolean
+    isSent: boolean
 
 }

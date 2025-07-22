@@ -158,7 +158,7 @@ export class EditUserFormComponent {
             initiator: 'UserDetails',
             entityId: z.body,
             priority: 2,
-            isCompleted: false
+            isSent: false
         }
     }
 

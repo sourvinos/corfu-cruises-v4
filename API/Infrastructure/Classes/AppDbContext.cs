@@ -80,7 +80,6 @@ namespace API.Infrastructure.Classes {
 
         public DbSet<Token> Tokens { get; set; }
         public DbSet<EmailQueue> EmailQueues { get; set; }
-        public DbSet<EmailLedgerSaleQueue> EmailLedgerSaleQueues { get; set; }
 
         #endregion
 
@@ -102,7 +101,6 @@ namespace API.Infrastructure.Classes {
             modelBuilder.ApplyConfiguration(new PassengersConfig());
             modelBuilder.ApplyConfiguration(new PickupPointsConfig());
             modelBuilder.ApplyConfiguration(new PortsConfig());
-            modelBuilder.ApplyConfiguration(new ReservationsConfig());
             modelBuilder.ApplyConfiguration(new ReservationsConfig());
             modelBuilder.ApplyConfiguration(new SchedulesConfig());
             modelBuilder.ApplyConfiguration(new ShipCrewsConfig());

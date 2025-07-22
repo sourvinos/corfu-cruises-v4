@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -9,7 +10,6 @@ using API.Features.Sales.Invoices;
 using API.Features.Sales.Ledgers;
 using API.Features.Sales.Receipts;
 using API.Infrastructure.Account;
-using API.Infrastructure.Classes;
 using API.Infrastructure.Helpers;
 using API.Infrastructure.Responses;
 using API.Infrastructure.Users;
@@ -26,7 +26,6 @@ namespace API.Infrastructure.EmailServices {
 
         #region variables
 
-        private readonly AppDbContext appDbContext;
         private readonly EnvironmentSettings environmentSettings;
         private readonly ICheckInSendToEmail checkInSendToEmail;
         private readonly IEmailAccountSender emailAccountSender;
@@ -47,10 +46,8 @@ namespace API.Infrastructure.EmailServices {
 
         #endregion
 
-        public EmailQueueService(AppDbContext dbContext, ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailInvoiceSender emailInvoiceSender, IEmailQueueRepository queueRepo, IEmailReceiptSender emailReceiptSender, IEmailUserDetailsSender emailUserDetailsSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, IInvoiceUpdateRepository invoiceUpdateRepo, ILedgerEmailSender emailSender, ILedgerPdfBuilder ledgerPdfBuilder, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
-            this.appDbContext = dbContext;
+        public EmailQueueService(ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailInvoiceSender emailInvoiceSender, IEmailQueueRepository queueRepo, IEmailReceiptSender emailReceiptSender, IEmailUserDetailsSender emailUserDetailsSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, IInvoiceUpdateRepository invoiceUpdateRepo, ILedgerEmailSender emailSender, ILedgerPdfBuilder ledgerPdfBuilder, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
             this.checkInSendToEmail = checkInSendToEmail;
-            this.invoiceUpdateRepo = invoiceUpdateRepo;
             this.emailAccountSender = emailAccountSender;
             this.emailInvoiceSender = emailInvoiceSender;
             this.emailQueueRepo = queueRepo;
@@ -59,6 +56,7 @@ namespace API.Infrastructure.EmailServices {
             this.environmentSettings = environmentSettings.Value;
             this.invoicePdfRepo = invoicePdfRepo;
             this.invoiceReadRepo = invoiceReadRepo;
+            this.invoiceUpdateRepo = invoiceUpdateRepo;
             this.ledgerEmailSender = emailSender;
             this.ledgerPdfBuilder = ledgerPdfBuilder;
             this.mapper = mapper;
@@ -76,9 +74,9 @@ namespace API.Infrastructure.EmailServices {
                     if (x.Initiator == "ResetPassword") { SendResetPassword(x); }
                     if (x.Initiator == "UserDetails") { await SendUserDetailsAsync(x); }
                     if (x.Initiator == "CheckIn") { await SendReservationAsync(x); }
-                    if (x.Initiator == "Sales") { await DoInvoiceTasks(x); }
+                    if (x.Initiator == "Invoices") { await DoInvoiceTasks(x); }
                     if (x.Initiator == "Receipts") { await DoReceiptTasks(x); }
-                    if (x.Initiator == "SaleLedgers") { await SendSaleLedgerAsync(x); }
+                    if (x.Initiator == "SaleLedgers") { await SendLedgerAsync(x); }
                 }
             }
         }
@@ -89,7 +87,7 @@ namespace API.Infrastructure.EmailServices {
                 var response = emailAccountSender.EmailForgotPassword(x.UserName, x.Displayname, x.Email, environmentSettings.BaseUrl + "/#/resetPassword?email=" + x.Email + "&token=" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(await userManager.GeneratePasswordResetTokenAsync(x))));
                 if (response.Exception == null) {
                     emailQueue.IsSent = true;
-                    appDbContext.SaveChanges();
+                    emailQueueRepo.Update(emailQueue);
                 }
             }
         }
@@ -100,7 +98,7 @@ namespace API.Infrastructure.EmailServices {
                 var response = emailUserSender.EmailUserDetails(x);
                 if (response.Exception == null) {
                     emailQueue.IsSent = true;
-                    appDbContext.SaveChanges();
+                    emailQueueRepo.Update(emailQueue);
                 }
             }
         }
@@ -111,7 +109,7 @@ namespace API.Infrastructure.EmailServices {
                 var response = checkInSendToEmail.SendReservationToEmail(mapper.Map<Reservation, CheckInBoardingPassReservationVM>(x));
                 if (response.Exception == null) {
                     emailQueue.IsSent = true;
-                    appDbContext.SaveChanges();
+                    emailQueueRepo.Update(emailQueue);
                 }
             } else {
                 throw new CustomException() {
@@ -162,12 +160,25 @@ namespace API.Infrastructure.EmailServices {
             }
         }
 
-        private async Task SendSaleLedgerAsync(EmailQueue emailQueue) {
+        private async Task SendLedgerAsync(EmailQueue emailQueue) {
             if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
-                var response = ledgerEmailSender.SendLedgerToEmail(await ledgerPdfBuilder.CreatePdfLedger(emailQueue));
+                var ledgerCriteria = new LedgerCriteria {
+                    FromDate = (DateTime)emailQueue.FromDate,
+                    ToDate = (DateTime)emailQueue.ToDate,
+                    CustomerId = (int)emailQueue.CustomerId,
+                };
+                var filenames = new List<string>();
+                for (int i = 1; i <= 2; i++) {
+                    filenames.Add(await ledgerPdfBuilder.CreatePdfLedger(ledgerCriteria, i));
+                }
+                var x = new EmailLedgerVM {
+                    CustomerId = (int)emailQueue.CustomerId,
+                    Filenames = filenames
+                };
+                var response = ledgerEmailSender.SendLedgerToEmail(x);
                 if (response.Exception == null) {
                     emailQueue.IsSent = true;
-                    appDbContext.SaveChanges();
+                    emailQueueRepo.Update(emailQueue);
                 }
             }
         }

@@ -5,6 +5,7 @@
             "name": "API",
             "type": "coreclr",
             "request": "launch",
+            "requireExactSource": false,
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/Debug/net7.0-windows/API.dll",
             "args": [],

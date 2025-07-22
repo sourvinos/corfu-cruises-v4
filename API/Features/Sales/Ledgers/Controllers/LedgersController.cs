@@ -31,7 +31,7 @@ namespace API.Features.Sales.Ledgers {
         [HttpPost("buildPdf")]
         [Authorize(Roles = "admin")]
         public async Task<ResponseWithBody> BuildPdf([FromBody] LedgerCriteria criteria) {
-            var x = await ledgerPdfBuilder.CreatePdfLedger(criteria);
+            var x = await ledgerPdfBuilder.CreatePdfLedger(criteria, (int)criteria.ShipOwnerId);
             if (x != null) {
                 return new ResponseWithBody {
                     Code = 200,

@@ -1,6 +1,5 @@
 ﻿using API.Infrastructure.Helpers;
 using API.Infrastructure.Responses;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,23 +11,21 @@ namespace API.Infrastructure.EmailServices {
         #region variables
 
         private readonly IEmailQueueRepository emailQueueRepo;
-        private readonly IMapper mapper;
 
         #endregion
 
-        public EmailQueuesController(IEmailQueueRepository emailQueueRepo, IMapper mapper) {
+        public EmailQueuesController(IEmailQueueRepository emailQueueRepo) {
             this.emailQueueRepo = emailQueueRepo;
-            this.mapper = mapper;
         }
 
         [HttpPost]
         [AllowAnonymous]
         public ResponseWithBody Post([FromBody] EmailQueueDto emailQueue) {
-            var z = emailQueueRepo.Create(mapper.Map<EmailQueueDto, EmailQueue>(emailQueue));
+            var z = emailQueueRepo.Create(emailQueueRepo.CreateEmailQueue(emailQueue));
             return new ResponseWithBody {
                 Code = 200,
                 Icon = Icons.Success.ToString(),
-                Body = z.Id.ToString(),
+                Body = z.EntityId,
                 Message = ApiMessages.OK()
             };
         }

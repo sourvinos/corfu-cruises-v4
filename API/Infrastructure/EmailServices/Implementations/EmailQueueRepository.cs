@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
+using API.Infrastructure.Helpers;
 
 namespace API.Infrastructure.EmailServices {
 
@@ -21,9 +23,26 @@ namespace API.Infrastructure.EmailServices {
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<EmailQueue> GetByIdAsync(int id) {
+        public async Task<EmailQueue> GetByIdAsync(string entityId) {
             return await context.EmailQueues
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.EntityId.ToString() == entityId);
+        }
+
+        public EmailQueue CreateEmailQueue(EmailQueueDto emailQueue) {
+            return new EmailQueue {
+                EntityId = IsNotGuid(emailQueue.EntityId) ? Guid.NewGuid() : emailQueue.EntityId,
+                Initiator = emailQueue.Initiator,
+                FromDate = emailQueue.FromDate != null ? DateHelpers.StringToDate(emailQueue.FromDate) : null,
+                ToDate = emailQueue.ToDate != null ? DateHelpers.StringToDate(emailQueue.ToDate) : null,
+                CustomerId = emailQueue.CustomerId,
+                Priority = 3,
+                IsSent = false,
+                PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime())
+            };
+        }
+
+        private static bool IsNotGuid(Guid x) {
+            return x.ToString().Count(x => x == '0') == 32;
         }
 
     }

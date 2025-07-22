@@ -289,10 +289,10 @@ export class InvoiceListComponent {
 
     private createEmailQueueObject(id: string): EmailQueueDto {
         return {
-            initiator: 'Sales',
+            initiator: 'Invoices',
             entityId: id,
-            priority: 2,
-            isCompleted: false
+            priority: 4,
+            isSent: false
         }
     }
 

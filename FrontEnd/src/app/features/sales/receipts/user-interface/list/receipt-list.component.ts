@@ -279,8 +279,8 @@ export class ReceiptListComponent {
         return {
             initiator: 'Receipts',
             entityId: id,
-            priority: 3,
-            isCompleted: false
+            priority: 4,
+            isSent: false
         }
     }
 

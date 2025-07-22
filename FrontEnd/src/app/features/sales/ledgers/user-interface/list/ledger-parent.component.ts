@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 // Custom
 import { DateHelperService } from '../../../../../shared/services/date-helper.service'
 import { DialogService } from 'src/app/shared/services/modal-dialog.service'
-import { EmailLedgerVM } from '../../classes/view-models/email/email-ledger-vm'
+import { EmailQueueHttpService } from 'src/app/shared/services/email-queue-http.service'
 import { HelperService } from '../../../../../shared/services/helper.service'
 import { InteractionService } from 'src/app/shared/services/interaction.service'
 import { LedgerCriteriaDialogComponent } from '../criteria/ledger-criteria.component'
@@ -13,6 +13,7 @@ import { LedgerPdfCriteriaVM } from '../../classes/view-models/pdf/ledger-pdf-cr
 import { LedgerVM } from '../../classes/view-models/list/ledger-vm'
 import { MessageDialogService } from 'src/app/shared/services/message-dialog.service'
 import { MessageLabelService } from '../../../../../shared/services/message-label.service'
+import { EmailQueueDto } from 'src/app/shared/classes/email-queue-dto'
 
 @Component({
     selector: 'ledger',
@@ -35,7 +36,7 @@ export class LedgerParentSalesComponent {
 
     //#endregion
 
-    constructor(private dateHelperService: DateHelperService, private dialogService: DialogService, private helperService: HelperService, private interactionService: InteractionService, private ledgerHttpService: LedgerHttpService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, public dialog: MatDialog) { }
+    constructor(private dateHelperService: DateHelperService, private dialogService: DialogService, private emailQueueHttpService: EmailQueueHttpService, private helperService: HelperService, private interactionService: InteractionService, private ledgerHttpService: LedgerHttpService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, public dialog: MatDialog) { }
 
     //#region lifecycle hooks
 
@@ -64,19 +65,13 @@ export class LedgerParentSalesComponent {
     }
 
     public async onDoEmailTasks(): Promise<void> {
-        const values = await Promise.all([this.buildPdfShipOwnerA(), this.buildPdfShipOwnerB()])
-        const criteria: EmailLedgerVM = {
-            customerId: this.criteria.customer.id,
-            filenames: values.filter(x => x != null)
-        }
-        this.ledgerHttpService.emailLedger(criteria).subscribe({
+        this.emailQueueHttpService.save(this.createEmailQueueObject()).subscribe(({
             complete: () => {
                 this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, false)
-            },
-            error: (errorFromInterceptor) => {
+            }, error: (errorFromInterceptor) => {
                 this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
             }
-        })
+        }))
     }
 
     public async onDoPrintTasks(): Promise<void> {
@@ -187,6 +182,17 @@ export class LedgerParentSalesComponent {
                 resolve(null)
             }
         })
+    }
+
+    private createEmailQueueObject(): EmailQueueDto {
+        return {
+            initiator: 'SaleLedgers',
+            priority: 3,
+            fromDate: this.criteria.fromDate,
+            toDate: this.criteria.toDate,
+            customerId: this.criteria.customer.id,
+            isSent: false
+        }
     }
 
     private loadRecordsForShipOwner(criteria: LedgerCriteriaVM, shipOwnerRecords: string, shipOwnerId: number): void {
