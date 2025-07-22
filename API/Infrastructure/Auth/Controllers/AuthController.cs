@@ -42,9 +42,6 @@ namespace API.Infrastructure.Auth {
 
         [HttpPost("[action]")]
         public IActionResult Logout([FromBody] JObject z) {
-            var tokens = context.Tokens.Where(x => x.UserId == z.First.FirstOrDefault().ToString()).ToList();
-            context.Tokens.RemoveRange(tokens);
-            context.SaveChanges();
             return StatusCode(200, new {
                 response = ApiMessages.OK()
             });
@@ -103,8 +100,8 @@ namespace API.Infrastructure.Auth {
                 ClientId = clientId,
                 UserId = userId,
                 Value = Guid.NewGuid().ToString("N"),
-                CreatedDate = DateTime.UtcNow,
-                ExpiryTime = DateTime.UtcNow.AddMinutes(Convert.ToDouble(settings.ExpireTime)),
+                CreatedDate = DateHelpers.GetLocalDateTime(),
+                ExpiryTime = DateHelpers.GetLocalDateTime().AddMinutes(Convert.ToDouble(settings.ExpireTime)),
                 Language = language
             };
         }
