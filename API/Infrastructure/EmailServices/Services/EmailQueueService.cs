@@ -119,67 +119,53 @@ namespace API.Infrastructure.EmailServices {
         }
 
         private async Task DoInvoiceTasks(EmailQueue emailQueue) {
-            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
-                var invoice = await invoiceReadRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
-                if (invoice != null) {
-                    if (invoicePdfRepo.BuildPdf(mapper.Map<Invoice, InvoicePdfVM>(invoice)) != "") {
-                        if (emailInvoiceSender.SendInvoiceToEmail(emailQueue, invoice.Customer.Email).Exception == null) {
-                            emailQueue.IsSent = true;
-                            emailQueueRepo.Update(emailQueue);
-                            invoice.IsEmailPending = false;
-                            invoice.IsEmailSent = true;
-                            invoiceUpdateRepo.Update(invoice);
-                        }
-                    } else {
-                        throw new CustomException() {
-                            ResponseCode = 404
-                        };
+            var invoice = await invoiceReadRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
+            if (invoice != null) {
+                if (invoicePdfRepo.BuildPdf(mapper.Map<Invoice, InvoicePdfVM>(invoice)) != "") {
+                    if (emailInvoiceSender.SendInvoiceToEmail(emailQueue, invoice.Customer.Email).Exception == null) {
+                        emailQueue.IsSent = true;
+                        emailQueueRepo.Update(emailQueue);
+                        invoice.IsEmailPending = false;
+                        invoice.IsEmailSent = true;
+                        invoiceUpdateRepo.Update(invoice);
                     }
                 }
             }
         }
 
         private async Task DoReceiptTasks(EmailQueue emailQueue) {
-            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
-                var receipt = await receiptRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
-                if (receipt != null) {
-                    if (receiptPdfRepo.BuildPdf(mapper.Map<Receipt, ReceiptPdfVM>(receipt)) != "") {
-                        if (emailReceiptSender.SendReceiptToEmail(emailQueue, receipt.Customer.Email).Exception == null) {
-                            emailQueue.IsSent = true;
-                            emailQueueRepo.Update(emailQueue);
-                            receipt.IsEmailPending = false;
-                            receipt.IsEmailSent = true;
-                            receiptRepo.Update(receipt);
-                        }
-                    } else {
-                        throw new CustomException() {
-                            ResponseCode = 404
-                        };
+            var receipt = await receiptRepo.GetByIdForPdfAsync(emailQueue.EntityId.ToString());
+            if (receipt != null) {
+                if (receiptPdfRepo.BuildPdf(mapper.Map<Receipt, ReceiptPdfVM>(receipt)) != "") {
+                    if (emailReceiptSender.SendReceiptToEmail(emailQueue, receipt.Customer.Email).Exception == null) {
+                        emailQueue.IsSent = true;
+                        emailQueueRepo.Update(emailQueue);
+                        receipt.IsEmailPending = false;
+                        receipt.IsEmailSent = true;
+                        receiptRepo.Update(receipt);
                     }
                 }
             }
         }
 
         private async Task SendLedgerAsync(EmailQueue emailQueue) {
-            if (DateHelpers.GetLocalDateTime().Hour >= 0 && DateHelpers.GetLocalDateTime().Hour <= 12) {
-                var ledgerCriteria = new LedgerCriteria {
-                    FromDate = (DateTime)emailQueue.FromDate,
-                    ToDate = (DateTime)emailQueue.ToDate,
-                    CustomerId = (int)emailQueue.CustomerId,
-                };
-                var filenames = new List<string>();
-                for (int i = 1; i <= 2; i++) {
-                    filenames.Add(await ledgerPdfBuilder.CreatePdfLedger(ledgerCriteria, i));
-                }
-                var x = new EmailLedgerVM {
-                    CustomerId = (int)emailQueue.CustomerId,
-                    Filenames = filenames
-                };
-                var response = ledgerEmailSender.SendLedgerToEmail(x);
-                if (response.Exception == null) {
-                    emailQueue.IsSent = true;
-                    emailQueueRepo.Update(emailQueue);
-                }
+            var ledgerCriteria = new LedgerCriteria {
+                FromDate = emailQueue.FromDate,
+                ToDate = emailQueue.ToDate,
+                CustomerId = (int)emailQueue.CustomerId,
+            };
+            var filenames = new List<string>();
+            for (int i = 1; i <= 2; i++) {
+                filenames.Add(await ledgerPdfBuilder.CreatePdfLedger(ledgerCriteria, i));
+            }
+            var x = new EmailLedgerVM {
+                CustomerId = (int)emailQueue.CustomerId,
+                Filenames = filenames
+            };
+            var response = ledgerEmailSender.SendLedgerToEmail(x);
+            if (response.Exception == null) {
+                emailQueue.IsSent = true;
+                emailQueueRepo.Update(emailQueue);
             }
         }
 

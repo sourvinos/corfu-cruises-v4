@@ -172,9 +172,7 @@ export class InvoiceListComponent {
             }
         })
         ids.forEach(id => {
-            this.emailQueueHttpService.save(this.createEmailQueueObject(id)).subscribe(() => {
-                console.log(id + ' sent')
-            })
+            this.emailQueueHttpService.save(this.createEmailQueueObject(id)).subscribe(() => { })
         })
     }
 

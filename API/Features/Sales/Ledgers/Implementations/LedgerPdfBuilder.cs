@@ -75,9 +75,9 @@ namespace API.Features.Sales.Ledgers {
         }
 
         private async Task<List<LedgerVM>> ProcessLedger(EmailQueue criteria, int shipOwnerId) {
-            var records = ledgerSaleRepo.BuildBalanceForLedger(await ledgerSaleRepo.GetForLedger(true, DateHelpers.DateToISOString((System.DateTime)criteria.FromDate), DateHelpers.DateToISOString((System.DateTime)criteria.ToDate), (int)criteria.CustomerId, shipOwnerId));
-            var previous = ledgerSaleRepo.BuildPrevious(records, DateHelpers.DateToISOString((System.DateTime)criteria.FromDate));
-            var requested = ledgerSaleRepo.BuildRequested(records, DateHelpers.DateToISOString((System.DateTime)criteria.FromDate));
+            var records = ledgerSaleRepo.BuildBalanceForLedger(await ledgerSaleRepo.GetForLedger(true, criteria.FromDate, criteria.ToDate, (int)criteria.CustomerId, shipOwnerId));
+            var previous = ledgerSaleRepo.BuildPrevious(records, criteria.FromDate);
+            var requested = ledgerSaleRepo.BuildRequested(records, criteria.FromDate);
             var total = ledgerSaleRepo.BuildTotal(records);
             return ledgerSaleRepo.MergePreviousRequestedAndTotal(previous, requested, total);
         }

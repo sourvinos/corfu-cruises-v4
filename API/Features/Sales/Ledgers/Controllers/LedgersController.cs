@@ -53,9 +53,9 @@ namespace API.Features.Sales.Ledgers {
         }
 
         private async Task<List<LedgerVM>> ProcessLedger(LedgerCriteria criteria) {
-            var records = repo.BuildBalanceForLedger(await repo.GetForLedger(true, DateHelpers.DateToISOString(criteria.FromDate), DateHelpers.DateToISOString(criteria.ToDate), criteria.CustomerId, criteria?.ShipOwnerId));
-            var previous = repo.BuildPrevious(records, DateHelpers.DateToISOString(criteria.FromDate));
-            var requested = repo.BuildRequested(records, DateHelpers.DateToISOString(criteria.FromDate));
+            var records = repo.BuildBalanceForLedger(await repo.GetForLedger(true, criteria.FromDate, criteria.ToDate, criteria.CustomerId, criteria?.ShipOwnerId));
+            var previous = repo.BuildPrevious(records, criteria.FromDate);
+            var requested = repo.BuildRequested(records, criteria.FromDate);
             var total = repo.BuildTotal(records);
             return repo.MergePreviousRequestedAndTotal(previous, requested, total);
         }

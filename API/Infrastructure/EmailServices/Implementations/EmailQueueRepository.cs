@@ -32,10 +32,10 @@ namespace API.Infrastructure.EmailServices {
             return new EmailQueue {
                 EntityId = IsNotGuid(emailQueue.EntityId) ? Guid.NewGuid() : emailQueue.EntityId,
                 Initiator = emailQueue.Initiator,
-                FromDate = emailQueue.FromDate != null ? DateHelpers.StringToDate(emailQueue.FromDate) : null,
-                ToDate = emailQueue.ToDate != null ? DateHelpers.StringToDate(emailQueue.ToDate) : null,
+                FromDate = emailQueue.FromDate != null ? emailQueue.FromDate : null,
+                ToDate = emailQueue.ToDate != null ? emailQueue.ToDate : null,
                 CustomerId = emailQueue.CustomerId,
-                Priority = 3,
+                Priority = emailQueue.Priority,
                 IsSent = false,
                 PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime())
             };
