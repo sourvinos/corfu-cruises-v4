@@ -226,32 +226,7 @@ namespace API.Features.Reservations.Reservations {
             return reservationValidation.OverbookedPax(date, destinationId);
         }
 
-        [HttpGet("boardingPass/{reservationId}")]
-        [Authorize(Roles = "user, admin")]
-        public async Task<Response> SendBoardingPassToEmailAsync(string reservationId) {
-            var x = await reservationReadRepo.GetByIdAsync(reservationId, true);
-            if (x != null) {
-                if (Identity.IsUserAdmin(httpContext) || reservationValidation.IsUserOwner(x.CustomerId)) {
-                    await reservationSendToEmail.SendReservationToEmail(mapper.Map<Reservation, BoardingPassReservationVM>(x));
-                    return new Response {
-                        Code = 200,
-                        Icon = Icons.Success.ToString(),
-                        Id = x.ReservationId.ToString(),
-                        Message = ApiMessages.OK()
-                    };
-                } else {
-                    throw new CustomException() {
-                        ResponseCode = 490
-                    };
-                }
-            } else {
-                throw new CustomException() {
-                    ResponseCode = 404
-                };
-            }
-        }
-
-        [HttpGet("getPaxLimit/{customerId}/date/{date}")]
+         [HttpGet("getPaxLimit/{customerId}/date/{date}")]
         [Authorize(Roles = "user, admin")]
         public async Task<ResponseWithBody> ValidatePaxLimit(int customerId, string date) {
             var x = await customerRepo.GetByIdAsync(customerId, false);

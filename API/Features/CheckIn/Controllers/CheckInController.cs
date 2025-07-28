@@ -14,16 +14,14 @@ namespace API.Features.CheckIn {
         #region variables
 
         private readonly ICheckInReadRepository checkInReadRepo;
-        private readonly ICheckInSendToEmail checkInSendToEmail;
         private readonly ICheckInUpdateRepository checkInUpdateRepo;
         private readonly ICheckInValidation checkInValidation;
         private readonly IMapper mapper;
 
         #endregion
 
-        public CheckInController(ICheckInReadRepository checkInReadRepo, ICheckInSendToEmail checkInSendToEmail, ICheckInUpdateRepository checkInUpdateRepo, ICheckInValidation checkInValidation, IMapper mapper) {
+        public CheckInController(ICheckInReadRepository checkInReadRepo, ICheckInUpdateRepository checkInUpdateRepo, ICheckInValidation checkInValidation, IMapper mapper) {
             this.checkInReadRepo = checkInReadRepo;
-            this.checkInSendToEmail = checkInSendToEmail;
             this.checkInUpdateRepo = checkInUpdateRepo;
             this.checkInValidation = checkInValidation;
             this.mapper = mapper;
@@ -45,7 +43,8 @@ namespace API.Features.CheckIn {
                     throw new CustomException() {
                         ResponseCode = 403
                     };
-                };
+                }
+                ;
             } else {
                 throw new CustomException() {
                     ResponseCode = 404
@@ -69,7 +68,8 @@ namespace API.Features.CheckIn {
                     throw new CustomException() {
                         ResponseCode = 403
                     };
-                };
+                }
+                ;
             } else {
                 throw new CustomException() {
                     ResponseCode = 404
@@ -108,24 +108,6 @@ namespace API.Features.CheckIn {
             var x = await checkInReadRepo.GetByIdAsync(vm.ReservationId, false);
             if (x != null) {
                 checkInUpdateRepo.UpdateEmail(x, vm.Email);
-                return new Response {
-                    Code = 200,
-                    Icon = Icons.Success.ToString(),
-                    Id = x.ReservationId.ToString(),
-                    Message = ApiMessages.OK()
-                };
-            } else {
-                throw new CustomException() {
-                    ResponseCode = 404
-                };
-            }
-        }
-
-        [HttpGet("emailBoardingPass/{reservationId}")]
-        public async Task<Response> EmailBoardingPass(string reservationId) {
-            var x = await checkInReadRepo.GetByIdAsync(reservationId, true);
-            if (x != null) {
-                await checkInSendToEmail.SendReservationToEmail(mapper.Map<Reservation, CheckInBoardingPassReservationVM>(x));
                 return new Response {
                     Code = 200,
                     Icon = Icons.Success.ToString(),

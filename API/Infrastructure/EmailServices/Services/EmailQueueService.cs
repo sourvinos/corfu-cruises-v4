@@ -73,7 +73,7 @@ namespace API.Infrastructure.EmailServices {
                 if (x != null) {
                     if (x.Initiator == "ResetPassword") { SendResetPassword(x); }
                     if (x.Initiator == "UserDetails") { await SendUserDetailsAsync(x); }
-                    if (x.Initiator == "CheckIn") { await SendReservationAsync(x); }
+                    if (x.Initiator == "CheckIn" || x.Initiator == "Reservation") { await SendReservationAsync(x); }
                     if (x.Initiator == "Invoices") { await DoInvoiceTasks(x); }
                     if (x.Initiator == "Receipts") { await DoReceiptTasks(x); }
                     if (x.Initiator == "SaleLedgers") { await SendLedgerAsync(x); }

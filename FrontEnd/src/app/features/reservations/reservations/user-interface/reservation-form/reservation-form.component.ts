@@ -9,13 +9,17 @@ import { map, startWith } from 'rxjs/operators'
 // Custom
 import { BoardingPassService } from '../../classes/boarding-pass/services/boarding-pass.service'
 import { CachedReservationDialogComponent } from '../cached-reservation-dialog/cached-reservation-dialog.component'
+import { CloneReservationDialogComponent } from '../clone-reservation-dialog/clone-reservation-dialog.component'
 import { CryptoService } from 'src/app/shared/services/crypto.service'
 import { CustomerAutoCompleteVM } from '../../../customers/classes/view-models/customer-autocomplete-vm'
 import { DateHelperService } from 'src/app/shared/services/date-helper.service'
 import { DestinationAutoCompleteVM } from '../../../destinations/classes/view-models/destination-autocomplete-vm'
 import { DexieService } from 'src/app/shared/services/dexie.service'
 import { DialogService } from 'src/app/shared/services/modal-dialog.service'
+import { DocumentTypeAutoCompleteVM } from 'src/app/features/sales/documentTypes/classes/view-models/documentType-autocomplete-vm'
 import { DriverAutoCompleteVM } from '../../../drivers/classes/view-models/driver-autocomplete-vm'
+import { EmailQueueDto } from 'src/app/shared/classes/email-queue-dto'
+import { EmailQueueHttpService } from 'src/app/shared/services/email-queue-http.service'
 import { EmojiService } from 'src/app/shared/services/emoji.service'
 import { FormResolved } from 'src/app/shared/classes/form-resolved'
 import { HelperService } from 'src/app/shared/services/helper.service'
@@ -32,12 +36,10 @@ import { ReservationHttpService } from '../../classes/services/reservation.http.
 import { ReservationReadDto } from '../../classes/dtos/form/reservation-read-dto'
 import { ReservationWriteDto } from '../../classes/dtos/form/reservation-write-dto'
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service'
-import { ValidationService } from './../../../../../shared/services/validation.service'
 import { ShipOwnerBrowserStorageVM } from '../../../shipOwners/classes/view-models/shipOwner-autocomplete-vm'
-import { DocumentTypeAutoCompleteVM } from 'src/app/features/sales/documentTypes/classes/view-models/documentType-autocomplete-vm'
 import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
+import { ValidationService } from './../../../../../shared/services/validation.service'
 import { environment } from 'src/environments/environment'
-import { CloneReservationDialogComponent } from '../clone-reservation-dialog/clone-reservation-dialog.component'
 
 @Component({
     selector: 'reservation-form',
@@ -64,7 +66,6 @@ export class ReservationFormComponent {
     //#region specific
 
     private mirrorRecord: ReservationReadDto
-    private mustGoBackAfterSave = true
     public isNewRecord: boolean
     public passengerDifferenceColor: string
 
@@ -86,7 +87,7 @@ export class ReservationFormComponent {
 
     //#endregion
 
-    constructor(private activatedRoute: ActivatedRoute, private boardingPassService: BoardingPassService, private cryptoService: CryptoService, private dateAdapter: DateAdapter<any>, private dateHelperService: DateHelperService, private dexieService: DexieService, private dialog: MatDialog, private dialogService: DialogService, private emojiService: EmojiService, private formBuilder: FormBuilder, private helperService: HelperService, private interactionService: InteractionService, private localStorageService: LocalStorageService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private reservationHelperService: ReservationHelperService, private reservationHttpService: ReservationHttpService, private router: Router, private sessionStorageService: SessionStorageService) { }
+    constructor(private activatedRoute: ActivatedRoute, private boardingPassService: BoardingPassService, private cryptoService: CryptoService, private dateAdapter: DateAdapter<any>, private dateHelperService: DateHelperService, private dexieService: DexieService, private dialog: MatDialog, private dialogService: DialogService, private emailQueueHttpService: EmailQueueHttpService, private emojiService: EmojiService, private formBuilder: FormBuilder, private helperService: HelperService, private interactionService: InteractionService, private localStorageService: LocalStorageService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private reservationHelperService: ReservationHelperService, private reservationHttpService: ReservationHttpService, private router: Router, private sessionStorageService: SessionStorageService) { }
 
     //#region lifecycle hooks
 
@@ -233,13 +234,11 @@ export class ReservationFormComponent {
 
     public onEmailBoardingPass(): void {
         if (this.helperService.deepEqual(this.reservationForm.value, this.mirrorRecord) == false || this.arePassengersMissing() || this.reservationForm.value.email == '') {
-            this.mustGoBackAfterSave = false
             this.dialogService.open(this.messageDialogService.threePointReservationValidation(), 'error', ['ok'])
         } else {
-            this.boardingPassService.emailBoardingPass(this.reservationForm.value.reservationId).subscribe({
+            this.emailQueueHttpService.save(this.createEmailQueueObject(this.reservationForm.value.reservationId)).subscribe({
                 next: () => {
                     this.helperService.doPostSaveFormTasks(this.messageDialogService.emailSent(), 'ok', this.parentUrl, false)
-                    this.mustGoBackAfterSave = true
                 },
                 error: (errorFromInterceptor) => {
                     this.helperService.doPostSaveFormTasks(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', this.parentUrl, false)
@@ -250,7 +249,6 @@ export class ReservationFormComponent {
 
     public onPrintBoardingPass(): void {
         if (this.helperService.deepEqual(this.reservationForm.value, this.mirrorRecord) == false || this.arePassengersMissing()) {
-            this.mustGoBackAfterSave = false
             this.dialogService.open(this.messageDialogService.twoPointReervationValidation(), 'error', ['ok'])
         } else {
             this.boardingPassService.getCompanyData().then(response => {
@@ -335,6 +333,15 @@ export class ReservationFormComponent {
 
     private cloneRecord(): void {
         this.mirrorRecord = this.reservationForm.value
+    }
+
+    private createEmailQueueObject(z: string): EmailQueueDto {
+        return {
+            initiator: 'Reservation',
+            entityId: z,
+            priority: 3,
+            isSent: false
+        }
     }
 
     private doNewOrEditReservationTasks(): void {

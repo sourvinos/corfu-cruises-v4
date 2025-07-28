@@ -1,4 +1,4 @@
-@model API.Features.Reservations.Reservations.BoardingPassReservationVM
+@model API.Features.CheckIn.CheckInBoardingPassReservationVM
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
     <div id="wrapper" style="max-width: 600px;">
         <p style="font-family: Tahoma; font-size: 13px;">👋 Dear guests,</p>
         <p></p>
-        <div style="font-family: Tahoma; font-size: 13px;">Your reservation for <span style="font-weight: bold;">@Model.Destination.Description </span>is confirmed.</div>
+        <div style="font-family: Tahoma; font-size: 13px;">Your reservation for <span style="font-weight: bold;">@Model.Destination.Description </span>is ready.</div>
         <p></p>
         <div style="font-family: Tahoma; font-size: 13px; font-weight: bold">Pickup details</div>
         <div style="font-family: Tahoma; font-size: 13px;">Date: @Model.Date</div>
@@ -43,7 +43,7 @@
         <div style="font-family: Tahoma; font-size: 13px;">website: www.corfucruises.com</div>
         <div style="font-family: Tahoma; font-size: 13px;">web application: www.appcorfucruises.com</div>
         <p></p>
-        <div style="font-family: Tahoma; font-size: 13px;">🚫 Please don't reply to this email.</div>
+        <div style="font-family: Tahoma; font-size: 13px;">🚫 Please don't reply to this email because nobody is going to receive it.</div>
     </div>
 </body>
 

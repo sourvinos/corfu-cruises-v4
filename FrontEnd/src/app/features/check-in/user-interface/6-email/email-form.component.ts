@@ -4,9 +4,9 @@ import { Router } from '@angular/router'
 import { Subject } from 'rxjs'
 // Custom
 import { CheckInHttpService } from '../../classes/services/check-in.http.service'
-import { DialogService } from 'src/app/shared/services/modal-dialog.service'
+import { EmailQueueDto } from 'src/app/shared/classes/email-queue-dto'
+import { EmailQueueHttpService } from 'src/app/shared/services/email-queue-http.service'
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service'
-import { MessageDialogService } from 'src/app/shared/services/message-dialog.service'
 import { MessageInputHintService } from 'src/app/shared/services/message-input-hint.service'
 import { MessageLabelService } from 'src/app/shared/services/message-label.service'
 
@@ -27,7 +27,7 @@ export class EmailFormComponent {
 
     //#endregion
 
-    constructor(private messageSnackbarService: MessageDialogService, private dialogService: DialogService, private localStorageService: LocalStorageService, private checkInHttpService: CheckInHttpService, private router: Router, private formBuilder: FormBuilder, private messageLabelService: MessageLabelService, private messageHintService: MessageInputHintService) { }
+    constructor(private checkInHttpService: CheckInHttpService, private emailQueueHttpService: EmailQueueHttpService, private formBuilder: FormBuilder, private localStorageService: LocalStorageService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private router: Router) { }
 
     //#region lifecycle hooks
 
@@ -59,19 +59,25 @@ export class EmailFormComponent {
     public next(): void {
         this.reservation = JSON.parse(this.localStorageService.getItem('reservation'))
         this.reservation.email = this.form.value.email
-        this.checkInHttpService.updateEmail(this.reservation).subscribe({
-            complete: () => {
+        this.checkInHttpService.updateEmail(this.reservation).subscribe(() => {
+            this.emailQueueHttpService.save(this.createEmailQueueObject(this.reservation.reservationId)).subscribe(() => {
                 this.router.navigate(['checkIn/completion'])
-            },
-            error: () => {
-                this.dialogService.open(this.messageSnackbarService.emailNotSent(), 'error', ['ok'])
-            }
+            })
         })
     }
 
     //#endregion
 
     //#region private methods
+
+    private createEmailQueueObject(z: string): EmailQueueDto {
+        return {
+            initiator: 'CheckIn',
+            entityId: z,
+            priority: 3,
+            isSent: false
+        }
+    }
 
     private initForm(): void {
         this.form = this.formBuilder.group({

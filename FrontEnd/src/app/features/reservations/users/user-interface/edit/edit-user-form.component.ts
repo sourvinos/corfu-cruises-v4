@@ -32,7 +32,7 @@ import { ValidationService } from '../../../../../shared/services/validation.ser
 
 export class EditUserFormComponent {
 
-    //#region common 
+    //#region common
 
     private record: UserReadDto
     public feature = 'editUserForm'

@@ -64,7 +64,7 @@ namespace API.Features.CheckIn {
         }
 
         private static string LoadTemplateFromFile() {
-            string FilePath = Directory.GetCurrentDirectory() + "\\Templates\\CheckInBoardingPass.cshtml";
+            string FilePath = Directory.GetCurrentDirectory() + "\\Templates\\BoardingPass.cshtml";
             StreamReader str = new(FilePath);
             string template = str.ReadToEnd();
             str.Close();
