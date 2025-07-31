@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using API.Infrastructure.Helpers;
 
 namespace API.Features.Reservations.Reservations {
 
@@ -36,7 +37,7 @@ namespace API.Features.Reservations.Reservations {
                 var connectedUserDetails = Identity.GetConnectedUserDetails(userManager, simpleUser);
                 reservations = await GetReservationsForLinkedCustomerAsync(date, (int)connectedUserDetails.CustomerId);
             }
-            return mapper.Map<IEnumerable<Reservation>, IEnumerable<ReservationListVM>>(reservations);
+            return ReservationsListMapper.Map(reservations);
         }
 
         public async Task<IEnumerable<ReservationListVM>> GetByRefNoAsync(string refNo) {
@@ -85,7 +86,7 @@ namespace API.Features.Reservations.Reservations {
                   .SingleOrDefaultAsync();
         }
 
-         public async Task<Reservation> GetByIdForPatchEmailSent(string reservationId) {
+        public async Task<Reservation> GetByIdForPatchEmailSent(string reservationId) {
             return await context.Reservations
                 .AsNoTracking()
                 .Where(x => x.ReservationId.ToString() == reservationId)
