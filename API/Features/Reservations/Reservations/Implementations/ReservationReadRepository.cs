@@ -37,7 +37,7 @@ namespace API.Features.Reservations.Reservations {
                 var connectedUserDetails = Identity.GetConnectedUserDetails(userManager, simpleUser);
                 reservations = await GetReservationsForLinkedCustomerAsync(date, (int)connectedUserDetails.CustomerId);
             }
-            return ReservationsListMapper.Map(reservations);
+            return mapper.Map<IEnumerable<Reservation>, IEnumerable<ReservationListVM>>(reservations);
         }
 
         public async Task<IEnumerable<ReservationListVM>> GetByRefNoAsync(string refNo) {
