@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -9,11 +8,12 @@ namespace API {
 
         public static void Main(string[] args) {
             ConfigureLogger();
-            WebHost.CreateDefaultBuilder(args)
-               .UseStartup<Startup>()
-               .Build()
-               .Run();
+            CreateHostBuilder(args).Build().Run();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder => {
+             webBuilder.UseStartup<Startup>();
+        });
 
         private static void ConfigureLogger() {
             Log.Logger = new LoggerConfiguration()

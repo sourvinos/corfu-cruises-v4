@@ -23,7 +23,7 @@ namespace API.Infrastructure.Middleware {
         }
 
         public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next) {
-            try {                                                                                                                                                                               
+            try {
                 await next(httpContext);
             }
             catch (CustomException exception) {
@@ -33,25 +33,9 @@ namespace API.Infrastructure.Middleware {
                 await CreateConcurrencyErrorResponse(httpContext, exception);
             }
             catch (Exception exception) {
-                if (exception.Message.Contains("boo.com")) {
-                    await CreateCustomHttpErrorResponse(httpContext, exception);
-                } else {
-                    LogError(exception, httpContextAccessor, userManager);
-                    await CreateServerErrorResponse(httpContext, exception);
-                }
+                LogError(exception, httpContextAccessor, userManager);
+                await CreateServerErrorResponse(httpContext, exception);
             }
-        }
-
-        private static Task CreateCustomHttpErrorResponse(HttpContext httpContext, Exception exception) {
-            httpContext.Response.StatusCode = 501;
-            httpContext.Response.ContentType = "application/json";
-            var result = JsonConvert.SerializeObject(new Response {
-                Code = 501,
-                Icon = Icons.Error.ToString(),
-                Id = null,
-                Message = GetErrorMessage(501)
-            });
-            return httpContext.Response.WriteAsync(result);
         }
 
         private static Task CreateCustomErrorResponse(HttpContext httpContext, CustomException e) {

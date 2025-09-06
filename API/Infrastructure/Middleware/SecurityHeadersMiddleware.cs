@@ -13,8 +13,6 @@ namespace API.Infrastructure.Middleware {
         }
 
         public async Task InvokeAsync(HttpContext context) {
-            context.Response.Headers.Remove("Server");
-            context.Response.Headers.Remove("X-Powered-By");
             context.Response.Headers.Add("X-XSS-Protection", new StringValues("1; mode=block"));
             context.Response.Headers.Add("X-Frame-Options", new StringValues("DENY"));
             context.Response.Headers.Add("Referrer-Policy", new StringValues("no-referrer-when-downgrade"));
