@@ -10,19 +10,6 @@ namespace API.Features.Reservations.Reservations {
     public class ReservationMappingProfile : Profile {
 
         public ReservationMappingProfile() {
-            // List
-            CreateMap<Reservation, ReservationListVM>()
-                .ForMember(x => x.Date, x => x.MapFrom(x => DateHelpers.DateToISOString(x.Date)))
-                .ForMember(x => x.Customer, x => x.MapFrom(x => new SimpleEntity { Id = x.Customer.Id, Description = x.Customer.Description }))
-                .ForMember(x => x.CoachRoute, x => x.MapFrom(x => new ReservationListCoachRouteVM { Id = x.PickupPoint.CoachRoute.Id, Abbreviation = x.PickupPoint.CoachRoute.Abbreviation }))
-                .ForMember(x => x.Destination, x => x.MapFrom(x => new ReservationListDestinationVM { Id = x.Destination.Id, Description = x.Destination.Description, Abbreviation = x.Destination.Abbreviation }))
-                .ForMember(x => x.PickupPoint, x => x.MapFrom(x => new ReservationListPickupPointVM { Id = x.PickupPoint.Id, Description = x.PickupPoint.Description, Time = x.PickupPoint.Time }))
-                .ForMember(x => x.Driver, x => x.MapFrom(x => new ReservationListDriverVM { Id = x.Driver == null ? 0 : x.Driver.Id, Description = x.Driver == null ? "(EMPTY)" : x.Driver.Description, Phones = x.Driver == null ? "(EMPTY)" : x.Driver.Phones }))
-                .ForMember(x => x.Port, x => x.MapFrom(x => new ReservationListPortVM { Id = x.Port.Id, Description = x.Port.Description, Abbreviation = x.Port.Abbreviation }))
-                .ForMember(x => x.PortAlternate, x => x.MapFrom(x => new ReservationListPortVM { Id = x.PortAlternate == null ? 0 : x.PortAlternate.Id, Description = x.PortAlternate == null ? "(EMPTY)" : x.PortAlternate.Description, Abbreviation = x.PortAlternate == null ? "(EMPTY)" : x.PortAlternate.Abbreviation }))
-                .ForMember(x => x.Ship, x => x.MapFrom(x => new ReservationListShipVM { Id = x.Ship == null ? 0 : x.Ship.Id, Description = x.Ship == null ? "(EMPTY)" : x.Ship.Description, Abbreviation = x.Ship == null ? "(EMPTY)" : x.Ship.Abbreviation }))
-                .ForMember(x => x.PassengerCount, x => x.MapFrom(x => x.Passengers.Count))
-                .ForMember(x => x.PassengerDifference, x => x.MapFrom(x => x.TotalPax - x.Passengers.Count));
             // DriverList
             CreateMap<Reservation, ReservationDriverListVM>()
                 .ForMember(x => x.ExactPoint, x => x.MapFrom(x => x.PickupPoint.ExactPoint))
