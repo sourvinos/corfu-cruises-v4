@@ -25,7 +25,7 @@ import { environment } from 'src/environments/environment'
 
 export class LoginFormComponent {
 
-    //#region common #6
+    //#region variables
 
     public feature = 'loginForm'
     public featureIcon = 'login'
@@ -34,30 +34,12 @@ export class LoginFormComponent {
     public input: InputTabStopDirective
     public parentUrl = null
 
-    //#endregion
-
-    //#region specific #2
-
     public hidePassword = true
     public isLoading = new Subject<boolean>()
 
     //#endregion
 
-    constructor(
-        private accountService: AccountService,
-        private dateHelperService: DateHelperService,
-        private dialogService: DialogService,
-        private emojiService: EmojiService,
-        private formBuilder: FormBuilder,
-        private helperService: HelperService,
-        private localStorageService: LocalStorageService,
-        private messageDialogService: MessageDialogService,
-        private messageHintService: MessageInputHintService,
-        private messageLabelService: MessageLabelService,
-        private router: Router,
-        private sessionStorageService: SessionStorageService,
-        private titleService: Title,
-    ) { }
+    constructor(private accountService: AccountService, private dateHelperService: DateHelperService, private dialogService: DialogService, private emojiService: EmojiService, private formBuilder: FormBuilder, private helperService: HelperService, private localStorageService: LocalStorageService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private router: Router, private sessionStorageService: SessionStorageService, private titleService: Title) { }
 
     //#region lifecycle hooks
 
@@ -75,10 +57,6 @@ export class LoginFormComponent {
     //#endregion
 
     //#region public methods
-
-    public getEmoji(emoji: string): string {
-        return this.emojiService.getEmoji(emoji)
-    }
 
     public getHint(id: string, minmax = 0): string {
         return this.messageHintService.getDescription(id, minmax)

@@ -74,12 +74,12 @@ export class AccountService extends HttpDataService {
             { 'item': 'toDate', 'when': 'always' },
             { 'item': 'dayCount', 'when': 'always' },
             // Criteria
+            { 'item': 'balanceSheetCriteria', 'when': 'production' },
             { 'item': 'boarding-criteria', 'when': 'production' },
+            { 'item': 'invoiceListCriteria', 'when': 'always' },
             { 'item': 'ledger-criteria', 'when': 'production' },
             { 'item': 'manifest-criteria', 'when': 'production' },
-            { 'item': 'invoiceListCriteria', 'when': 'production' },
             { 'item': 'receipt-list-criteria', 'when': 'production' },
-            { 'item': 'balanceSheetCriteria', 'when': 'production' },
             { 'item': 'revenuesCriteria', 'when': 'production' },
             // Tasks
             { 'item': 'reservationList-filters', 'when': 'always' }, { 'item': 'reservationList-id', 'when': 'always' }, { 'item': 'reservationList-scrollTop', 'when': 'always' },

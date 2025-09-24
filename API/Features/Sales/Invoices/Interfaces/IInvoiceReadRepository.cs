@@ -6,7 +6,6 @@ namespace API.Features.Sales.Invoices {
 
     public interface IInvoiceReadRepository : IRepository<Invoice> {
 
-        Task<IEnumerable<InvoiceListVM>> GetAsync();
         Task<IEnumerable<InvoiceListVM>> GetForPeriodAsync(InvoiceListCriteriaVM criteria);
         Task<Invoice> GetByIdAsync(string invoiceId, bool includeTables);
         Task<Invoice> GetByIdForPdfAsync(string invoiceId);

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
+using API.Infrastructure.Helpers;
 
 namespace API.Features.Sales.Invoices {
 
@@ -21,33 +22,49 @@ namespace API.Features.Sales.Invoices {
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<InvoiceListVM>> GetAsync() {
-            var invoices = await context.Invoices
-                .AsNoTracking()
-                .Where(x => x.DiscriminatorId == 1)
-                .Include(x => x.Customer)
-                .Include(x => x.Destination)
-                .Include(x => x.DocumentType)
-                .Include(x => x.Ship)
-                .OrderBy(x => x.Date)
-                .ToListAsync();
-            return mapper.Map<IEnumerable<Invoice>, IEnumerable<InvoiceListVM>>(invoices);
-        }
-
         public async Task<IEnumerable<InvoiceListVM>> GetForPeriodAsync(InvoiceListCriteriaVM criteria) {
-            var invoices = await context.Invoices
+            return await context.Invoices
                 .AsNoTracking()
-                .Where(x => x.DiscriminatorId == 1)
                 .Include(x => x.Customer)
                 .Include(x => x.Destination)
                 .Include(x => x.DocumentType)
                 .Include(x => x.Ship)
                 .Include(x => x.ShipOwner)
                 .Include(x => x.Aade)
-                .Where(x => x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
+                .Where(x => x.DiscriminatorId == 1 && x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
                 .OrderBy(x => x.Date).ThenBy(x => x.ShipOwner.Description).ThenBy(x => x.Ship.Description).ThenBy(x => x.InvoiceNo)
-                .ToListAsync();
-            return mapper.Map<IEnumerable<Invoice>, IEnumerable<InvoiceListVM>>(invoices);
+                .Select(x => new InvoiceListVM {
+                    InvoiceId = x.InvoiceId.ToString(),
+                    Date = DateHelpers.DateToISOString(x.Date),
+                    InvoiceNo = x.InvoiceNo,
+                    Customer = new SimpleEntity {
+                        Id = x.Customer.Id,
+                        Description = x.Customer.Description
+                    },
+                    Destination = new SimpleEntity {
+                        Id = x.Destination.Id,
+                        Description = x.Destination.Description
+                    },
+                    DocumentType = new SimpleEntity {
+                        Id = x.DocumentType.Id,
+                        Description = x.DocumentType.Description
+                    },
+                    Ship = new SimpleEntity {
+                        Id = x.Ship.Id,
+                        Description = x.Ship.Description
+                    },
+                    ShipOwner = new SimpleEntity {
+                        Id = x.ShipOwner.Id,
+                        Description = x.ShipOwner.Description
+                    },
+                    GrossAmount = x.GrossAmount,
+                    IsEmailPending = x.IsEmailPending,
+                    IsEmailSent = x.IsEmailSent,
+                    Aade = new InvoiceListAadeVM {
+                        Mark = x.Aade.Mark != "",
+                        MarkCancel = x.Aade.MarkCancel != ""
+                    }
+                }).ToListAsync();
         }
 
         public async Task<Invoice> GetByIdAsync(string invoiceId, bool includeTables) {

@@ -30,12 +30,6 @@ namespace API.Features.Sales.Receipts {
             this.receiptValidation = transactionValidation;
         }
 
-        [HttpGet]
-        [Authorize(Roles = "admin")]
-        public async Task<IEnumerable<ReceiptListVM>> GetAsync() {
-            return await receiptRepo.GetAsync();
-        }
-
         [HttpPost("{getForPeriod}")]
         [Authorize(Roles = "admin")]
         public async Task<IEnumerable<ReceiptListVM>> GetForPeriodAsync([FromBody] ReceiptListCriteriaVM criteria) {

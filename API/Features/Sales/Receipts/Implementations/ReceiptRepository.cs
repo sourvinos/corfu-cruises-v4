@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using System;
 using Microsoft.EntityFrameworkCore.Storage;
+using API.Infrastructure.Helpers;
 
 namespace API.Features.Sales.Receipts {
 
@@ -24,31 +25,36 @@ namespace API.Features.Sales.Receipts {
             this.testingEnvironment = testingEnvironment.Value;
         }
 
-        public async Task<IEnumerable<ReceiptListVM>> GetAsync() {
-            var receipts = await context.Receipts
+        public async Task<IEnumerable<ReceiptListVM>> GetForPeriodAsync(ReceiptListCriteriaVM criteria) {
+            return await context.Receipts
                 .AsNoTracking()
                 .Include(x => x.Customer)
                 .Include(x => x.DocumentType)
                 .Include(x => x.PaymentMethod)
                 .Include(x => x.ShipOwner)
-                .Where(x => x.DiscriminatorId == 2)
-                .OrderBy(x => x.Date)
-                .ToListAsync();
-            return mapper.Map<IEnumerable<Receipt>, IEnumerable<ReceiptListVM>>(receipts);
-        }
-
-        public async Task<IEnumerable<ReceiptListVM>> GetForPeriodAsync(ReceiptListCriteriaVM criteria) {
-            var receipts = await context.Receipts
-                 .AsNoTracking()
-                 .Where(x => x.DiscriminatorId == 2)
-                 .Include(x => x.Customer)
-                 .Include(x => x.DocumentType)
-                 .Include(x => x.PaymentMethod)
-                 .Include(x => x.ShipOwner)
-                 .Where(x => x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
-                 .OrderBy(x => x.Date).ThenBy(x => x.ShipOwner.Description).ThenBy(x => x.DocumentType.Description).ThenBy(x => x.InvoiceNo)
-                 .ToListAsync();
-            return mapper.Map<IEnumerable<Receipt>, IEnumerable<ReceiptListVM>>(receipts);
+                .Where(x => x.DiscriminatorId == 2 && x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
+                .OrderBy(x => x.Date).ThenBy(x => x.ShipOwner.Description).ThenBy(x => x.DocumentType.Description).ThenBy(x => x.InvoiceNo)
+                .Select(x => new ReceiptListVM {
+                    InvoiceId = x.InvoiceId.ToString(),
+                    Date = DateHelpers.DateToISOString(x.Date),
+                    InvoiceNo = x.InvoiceNo,
+                    Customer = new SimpleEntity {
+                        Id = x.Customer.Id,
+                        Description = x.Customer.Description
+                    },
+                    DocumentType = new SimpleEntity {
+                        Id = x.DocumentType.Id,
+                        Description = x.DocumentType.Description
+                    },
+                    ShipOwner = new SimpleEntity {
+                        Id = x.ShipOwner.Id,
+                        Description = x.ShipOwner.Description
+                    },
+                    GrossAmount = x.GrossAmount,
+                    IsEmailPending = x.IsEmailPending,
+                    IsEmailSent = x.IsEmailSent,
+                    IsCancelled = x.IsCancelled
+                }).ToListAsync();
         }
 
         public async Task<Receipt> GetByIdAsync(string invoiceId, bool includeTables) {
