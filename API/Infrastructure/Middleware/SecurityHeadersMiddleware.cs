@@ -19,7 +19,7 @@ namespace API.Infrastructure.Middleware {
             context.Response.Headers.Append("X-Content-Type-Options", new StringValues("nosniff"));
             context.Response.Headers.Append("X-Permitted-Cross-Domain-Policies", new StringValues("none"));
             context.Response.Headers.Append("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
-            context.Response.Headers.Append("Content-Security-Policy", new StringValues("font-src https://appsourvinos.com https://fonts.cdnfonts.com fonts.googleapis.com fonts.gstatic.com"));
+            context.Response.Headers.Append("Content-Security-Policy", new StringValues("font-src https://appcorfucruises.com https://appsourvinos.com https://fonts.cdnfonts.com fonts.googleapis.com fonts.gstatic.com"));
             await _next(context);
         }
     }

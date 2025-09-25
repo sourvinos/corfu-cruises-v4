@@ -43,7 +43,7 @@ namespace API.Features.Sales.Ledgers {
             var customer = GetCustomerAsync(model.CustomerId).Result;
             var message = new MimeMessage { Sender = MailboxAddress.Parse(emailInvoiceSettings.Username) };
             message.From.Add(new MailboxAddress(emailInvoiceSettings.From, emailInvoiceSettings.Username));
-            message.To.Add(MailboxAddress.Parse(customer.Email));
+            message.To.AddRange(BuildReceivers(customer.Email));
             message.Subject = "✨ Λογιστική καρτέλα και ανάλυση λογαριασμού";
             var builder = new BodyBuilder { HtmlBody = await BuildEmailLedgerTemplate(customer.Email) };
             foreach (var filename in model.Filenames) {
@@ -51,6 +51,15 @@ namespace API.Features.Sales.Ledgers {
             }
             message.Body = builder.ToMessageBody();
             return message;
+        }
+
+        private static InternetAddressList BuildReceivers(string email) {
+            InternetAddressList internetAddressList = new();
+            var emails = email.Split(",");
+            foreach (string address in emails) {
+                internetAddressList.Add(MailboxAddress.Parse(EmailHelpers.BeValidEmailAddress(address.Trim()) ? address.Trim() : "postmaster@appcorfucruises.com"));
+            }
+            return internetAddressList;
         }
 
         private async Task<string> BuildEmailLedgerTemplate(string email) {
