@@ -67,8 +67,8 @@ namespace API.Features.Reservations.Reservations {
 
         [HttpGet("refNo/{refNo}")]
         [Authorize(Roles = "user, admin")]
-        public async Task<IEnumerable<ReservationListVM>> GetByRefNoAsync([FromRoute] string refNo) {
-            return await reservationReadRepo.GetByRefNoAsync(refNo);
+        public IQueryable<ReservationListVM> GetByRefNoAsync([FromRoute] string refNo) {
+            return reservationReadRepo.GetByRefNoAsync(refNo);
         }
 
         [HttpGet("{reservationId}")]
