@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using API.Infrastructure.Helpers;
 
 namespace API.Features.Reservations.Reservations {
 
@@ -27,16 +28,14 @@ namespace API.Features.Reservations.Reservations {
             this.userManager = userManager;
         }
 
-        public async Task<IEnumerable<ReservationListVM>> GetByDateAsync(string date) {
-            IEnumerable<Reservation> reservations;
+        public IQueryable<ReservationListVM> GetByDateAsync(string date) {
             if (Identity.IsUserAdmin(httpContext)) {
-                reservations = await GetReservationsFromAllUsersByDateAsync(date);
+                return GetReservationsFromAllUsersByDate(date);
             } else {
                 var simpleUser = Identity.GetConnectedUserId(httpContext);
                 var connectedUserDetails = Identity.GetConnectedUserDetails(userManager, simpleUser);
-                reservations = await GetReservationsForLinkedCustomerAsync(date, (int)connectedUserDetails.CustomerId);
+                return GetReservationsForLinkedCustomerAsync(date, (int)connectedUserDetails.CustomerId);
             }
-            return ReservationMappingReadDomainToListVM.ReservationDomainToListVM(reservations);
         }
 
         public async Task<IEnumerable<ReservationListVM>> GetByRefNoAsync(string refNo) {
@@ -92,8 +91,8 @@ namespace API.Features.Reservations.Reservations {
                 .SingleOrDefaultAsync();
         }
 
-        private async Task<IEnumerable<Reservation>> GetReservationsFromAllUsersByDateAsync(string date) {
-            return await context.Reservations
+        private IQueryable<ReservationListVM> GetReservationsFromAllUsersByDate(string date) {
+            return context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Customer)
                 .Include(x => x.Destination)
@@ -101,14 +100,61 @@ namespace API.Features.Reservations.Reservations {
                 .Include(x => x.PickupPoint).ThenInclude(y => y.CoachRoute)
                 .Include(x => x.Port)
                 .Include(x => x.PortAlternate)
-                .Include(x => x.Ship)
                 .Include(x => x.Passengers)
-                .Where(x => x.Date == Convert.ToDateTime(date))
-                .ToListAsync();
+                .Where(x => x.Date == Convert.ToDateTime(date)).Select(x => new ReservationListVM {
+                    ReservationId = x.ReservationId,
+                    Date = DateHelpers.DateToISOString(x.Date),
+                    RefNo = x.RefNo,
+                    TicketNo = x.TicketNo,
+                    Adults = x.Adults,
+                    Kids = x.Kids,
+                    Free = x.Free,
+                    TotalPax = x.TotalPax,
+                    Customer = new SimpleEntity {
+                        Id = x.Customer.Id,
+                        Description = x.Customer.Description
+                    },
+                    CoachRoute = new ReservationListCoachRouteVM {
+                        Id = x.PickupPoint.CoachRoute.Id,
+                        Abbreviation = x.PickupPoint.CoachRoute.Abbreviation
+                    },
+                    Destination = new ReservationListDestinationVM {
+                        Id = x.Destination.Id,
+                        Abbreviation = x.Destination.Abbreviation,
+                        Description = x.Destination.Description
+                    },
+                    Driver = new ReservationListDriverVM {
+                        Id = x.Driver != null ? x.Driver.Id : 0,
+                        Description = x.Driver != null ? x.Driver.Description : "(EMPTY)",
+                        Phones = x.Driver != null ? x.Driver.Phones : ""
+                    },
+                    PickupPoint = new ReservationListPickupPointVM {
+                        Id = x.PickupPoint.Id,
+                        Description = x.PickupPoint.Description,
+                        Time = x.PickupPoint.Time
+                    },
+                    Port = new ReservationListPortVM {
+                        Id = x.Port.Id,
+                        Abbreviation = x.Port.Abbreviation,
+                        Description = x.Port.Description
+                    },
+                    PortAlternate = new ReservationListPortVM {
+                        Id = x.PortAlternate.Id,
+                        Abbreviation = x.PortAlternate.Abbreviation,
+                        Description = x.PortAlternate.Description
+                    },
+                    Ship = new ReservationListShipVM {
+                        Id = x.Ship != null ? x.Ship.Id : 0,
+                        Abbreviation = x.Ship != null ? x.Ship.Abbreviation : "(EMPTY)",
+                        Description = x.Ship != null ? x.Ship.Description : "(EMPTY)"
+                    },
+                    PassengerCount = x.Passengers.Count,
+                    PassengerDifference = x.TotalPax - x.Passengers.Count
+                });
         }
 
-        private async Task<IEnumerable<Reservation>> GetReservationsForLinkedCustomerAsync(string date, int customerId) {
-            return await context.Reservations
+        private IQueryable<ReservationListVM> GetReservationsForLinkedCustomerAsync(string date, int customerId) {
+            return context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Customer)
                 .Include(x => x.Destination)
@@ -116,10 +162,58 @@ namespace API.Features.Reservations.Reservations {
                 .Include(x => x.PickupPoint).ThenInclude(y => y.CoachRoute)
                 .Include(x => x.Port)
                 .Include(x => x.PortAlternate)
-                .Include(x => x.Ship)
                 .Include(x => x.Passengers)
                 .Where(x => x.Date == Convert.ToDateTime(date) && x.CustomerId == customerId)
-                .ToListAsync();
+                .Select(x => new ReservationListVM {
+                    ReservationId = x.ReservationId,
+                    Date = DateHelpers.DateToISOString(x.Date),
+                    RefNo = x.RefNo,
+                    TicketNo = x.TicketNo,
+                    Adults = x.Adults,
+                    Kids = x.Kids,
+                    Free = x.Free,
+                    TotalPax = x.TotalPax,
+                    Customer = new SimpleEntity {
+                        Id = x.Customer.Id,
+                        Description = x.Customer.Description
+                    },
+                    CoachRoute = new ReservationListCoachRouteVM {
+                        Id = x.PickupPoint.CoachRoute.Id,
+                        Abbreviation = x.PickupPoint.CoachRoute.Abbreviation
+                    },
+                    Destination = new ReservationListDestinationVM {
+                        Id = x.Destination.Id,
+                        Abbreviation = x.Destination.Abbreviation,
+                        Description = x.Destination.Description
+                    },
+                    Driver = new ReservationListDriverVM {
+                        Id = x.Driver != null ? x.Driver.Id : 0,
+                        Description = x.Driver != null ? x.Driver.Description : "(EMPTY)",
+                        Phones = x.Driver != null ? x.Driver.Phones : ""
+                    },
+                    PickupPoint = new ReservationListPickupPointVM {
+                        Id = x.PickupPoint.Id,
+                        Description = x.PickupPoint.Description,
+                        Time = x.PickupPoint.Time
+                    },
+                    Port = new ReservationListPortVM {
+                        Id = x.Port.Id,
+                        Abbreviation = x.Port.Abbreviation,
+                        Description = x.Port.Description
+                    },
+                    PortAlternate = new ReservationListPortVM {
+                        Id = x.PortAlternate.Id,
+                        Abbreviation = x.PortAlternate.Abbreviation,
+                        Description = x.PortAlternate.Description
+                    },
+                    Ship = new ReservationListShipVM {
+                        Id = x.Ship != null ? x.Ship.Id : 0,
+                        Abbreviation = x.Ship != null ? x.Ship.Abbreviation : "(EMPTY)",
+                        Description = x.Ship != null ? x.Ship.Description : "(EMPTY)"
+                    },
+                    PassengerCount = x.Passengers.Count,
+                    PassengerDifference = x.TotalPax - x.Passengers.Count
+                });
         }
 
         private async Task<IEnumerable<Reservation>> GetReservationsFromAllUsersByRefNoAsync(string refNo) {

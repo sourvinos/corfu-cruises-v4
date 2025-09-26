@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Features.Reservations.Customers;
 using API.Features.Reservations.Schedules;
@@ -54,8 +55,8 @@ namespace API.Features.Reservations.Reservations {
 
         [HttpGet("date/{date}")]
         [Authorize(Roles = "user, admin")]
-        public async Task<IEnumerable<ReservationListVM>> GetByDateListAsync([FromRoute] string date) {
-            return await reservationReadRepo.GetByDateAsync(date);
+        public IQueryable<ReservationListVM> GetByDateListAsync([FromRoute] string date) {
+            return reservationReadRepo.GetByDateAsync(date);
         }
 
         [HttpGet("date/{date}/driver/{driverId}")]
@@ -226,7 +227,7 @@ namespace API.Features.Reservations.Reservations {
             return reservationValidation.OverbookedPax(date, destinationId);
         }
 
-         [HttpGet("getPaxLimit/{customerId}/date/{date}")]
+        [HttpGet("getPaxLimit/{customerId}/date/{date}")]
         [Authorize(Roles = "user, admin")]
         public async Task<ResponseWithBody> ValidatePaxLimit(int customerId, string date) {
             var x = await customerRepo.GetByIdAsync(customerId, false);
