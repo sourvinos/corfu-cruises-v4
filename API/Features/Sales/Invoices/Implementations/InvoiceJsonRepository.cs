@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using API.Features.Reservations.ShipOwners;
@@ -47,7 +48,7 @@ namespace API.Features.Sales.Invoices {
 
         public string SaveJsonInvoice(JsonInvoiceVM x) {
             var jsonString = JsonConvert.SerializeObject(x);
-            var fullPathname = FileSystemHelpers.CreateInvoiceJsonFullPathName(x,"Jsons", "invoice");
+            var fullPathname = FileSystemHelpers.CreateInvoiceJsonFullPathName(x, "Jsons", "invoice");
             using StreamWriter outputFile = new(fullPathname);
             outputFile.Write(jsonString);
             return jsonString;
@@ -60,6 +61,16 @@ namespace API.Features.Sales.Invoices {
             var content = new StringContent(x, UTF8Encoding.UTF8, "application/json");
             var response = await client.PostAsync(z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoUrl : z.OxygenLiveUrl : "", content);
             return await response.Content.ReadAsStringAsync();
+        }
+
+        public void DownloadJsonInvoiceAsync(ShipOwner z, string x) {
+            // https://api.mydataprovider.gr/v2/invoices/01k1jbv0q1bbqb8m2ngxffhzyn
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoAPIKey : z.OxygenLiveAPIKey : "");
+            var content = new StringContent(x, UTF8Encoding.UTF8, "application/json");
+            var response = client.GetAsync(z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoUrl + "/" + x : z.OxygenLiveUrl + "/" + x : "").Result;
+            var i = response.Content.ReadFromJsonAsync<object>();
         }
 
         public JObject ShowResponseAfterUploadJsonInvoice(string response) {
