@@ -5,9 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace API.Features.Sales.Invoices {
@@ -58,14 +55,12 @@ namespace API.Features.Sales.Invoices {
                 using HttpClient client = new();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", x.Ship.ShipOwner.OxygenLiveAPIKey);
-                var response = await client.GetStringAsync(x.Ship.ShipOwner.OxygenLiveUrl + "/" + x.Aade.Id);
-                JObject json = JObject.Parse(response);
                 return new ResponseWithBody {
                     Code = 200,
                     Icon = Icons.Info.ToString(),
                     Body = new {
                         invoiceId,
-                        json
+                        oxygen = JObject.Parse(await client.GetStringAsync(x.Ship.ShipOwner.OxygenLiveUrl + "/" + x.Aade.Id))
                     },
                     Message = ApiMessages.OK()
                 };
@@ -79,12 +74,6 @@ namespace API.Features.Sales.Invoices {
         private string SaveInvoiceResponse(JsonInvoiceVM invoice, string subdirectory, string response) {
             return invoiceJsonRepo.SaveInvoiceJsonResponse(invoice, subdirectory, response);
         }
-
-    }
-
-    public class CSharpMember {
-
-        public int Code { get; set; }
 
     }
 
