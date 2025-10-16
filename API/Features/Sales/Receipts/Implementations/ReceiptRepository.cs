@@ -46,6 +46,10 @@ namespace API.Features.Sales.Receipts {
                         Id = x.DocumentType.Id,
                         Description = x.DocumentType.Description
                     },
+                    PaymentMethod = new SimpleEntity {
+                        Id = x.PaymentMethod.Id,
+                        Description = x.PaymentMethod.Description
+                    },
                     ShipOwner = new SimpleEntity {
                         Id = x.ShipOwner.Id,
                         Description = x.ShipOwner.Description
