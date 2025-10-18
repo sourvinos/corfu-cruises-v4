@@ -1,3 +1,4 @@
+import { ReceiptListCustomerVM } from './receipt-list-customer-vm'
 import { SimpleEntity } from '../../../../../../shared/classes/simple-entity'
 
 export interface ReceiptListVM {
@@ -5,7 +6,7 @@ export interface ReceiptListVM {
     invoiceId: string
     date: SimpleEntity
     formattedDate: string
-    customer: SimpleEntity
+    customer: ReceiptListCustomerVM
     documentType: SimpleEntity
     shipOwner: SimpleEntity
     paymentMethod: SimpleEntity

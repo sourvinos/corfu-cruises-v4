@@ -3,6 +3,7 @@ export interface ReceiptListExportVM {
     date: string
     issuer: string
     customer: string
+    vatNumber: string
     documentType: string
     paymentMethod: string
     invoiceNo: number

@@ -7,7 +7,7 @@ namespace API.Features.Sales.Receipts {
         public string InvoiceId { get; set; }
         public string Date { get; set; }
         public int InvoiceNo { get; set; }
-        public SimpleEntity Customer { get; set; }
+        public ReceiptListCustomerVM Customer { get; set; }
         public SimpleEntity DocumentType { get; set; }
         public SimpleEntity ShipOwner { get; set; }
         public SimpleEntity PaymentMethod { get; set; }

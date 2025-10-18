@@ -3331,6 +3331,10 @@
                 "description": "Πελάτης"
             },
             {
+                "id": "headerCustomerVatNumber",
+                "description": "ΑΦΜ"
+            },
+            {
                 "id": "headerDocumentType",
                 "description": "Παραστατικό"
             },
@@ -3341,6 +3345,10 @@
             {
                 "id": "headerGrossAmount",
                 "description": "Αξία"
+            },
+            {
+                "id": "headerRemarks",
+                "description": "Παρατηρήσεις"
             },
             {
                 "id": "exportSelected",

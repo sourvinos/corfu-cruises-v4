@@ -38,9 +38,10 @@ namespace API.Features.Sales.Receipts {
                     InvoiceId = x.InvoiceId.ToString(),
                     Date = DateHelpers.DateToISOString(x.Date),
                     InvoiceNo = x.InvoiceNo,
-                    Customer = new SimpleEntity {
+                    Customer = new ReceiptListCustomerVM {
                         Id = x.Customer.Id,
-                        Description = x.Customer.Description
+                        Description = x.Customer.Description,
+                        VatNumber = x.Customer.VatNumber
                     },
                     DocumentType = new SimpleEntity {
                         Id = x.DocumentType.Id,
@@ -55,6 +56,7 @@ namespace API.Features.Sales.Receipts {
                         Description = x.ShipOwner.Description
                     },
                     GrossAmount = x.GrossAmount,
+                    Remarks = x.Remarks,
                     IsEmailPending = x.IsEmailPending,
                     IsEmailSent = x.IsEmailSent,
                     IsCancelled = x.IsCancelled

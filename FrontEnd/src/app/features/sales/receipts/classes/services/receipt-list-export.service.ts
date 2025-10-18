@@ -20,6 +20,7 @@ export class ReceiptListExportService {
                 date: record.date.description,
                 issuer: record.shipOwner.description,
                 customer: record.customer.description,
+                vatNumber: record.customer.vatNumber,
                 documentType: record.documentType.description,
                 invoiceNo: record.invoiceNo,
                 paymentMethod: record.paymentMethod.description,
@@ -34,6 +35,7 @@ export class ReceiptListExportService {
         import('xlsx').then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(exportedRecords)
             const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] }
+            xlsx.utils.sheet_add_aoa(worksheet, [['Ημερομηνία', 'Εκδότης', 'Πελάτης', 'ΑΦΜ', 'Παραστατικό', 'Νο', 'Τρόπος πληρωμής', 'Ποσό', 'Παρατηρήσεις']], { origin: 'A1' })
             const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' })
             this.saveAsExcelFile(excelBuffer, 'ΗΜΕΡΟΛΟΓΙΟ ΕΙΣΠΡΑΞΕΩΝ')
         })
