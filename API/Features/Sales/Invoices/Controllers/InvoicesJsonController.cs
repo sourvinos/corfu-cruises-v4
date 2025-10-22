@@ -2,9 +2,6 @@
 using API.Infrastructure.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace API.Features.Sales.Invoices {
@@ -51,16 +48,13 @@ namespace API.Features.Sales.Invoices {
         [Authorize(Roles = "admin")]
         public async Task<ResponseWithBody> DownloadByIdAsync(string invoiceId) {
             var x = await invoiceReadRepo.GetByIdAsync(invoiceId, true);
-            if (x != null) {
-                using HttpClient client = new();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", x.Ship.ShipOwner.OxygenLiveAPIKey);
+            if (x != null && x.Ship.ShipOwner.OxygenIsActive) {
                 return new ResponseWithBody {
                     Code = 200,
                     Icon = Icons.Info.ToString(),
                     Body = new {
                         invoiceId,
-                        oxygen = JObject.Parse(await client.GetStringAsync(x.Ship.ShipOwner.OxygenLiveUrl + "/" + x.Aade.Id))
+                        oxygen = invoiceJsonRepo.DownloadJsonInvoiceAsync(x).Result
                     },
                     Message = ApiMessages.OK()
                 };

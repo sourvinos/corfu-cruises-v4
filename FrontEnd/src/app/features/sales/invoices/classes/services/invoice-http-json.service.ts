@@ -10,11 +10,15 @@ import { environment } from 'src/environments/environment'
 export class InvoiceHttpJsonService extends HttpDataService {
 
     constructor(httpClient: HttpClient) {
-        super(httpClient, environment.apiUrl + '/invoicesJson')
+        super(httpClient, environment.apiUrl)
     }
 
     public get(invoiceId: string): Observable<any> {
-        return this.http.get(this.url + '/' + invoiceId)
+        return this.http.get(this.url + '/invoicesJson/getById/' + invoiceId)
+    }
+
+    public download(invoiceId: string): Observable<any> {
+        return this.http.get(this.url + '/invoicesJson/downloadById/' + invoiceId)
     }
 
 }

@@ -3184,6 +3184,10 @@
                 "description": "Ανάκτηση χρεώσεων"
             },
             {
+                "id": "downloadInvoice",
+                "description": "Ανάκτηση υπογραφών"
+            },
+            {
                 "id": "uId",
                 "description": "UID"
             },

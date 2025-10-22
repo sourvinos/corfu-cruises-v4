@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using API.Features.Reservations.ShipOwners;
@@ -41,7 +40,7 @@ namespace API.Features.Sales.Invoices {
                 Payment_Methods = AddPaymentMethods(invoice),
                 Lines = AddLines(invoice),
                 Summary = AddSummary(invoice),
-                Options = AddOptions(invoice)
+                Options = AddOptions()
             };
             return x;
         }
@@ -58,19 +57,15 @@ namespace API.Features.Sales.Invoices {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoAPIKey : z.OxygenLiveAPIKey : "");
-            var content = new StringContent(x, UTF8Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoUrl : z.OxygenLiveUrl : "", content);
+            var response = await client.PostAsync(z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoUrl : z.OxygenLiveUrl : "", new StringContent(x, UTF8Encoding.UTF8, "application/json"));
             return await response.Content.ReadAsStringAsync();
         }
 
-        public void DownloadJsonInvoiceAsync(ShipOwner z, string x) {
-            // https://api.mydataprovider.gr/v2/invoices/01k1jbv0q1bbqb8m2ngxffhzyn
+        public async Task<JObject> DownloadJsonInvoiceAsync(Invoice invoice) {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoAPIKey : z.OxygenLiveAPIKey : "");
-            var content = new StringContent(x, UTF8Encoding.UTF8, "application/json");
-            var response = client.GetAsync(z.OxygenIsActive ? z.OxygenIsDemo ? z.OxygenDemoUrl + "/" + x : z.OxygenLiveUrl + "/" + x : "").Result;
-            var i = response.Content.ReadFromJsonAsync<object>();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", invoice.Ship.ShipOwner.OxygenIsActive ? invoice.Ship.ShipOwner.OxygenIsDemo ? invoice.Ship.ShipOwner.OxygenDemoAPIKey : invoice.Ship.ShipOwner.OxygenLiveAPIKey : "");
+            return JObject.Parse(await client.GetStringAsync(invoice.Ship.ShipOwner.OxygenIsDemo ? invoice.Ship.ShipOwner.OxygenDemoUrl + "/" + invoice.Aade.Id : invoice.Ship.ShipOwner.OxygenLiveUrl + "/" + invoice.Aade.Id));
         }
 
         public JObject ShowResponseAfterUploadJsonInvoice(string response) {
@@ -119,7 +114,7 @@ namespace API.Features.Sales.Invoices {
             return x;
         }
 
-        private static JsonOptionsVM AddOptions(Invoice invoice) {
+        private static JsonOptionsVM AddOptions() {
             var x = new JsonOptionsVM() {
                 Is_Peppol = false,
                 Ignore_Classifications = false

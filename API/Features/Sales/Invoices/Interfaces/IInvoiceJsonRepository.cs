@@ -9,7 +9,7 @@ namespace API.Features.Sales.Invoices {
         JsonInvoiceVM CreateJsonInvoice(Invoice x);
         string SaveJsonInvoice(JsonInvoiceVM x);
         Task<string> UploadJsonInvoiceAsync(string x, ShipOwner z);
-        // Task<System.Text.Json.JsonElement> DownloadJsonInvoiceAsync(ShipOwner x,string id);
+        Task<JObject> DownloadJsonInvoiceAsync(Invoice x);
         JObject ShowResponseAfterUploadJsonInvoice(string x);
         string SaveInvoiceJsonResponse(JsonInvoiceVM invoice, string subdirectory, string response);
 

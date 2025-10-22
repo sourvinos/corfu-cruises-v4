@@ -192,6 +192,14 @@ export class InvoiceFormComponent {
         this.debugDialogService.open(this.form.value, '', ['ok'])
     }
 
+    public onDownloadInvoice(): void {
+        this.invoiceHttpJsonService.download(this.form.value.invoiceId).subscribe({
+            next: (response) => {
+                console.log(response)
+            }
+        })
+    }
+
     public enableOrDisableAutoComplete(event: any): void {
         this.isAutoCompleteDisabled = this.helperService.enableOrDisableAutoComplete(event)
     }
@@ -218,6 +226,11 @@ export class InvoiceFormComponent {
 
     public isCancelPossible(): boolean {
         return this.form.value.aade.discriminator == 'aade' ? true : false
+    }
+
+    public isDownloadPossible(): boolean {
+        // return this.form.value.aade.discriminator == 'oxygen' ? true : false
+        return true
     }
 
     public isSubmitPossible(): boolean {

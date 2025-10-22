@@ -564,6 +564,9 @@
     <button (click)="onCancelInvoice()" [disabled]="!isCancelPossible()" mat-menu-item>
         <span>{{ getLabel('cancelInvoice') }}</span>
     </button>
+    <button (click)="onDownloadInvoice()" [disabled]="!isDownloadPossible()" mat-menu-item>
+        <span>{{ getLabel('downloadInvoice') }}</span>
+    </button>
     <button (click)="onRetrievePrices()" mat-menu-item>
         <span>{{ getLabel('retrievePrices') }}</span>
     </button>
