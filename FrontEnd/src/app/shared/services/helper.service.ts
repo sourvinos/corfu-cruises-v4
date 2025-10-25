@@ -46,7 +46,6 @@ export class HelperService {
         this.clipboard.copy(window.getSelection().toString())
     }
 
-
     public rightAlignLastTab(): void {
         const tabs = document.getElementsByClassName('mat-mdc-tab') as HTMLCollectionOf<HTMLElement>
         tabs[tabs.length - 1].style.marginLeft = 'auto'
@@ -133,16 +132,8 @@ export class HelperService {
         }, 500)
     }
 
-    public clearTableTextFilters(table: Table, inputs: string[]): void {
+    public clearTableTextFilters(table: Table): void {
         table.clear()
-        // table.clearFilterValues()
-        // inputs.forEach(input => {
-        //     table.filter(null, input, 'contains')
-        //     table.filter('', input, 'equals')
-        // })
-        // document.querySelectorAll<HTMLInputElement>('.p-inputtext, .mat-input-element').forEach(box => {
-        //     box.value = ''
-        // })
         document.querySelectorAll<HTMLElement>('.p-date-filter-clear-button').forEach(box => {
             box.style.visibility = 'hidden'
         })

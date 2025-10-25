@@ -1,6 +1,6 @@
 {
     "name": "corfucruises",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --hmr --host=127.0.0.1 --ssl --ssl-cert ssl\\localhost.crt --ssl-key ssl\\localhost.key",

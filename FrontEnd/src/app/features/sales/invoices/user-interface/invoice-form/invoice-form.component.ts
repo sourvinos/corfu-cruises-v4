@@ -1,3 +1,4 @@
+import { AadeVM } from './../../classes/view-models/form/aade-vm'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Component } from '@angular/core'
@@ -33,12 +34,14 @@ import { LocalStorageService } from 'src/app/shared/services/local-storage.servi
 import { MessageDialogService } from 'src/app/shared/services/message-dialog.service'
 import { MessageInputHintService } from 'src/app/shared/services/message-input-hint.service'
 import { MessageLabelService } from 'src/app/shared/services/message-label.service'
+import { OxygenTransmissionResponse } from '../../classes/view-models/oxygen-response/oxygen-transmission-response'
 import { PortAutoCompleteVM } from 'src/app/features/reservations/ports/classes/view-models/port-autocomplete-vm'
 import { PriceHttpService } from '../../../prices/classes/services/price-http.service'
 import { SalesCriteriaVM } from '../../classes/view-models/form/sales-criteria-vm'
 import { ShipAutoCompleteVM } from './../../../../reservations/ships/classes/view-models/ship-autocomplete-vm'
 import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
 import { ValidationService } from 'src/app/shared/services/validation.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
     selector: 'invoice-form',
@@ -195,10 +198,38 @@ export class InvoiceFormComponent {
     public onDownloadInvoice(): void {
         this.invoiceHttpJsonService.download(this.form.value.invoiceId).subscribe({
             next: (response) => {
-                console.log(response)
+                if (this.isValidResponseFromOxygen(response)) {
+                    this.invoiceHttpService.updateInvoiceOxygen(this.createAadeObject(this.form.value.invoiceId, response)).subscribe({
+                        // 
+                    })
+                }
+            },
+            error: (errorFromInterceptor) => {
+                this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
             }
         })
     }
+
+    private isValidResponseFromOxygen(response: any): boolean {
+        return response.body.oxygen.transmissions.length == 1 ? true : false
+    }
+
+    private createAadeObject(invoiceId: string, i: any): AadeVM {
+        const z: OxygenTransmissionResponse = i.body.oxygen.transmissions[0]
+        const x: AadeVM = {
+            invoiceId: invoiceId,
+            id: i.body.oxygen.id,
+            uId: z.uid,
+            mark: z.mark,
+            markCancel: z.cancellation_mark ? z.cancellation_mark : '',
+            authenticationCode: z.authentication_code,
+            iCode: 'part-of-url',
+            url: i.body.oxygen.url,
+            discriminator: 'oxygen'
+        }
+        return x
+    }
+
 
     public enableOrDisableAutoComplete(event: any): void {
         this.isAutoCompleteDisabled = this.helperService.enableOrDisableAutoComplete(event)
@@ -229,8 +260,7 @@ export class InvoiceFormComponent {
     }
 
     public isDownloadPossible(): boolean {
-        // return this.form.value.aade.discriminator == 'oxygen' ? true : false
-        return true
+        return this.form.value.aade.discriminator == 'oxygen' && environment.isDevelopment ? true : false
     }
 
     public isSubmitPossible(): boolean {
