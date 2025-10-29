@@ -221,7 +221,7 @@ export class ReceiptListComponent {
     }
 
     public resetTableFilters(): void {
-        this.table != undefined ? this.helperService.clearTableTextFilters(this.table, ['invoiceNo', 'grossAmount']) : null
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion
@@ -257,7 +257,7 @@ export class ReceiptListComponent {
 
     private clearFilters(): void {
         this.table != undefined
-            ? this.helperService.clearTableTextFilters(this.table, ['invoiceNo', 'grossAmount'])
+            ? this.helperService.clearTableTextFilters(this.table)
             : null
     }
 

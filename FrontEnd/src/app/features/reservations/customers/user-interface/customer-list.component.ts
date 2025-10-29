@@ -104,7 +104,7 @@ export class CustomerListComponent {
     }
 
     public onResetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['description', 'email', 'phones'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

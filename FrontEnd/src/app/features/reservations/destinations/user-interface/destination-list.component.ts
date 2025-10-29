@@ -91,7 +91,7 @@ export class DestinationListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['abbreviation', 'description'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

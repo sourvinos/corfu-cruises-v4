@@ -112,7 +112,7 @@ export class ManifestListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.passengersTable, ['lastname', 'firstname'])
+        this.helperService.clearTableTextFilters(this.passengersTable)
     }
 
     //#endregion

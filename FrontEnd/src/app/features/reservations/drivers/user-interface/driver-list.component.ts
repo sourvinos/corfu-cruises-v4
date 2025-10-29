@@ -91,7 +91,7 @@ export class DriverListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['description', 'phones'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

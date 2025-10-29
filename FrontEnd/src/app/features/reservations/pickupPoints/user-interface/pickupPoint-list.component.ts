@@ -107,7 +107,7 @@ export class PickupPointListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['description', 'exactPoint', 'time'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

@@ -267,7 +267,7 @@ export class InvoiceListComponent {
 
     private clearFilters(): void {
         this.table != undefined
-            ? this.helperService.clearTableTextFilters(this.table, ['invoiceNo', 'grossAmount'])
+            ? this.helperService.clearTableTextFilters(this.table)
             : null
     }
 

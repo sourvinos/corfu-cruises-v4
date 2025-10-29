@@ -146,7 +146,7 @@ export class BoardingReservationsComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['refNo', 'ticketNo', 'totalPax'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     public showPassengers(reservation: BoardingReservationVM): void {

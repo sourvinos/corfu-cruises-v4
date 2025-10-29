@@ -262,7 +262,7 @@ export class ReservationListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['refNo', 'ticketNo'])
+        this.helperService.clearTableTextFilters(this.table)
         this.selectedRecords = []
         this.totalPax[1] = this.totalPax[0]
         this.totalPax[2] = 0

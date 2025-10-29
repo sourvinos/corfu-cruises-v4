@@ -101,7 +101,7 @@ export class ShipCrewListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['lastname', 'firstname'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

@@ -96,7 +96,7 @@ export class PortListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['stopOrder', 'description'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

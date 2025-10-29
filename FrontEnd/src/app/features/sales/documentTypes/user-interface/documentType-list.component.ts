@@ -102,7 +102,7 @@ export class DocumentTypeListComponent {
     }
 
     public onResetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['description', 'email', 'phones'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     public getEmoji(anything: any): string {

@@ -116,7 +116,7 @@ export class BankAccountListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['description'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

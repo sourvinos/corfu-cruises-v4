@@ -124,7 +124,7 @@ export class PriceListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, [''])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

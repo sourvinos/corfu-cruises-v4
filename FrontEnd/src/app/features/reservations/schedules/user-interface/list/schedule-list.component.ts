@@ -113,7 +113,7 @@ export class ScheduleListComponent {
 
     public resetTableFilters(): void {
         this.filterDate = ''
-        this.helperService.clearTableTextFilters(this.table, ['date', 'maxPax'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

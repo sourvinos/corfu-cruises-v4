@@ -91,7 +91,7 @@ export class TaxOfficeListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['description', 'email', 'phones'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion

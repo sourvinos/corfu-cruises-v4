@@ -92,7 +92,7 @@ export class UserListComponent {
     }
 
     public resetTableFilters(): void {
-        this.helperService.clearTableTextFilters(this.table, ['userName', 'displayname', 'email'])
+        this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion
