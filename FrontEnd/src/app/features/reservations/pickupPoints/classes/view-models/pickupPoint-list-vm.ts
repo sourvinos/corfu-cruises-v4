@@ -5,6 +5,7 @@ export interface PickupPointListVM {
 
     id: number
     description: string
+    linkTwistAlias: string
     coachRoute: PickupPointListCoachRouteVM
     port: PickupPointListPortVM
     exactPoint: string

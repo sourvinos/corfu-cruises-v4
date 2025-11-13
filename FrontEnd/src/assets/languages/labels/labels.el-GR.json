@@ -334,6 +334,10 @@
                 "description": "Περιγραφή"
             },
             {
+                "id": "headerLinkTwistAlias",
+                "description": "LinkTwist"
+            },
+            {
                 "id": "headerExactPoint",
                 "description": "Ακριβές σημείο"
             },
@@ -369,6 +373,10 @@
             {
                 "id": "description",
                 "description": "Περιγραφή"
+            },
+            {
+                "id": "linkTwistAlias",
+                "description": "LinkTwist"
             },
             {
                 "id": "exactPoint",

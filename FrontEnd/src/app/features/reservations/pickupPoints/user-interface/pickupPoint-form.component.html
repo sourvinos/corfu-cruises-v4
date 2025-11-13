@@ -38,17 +38,24 @@
                 <mat-error *ngIf="description.hasError('required')">{{ getHint("required") }}</mat-error>
                 <mat-error *ngIf="description.hasError('maxlength')">{{ getHint("maxLength", description.errors.maxlength.requiredLength) }}</mat-error>
             </mat-form-field>
+            <!-- LikTwist -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('linkTwistAlias') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="4" formControlName="linkTwistAlias" matInput>
+                <mat-error *ngIf="linkTwistAlias.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="linkTwistAlias.hasError('maxlength')">{{ getHint("maxLength", linkTwistAlias.errors.maxlength.requiredLength) }}</mat-error>
+            </mat-form-field>
             <!-- ExactPoint -->
             <mat-form-field>
                 <mat-label>{{ getLabel('exactPoint') }}</mat-label>
-                <input [inputTabStop]="input" dataTabIndex="4" formControlName="exactPoint" matInput>
+                <input [inputTabStop]="input" dataTabIndex="5" formControlName="exactPoint" matInput>
                 <mat-error *ngIf="exactPoint.hasError('required')">{{ getHint("required") }}</mat-error>
                 <mat-error *ngIf="exactPoint.hasError('maxlength')">{{ getHint("maxLength", exactPoint.errors.maxlength.requiredLength) }}</mat-error>
             </mat-form-field>
             <!-- Time -->
             <mat-form-field>
                 <mat-label>{{ getLabel('time') }}</mat-label>
-                <input [inputTabStop]="input" dataTabIndex="5" formControlName="time" matInput>
+                <input [inputTabStop]="input" dataTabIndex="6" formControlName="time" matInput>
                 <mat-error *ngIf="time.hasError('required')">{{ getHint("required") }}</mat-error>
                 <mat-error *ngIf="!time.hasError('required') && !time.hasError('isTime')">{{ getHint("invalid") }}</mat-error>
             </mat-form-field>

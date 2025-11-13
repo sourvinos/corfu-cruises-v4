@@ -34,10 +34,11 @@ namespace API.Features.Reservations.PickupPoints {
                     Id = x.Port.Id,
                     Description = x.Port.Description
                 }));
-             CreateMap<PickupPointWriteDto, PickupPoint>()
-                .ForMember(x => x.Description, x => x.MapFrom(x => x.Description.Trim()))
-                .ForMember(x => x.ExactPoint, x => x.MapFrom(x => x.ExactPoint.Trim()))
-                .ForMember(x => x.Remarks, x => x.MapFrom(x => x.Remarks.Trim()));
+            CreateMap<PickupPointWriteDto, PickupPoint>()
+               .ForMember(x => x.Description, x => x.MapFrom(x => x.Description.Trim()))
+               .ForMember(x => x.LinkTwistAlias, x => x.MapFrom(x => x.LinkTwistAlias.Trim()))
+               .ForMember(x => x.ExactPoint, x => x.MapFrom(x => x.ExactPoint.Trim()))
+               .ForMember(x => x.Remarks, x => x.MapFrom(x => x.Remarks.Trim()));
         }
 
     }

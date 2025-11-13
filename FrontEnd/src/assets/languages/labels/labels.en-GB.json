@@ -334,6 +334,10 @@
                 "description": "Description"
             },
             {
+                "id": "headerLinkTwistAlias",
+                "description": "LinkTwist"
+            },
+            {
                 "id": "headerExactPoint",
                 "description": "Exact point"
             },
@@ -369,6 +373,10 @@
             {
                 "id": "description",
                 "description": "Description"
+            },
+            {
+                "id": "linkTwistAlias",
+                "description": "LinkTwist"
             },
             {
                 "id": "exactPoint",

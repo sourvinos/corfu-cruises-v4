@@ -7,6 +7,7 @@ export interface PickupPointWriteDto {
     portId: number
     // Fields
     description: string
+    linkTwistAlias: string
     exactPoint: string
     time: string
     remarks: string

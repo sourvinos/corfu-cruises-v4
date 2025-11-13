@@ -11,6 +11,7 @@ export interface PickupPointReadDto extends Metadata {
     port: PortAutoCompleteVM
     // Fields
     description: string
+    linkTwistAlias: string
     exactPoint: string
     time: string
     remarks: string

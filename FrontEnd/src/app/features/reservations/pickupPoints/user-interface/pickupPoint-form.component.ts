@@ -135,6 +135,7 @@ export class PickupPointFormComponent {
             coachRouteId: this.form.value.coachRoute.id,
             portId: this.form.value.port.id,
             description: this.form.value.description,
+            linkTwistAlias: this.form.value.linkTwistAlias,
             exactPoint: this.form.value.exactPoint,
             time: this.form.value.time,
             remarks: this.form.value.remarks,
@@ -174,6 +175,7 @@ export class PickupPointFormComponent {
             coachRoute: ['', [Validators.required, ValidationService.RequireAutocomplete]],
             port: ['', [Validators.required, ValidationService.RequireAutocomplete]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
+            linkTwistAlias: ['', [Validators.required, Validators.maxLength(256)]],
             exactPoint: ['', [Validators.required, Validators.maxLength(128)]],
             time: ['', [Validators.required, ValidationService.isTime]],
             remarks: ['', Validators.maxLength(2048)],
@@ -204,6 +206,7 @@ export class PickupPointFormComponent {
                 coachRoute: { 'id': this.record.coachRoute.id, 'abbreviation': this.record.coachRoute.abbreviation },
                 port: { 'id': this.record.port.id, 'description': this.record.port.description },
                 description: this.record.description,
+                linkTwistAlias: this.record.linkTwistAlias,
                 exactPoint: this.record.exactPoint,
                 time: this.record.time,
                 remarks: this.record.remarks,
@@ -226,6 +229,7 @@ export class PickupPointFormComponent {
                 this.dexieService.update('pickupPoints', {
                     'id': parseInt(response.id),
                     'description': pickupPoint.description,
+                    'linkTwistAlias': pickupPoint.linkTwistAlias,
                     'exactPoint': pickupPoint.exactPoint,
                     'time': pickupPoint.time,
                     'isActive': pickupPoint.isActive
@@ -258,6 +262,10 @@ export class PickupPointFormComponent {
 
     get description(): AbstractControl {
         return this.form.get('description')
+    }
+
+    get linkTwistAlias(): AbstractControl {
+        return this.form.get('linkTwistAlias')
     }
 
     get exactPoint(): AbstractControl {

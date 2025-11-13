@@ -140,6 +140,7 @@ export class PickupPointListComponent {
                 this.filterColumn(filters.coachRoute, 'coachRoute', 'in')
                 this.filterColumn(filters.port, 'port', 'in')
                 this.filterColumn(filters.description, 'description', 'contains')
+                this.filterColumn(filters.linkTwistAlias, 'linkTwistAlias', 'contains')
                 this.filterColumn(filters.exactPoint, 'exactPoint', 'contains')
                 this.filterColumn(filters.time, 'time', 'contains')
             }, 500)
