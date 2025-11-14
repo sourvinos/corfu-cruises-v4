@@ -1,8 +1,10 @@
 using Infrastructure;
 
-namespace PickupPoints {
+namespace PickupPoints
+{
 
-    public class TestPickupPoint : ITestEntity {
+    public class TestPickupPoint : ITestEntity
+    {
 
         public int StatusCode { get; set; }
 
@@ -10,6 +12,7 @@ namespace PickupPoints {
         public int CoachRouteId { get; set; }
         public int PortId { get; set; }
         public string Description { get; set; }
+        public string LinkTwistAlias { get; set; }
         public string ExactPoint { get; set; }
         public string Time { get; set; }
         public bool IsActive { get; set; }

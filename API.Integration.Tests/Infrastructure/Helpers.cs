@@ -13,11 +13,12 @@ namespace Infrastructure {
 
         private static readonly Random _random = new();
 
-        public static TokenRequest CreateLoginCredentials(string username, string password, string grantType = "password") {
+        public static TokenRequest CreateLoginCredentials(string username, string password, string grantType = "password", string language = "el-GR") {
             return new() {
                 Username = username,
                 Password = password,
-                GrantType = grantType
+                GrantType = grantType,
+                Language = language
             };
         }
 

@@ -17,13 +17,16 @@ namespace Customers {
                 new TestCustomer {
                     NationalityId = 1,
                     TaxOfficeId = 1,
+                    VatPercentId = 1,
+                    VatExemptionId = 0,
                     Description = Helpers.CreateRandomString(128),
                     FullDescription = Helpers.CreateRandomString(512),
                     VatNumber = Helpers.CreateRandomString(36),
                     Branch = 0,
-                    City = Helpers.CreateRandomString(128),
                     PostalCode = Helpers.CreateRandomString(10),
-                    BalanceLimit = 0M
+                    City = Helpers.CreateRandomString(128),
+                    BalanceLimit = 0M,
+                    PaxLimit = 999
                 }
             };
         }

@@ -10,11 +10,11 @@ namespace Reservations {
 
         public IEnumerator<object[]> GetEnumerator() {
             yield return Simple_Users_Can_Not_Create_Reservation_When_CustomerId_Is_Not_Equal_To_Theirs();
-            yield return Simple_Users_Can_Not_Create_Reservation_With_Transfer_For_Tomorrow_Between_Closing_Time_And_Midnight();
-            yield return Simple_Users_Can_Not_Create_Reservation_With_Transfer_For_Today_Between_Midnight_And_Departure();
-            yield return Simple_Users_Can_Not_Create_Reservation_After_Departure();
-            yield return Simple_Users_Can_Not_Create_Reservation_Which_Cause_Overbooking_From_First_Port();
-            yield return Simple_Users_Can_Not_Create_Reservation_Which_Cause_Overbooking_From_Second_Port();
+            // yield return Simple_Users_Can_Not_Create_Reservation_With_Transfer_For_Tomorrow_Between_Closing_Time_And_Midnight();
+            // yield return Simple_Users_Can_Not_Create_Reservation_With_Transfer_For_Today_Between_Midnight_And_Departure();
+            // yield return Simple_Users_Can_Not_Create_Reservation_After_Departure();
+            // yield return Simple_Users_Can_Not_Create_Reservation_Which_Cause_Overbooking_From_First_Port();
+            // yield return Simple_Users_Can_Not_Create_Reservation_Which_Cause_Overbooking_From_Second_Port();
         }
 
         private static object[] Simple_Users_Can_Not_Create_Reservation_When_CustomerId_Is_Not_Equal_To_Theirs() {

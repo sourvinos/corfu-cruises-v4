@@ -15,7 +15,8 @@ namespace PaymentMethods {
         private static object[] ValidRecord() {
             return new object[] {
                 new TestPaymentMethod {
-                    Description = Helpers.CreateRandomString(128)
+                    Description = Helpers.CreateRandomString(128),
+                    DescriptionEn = Helpers.CreateRandomString(128)
                 }
             };
         }

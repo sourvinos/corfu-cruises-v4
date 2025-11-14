@@ -17,6 +17,7 @@ namespace PaymentMethods {
                 new TestPaymentMethod {
                     Id = 4,
                     Description = Helpers.CreateRandomString(128),
+                    DescriptionEn = Helpers.CreateRandomString(128),
                     PutAt = "2024-01-01 00:00:00"
                 }
             };

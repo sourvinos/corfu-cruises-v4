@@ -17,7 +17,11 @@ namespace ShipOwners {
                 new TestShipOwner {
                     NationalityId = 1,
                     TaxOfficeId = 1,
+                    VatPercent = 13,
+                    VatPercentId = 1,
+                    VatExemptionId = 0,
                     Description = Helpers.CreateRandomString(128),
+                    DescriptionEn = Helpers.CreateRandomString(128),
                     VatNumber = Helpers.CreateRandomString(36),
                     Branch = 0,
                     PostalCode = Helpers.CreateRandomString(10),

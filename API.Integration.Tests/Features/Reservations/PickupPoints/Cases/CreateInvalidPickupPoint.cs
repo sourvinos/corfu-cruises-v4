@@ -22,6 +22,7 @@ namespace PickupPoints {
                     CoachRouteId = 99,
                     PortId = 1,
                     Description = Helpers.CreateRandomString(128),
+                    LinkTwistAlias = Helpers.CreateRandomString(256),
                     ExactPoint = Helpers.CreateRandomString(128),
                     Time = "08:00"
                 }
@@ -35,6 +36,7 @@ namespace PickupPoints {
                     CoachRouteId = 9,
                     PortId = 1,
                     Description = Helpers.CreateRandomString(128),
+                    LinkTwistAlias = Helpers.CreateRandomString(256),
                     ExactPoint = Helpers.CreateRandomString(128),
                     Time = "08:00"
                 }
@@ -48,6 +50,7 @@ namespace PickupPoints {
                     CoachRouteId = 1,
                     PortId = 999,
                     Description = Helpers.CreateRandomString(128),
+                    LinkTwistAlias = Helpers.CreateRandomString(256),
                     ExactPoint = Helpers.CreateRandomString(128),
                     Time = "08:00"
                 }
@@ -61,6 +64,7 @@ namespace PickupPoints {
                     CoachRouteId = 1,
                     PortId = 3,
                     Description = Helpers.CreateRandomString(128),
+                    LinkTwistAlias = Helpers.CreateRandomString(256),
                     ExactPoint = Helpers.CreateRandomString(128),
                     Time = "08:00"
                 }

@@ -11,8 +11,10 @@ namespace DocumentTypes {
         public int ShipOwnerId { get; set; }
         // Fields
         public string Abbreviation { get; set; }
+        public string AbbreviationEn { get; set; }
         public string Description { get; set; }
         public string Batch { get; set; }
+        public string BatchEn { get; set; }
         public string LastDate { get; set; }
         public int LastNo { get; set; }
         public string Customers { get; set; }

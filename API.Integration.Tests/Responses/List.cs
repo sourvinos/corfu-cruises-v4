@@ -19,6 +19,15 @@ namespace Responses {
             return actionResponse;
         }
 
+        public static async Task<HttpResponseMessage> NoAuthAction(HttpClient httpClient, string baseUrl, string url) {
+            // arrange
+            var request = Helpers.CreateRequest(baseUrl, url);
+            // act
+            var actionResponse = await httpClient.SendAsync(request);
+            // return
+            return actionResponse;
+        }
+
     }
 
 }

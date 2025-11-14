@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Text.Json;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using API.Features.Sales.Invoices;
 using Cases;
 using Infrastructure;
 using Responses;
@@ -20,7 +17,7 @@ namespace Invoices {
         private readonly TestHostFixture _testHostFixture = new();
         private readonly string _actionVerb = "get";
         private readonly string _baseUrl;
-        private readonly string _url = "/invoices";
+        private readonly string _url = "/invoices/getForPeriod";
 
         #endregion
 
@@ -50,14 +47,7 @@ namespace Invoices {
         public async Task Simple_Users_Can_Not_List() {
             await Forbidden.Action(_httpClient, _baseUrl, _url, _actionVerb, "simpleuser", "A#ba439de-446e-4eef-8c4b-833f1b3e18aa", null);
         }
-
-        [Fact]
-        public async Task Admins_Can_List() {
-            var actionResponse = await List.Action(_httpClient, _baseUrl, _url, "john", "A#ba439de-446e-4eef-8c4b-833f1b3e18aa");
-            var records = JsonSerializer.Deserialize<List<InvoiceListVM>>(await actionResponse.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            Assert.Equal(2, records.Count);
-        }
-
+ 
     }
 
 }

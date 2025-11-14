@@ -1,12 +1,12 @@
 {
-    "version": "0.2.0",
+    "version": "2.0.0",
     "configurations": [
         {
-			"name": "API",
+            "name": "API",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net7.0/API.Integration.Tests.dll",
+            "program": "${workspaceFolder}/bin/Debug/net9.0-windows/API.Integration.Tests.dll",
             "args": [],
             "cwd": "API.Integration.Tests",
             "stopAtEntry": false,

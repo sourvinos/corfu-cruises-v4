@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using API.Infrastructure.Helpers;
 
 namespace Receipts {
 
@@ -14,16 +15,16 @@ namespace Receipts {
         private static object[] ValidRecord() {
             return new object[] {
                 new TestReceipt {
+                    Date = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime()),
+                    InvoiceNo = 1,
                     CustomerId = 1,
                     DocumentTypeId = 4,
                     PaymentMethodId = 1,
                     ShipOwnerId = 1,
-                    Date = "2024-02-10",
-                    InvoiceNo = 1,
                     NetAmount = 12,
-                    VatPercent = 24,
-                    VatAmount = 2.88M,
-                    GrossAmount = 14.88M
+                    VatPercent = 0,
+                    VatAmount = 0M,
+                    GrossAmount = 12M
                 }
             };
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using API.Infrastructure.Helpers;
 
 namespace Invoices {
 
@@ -14,12 +15,12 @@ namespace Invoices {
         private static object[] ValidInvoice() {
             return new object[] {
                 new TestInvoice {
-                    CustomerId = 1,
+                    CustomerId = 2,
                     DestinationId = 1,
                     DocumentTypeId = 1,
                     PaymentMethodId = 1,
                     ShipId = 1,
-                    Date = "2024-02-10",
+                    Date = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime()),
                     TripDate = "2024-02-10",
                     InvoiceNo = 1,
                     NetAmount = 12,
