@@ -157,9 +157,6 @@ export class ShipOwnerFormComponent {
             id: this.form.value.id,
             nationalityId: this.form.value.nationality.id,
             taxOfficeId: this.form.value.taxOffice.id,
-            vatPercent: this.form.value.vatPercent,
-            vatPercentId: this.form.value.vatPercentId,
-            vatExemptionId: this.form.value.vatExemptionId,
             description: this.form.value.description,
             descriptionEn: this.form.value.descriptionEn,
             vatNumber: this.form.value.vatNumber,
@@ -222,9 +219,6 @@ export class ShipOwnerFormComponent {
             id: 0,
             nationality: ['', [Validators.required, ValidationService.RequireAutocomplete]],
             taxOffice: ['', [Validators.required, ValidationService.RequireAutocomplete]],
-            vatPercent: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
-            vatPercentId: [0, [Validators.required, Validators.min(1), Validators.max(9)]],
-            vatExemptionId: [0, [Validators.required, Validators.min(0), Validators.max(30)]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
             descriptionEn: ['', [Validators.required, Validators.maxLength(128)]],
             vatNumber: ['', [Validators.required, Validators.maxLength(36)]],
@@ -283,9 +277,6 @@ export class ShipOwnerFormComponent {
                 id: this.record.id,
                 nationality: { 'id': this.record.nationality.id, 'description': this.record.nationality.description },
                 taxOffice: { 'id': this.record.taxOffice.id, 'description': this.record.taxOffice.description },
-                vatPercent: this.record.vatPercent,
-                vatPercentId: this.record.vatPercentId,
-                vatExemptionId: this.record.vatExemptionId,
                 description: this.record.description,
                 descriptionEn: this.record.descriptionEn,
                 vatNumber: this.record.vatNumber,
@@ -333,8 +324,7 @@ export class ShipOwnerFormComponent {
             'number': document.querySelector('postal_address_no').innerHTML,
             'postalCode': document.querySelector('postal_zip_code').innerHTML,
             'city': document.querySelector('postal_area_description').innerHTML,
-            'nationality': await this.dexieService.getByDescription('nationalities', 'GREECE'),
-            'vatExemptionId': document.querySelector('normal_vat_system_flag').innerHTML == 'Y' ? 0 : 1
+            'nationality': await this.dexieService.getByDescription('nationalities', 'GREECE')
         })
     }
 
@@ -371,18 +361,6 @@ export class ShipOwnerFormComponent {
 
     get taxOffice(): AbstractControl {
         return this.form.get('taxOffice')
-    }
-
-    get vatPercent(): AbstractControl {
-        return this.form.get('vatPercent')
-    }
-
-    get vatPercentId(): AbstractControl {
-        return this.form.get('vatPercentId')
-    }
-
-    get vatExemptionId(): AbstractControl {
-        return this.form.get('vatExemptionId')
     }
 
     get description(): AbstractControl {

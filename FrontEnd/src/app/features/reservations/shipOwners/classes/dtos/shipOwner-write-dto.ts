@@ -6,9 +6,6 @@ export interface ShipOwnerWriteDto {
     nationalityId: number
     taxOfficeId: number
     // Fields
-    vatPercent: number
-    vatPercentId: number
-    vatExemptionId: number
     description: string
     descriptionEn: string
     vatNumber: string

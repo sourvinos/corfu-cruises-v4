@@ -11,9 +11,6 @@ namespace API.Features.Reservations.ShipOwners {
         public SimpleEntity Nationality { get; set; }
         public SimpleEntity TaxOffice { get; set; }
         // Fields
-        public decimal VatPercent { get; set; }
-        public int VatPercentId { get; set; }
-        public int VatExemptionId { get; set; }
         public string Description { get; set; }
         public string DescriptionEn { get; set; }
         public string VatNumber { get; set; }

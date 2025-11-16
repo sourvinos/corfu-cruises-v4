@@ -12,7 +12,7 @@
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "LocalTesting"
+                "ASPNETCORE_ENVIRONMENT": "LocalDevelopment"
             }
         }
     ]

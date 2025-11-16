@@ -10,9 +10,6 @@ namespace API.Features.Reservations.ShipOwners {
             RuleFor(x => x.NationalityId).NotEmpty();
             RuleFor(x => x.TaxOfficeId).NotEmpty();
             // Fields
-            RuleFor(x => x.VatPercent).GreaterThanOrEqualTo(0);
-            RuleFor(x => x.VatPercentId).InclusiveBetween(1, 9); ;
-            RuleFor(x => x.VatExemptionId).InclusiveBetween(0, 30); ;
             RuleFor(x => x.Description).NotEmpty().MaximumLength(128);
             RuleFor(x => x.DescriptionEn).NotEmpty().MaximumLength(128);
             RuleFor(x => x.VatNumber).NotEmpty().MaximumLength(36);

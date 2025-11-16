@@ -44,33 +44,10 @@
                             <mat-error *ngIf="taxOffice.hasError('required')">{{ getHint("required") }}</mat-error>
                             <mat-error *ngIf="!taxOffice.hasError('required') && taxOffice.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
                         </mat-form-field>
-                    </div>
-                    <div class="group-input-field">
-                        <!-- VatPercent -->
-                        <mat-form-field>
-                            <mat-label>{{ getLabel('vatPercent') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="5" formControlName="vatPercent" matInput type="number">
-                            <mat-error *ngIf="vatPercent.hasError('required')">{{ getHint("required") }}</mat-error>
-                            <mat-error *ngIf="!vatPercent.hasError('required') && vatPercent.hasError('min') || vatPercent.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
-                        </mat-form-field>
-                        <!-- VatPercentId -->
-                        <mat-form-field>
-                            <mat-label>{{ getLabel('vatPercentId') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="6" formControlName="vatPercentId" matInput type="number">
-                            <mat-error *ngIf="vatPercentId.hasError('required')">{{ getHint("required") }}</mat-error>
-                            <mat-error *ngIf="!vatPercentId.hasError('required') && vatPercentId.hasError('min') || vatPercentId.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
-                        </mat-form-field>
-                        <!-- VatExemptionId -->
-                        <mat-form-field>
-                            <mat-label>{{ getLabel('vatExemptionId') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="7" formControlName="vatExemptionId" matInput type="number">
-                            <mat-error *ngIf="vatExemptionId.hasError('required')">{{ getHint("required") }}</mat-error>
-                            <mat-error *ngIf="!vatExemptionId.hasError('required') && vatExemptionId.hasError('min') || vatExemptionId.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
-                        </mat-form-field>
                         <!-- Branch -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('branch') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="8" formControlName="branch" matInput type="number">
+                            <input [inputTabStop]="input" dataTabIndex="5" formControlName="branch" matInput type="number">
                             <mat-error *ngIf="branch.hasError('required')">{{ getHint("required") }}</mat-error>
                             <mat-error *ngIf="branch.hasError('min') || branch.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
                         </mat-form-field>
@@ -78,36 +55,36 @@
                     <!-- Profession -->
                     <mat-form-field>
                         <mat-label>{{ getLabel('profession') }}</mat-label>
-                        <input [inputTabStop]="input" dataTabIndex="9" formControlName="profession" matInput>
+                        <input [inputTabStop]="input" dataTabIndex="6" formControlName="profession" matInput>
                         <mat-error *ngIf="profession.hasError('required')">{{ getHint("required") }}</mat-error>
                     </mat-form-field>
                     <div class="group-input-field">
                         <!-- Street -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('street') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="10" formControlName="street" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="7" formControlName="street" matInput>
                         </mat-form-field>
                         <!-- Number -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('number') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="11" formControlName="number" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="8" formControlName="number" matInput>
                         </mat-form-field>
                         <!-- City -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('city') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="12" formControlName="city" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="9" formControlName="city" matInput>
                             <mat-error *ngIf="city.hasError('required')">{{ getHint("required") }}</mat-error>
                         </mat-form-field>
                         <!-- Postal code -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('postalCode') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="13" formControlName="postalCode" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="10" formControlName="postalCode" matInput>
                             <mat-error *ngIf="postalCode.hasError('required')">{{ getHint("required") }}</mat-error>
                         </mat-form-field>
                         <!-- Nationality -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('nationality') }}</mat-label>
-                            <input #inputAutoComplete #triggerNationality="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="nationalities" dataTabIndex="14" formControlName="nationality" matInput>
+                            <input #inputAutoComplete #triggerNationality="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="nationalities" dataTabIndex="11" formControlName="nationality" matInput>
                             <div matSuffix style="display:flex">
                                 <button (click)="openOrCloseAutoComplete(triggerNationality, 'nationality')" mat-icon-button type="button">
                                     <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
@@ -155,7 +132,7 @@
                         <!-- myData live url -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('liveUrl') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="5" formControlName="myDataLiveUrl" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="4" formControlName="myDataLiveUrl" matInput>
                         </mat-form-field>
                     </div>
                     <div class="group-input-field">
@@ -167,7 +144,7 @@
                         <!-- myData live username -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('liveUsername') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="6" formControlName="myDataLiveUsername" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="5" formControlName="myDataLiveUsername" matInput>
                         </mat-form-field>
                     </div>
                     <div class="group-input-field">
@@ -179,7 +156,7 @@
                         <!-- myData live password -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('liveSubscriptionKey') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="7" formControlName="myDataLiveSubscriptionKey" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="6" formControlName="myDataLiveSubscriptionKey" matInput>
                         </mat-form-field>
                     </div>
                     <div class="stacked-checkboxes">

@@ -11,11 +11,9 @@ namespace API.Features.Reservations.ShipOwners {
             // FKs
             entity.Property(x => x.NationalityId).IsRequired(true);
             entity.Property(x => x.TaxOfficeId).IsRequired(true);
-            entity.Property(x => x.VatExemptionId).IsRequired(true);
             // Fields
             entity.Property(x => x.Description).HasMaxLength(128).IsRequired(true);
             entity.Property(x => x.DescriptionEn).HasMaxLength(128).IsRequired(true);
-            entity.Property(x => x.VatPercent).HasDefaultValue(0).HasMaxLength(5);
             entity.Property(x => x.VatNumber).HasDefaultValue("").HasMaxLength(36);
             entity.Property(x => x.Profession).HasDefaultValue("").HasMaxLength(128);
             entity.Property(x => x.Street).HasDefaultValue("").HasMaxLength(128).IsRequired();

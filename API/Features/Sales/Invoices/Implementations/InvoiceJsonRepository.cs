@@ -86,7 +86,7 @@ namespace API.Features.Sales.Invoices {
                     Vat_Category = invoice.Customer.VatPercentId,
                     Vat_Amount = invoice.VatAmount,
                     Total_Amount = invoice.GrossAmount,
-                    Vat_Exemption_Reason_Code = invoice.Ship.ShipOwner.VatExemptionId.ToString(),
+                    Vat_Exemption_Reason_Code = invoice.Customer.VatExemptionId.ToString(),
                     Classifications = AddClassifications(invoice)
                 }
             };

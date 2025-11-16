@@ -1886,18 +1886,6 @@
                 "description": "Λειτουργία δοκιμών"
             },
             {
-                "id": "vatPercent",
-                "description": "Ποσοστό ΦΠΑ λιανικών πωλήσεων"
-            },
-            {
-                "id": "vatPercentId",
-                "description": "Κατηγορία ΦΠΑ - Πίνακας 8.2"
-            },
-            {
-                "id": "vatExemptionId",
-                "description": "Κατηγορία Αιτίας Εξαίρεσης ΦΠΑ - Πίνακας 8.3"
-            },
-            {
                 "id": "isActive",
                 "description": "Ενεργός"
             },

@@ -12,8 +12,7 @@ namespace API.Features.Reservations.Ships {
                     Id = x.ShipOwner.Id,
                     Description = x.ShipOwner.DescriptionEn,
                     IsMyData = x.ShipOwner.MyDataIsActive,
-                    IsOxygen = x.ShipOwner.OxygenIsActive,
-                    VatPercent = x.ShipOwner.VatPercent
+                    IsOxygen = x.ShipOwner.OxygenIsActive
                 }));
             CreateMap<Ship, SimpleEntity>();
             CreateMap<Ship, ShipReadDto>()
