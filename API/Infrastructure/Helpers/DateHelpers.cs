@@ -5,13 +5,6 @@ namespace API.Infrastructure.Helpers {
 
     public static class DateHelpers {
 
-        public static string LinkTwistToISOString(string date) {
-            var day = date[..2];
-            var month = date.Substring(3, 2);
-            var year = date.Substring(6, 4);
-            return year + "-" + month + "-" + day;
-        }
-
         public static DateTime StringToDate(string date) {
             return new(int.Parse(date[..4]), int.Parse(date.Substring(5, 2)), int.Parse(date.Substring(8, 2)));
         }

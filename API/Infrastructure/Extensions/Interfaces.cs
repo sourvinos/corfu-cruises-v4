@@ -69,6 +69,7 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IReservationCalculatePaxLimit, ReservationCalculatePaxLimit>();
             services.AddTransient<IReservationCalendar, ReservationCalendar>();
             services.AddTransient<IReservationCloneRepository, ReservationCloneRepository>();
+            services.AddTransient<IReservationLinkTwist, ReservationLinkTwist>();
             services.AddTransient<IReservationParameterValidation, ParameterValidation>();
             services.AddTransient<IReservationParametersRepository, ParametersRepository>();
             services.AddTransient<IReservationReadRepository, ReservationReadRepository>();
