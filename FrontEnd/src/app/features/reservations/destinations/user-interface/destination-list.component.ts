@@ -115,6 +115,7 @@ export class DestinationListComponent {
                 this.filterColumn(filters.isActive, 'isActive', 'contains')
                 this.filterColumn(filters.abbreviation, 'abbreviation', 'contains')
                 this.filterColumn(filters.description, 'description', 'contains')
+                this.filterColumn(filters.linkTwistAlias, 'linkTwistAlias', 'contains')
             }, 500)
         }
     }

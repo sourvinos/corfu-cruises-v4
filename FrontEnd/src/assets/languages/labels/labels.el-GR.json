@@ -206,6 +206,10 @@
                 "description": "Περιγραφή"
             },
             {
+                "id": "headerLinkTwistAlias",
+                "description": "LinkTwist"
+            },
+            {
                 "id": "newRecord",
                 "description": "Νεα εγγραφη"
             }
@@ -225,6 +229,10 @@
             {
                 "id": "description",
                 "description": "Περιγραφή"
+            },
+            {
+                "id": "linkTwistAlias",
+                "description": "LinkTwist"
             },
             {
                 "id": "isActive",

@@ -11,8 +11,9 @@ namespace API.Features.Reservations.Destinations {
             CreateMap<Destination, SimpleEntity>();
             CreateMap<Destination, DestinationReadDto>();
             CreateMap<DestinationWriteDto, Destination>()
+                .ForMember(x => x.Abbreviation, x => x.MapFrom(x => x.Abbreviation.Trim()))
                 .ForMember(x => x.Description, x => x.MapFrom(x => x.Description.Trim()))
-                .ForMember(x => x.Abbreviation, x => x.MapFrom(x => x.Abbreviation.Trim()));
+                .ForMember(x => x.LinkTwistAlias, x => x.MapFrom(x => x.LinkTwistAlias.Trim()));
         }
 
     }

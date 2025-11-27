@@ -206,6 +206,10 @@
                 "description": "Description"
             },
             {
+                "id": "headerLinkTwistAlias",
+                "description": "LinkTwist"
+            },
+            {
                 "id": "newRecord",
                 "description": "New record"
             }
@@ -225,6 +229,10 @@
             {
                 "id": "description",
                 "description": "Description"
+            },
+            {
+                "id": "linkTwistAlias",
+                "description": "LinkTwist"
             },
             {
                 "id": "isActive",

@@ -7,8 +7,9 @@ namespace API.Features.Reservations.Destinations {
         // PK
         public int Id { get; set; }
         // Fields
-        public string Description { get; set; }
         public string Abbreviation { get; set; }
+        public string Description { get; set; }
+        public string LinkTwistAlias { get; set; }
         public bool IsActive { get; set; }
         // Metadata
         public string PostAt { get; set; }

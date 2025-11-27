@@ -7,6 +7,7 @@ export interface DestinationReadDto extends Metadata {
     // Fields
     abbreviation: string
     description: string
+    linkTwistAlias: string
     isActive: boolean
 
 }

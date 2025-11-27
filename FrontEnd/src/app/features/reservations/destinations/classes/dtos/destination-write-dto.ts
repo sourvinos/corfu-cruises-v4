@@ -4,6 +4,7 @@ export interface DestinationWriteDto {
     id: number
     abbreviation: string
     description: string
+    linkTwistAlias: string
     isActive: boolean
     // Rowversion
     putAt: string

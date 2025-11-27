@@ -91,6 +91,7 @@ export class DestinationFormComponent {
             id: this.form.value.id,
             abbreviation: this.form.value.abbreviation,
             description: this.form.value.description,
+            linkTwistAlias: this.form.value.linkTwistAlias,
             isActive: this.form.value.isActive,
             putAt: this.form.value.putAt
         }
@@ -126,6 +127,7 @@ export class DestinationFormComponent {
             id: 0,
             abbreviation: ['', [Validators.required, Validators.maxLength(5)]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
+            linkTwistAlias: ['', [Validators.required, Validators.maxLength(128)]],
             isActive: true,
             postAt: [''],
             postUser: [''],
@@ -140,6 +142,7 @@ export class DestinationFormComponent {
                 id: this.record.id,
                 abbreviation: this.record.abbreviation,
                 description: this.record.description,
+                linkTwistAlias: this.record.linkTwistAlias,
                 isActive: this.record.isActive,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,
@@ -186,6 +189,10 @@ export class DestinationFormComponent {
 
     get description(): AbstractControl {
         return this.form.get('description')
+    }
+
+    get linkTwistAlias(): AbstractControl {
+        return this.form.get('linkTwistAlias')
     }
 
     get postAt(): AbstractControl {
