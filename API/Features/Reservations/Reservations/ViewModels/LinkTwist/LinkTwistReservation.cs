@@ -8,6 +8,8 @@ namespace API.Features.Reservations.Reservations {
         [JsonPropertyName("code")]
         public string Code { get; set; }
 
+        public string Date { get; set; }
+
         [JsonPropertyName("referer")]
         public string Customer { get; set; }
 
@@ -23,7 +25,7 @@ namespace API.Features.Reservations.Reservations {
         public List<LinkTwistReservationDetails> Details { get; set; }
 
         [JsonPropertyName("extras")]
-        public List<LinkTwistPickupPoint> PickupPoint { get; set; } 
+        public List<LinkTwistPickupPoint> PickupPoint { get; set; }
 
     }
 
