@@ -11,6 +11,12 @@ namespace API.Features.Reservations.Parameters {
         public string ClosingTime { get; set; }
         public string Phones { get; set; }
         public string Email { get; set; }
+        // LinkTwist
+        public bool LinkTwistIsDemo { get; set; }
+        public string LinkTwistDemoUrl { get; set; }
+        public string LinkTwistDemoAPIKey { get; set; }
+        public string LinkTwistLiveUrl { get; set; }
+        public string LinkTwistLiveAPIKey { get; set; }
         // Metadata
         public string PostAt { get; set; }
         public string PostUser { get; set; }

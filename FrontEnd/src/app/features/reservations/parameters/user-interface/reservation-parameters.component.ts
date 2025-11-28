@@ -22,7 +22,7 @@ import { ValidationService } from 'src/app/shared/services/validation.service'
 
 export class ReservationParametersComponent {
 
-    //#region common form variables
+    //#region common
 
     private record: ReservationParametersReadDto
     public feature = 'reservationparameters'
@@ -75,6 +75,11 @@ export class ReservationParametersComponent {
             closingTime: this.form.value.closingTime,
             phones: this.form.value.phones,
             email: this.form.value.email,
+            linkTwistIsDemo: this.form.value.linkTwistIsDemo,
+            linkTwistDemoUrl: this.form.value.linkTwistDemoUrl,
+            linkTwistDemoAPIKey: this.form.value.linkTwistDemoAPIKey,
+            linkTwistLiveUrl: this.form.value.linkTwistLiveUrl,
+            linkTwistLiveAPIKey: this.form.value.linkTwistLiveAPIKey,
             putAt: this.form.value.putAt
         }
     }
@@ -109,6 +114,11 @@ export class ReservationParametersComponent {
             closingTime: ['00:00', [Validators.required, ValidationService.isTime]],
             phones: ['', [Validators.required, Validators.maxLength(128)]],
             email: ['', [Validators.required, Validators.maxLength(128)]],
+            linkTwistIsDemo: true,
+            linkTwistDemoUrl: ['', [Validators.maxLength(256)]],
+            linkTwistDemoAPIKey: ['', [Validators.maxLength(256)]],
+            linkTwistLiveUrl: ['', [Validators.maxLength(256)]],
+            linkTwistLiveAPIKey: ['', [Validators.maxLength(256)]],
             postAt: [''],
             postUser: [''],
             putAt: [''],
@@ -123,6 +133,11 @@ export class ReservationParametersComponent {
                 closingTime: this.record.closingTime,
                 phones: this.record.phones,
                 email: this.record.email,
+                linkTwistIsDemo: this.record.linkTwistIsDemo,
+                linkTwistDemoUrl: this.record.linkTwistDemoUrl,
+                linkTwistDemoAPIKey: this.record.linkTwistDemoAPIKey,
+                linkTwistLiveUrl: this.record.linkTwistLiveUrl,
+                linkTwistLiveAPIKey: this.record.linkTwistLiveAPIKey,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,
                 putAt: this.record.putAt,
@@ -164,6 +179,21 @@ export class ReservationParametersComponent {
 
     get email(): AbstractControl {
         return this.form.get('email')
+    }
+
+    get linkTwistDemoUrl(): AbstractControl {
+        return this.form.get('linkTwistDemoUrl')
+    }
+    get linkTwistDemoAPIKey(): AbstractControl {
+        return this.form.get('linkTwistDemoAPIKey')
+    }
+
+    get linkTwistLiveUrl(): AbstractControl {
+        return this.form.get('linkTwistLiveUrl')
+    }
+
+    get linkTwistLiveAPIKey(): AbstractControl {
+        return this.form.get('linkTwistLiveAPIKey')
     }
 
     get postAt(): AbstractControl {

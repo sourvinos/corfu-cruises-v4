@@ -2343,7 +2343,15 @@
         "labels": [
             {
                 "id": "header",
-                "description": "Settings"
+                "description": "Reservation parameters"
+            },
+            {
+                "id": "tab1",
+                "description": "Γενικά"
+            },
+            {
+                "id": "tab2",
+                "description": "LinkTwist"
             },
             {
                 "id": "closingTime",
@@ -2356,6 +2364,26 @@
             {
                 "id": "email",
                 "description": "Email"
+            },
+            {
+                "id": "linkTwistIsDemo",
+                "description": "Λειτουργία δοκιμών"
+            },
+            {
+                "id": "linkTwistDemoUrl",
+                "description": "Url δοκιμών"
+            },
+            {
+                "id": "linkTwistDemoAPIKey",
+                "description": "Κωδικός δοκιμών"
+            },
+            {
+                "id": "linkTwistLiveUrl",
+                "description": "Url"
+            },
+            {
+                "id": "linkTwistLiveAPIKey",
+                "description": "Κωδικός"
             },
             {
                 "id": "emailΤooltip",

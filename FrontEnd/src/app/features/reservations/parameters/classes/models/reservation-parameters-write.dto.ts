@@ -1,12 +1,14 @@
 export interface ReservationParametersWriteDto {
 
-    // PK
     id: number
-    // Fields
     closingTime: string
     phones: string
     email: string
-    // Rowversion
+    linkTwistIsDemo: boolean
+    linkTwistDemoUrl: string
+    linkTwistDemoAPIKey: string
+    linkTwistLiveUrl: string
+    linkTwistLiveAPIKey: string
     putAt: string
 
 }

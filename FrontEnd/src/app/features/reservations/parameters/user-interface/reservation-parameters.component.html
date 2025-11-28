@@ -7,32 +7,58 @@
         </div>
 
         <form [formGroup]="form" id="form">
-            <!-- Closing time -->
-            <mat-form-field>
-                <mat-label>{{ getLabel('closingTime') }}</mat-label>
-                <input [inputTabStop]="input" dataTabIndex="1" formControlName="closingTime" matInput />
-                <mat-error *ngIf="closingTime.hasError('required')">{{ getHint("required") }}</mat-error>
-                <mat-error *ngIf="!closingTime.hasError('required') && !closingTime.hasError('time')">{{ getHint("invalid") }}</mat-error>
-            </mat-form-field>
-            <!-- Phones -->
-            <mat-form-field>
-                <mat-label>{{ getLabel('phones') }}</mat-label>
-                <input [inputTabStop]="input" dataTabIndex="2" formControlName="phones" matInput>
-                <mat-error *ngIf="phones.hasError('required')">{{ getHint("required") }}</mat-error>
-                <mat-error *ngIf="phones.hasError('maxlength')">{{ getHint("maxLength", phones.errors.maxlength.requiredLength) }}</mat-error>
-            </mat-form-field>
-            <!-- Email -->
-            <mat-form-field>
-                <mat-label>{{ getLabel('email') }}</mat-label>
-                <input [inputTabStop]="input" dataTabIndex="3" formControlName="email" matInput>
-                <mat-error *ngIf="email.hasError('maxlength')">{{ getHint("maxLength", email.errors.maxlength.requiredLength) }}</mat-error>
-                <mat-error *ngIf="!email.hasError('maxlength') && email.hasError('email')">{{ getHint("invalid") }}</mat-error>
-            </mat-form-field>
+            <mat-tab-group mat-stretch-tabs="false">
+                <mat-tab label="{{ getLabel('tab1') }}">
+                    <mat-form-field>
+                        <mat-label>{{ getLabel('closingTime') }}</mat-label>
+                        <input [inputTabStop]="input" dataTabIndex="1" formControlName="closingTime" matInput />
+                        <mat-error *ngIf="closingTime.hasError('required')">{{ getHint("required") }}</mat-error>
+                        <mat-error *ngIf="!closingTime.hasError('required') && !closingTime.hasError('time')">{{ getHint("invalid") }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ getLabel('phones') }}</mat-label>
+                        <input [inputTabStop]="input" dataTabIndex="2" formControlName="phones" matInput>
+                        <mat-error *ngIf="phones.hasError('required')">{{ getHint("required") }}</mat-error>
+                        <mat-error *ngIf="phones.hasError('maxlength')">{{ getHint("maxLength", phones.errors.maxlength.requiredLength) }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ getLabel('email') }}</mat-label>
+                        <input [inputTabStop]="input" dataTabIndex="3" formControlName="email" matInput>
+                        <mat-error *ngIf="email.hasError('maxlength')">{{ getHint("maxLength", email.errors.maxlength.requiredLength) }}</mat-error>
+                        <mat-error *ngIf="!email.hasError('maxlength') && email.hasError('email')">{{ getHint("invalid") }}</mat-error>
+                    </mat-form-field>
+                </mat-tab>
+                <mat-tab label="{{ getLabel('tab2') }}">
+                    <div class="group-input-field">
+                        <mat-form-field>
+                            <mat-label>{{ getLabel('linkTwistDemoUrl') }}</mat-label>
+                            <input [inputTabStop]="input" dataTabIndex="1" formControlName="linkTwistDemoUrl" matInput>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>{{ getLabel('linkTwistLiveUrl') }}</mat-label>
+                            <input [inputTabStop]="input" dataTabIndex="3" formControlName="linkTwistLiveUrl" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="group-input-field">
+                        <mat-form-field>
+                            <mat-label>{{ getLabel('linkTwistDemoAPIKey') }}</mat-label>
+                            <input [inputTabStop]="input" dataTabIndex="2" formControlName="linkTwistDemoAPIKey" matInput>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>{{ getLabel('linkTwistLiveAPIKey') }}</mat-label>
+                            <input [inputTabStop]="input" dataTabIndex="4" formControlName="linkTwistLiveAPIKey" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="stacked-checkboxes">
+                        <mat-checkbox formControlName="linkTwistIsDemo">
+                            <span>{{ getLabel("linkTwistIsDemo") }}</span>
+                        </mat-checkbox>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
             <div class="align-bottom">
-                <!-- Metadata -->
                 <metadata-panel [feature]="feature" [postAt]="form.value.postAt" [postUser]="form.value.postUser" [putAt]="form.value.putAt" [putUser]="form.value.putUser"></metadata-panel>
             </div>
-
         </form>
 
     </div>
