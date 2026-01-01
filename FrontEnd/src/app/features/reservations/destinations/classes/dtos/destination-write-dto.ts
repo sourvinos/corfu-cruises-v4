@@ -1,12 +1,11 @@
 export interface DestinationWriteDto {
 
-    // PK
     id: number
     abbreviation: string
     description: string
+    isLinkTwist: boolean
     linkTwistAlias: string
     isActive: boolean
-    // Rowversion
     putAt: string
 
 }

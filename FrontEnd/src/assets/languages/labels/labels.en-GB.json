@@ -206,8 +206,12 @@
                 "description": "Description"
             },
             {
-                "id": "headerLinkTwistAlias",
+                "id": "headerIsLinkTwist",
                 "description": "LinkTwist"
+            },
+            {
+                "id": "headerLinkTwistAlias",
+                "description": "Abbr. LinkTwist"
             },
             {
                 "id": "newRecord",
@@ -233,6 +237,10 @@
             {
                 "id": "linkTwistAlias",
                 "description": "LinkTwist"
+            },
+            {
+                "id": "isLinkTwist",
+                "description": "Refers to LinkTwist"
             },
             {
                 "id": "isActive",

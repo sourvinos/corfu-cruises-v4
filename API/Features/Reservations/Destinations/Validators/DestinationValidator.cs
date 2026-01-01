@@ -8,7 +8,7 @@ namespace API.Features.Reservations.Destinations {
             // Fields
             RuleFor(x => x.Abbreviation).NotEmpty().MaximumLength(5);
             RuleFor(x => x.Description).NotEmpty().MaximumLength(128);
-            RuleFor(x => x.LinkTwistAlias).NotEmpty().MaximumLength(128);
+            RuleFor(x => x.LinkTwistAlias).MaximumLength(128);
         }
 
     }

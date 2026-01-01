@@ -9,6 +9,7 @@ namespace API.Features.Reservations.Destinations {
         // Fields
         public string Abbreviation { get; set; }
         public string Description { get; set; }
+        public bool IsLinkTwist { get; set; }
         public string LinkTwistAlias { get; set; }
         public bool IsActive { get; set; }
         // Metadata

@@ -206,8 +206,12 @@
                 "description": "Περιγραφή"
             },
             {
-                "id": "headerLinkTwistAlias",
+                "id": "headerIsLinkTwist",
                 "description": "LinkTwist"
+            },
+            {
+                "id": "headerLinkTwistAlias",
+                "description": "Συντ. LinkTwist"
             },
             {
                 "id": "newRecord",
@@ -233,6 +237,10 @@
             {
                 "id": "linkTwistAlias",
                 "description": "LinkTwist"
+            },
+            {
+                "id": "isLinkTwist",
+                "description": "Αφορά LinkTwist"
             },
             {
                 "id": "isActive",

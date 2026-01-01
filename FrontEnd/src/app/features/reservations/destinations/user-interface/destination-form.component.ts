@@ -91,6 +91,7 @@ export class DestinationFormComponent {
             id: this.form.value.id,
             abbreviation: this.form.value.abbreviation,
             description: this.form.value.description,
+            isLinkTwist: this.form.value.isLinkTwist,
             linkTwistAlias: this.form.value.linkTwistAlias,
             isActive: this.form.value.isActive,
             putAt: this.form.value.putAt
@@ -127,7 +128,8 @@ export class DestinationFormComponent {
             id: 0,
             abbreviation: ['', [Validators.required, Validators.maxLength(5)]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
-            linkTwistAlias: ['', [Validators.required, Validators.maxLength(128)]],
+            linkTwistAlias: ['', [Validators.maxLength(128)]],
+            isLinkTwist: false,
             isActive: true,
             postAt: [''],
             postUser: [''],
@@ -143,6 +145,7 @@ export class DestinationFormComponent {
                 abbreviation: this.record.abbreviation,
                 description: this.record.description,
                 linkTwistAlias: this.record.linkTwistAlias,
+                isLinkTwist: this.record.isLinkTwist,
                 isActive: this.record.isActive,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,
@@ -163,6 +166,7 @@ export class DestinationFormComponent {
                     'id': parseInt(response.id),
                     'abbreviation': destination.abbreviation,
                     'description': destination.description,
+                    'isLinkTwist': destination.isLinkTwist,
                     'isActive': destination.isActive
                 })
                 this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, true)
