@@ -9,6 +9,7 @@ import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
 export interface ReservationReadDto extends Metadata {
 
     reservationId: Guid
+    linkTwistId: string
     customer: CustomerAutoCompleteVM
     destination: SimpleEntity
     driver: SimpleEntity

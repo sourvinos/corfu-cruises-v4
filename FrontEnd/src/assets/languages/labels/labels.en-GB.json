@@ -865,6 +865,10 @@
                 "description": "Reservation"
             },
             {
+                "id": "linkTwistId",
+                "description": "LinkTwist"
+            },
+            {
                 "id": "date",
                 "description": "Date"
             },

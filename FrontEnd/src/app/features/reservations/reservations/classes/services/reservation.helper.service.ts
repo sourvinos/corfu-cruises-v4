@@ -35,6 +35,7 @@ export class ReservationHelperService {
     public flattenReservationForm(form: any): ReservationWriteDto {
         return {
             reservationId: form.reservationId != '' ? form.reservationId : null,
+            linkTwistId: form.linkTwistId,
             customerId: form.customer.id,
             destinationId: form.destination.id,
             driverId: form.driver ? form.driver.id : null,
@@ -84,6 +85,7 @@ export class ReservationHelperService {
     public createCachedReservation(form: any): ReservationReadDto {
         return {
             reservationId: form.reservationId,
+            linkTwistId: form.linkTwistId,
             customer: form.customer,
             destination: form.destination,
             driver: form.driver,

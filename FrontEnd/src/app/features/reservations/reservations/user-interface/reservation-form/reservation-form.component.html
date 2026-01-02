@@ -24,6 +24,12 @@
                             <div id="ref-no" style="width: 20% !important;">
                                 <span id="ref-no-body">{{ reservationForm.value.refNo }}</span>
                             </div>
+                            <!-- LinkTwist -->
+                            <mat-form-field style="width: 50%">
+                                <mat-icon class="material-icons-outlined small">lock</mat-icon>
+                                <mat-label>{{ getLabel('linkTwistId') }}</mat-label>
+                                <input formControlName="linkTwistId" matInput readonly>
+                            </mat-form-field>
                             <!-- Date -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('date') }}</mat-label>

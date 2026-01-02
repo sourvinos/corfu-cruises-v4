@@ -865,6 +865,10 @@
                 "description": "Κράτηση"
             },
             {
+                "id": "linkTwistId",
+                "description": "LinkTwist"
+            },
+            {
                 "id": "date",
                 "description": "Ημερομηνία"
             },

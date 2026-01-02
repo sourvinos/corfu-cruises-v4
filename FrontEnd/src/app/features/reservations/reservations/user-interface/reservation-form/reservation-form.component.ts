@@ -446,6 +446,7 @@ export class ReservationFormComponent {
     private initReservationForm(): void {
         this.reservationForm = this.formBuilder.group({
             reservationId: '',
+            linkTwistId: '',
             date: ['', [Validators.required]],
             refNo: '',
             destination: ['', [Validators.required, ValidationService.RequireAutocomplete]],
@@ -500,6 +501,7 @@ export class ReservationFormComponent {
     private populateReservationFields(): void {
         this.reservationForm.setValue({
             reservationId: this.record.reservationId,
+            linkTwistId: this.record.linkTwistId,
             date: this.record.date,
             refNo: this.record.refNo,
             destination: { 'id': this.record.destination.id, 'description': this.record.destination.description },
@@ -544,6 +546,7 @@ export class ReservationFormComponent {
                 if (keepFormOpen) {
                     this.reservationForm.patchValue({
                         reservationId: response.body.reservationId,
+                        linkTwistId: response.body.linkTwistId,
                         refNo: response.body.refNo,
                         postAt: response.body.postAt,
                         postUser: response.body.postUser,
@@ -630,6 +633,10 @@ export class ReservationFormComponent {
 
     get refNo(): AbstractControl {
         return this.reservationForm.get('refNo')
+    }
+
+    get linkTwistId(): AbstractControl {
+        return this.reservationForm.get('linkTwistId')
     }
 
     get reservationDate(): AbstractControl {
