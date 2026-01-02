@@ -24,6 +24,7 @@ namespace API.Features.Reservations.Reservations {
         public int? ShipId { get; set; }
         // Fields
         public DateTime Date { get; set; }
+        public string LinkTwistId { get; set; }
         public string RefNo { get; set; }
         public string TicketNo { get; set; }
         public int Adults { get; set; }

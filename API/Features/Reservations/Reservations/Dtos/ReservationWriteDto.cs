@@ -19,6 +19,7 @@ namespace API.Features.Reservations.Reservations {
         // Fields
         public string Date { get; set; }
         public DateTime Now { get; set; }
+        public string LinkTwistId { get; set; }
         public string RefNo { get; set; }
         public string TicketNo { get; set; }
         public string Email { get; set; }

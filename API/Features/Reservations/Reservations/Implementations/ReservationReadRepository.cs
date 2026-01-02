@@ -101,6 +101,7 @@ namespace API.Features.Reservations.Reservations {
                 .Include(x => x.Passengers)
                 .Where(x => x.Date == Convert.ToDateTime(date)).Select(x => new ReservationListVM {
                     ReservationId = x.ReservationId,
+                    LinkTwistId = x.LinkTwistId,
                     Date = DateHelpers.DateToISOString(x.Date),
                     RefNo = x.RefNo,
                     TicketNo = x.TicketNo,
@@ -164,6 +165,7 @@ namespace API.Features.Reservations.Reservations {
                 .Where(x => x.Date == Convert.ToDateTime(date) && x.CustomerId == customerId)
                 .Select(x => new ReservationListVM {
                     ReservationId = x.ReservationId,
+                    LinkTwistId = x.LinkTwistId,
                     Date = DateHelpers.DateToISOString(x.Date),
                     RefNo = x.RefNo,
                     TicketNo = x.TicketNo,
@@ -226,6 +228,7 @@ namespace API.Features.Reservations.Reservations {
                 .Include(x => x.Passengers)
                 .Where(x => x.RefNo == refNo || x.TicketNo == refNo).Select(x => new ReservationListVM {
                     ReservationId = x.ReservationId,
+                    LinkTwistId = x.LinkTwistId,
                     Date = DateHelpers.DateToISOString(x.Date),
                     RefNo = x.RefNo,
                     TicketNo = x.TicketNo,
@@ -288,6 +291,7 @@ namespace API.Features.Reservations.Reservations {
                 .Include(x => x.Passengers)
                 .Where(x => (x.RefNo == refNo || x.TicketNo == refNo) && x.CustomerId == customerId).Select(x => new ReservationListVM {
                     ReservationId = x.ReservationId,
+                    LinkTwistId = x.LinkTwistId,
                     Date = DateHelpers.DateToISOString(x.Date),
                     RefNo = x.RefNo,
                     TicketNo = x.TicketNo,

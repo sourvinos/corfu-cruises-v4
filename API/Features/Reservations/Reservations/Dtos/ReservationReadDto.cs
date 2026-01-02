@@ -11,6 +11,7 @@ namespace API.Features.Reservations.Reservations {
         public string ReservationId { get; set; }
         // Fields
         public string Date { get; set; }
+        public string LinkTwistId { get; set; }
         public string RefNo { get; set; }
         public int Adults { get; set; }
         public int Kids { get; set; }

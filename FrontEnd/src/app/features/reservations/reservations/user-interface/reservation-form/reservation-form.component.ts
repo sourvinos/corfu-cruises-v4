@@ -481,18 +481,18 @@ export class ReservationFormComponent {
     }
 
     private populateDropdowns(): void {
-        this.populateDropdownFromDexieDB('reservationForm', 'customers', 'dropdownCustomers', 'customer', 'description', 'description')
-        this.populateDropdownFromDexieDB('reservationForm', 'destinations', 'dropdownDestinations', 'destination', 'description', 'description')
-        this.populateDropdownFromDexieDB('reservationForm', 'drivers', 'dropdownDrivers', 'driver', 'description', 'description')
-        this.populateDropdownFromDexieDB('reservationForm', 'pickupPoints', 'dropdownPickupPoints', 'pickupPoint', 'description', 'description')
-        this.populateDropdownFromDexieDB('reservationForm', 'ports', 'dropdownPorts', 'port', 'description', 'description')
-        this.populateDropdownFromDexieDB('reservationForm', 'ports', 'dropdownPorts', 'portAlternate', 'description', 'description')
-        this.populateDropdownFromDexieDB('reservationForm', 'ships', 'dropdownShips', 'ship', 'description', 'description')
+        this.populateDropdownFromDexieDB('reservationForm', 'customers', 'dropdownCustomers', 'customer', 'description', 'description', false)
+        this.populateDropdownFromDexieDB('reservationForm', 'destinations', 'dropdownDestinations', 'destination', 'description', 'description', true)
+        this.populateDropdownFromDexieDB('reservationForm', 'drivers', 'dropdownDrivers', 'driver', 'description', 'description', false)
+        this.populateDropdownFromDexieDB('reservationForm', 'pickupPoints', 'dropdownPickupPoints', 'pickupPoint', 'description', 'description', false)
+        this.populateDropdownFromDexieDB('reservationForm', 'ports', 'dropdownPorts', 'port', 'description', 'description', false)
+        this.populateDropdownFromDexieDB('reservationForm', 'ports', 'dropdownPorts', 'portAlternate', 'description', 'description', false)
+        this.populateDropdownFromDexieDB('reservationForm', 'ships', 'dropdownShips', 'ship', 'description', 'description', false)
     }
 
-    private populateDropdownFromDexieDB(form: string, dexieTable: string, filteredTable: string, formField: string, modelProperty: string, orderBy: string): void {
+    private populateDropdownFromDexieDB(form: string, dexieTable: string, filteredTable: string, formField: string, modelProperty: string, orderBy: string, excludeLinkTwist: boolean): void {
         this.dexieService.table(dexieTable).orderBy(orderBy).toArray().then((response) => {
-            this[dexieTable] = this.recordId == undefined ? response.filter(x => x.isActive) : response
+            this[dexieTable] = this.recordId == undefined ? excludeLinkTwist ? response.filter(x => x.isActive).filter(x => !x.isLinkTwist) : response.filter(x => x.isActive) : response
             this[filteredTable] = this[form].get(formField).valueChanges.pipe(startWith(''), map(value => this.filterAutocomplete(dexieTable, modelProperty, value)))
         })
     }

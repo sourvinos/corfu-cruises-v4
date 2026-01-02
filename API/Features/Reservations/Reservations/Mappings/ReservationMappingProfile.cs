@@ -59,6 +59,7 @@ namespace API.Features.Reservations.Reservations {
                 }));
             // Write reservation
             CreateMap<ReservationWriteDto, Reservation>()
+                .ForMember(x => x.LinkTwistId, x => x.MapFrom(x => x.LinkTwistId ?? ""))
                 .ForMember(x => x.TicketNo, x => x.MapFrom(x => x.TicketNo.Trim()))
                 .ForMember(x => x.Phones, x => x.MapFrom(x => x.Phones.Trim()))
                 .ForMember(x => x.Remarks, x => x.MapFrom(x => x.Remarks.Trim()));

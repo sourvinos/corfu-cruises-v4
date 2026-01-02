@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core'
 import { NgxCurrencyDirective, NgxCurrencyInputMode, provideEnvironmentNgxCurrency } from 'ngx-currency'
 import { PrimeNgModule } from './primeng.module'
 import { RouterModule } from '@angular/router'
-import { ZXingScannerModule } from '@zxing/ngx-scanner'
 // Custom
 import { AbsPipe } from '../pipes/abs.pipe'
 import { CatPageComponent } from '../components/cat-page/cat-page.component'
@@ -76,8 +75,7 @@ import { YearSelectorComponent } from '../components/year-selector/year-selector
         NgxCurrencyDirective,
         PrimeNgModule,
         ReactiveFormsModule,
-        RouterModule,
-        ZXingScannerModule,
+        RouterModule
     ],
     exports: [
         AbsPipe,
@@ -114,8 +112,7 @@ import { YearSelectorComponent } from '../components/year-selector/year-selector
         TableTotalFilteredRecordsComponent,
         ThemeSelectorComponent,
         TrimStringPipe,
-        YearSelectorComponent,
-        ZXingScannerModule
+        YearSelectorComponent
     ], providers: [
         provideEnvironmentNgxCurrency({
             align: 'right',

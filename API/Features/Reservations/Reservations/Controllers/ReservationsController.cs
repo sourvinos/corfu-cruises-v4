@@ -26,14 +26,13 @@ namespace API.Features.Reservations.Reservations {
         private readonly IReservationCalendar reservationCalendar;
         private readonly IReservationCloneRepository reservationCloneRepo;
         private readonly IReservationReadRepository reservationReadRepo;
-        private readonly IReservationSendToEmail reservationSendToEmail;
         private readonly IReservationUpdateRepository reservationUpdateRepo;
         private readonly IReservationValidation reservationValidation;
         private readonly IScheduleRepository scheduleRepo;
 
         #endregion
 
-        public ReservationsController(ICustomerRepository customerRepo, IHttpContextAccessor httpContext, IMapper mapper, IReservationCalculatePaxLimit reservationCalculatePaxLimit, IReservationCalendar reservationCalendar, IReservationCloneRepository reservationCloneRepo, IReservationReadRepository reservationReadRepo, IReservationSendToEmail reservationSendToEmail, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation, IScheduleRepository scheduleRepo) {
+        public ReservationsController(ICustomerRepository customerRepo, IHttpContextAccessor httpContext, IMapper mapper, IReservationCalculatePaxLimit reservationCalculatePaxLimit, IReservationCalendar reservationCalendar, IReservationCloneRepository reservationCloneRepo, IReservationReadRepository reservationReadRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation, IScheduleRepository scheduleRepo) {
             this.customerRepo = customerRepo;
             this.httpContext = httpContext;
             this.mapper = mapper;
@@ -41,7 +40,6 @@ namespace API.Features.Reservations.Reservations {
             this.reservationCalendar = reservationCalendar;
             this.reservationCloneRepo = reservationCloneRepo;
             this.reservationReadRepo = reservationReadRepo;
-            this.reservationSendToEmail = reservationSendToEmail;
             this.reservationUpdateRepo = reservationUpdateRepo;
             this.reservationValidation = reservationValidation;
             this.scheduleRepo = scheduleRepo;
