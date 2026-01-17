@@ -2,7 +2,6 @@
     { "id": "calendar", "description": "Reservierungen" },
     { "id": "availability", "description": "Verfügbarkeit" },
     { "id": "coachRoutes", "description": "Busrouten" },
-    { "id": "registrars", "description": "Fahrgastregistrierer" },
     { "id": "ports", "description": "Häfen" },
     { "id": "drivers", "description": "Fahrer" },
     { "id": "crewSpecialties", "description": "Ειδικότητες πληρωμάτων" },

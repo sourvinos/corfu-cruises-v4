@@ -2018,92 +2018,6 @@
         ]
     },
     {
-        "feature": "registrarList",
-        "labels": [
-            {
-                "id": "header",
-                "description": "Καταγραφείς επιβατών"
-            },
-            {
-                "id": "headerIsActive",
-                "description": "Ενεργός"
-            },
-            {
-                "id": "headerIsPrimary",
-                "description": "Πρωτεύων"
-            },
-            {
-                "id": "headerFullname",
-                "description": "Πλήρες όνομα"
-            },
-            {
-                "id": "headerShipDescription",
-                "description": "Πλοίο"
-            },
-            {
-                "id": "newRecord",
-                "description": "Νεα εγγραφη"
-            }
-        ]
-    },
-    {
-        "feature": "registrarForm",
-        "labels": [
-            {
-                "id": "header",
-                "description": "Καταγραφέας επιβατών"
-            },
-            {
-                "id": "fullname",
-                "description": "Πλήρες όνομα"
-            },
-            {
-                "id": "ship",
-                "description": "Πλοίο"
-            },
-            {
-                "id": "phones",
-                "description": "Τηλέφωνα"
-            },
-            {
-                "id": "email",
-                "description": "Email"
-            },
-            {
-                "id": "fax",
-                "description": "Fax"
-            },
-            {
-                "id": "address",
-                "description": "Διεύθυνση"
-            },
-            {
-                "id": "isPrimary",
-                "description": "Πρωτεύον"
-            },
-            {
-                "id": "isActive",
-                "description": "Ενεργός"
-            },
-            {
-                "id": "post",
-                "description": "Αρχική καταχώριση"
-            },
-            {
-                "id": "put",
-                "description": "Τελευταία ενημέρωση"
-            },
-            {
-                "id": "deleteButton",
-                "description": "Διαγραφη"
-            },
-            {
-                "id": "saveButton",
-                "description": "Αποθηκευση"
-            }
-        ]
-    },
-    {
         "feature": "shipCrewList",
         "labels": [
             {
@@ -4086,6 +4000,48 @@
             {
                 "id": "cancelButton",
                 "description": "Ακυρο"
+            }
+        ]
+    },
+    {
+        "feature": "reservationImportListCriteria",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Εισαγωγή κρατήσεων"
+            },
+            {
+                "id": "subHeader",
+                "description": "Δώστε τα κριτήρια με τα οποία θα γίνει η αναζήτηση"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Ακυρο"
+            },
+            {
+                "id": "okButton",
+                "description": "Συνεχεια"
+            }
+        ]
+    },
+    {
+        "feature": "reservationImportList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Εισαγωγή κρατήσεων"
+            },
+            {
+                "id": "okButton",
+                "description": "Συνεχεια"
+            },
+            {
+                "id": "noDataHeader",
+                "description": "Δεν βρήκαμε εγγραφές για να εμφανίσουμε."
+            },
+            {
+                "id": "noDataSubHeader",
+                "description": "Ισως πρέπει να δώσετε διαφορετικά κριτήρια."
             }
         ]
     }

@@ -79,7 +79,6 @@ export class MessageDialogService {
     public helpDialog(): string { return this.getDescription(this.feature, 'helpDialog') }
     public twoPointReervationValidation(): string { return this.getDescription(this.feature, 'twoPointReservationValidation') }
     public threePointReservationValidation(): string { return this.getDescription(this.feature, 'threePointReservationValidation') }
-    public errorsInRegistrars(): string { return this.getDescription(this.feature, 'errorsInRegistrars') }
     public checkInAfterDepartureIsNotAllowed(): string { return this.getDescription(this.feature, 'checkInAfterDepartureIsNotAllowed') }
     public customerDataIsInvalid(): string { return this.getDescription(this.feature, 'customerDataIsInvalid') }
     public customerVatNumberIsDuplicate(): string { return this.getDescription(this.feature, 'customerVatNumberIsDuplicate') }

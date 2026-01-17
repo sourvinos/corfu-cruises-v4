@@ -175,10 +175,6 @@
                 "message": "Assurez-vous qu'il ne manque aucune information sur le passager, que vous avez fourni l'adresse électronique et que la réservation a été enregistrée."
             },
             {
-                "id": "errorsInRegistrars",
-                "message": "Les registres des passagers de ce navire ne sont pas corrects. Pour chaque navire, il devrait y avoir deux bureaux d'enregistrement actifs, dont l'un devrait être déclaré comme actif."
-            },
-            {
                 "id": "priceRetrieverHasErrors",
                 "message": "Δεν μπορούμε να ανακτήσουμε τις χρεώσεις επειδή πρέπει να δώσετε την ημερομηνία, τον πελάτη και τον προορισμό."
             },

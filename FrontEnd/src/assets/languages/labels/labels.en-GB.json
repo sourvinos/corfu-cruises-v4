@@ -2018,92 +2018,6 @@
         ]
     },
     {
-        "feature": "registrarList",
-        "labels": [
-            {
-                "id": "header",
-                "description": "Passenger registrars"
-            },
-            {
-                "id": "headerIsActive",
-                "description": "Active"
-            },
-            {
-                "id": "headerIsPrimary",
-                "description": "Primary"
-            },
-            {
-                "id": "headerFullname",
-                "description": "Fullname"
-            },
-            {
-                "id": "headerShipDescription",
-                "description": "Ship"
-            },
-            {
-                "id": "newRecord",
-                "description": "New record"
-            }
-        ]
-    },
-    {
-        "feature": "registrarForm",
-        "labels": [
-            {
-                "id": "header",
-                "description": "Registrar"
-            },
-            {
-                "id": "fullname",
-                "description": "Fullname"
-            },
-            {
-                "id": "ship",
-                "description": "Ship"
-            },
-            {
-                "id": "phones",
-                "description": "Phones"
-            },
-            {
-                "id": "email",
-                "description": "Email"
-            },
-            {
-                "id": "fax",
-                "description": "Fax"
-            },
-            {
-                "id": "address",
-                "description": "Address"
-            },
-            {
-                "id": "isPrimary",
-                "description": "Primary"
-            },
-            {
-                "id": "isActive",
-                "description": "Active"
-            },
-            {
-                "id": "post",
-                "description": "Initial entry"
-            },
-            {
-                "id": "put",
-                "description": "Last update"
-            },
-            {
-                "id": "deleteButton",
-                "description": "Delete"
-            },
-            {
-                "id": "saveButton",
-                "description": "Save"
-            }
-        ]
-    },
-    {
         "feature": "shipCrewList",
         "labels": [
             {
@@ -4086,6 +4000,48 @@
             {
                 "id": "cancelButton",
                 "description": "Ακυρο"
+            }
+        ]
+    },
+    {
+        "feature": "reservationImportListCriteria",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Εισαγωγή κρατήσεων"
+            },
+            {
+                "id": "subHeader",
+                "description": "Δώστε τα κριτήρια με τα οποία θα γίνει η αναζήτηση"
+            },
+            {
+                "id": "cancelButton",
+                "description": "Ακυρο"
+            },
+            {
+                "id": "okButton",
+                "description": "Συνεχεια"
+            }
+        ]
+    },
+    {
+        "feature": "reservationImportList",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Εισαγωγή κρατήσεων"
+            },
+            {
+                "id": "okButton",
+                "description": "Συνεχεια"
+            },
+            {
+                "id": "noDataHeader",
+                "description": "Δεν βρήκαμε εγγραφές για να εμφανίσουμε."
+            },
+            {
+                "id": "noDataSubHeader",
+                "description": "Ισως πρέπει να δώσετε διαφορετικά κριτήρια."
             }
         ]
     }

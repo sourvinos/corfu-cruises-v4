@@ -39,6 +39,7 @@ const appRoutes: Routes = [
     { path: 'ships', loadChildren: () => import('../features/reservations/ships/classes/modules/ship.module').then(m => m.ShipModule) },
     { path: 'users', loadChildren: () => import('../features/reservations/users/classes/modules/user.module').then(m => m.UserModule) },
     { path: 'reservation-parameters', loadChildren: () => import('../features/reservations/parameters/classes/modules/reservation-parameters.module').then(m => m.ReservationParametersModule) },
+    { path: 'reservations-import', loadChildren: () => import('../features/reservations/reservations-import/classes/modules/reservation-import.module').then(m => m.ReservationImportModule) },
     // Sales
     { path: 'banks', loadChildren: () => import('../features/sales/banks/classes/modules/bank.module').then(m => m.BankModule) },
     { path: 'bankAccounts', loadChildren: () => import('../features/sales/bankAccounts/classes/modules/bankAccount.module').then(m => m.BankAccountModule) },

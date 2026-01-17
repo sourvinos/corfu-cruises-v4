@@ -175,10 +175,6 @@
                 "message": "Make sure that no passenger details are missing, that you have provided the email and that the reservation has been saved."
             },
             {
-                "id": "errorsInRegistrars",
-                "message": "The passenger registrars for this ship are not correct. For each ship there should be two active registrars, one of which should be declared as active."
-            },
-            {
                 "id": "priceRetrieverHasErrors",
                 "message": "Δεν μπορούμε να ανακτήσουμε τις χρεώσεις επειδή πρέπει να δώσετε την ημερομηνία, τον πελάτη και τον προορισμό."
             },

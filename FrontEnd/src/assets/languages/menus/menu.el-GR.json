@@ -4,16 +4,16 @@
         "description": "Κρατήσεις"
     },
     {
+        "id": "importReservations",
+        "description": "Εισαγωγή κρατήσεων"
+    },
+    {
         "id": "availability",
         "description": "Διαθεσιμότητα"
     },
     {
         "id": "coachRoutes",
         "description": "Δρομολόγια λεωφορείων"
-    },
-    {
-        "id": "registrars",
-        "description": "Καταγραφείς επιβατών"
     },
     {
         "id": "ports",

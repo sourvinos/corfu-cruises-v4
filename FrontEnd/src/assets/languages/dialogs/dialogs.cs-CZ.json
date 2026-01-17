@@ -175,10 +175,6 @@
                 "message": "Zkontrolujte, zda nechybí žádné údaje o cestujícím, zda jste zadali e-mail a zda byla rezervace uložena."
             },
             {
-                "id": "errorsInRegistrars",
-                "message": "Údaje o cestujících na této lodi nejsou správné. Pro každou loď by měli existovat dva aktivní registrátoři, z nichž jeden by měl být deklarován jako aktivní."
-            },
-            {
                 "id": "priceRetrieverHasErrors",
                 "message": "Δεν μπορούμε να ανακτήσουμε τις χρεώσεις επειδή πρέπει να δώσετε την ημερομηνία, τον πελάτη και τον προορισμό."
             },

@@ -98,7 +98,7 @@ namespace API {
             services.Configure<EmailUserSettings>(options => Configuration.GetSection("EmailUserSettings").Bind(options));
             services.Configure<TokenSettings>(options => Configuration.GetSection("TokenSettings").Bind(options));
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
-            services.AddHostedService<EmailQueueService>();
+            // services.AddHostedService<EmailQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

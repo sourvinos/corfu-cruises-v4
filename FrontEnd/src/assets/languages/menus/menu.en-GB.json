@@ -4,16 +4,16 @@
         "description": "Reservations"
     },
     {
+        "id": "importReservations",
+        "description": "Εισαγωγή κρατήσεων"
+    },
+    {
         "id": "availability",
         "description": "Availability"
     },
     {
         "id": "coachRoutes",
         "description": "Coach routes"
-    },
-    {
-        "id": "registrars",
-        "description": "Passenger registrars"
     },
     {
         "id": "ports",

@@ -13,13 +13,15 @@ namespace API.Features.Reservations.Reservations {
         [JsonPropertyName("referer")]
         public string Customer { get; set; }
 
+        public int Adults { get; set; }
+        
+        public int TotalPax { get; set; }
+
         [JsonPropertyName("comments")]
         public object Comments { get; set; }
 
-        [JsonPropertyName("cancelled_at")]
-        public string CancelledAt { get; set; }
-
-        public bool IsCancelled { get; set; }
+        [JsonPropertyName("booking_status")]
+        public string Status { get; set; }
 
         [JsonPropertyName("items")]
         public List<LinkTwistReservationDetails> Details { get; set; }

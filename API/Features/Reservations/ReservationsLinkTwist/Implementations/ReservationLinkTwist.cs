@@ -3,6 +3,7 @@ using API.Features.Reservations.Parameters;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Linq;
 
 namespace API.Features.Reservations.Reservations {
 
@@ -22,14 +23,20 @@ namespace API.Features.Reservations.Reservations {
             using HttpClient httpClient = new();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
-            return JsonSerializer.Deserialize<LinkTwistReservation>(await httpClient.GetStringAsync(GetParameters().APIUrl + "/bookings/" + code));
+            return CalculatePassengers(JsonSerializer.Deserialize<LinkTwistReservation>(await httpClient.GetStringAsync(GetParameters().APIUrl + "/bookings/" + code)));
         }
 
         public async Task<LinkTwistReservation[]> GetReservationsAsync(LinkTwistReservationCriteriaVM criteria) {
             using HttpClient httpClient = new();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
-            return JsonSerializer.Deserialize<LinkTwistReservation[]>(await httpClient.GetStringAsync($"https://test.api.link-twist.com/bookings?activity_date_time_from={criteria.FromDate}&activity_date_time_to={criteria.ToDate}"));
+            return JsonSerializer.Deserialize<LinkTwistReservation[]>(await httpClient.GetStringAsync($"{GetParameters().APIUrl}/bookings?activity_date_time_from={criteria.FromDate}&activity_date_time_to={criteria.ToDate}"));
+        }
+
+        private static LinkTwistReservation CalculatePassengers(LinkTwistReservation x) {
+            x.Adults = x.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Adult"));
+            x.TotalPax = x.Details.Count;
+            return x;
         }
 
         private ReservationParametersVM GetParameters() {
