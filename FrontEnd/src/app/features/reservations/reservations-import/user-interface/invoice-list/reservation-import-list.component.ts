@@ -148,8 +148,10 @@ export class ReservationImportListComponent {
         this.helperService.highlightRow(id)
     }
 
-    public onNewRecord(): void {
-        this.router.navigate([this.url + '/new'])
+    public onImportRecords(): void {
+        if (this.isAnyRowSelected()) {
+            this.router.navigate([this.url + '/new'])
+        }
     }
 
     public onShowCriteriaDialog(): void {

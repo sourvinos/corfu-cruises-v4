@@ -4032,7 +4032,7 @@
                 "description": "Εισαγωγή κρατήσεων"
             },
             {
-                "id": "okButton",
+                "id": "importButton",
                 "description": "Συνεχεια"
             },
             {
@@ -4042,6 +4042,26 @@
             {
                 "id": "noDataSubHeader",
                 "description": "Ισως πρέπει να δώσετε διαφορετικά κριτήρια."
+            },
+            {
+                "id": "headerCode",
+                "description": "Κωδικός"
+            },
+            {
+                "id": "headerDate",
+                "description": "Ημερομηνία"
+            },
+            {
+                "id": "headerDestination",
+                "description": "Προορισμός"
+            },
+            {
+                "id": "headerCustomer",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "headerPickupPoint",
+                "description": "Σημείο παραλαβής"
             }
         ]
     }

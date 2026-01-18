@@ -4032,7 +4032,7 @@
                 "description": "Εισαγωγή κρατήσεων"
             },
             {
-                "id": "okButton",
+                "id": "importButton",
                 "description": "Συνεχεια"
             },
             {
