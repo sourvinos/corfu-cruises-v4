@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using API.Infrastructure.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

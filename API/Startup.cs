@@ -1,7 +1,6 @@
 using System;
 using API.Infrastructure.Auth;
 using API.Infrastructure.Classes;
-using API.Infrastructure.EmailServices;
 using API.Infrastructure.Extensions;
 using API.Infrastructure.Helpers;
 using API.Infrastructure.Middleware;

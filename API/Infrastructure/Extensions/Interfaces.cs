@@ -36,6 +36,7 @@ using API.Infrastructure.Users;
 using Microsoft.Extensions.DependencyInjection;
 using API.Infrastructure.Account;
 using API.Infrastructure.EmailServices;
+using API.Features.Reservations.PickupPointsLinkTwist;
 
 namespace API.Infrastructure.Extensions {
 
@@ -64,6 +65,7 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<INationalityRepository, NationalityRepository>();
             services.AddTransient<IPickupPointRepository, PickupPointRepository>();
             services.AddTransient<IPickupPointValidation, PickupPointValidation>();
+            services.AddTransient<IPickupPointLinkTwist, PickupPointLinkTwist>();
             services.AddTransient<IPortRepository, PortRepository>();
             services.AddTransient<IPortValidation, PortValidation>();
             services.AddTransient<IReservationCalculatePaxLimit, ReservationCalculatePaxLimit>();
