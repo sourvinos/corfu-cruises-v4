@@ -9,6 +9,7 @@ import { InteractionService } from 'src/app/shared/services/interaction.service'
 import { ListResolved } from 'src/app/shared/classes/list-resolved'
 import { MessageDialogService } from 'src/app/shared/services/message-dialog.service'
 import { MessageLabelService } from 'src/app/shared/services/message-label.service'
+import { PickupPointHttpService } from '../classes/services/pickupPoint-http.service'
 import { PickupPointListVM } from '../classes/view-models/pickupPoint-list-vm'
 import { PickupPointPdfService } from '../classes/services/pickupPoint-pdf.service'
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service'
@@ -21,7 +22,7 @@ import { SessionStorageService } from 'src/app/shared/services/session-storage.s
 
 export class PickupPointListComponent {
 
-    //#region common #9
+    //#region variables 
 
     @ViewChild('table') table: Table
 
@@ -33,6 +34,7 @@ export class PickupPointListComponent {
     public parentUrl = '/home'
     public records: PickupPointListVM[]
     public recordsFilteredCount: number
+    public recordsFiltered: PickupPointListVM[]
 
     //#endregion
 
@@ -43,13 +45,7 @@ export class PickupPointListComponent {
 
     //#endregion
 
-    //#region specific #1
-
-    public recordsFiltered: PickupPointListVM[]
-
-    //#endregion
-
-    constructor(private activatedRoute: ActivatedRoute, private dialogService: DialogService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private pickupPointPdfService: PickupPointPdfService, private router: Router, private sessionStorageService: SessionStorageService) { }
+    constructor(private activatedRoute: ActivatedRoute, private dialogService: DialogService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private pickupPointHttpService: PickupPointHttpService, private pickupPointPdfService: PickupPointPdfService, private router: Router, private sessionStorageService: SessionStorageService) { }
 
     //#region lifecycle hooks
 
@@ -74,19 +70,7 @@ export class PickupPointListComponent {
 
     //#endregion
 
-    //#region public common methods #7
-
-    public editRecord(id: number): void {
-        this.storeScrollTop()
-        this.storeSelectedId(id)
-        this.navigateToRecord(id)
-    }
-
-    public filterRecords(event: any): void {
-        this.sessionStorageService.saveItem(this.feature + '-' + 'filters', JSON.stringify(this.table.filters))
-        this.recordsFiltered = event.filteredValue
-        this.recordsFilteredCount = event.filteredValue.length
-    }
+    //#region public methods
 
     public getEmoji(anything: any): string {
         return typeof anything == 'string'
@@ -102,25 +86,48 @@ export class PickupPointListComponent {
         this.helperService.highlightRow(id)
     }
 
-    public newRecord(): void {
+    public onCreatePdf(): void {
+        this.pickupPointPdfService.createReport(this.recordsFiltered)
+    }
+
+    public onEditRecord(id: number): void {
+        this.storeScrollTop()
+        this.storeSelectedId(id)
+        this.navigateToRecord(id)
+    }
+
+    public onFilterRecords(event: any): void {
+        this.sessionStorageService.saveItem(this.feature + '-' + 'filters', JSON.stringify(this.table.filters))
+        this.recordsFiltered = event.filteredValue
+        this.recordsFilteredCount = event.filteredValue.length
+    }
+
+    public onUpdateFromLinkTwist(): void {
+        this.dialogService.open(this.messageDialogService.confirmUpdatePickupPointsFromLinkTwist(), 'question', ['abort', 'ok']).subscribe(response => {
+            if (response) {
+                this.pickupPointHttpService.getFromLinkTwist().subscribe({
+                    next: (response: any) => {
+                        this.seekRecord(response)
+                    },
+                    error: (errorFromInterceptor) => {
+                        this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
+                    }
+                })
+            }
+        })
+    }
+
+    public onNewRecord(): void {
         this.router.navigate([this.url + '/new'])
     }
 
-    public resetTableFilters(): void {
+    public onResetTableFilters(): void {
         this.helperService.clearTableTextFilters(this.table)
     }
 
     //#endregion
 
-    //#region public specific methods #1
-
-    public createPdf(): void {
-        this.pickupPointPdfService.createReport(this.recordsFiltered)
-    }
-
-    //#endregion
-
-    //#region private common methods #13
+    //#region private methods
 
     private enableDisableFilters(): void {
         this.records.length == 0 ? this.helperService.disableTableFilters() : this.helperService.enableTableFilters()
@@ -179,8 +186,29 @@ export class PickupPointListComponent {
         this.router.navigate([this.url, id])
     }
 
+    private populateDropdownFilters(): void {
+        this.dropdownCoachRoutes = this.helperService.getDistinctRecords(this.records, 'coachRoute', 'abbreviation')
+        this.dropdownPorts = this.helperService.getDistinctRecords(this.records, 'port', 'abbreviation')
+    }
+
     private scrollToSavedPosition(): void {
         this.helperService.scrollToSavedPosition(this.virtualElement, this.feature)
+    }
+
+    private seekRecord(response: any[]): void {
+        response.forEach(pickupPoint => {
+            const linkTwist = pickupPoint.title.split('|')[0].split('-')[0].trim()
+            const ourRecord: PickupPointListVM = this.records.find(x => x.description == linkTwist)
+            if (ourRecord) {
+                if (linkTwist == ourRecord.description) {
+                    // console.log(linkTwist + ' ' + ourRecord.description)
+                } else {
+                    console.log(linkTwist + ' ' + 'not found in our table')
+                }
+            } else {
+                console.log(JSON.stringify(pickupPoint) + ' ' + 'not found in our table')
+            }
+        })
     }
 
     private setSidebarsHeight(): void {
@@ -203,15 +231,6 @@ export class PickupPointListComponent {
         this.interactionService.refreshTabTitle.subscribe(() => {
             this.setTabTitle()
         })
-    }
-
-    //#endregion
-
-    //#region private specific methods #1
-
-    private populateDropdownFilters(): void {
-        this.dropdownCoachRoutes = this.helperService.getDistinctRecords(this.records, 'coachRoute', 'abbreviation')
-        this.dropdownPorts = this.helperService.getDistinctRecords(this.records, 'port', 'abbreviation')
     }
 
     //#endregion

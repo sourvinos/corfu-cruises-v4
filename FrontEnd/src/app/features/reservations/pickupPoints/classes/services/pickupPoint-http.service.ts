@@ -8,14 +8,18 @@ import { environment } from 'src/environments/environment'
 
 @Injectable({ providedIn: 'root' })
 
-export class PickupPointService extends HttpDataService {
+export class PickupPointHttpService extends HttpDataService {
 
     constructor(httpClient: HttpClient) {
         super(httpClient, environment.apiUrl + '/pickupPoints')
     }
 
-    getForBrowser(): Observable<any[]> {
+    public getForBrowser(): Observable<any[]> {
         return this.http.get<PickupPointAutoCompleteVM[]>(environment.apiUrl + '/pickupPoints/getForBrowser')
+    }
+
+    public getFromLinkTwist(): Observable<any> {
+        return this.http.get<any[]>(environment.apiUrl + '/pickupPointsLinkTwist')
     }
 
 }

@@ -20,7 +20,7 @@ import { HttpDataService } from './http-data.service'
 import { InteractionService } from './interaction.service'
 import { NationalityHttpService } from '../../features/reservations/nationalities/classes/services/nationality-http.service'
 import { PaymentMethodHttpService } from 'src/app/features/sales/paymentMethods/classes/services/paymentMethod-http.service'
-import { PickupPointService } from './../../features/reservations/pickupPoints/classes/services/pickupPoint.service'
+import { PickupPointHttpService } from '../../features/reservations/pickupPoints/classes/services/pickupPoint-http.service'
 import { PortHttpService } from '../../features/reservations/ports/classes/services/port-http.service'
 import { ResetPasswordViewModel } from './../../features/reservations/users/classes/view-models/reset-password-view-model'
 import { SessionStorageService } from './session-storage.service'
@@ -44,7 +44,7 @@ export class AccountService extends HttpDataService {
 
     //#endregion
 
-    constructor(httpClient: HttpClient, private bankService: BankService, private coachRouteService: CoachRouteService, private crewSpecialtyHttpService: CrewSpecialtyHttpService, private cryptoService: CryptoService, private customerHttpService: CustomerHttpService, private destinationHttpService: DestinationHttpService, private dexieService: DexieService, private documentTypeHttpService: DocumentTypeHttpService, private driverService: DriverService, private genderService: GenderService, private interactionService: InteractionService, private nationalityService: NationalityHttpService, private ngZone: NgZone, private paymentMethodService: PaymentMethodHttpService, private pickupPointService: PickupPointService, private portHttpService: PortHttpService, private router: Router, private sessionStorageService: SessionStorageService, private shipHttpService: ShipHttpService, private shipOwnerService: ShipOwnerHttpService, private taxOfficeService: TaxOfficeService) {
+    constructor(httpClient: HttpClient, private bankService: BankService, private coachRouteService: CoachRouteService, private crewSpecialtyHttpService: CrewSpecialtyHttpService, private cryptoService: CryptoService, private customerHttpService: CustomerHttpService, private destinationHttpService: DestinationHttpService, private dexieService: DexieService, private documentTypeHttpService: DocumentTypeHttpService, private driverService: DriverService, private genderService: GenderService, private interactionService: InteractionService, private nationalityService: NationalityHttpService, private ngZone: NgZone, private paymentMethodService: PaymentMethodHttpService, private pickupPointService: PickupPointHttpService, private portHttpService: PortHttpService, private router: Router, private sessionStorageService: SessionStorageService, private shipHttpService: ShipHttpService, private shipOwnerService: ShipOwnerHttpService, private taxOfficeService: TaxOfficeService) {
         super(httpClient, environment.apiUrl)
     }
 

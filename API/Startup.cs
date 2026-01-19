@@ -128,7 +128,7 @@ namespace API {
         }
 
         public virtual void Configure(IApplicationBuilder app) {
-            // app.UseMiddleware<ResponseMiddleware>();
+            app.UseMiddleware<ResponseMiddleware>();
             app.UseMiddleware<SecurityHeadersMiddleware>();
             app.UseDefaultFiles();
             app.UseHttpsRedirection();

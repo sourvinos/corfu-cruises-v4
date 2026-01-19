@@ -147,6 +147,10 @@
                 "message": "Please confirm that you want to logout!"
             },
             {
+                "id": "confirmUpdatePickupPointsFromLinkTwist",
+                "message": "Import"
+            },
+            {
                 "id": "passwordCanBeChangedOnlyByAccountOwner",
                 "message": "The password can be changed only by the owner of the account."
             },

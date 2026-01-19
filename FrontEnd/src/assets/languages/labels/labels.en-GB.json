@@ -351,7 +351,7 @@
             },
             {
                 "id": "headerLinkTwistAlias",
-                "description": "LinkTwist"
+                "description": "Κωδ. LinkTwist"
             },
             {
                 "id": "headerExactPoint",
@@ -368,6 +368,10 @@
             {
                 "id": "createPdf",
                 "description": "Create PDF"
+            },
+            {
+                "id": "updateFromLinkTwist",
+                "description": "Update from LinkTwist"
             }
         ]
     },
@@ -392,7 +396,7 @@
             },
             {
                 "id": "linkTwistAlias",
-                "description": "LinkTwist"
+                "description": "Κωδ. LinkTwist"
             },
             {
                 "id": "exactPoint",
@@ -4042,6 +4046,26 @@
             {
                 "id": "noDataSubHeader",
                 "description": "Ισως πρέπει να δώσετε διαφορετικά κριτήρια."
+            },
+            {
+                "id": "headerCode",
+                "description": "Κωδικός"
+            },
+            {
+                "id": "headerDate",
+                "description": "Ημερομηνία"
+            },
+            {
+                "id": "headerDestination",
+                "description": "Προορισμός"
+            },
+            {
+                "id": "headerCustomer",
+                "description": "Πελάτης"
+            },
+            {
+                "id": "headerPickupPoint",
+                "description": "Σημείο παραλαβής"
             }
         ]
     }

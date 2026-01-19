@@ -15,7 +15,7 @@ import { MessageDialogService } from 'src/app/shared/services/message-dialog.ser
 import { MessageInputHintService } from 'src/app/shared/services/message-input-hint.service'
 import { MessageLabelService } from 'src/app/shared/services/message-label.service'
 import { PickupPointReadDto } from '../classes/dtos/pickupPoint-read-dto'
-import { PickupPointService } from '../classes/services/pickupPoint.service'
+import { PickupPointHttpService } from '../classes/services/pickupPoint-http.service'
 import { PickupPointWriteDto } from '../classes/dtos/pickupPoint-write-dto'
 import { PortAutoCompleteVM } from '../../ports/classes/view-models/port-autocomplete-vm'
 import { ValidationService } from '../../../../shared/services/validation.service'
@@ -49,7 +49,7 @@ export class PickupPointFormComponent {
 
     //#endregion
 
-    constructor(private activatedRoute: ActivatedRoute, private dexieService: DexieService, private dialogService: DialogService, private formBuilder: FormBuilder, private helperService: HelperService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private pickupPointService: PickupPointService, private router: Router) { }
+    constructor(private activatedRoute: ActivatedRoute, private dexieService: DexieService, private dialogService: DialogService, private formBuilder: FormBuilder, private helperService: HelperService, private messageDialogService: MessageDialogService, private messageHintService: MessageInputHintService, private messageLabelService: MessageLabelService, private pickupPointService: PickupPointHttpService, private router: Router) { }
 
     //#region lifecycle hooks
 

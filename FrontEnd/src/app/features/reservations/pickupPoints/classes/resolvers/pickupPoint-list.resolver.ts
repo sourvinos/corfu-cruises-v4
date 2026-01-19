@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { ListResolved } from '../../../../../shared/classes/list-resolved'
-import { PickupPointService } from '../services/pickupPoint.service'
+import { PickupPointHttpService } from '../services/pickupPoint-http.service'
 
 @Injectable({ providedIn: 'root' })
 
 export class PickupPointListResolver {
 
-    constructor(private pickupPointService: PickupPointService) { }
+    constructor(private pickupPointService: PickupPointHttpService) { }
 
     resolve(): Observable<ListResolved> {
         return this.pickupPointService.getAll()

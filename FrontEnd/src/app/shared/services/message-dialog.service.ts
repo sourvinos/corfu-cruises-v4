@@ -70,6 +70,7 @@ export class MessageDialogService {
     public priceRetrieverIsValid(): string { return this.getDescription(this.feature, 'priceRetrieverIsValid') }
     public success(): string { return this.getDescription(this.feature, 'success') }
     public confirmDelete(): string { return this.getDescription(this.feature, 'warning') }
+    public confirmUpdatePickupPointsFromLinkTwist(): string { return this.getDescription(this.feature, 'confirmUpdatePickupPointsFromLinkTwist') }
     public confirmCancelInvoice(): string { return this.getDescription(this.feature, 'confirmCancelInvoice') }
     public confirmDeleteDexieDB(): string { return this.getDescription(this.feature, 'confirmDeleteDexieDB') }
     public confirmLogout(): string { return this.getDescription(this.feature, 'confirmLogout') }

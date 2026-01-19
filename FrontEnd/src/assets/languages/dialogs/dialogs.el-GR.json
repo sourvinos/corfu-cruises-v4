@@ -147,6 +147,10 @@
                 "message": "Επιβεβαιώστε ότι θέλετε να αποσυνδεθείτε!"
             },
             {
+                "id": "confirmUpdatePickupPointsFromLinkTwist",
+                "message": "Import"
+            },
+            {
                 "id": "passwordCanBeChangedOnlyByAccountOwner",
                 "message": "Ο κωδικός μπορεί να αλλάξει μόνο από τον κάτοχο του λογαριασμού."
             },

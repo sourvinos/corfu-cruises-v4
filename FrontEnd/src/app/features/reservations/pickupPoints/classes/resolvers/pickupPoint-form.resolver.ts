@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core'
 import { catchError, map, of } from 'rxjs'
 // Custom
 import { FormResolved } from 'src/app/shared/classes/form-resolved'
-import { PickupPointService } from '../services/pickupPoint.service'
+import { PickupPointHttpService } from '../services/pickupPoint-http.service'
 
 @Injectable({ providedIn: 'root' })
 
 export class PickupPointFormResolver {
 
-    constructor(private pickupPointService: PickupPointService) { }
+    constructor(private pickupPointService: PickupPointHttpService) { }
 
     resolve(route: ActivatedRouteSnapshot): any {
         return this.pickupPointService.getSingle(route.params.id).pipe(
