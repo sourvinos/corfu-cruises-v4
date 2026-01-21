@@ -10,6 +10,8 @@ export interface PickupPointListVM {
     port: PickupPointListPortVM
     exactPoint: string
     time: string
+    remarks: string
+    putAt: string
     isActive: boolean
 
 }

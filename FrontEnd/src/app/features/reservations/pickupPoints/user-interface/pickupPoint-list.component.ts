@@ -13,11 +13,12 @@ import { PickupPointHttpService } from '../classes/services/pickupPoint-http.ser
 import { PickupPointListVM } from '../classes/view-models/pickupPoint-list-vm'
 import { PickupPointPdfService } from '../classes/services/pickupPoint-pdf.service'
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service'
+import { PickupPointWriteDto } from '../classes/dtos/pickupPoint-write-dto'
 
 @Component({
     selector: 'pickupPoint-list',
     templateUrl: './pickupPoint-list.component.html',
-    styleUrls: ['../../../../../assets/styles/custom/lists.css']
+    styleUrls: ['../../../../../assets/styles/custom/lists.css', './pickupPoint-list.component.css']
 })
 
 export class PickupPointListComponent {
@@ -35,6 +36,7 @@ export class PickupPointListComponent {
     public records: PickupPointListVM[]
     public recordsFilteredCount: number
     public recordsFiltered: PickupPointListVM[]
+    private clonedRecords: { [s: string]: PickupPointListVM } = {}
 
     //#endregion
 
@@ -102,12 +104,27 @@ export class PickupPointListComponent {
         this.recordsFilteredCount = event.filteredValue.length
     }
 
+    public onRowEditCancel(record: PickupPointWriteDto, index: number): void {
+        this.records[index] = this.clonedRecords[record.id as number]
+        delete this.clonedRecords[record.id as number]
+    }
+
+    public onRowEditInit(record: PickupPointListVM): void {
+        this.pickupPointHttpService.getSingle(record.id).subscribe(response => {
+            this.clonedRecords[record.id as number] = { ...response.body }
+        })
+    }
+
+    public onRowEditSave(record: PickupPointListVM): void {
+        this.saveRecord(this.flattenObject(record))
+    }
+
     public onUpdateFromLinkTwist(): void {
         this.dialogService.open(this.messageDialogService.confirmUpdatePickupPointsFromLinkTwist(), 'question', ['abort', 'ok']).subscribe(response => {
             if (response) {
                 this.pickupPointHttpService.getFromLinkTwist().subscribe({
                     next: (response: any) => {
-                        this.seekRecord(response)
+                        this.updateListFromLinkTwist(response)
                     },
                     error: (errorFromInterceptor) => {
                         this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
@@ -154,6 +171,21 @@ export class PickupPointListComponent {
         }
     }
 
+    private flattenObject(record: PickupPointListVM): PickupPointWriteDto {
+        return {
+            id: record.id,
+            coachRouteId: record.coachRoute.id,
+            portId: record.port.id,
+            description: record.description,
+            linkTwistAlias: record.linkTwistAlias,
+            exactPoint: record.exactPoint,
+            time: record.time,
+            remarks: record.remarks,
+            isActive: record.isActive,
+            putAt: record.putAt
+        }
+    }
+
     private getVirtualElement(): void {
         this.virtualElement = document.getElementsByClassName('p-scroller-inline')[0]
     }
@@ -191,22 +223,29 @@ export class PickupPointListComponent {
         this.dropdownPorts = this.helperService.getDistinctRecords(this.records, 'port', 'abbreviation')
     }
 
+    private saveRecord(pickupPoint: PickupPointWriteDto): void {
+        this.pickupPointHttpService.save(pickupPoint).subscribe({
+            next: () => {
+                this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.url, false)
+            },
+            error: (errorFromInterceptor) => {
+                this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
+            }
+        })
+    }
+
     private scrollToSavedPosition(): void {
         this.helperService.scrollToSavedPosition(this.virtualElement, this.feature)
     }
 
-    private seekRecord(response: any[]): void {
+    private updateListFromLinkTwist(response: any[]): void {
         response.forEach(pickupPoint => {
             const linkTwist = pickupPoint.title.split('|')[0].split('-')[0].trim()
-            const ourRecord: PickupPointListVM = this.records.find(x => x.description == linkTwist)
-            if (ourRecord) {
-                if (linkTwist == ourRecord.description) {
-                    // console.log(linkTwist + ' ' + ourRecord.description)
-                } else {
-                    console.log(linkTwist + ' ' + 'not found in our table')
+            const existingRecord: PickupPointListVM = this.records.find(x => x.description == linkTwist)
+            if (existingRecord) {
+                if (linkTwist == existingRecord.description) {
+                    this.records[this.records.findIndex(x => x.description == linkTwist)].linkTwistAlias = pickupPoint.alias
                 }
-            } else {
-                console.log(JSON.stringify(pickupPoint) + ' ' + 'not found in our table')
             }
         })
     }

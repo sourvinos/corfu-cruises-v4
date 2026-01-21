@@ -148,7 +148,7 @@
             },
             {
                 "id": "confirmUpdatePickupPointsFromLinkTwist",
-                "message": "Import"
+                "message": "Θέλετε να ενημερώσετε τα υπάρχοντα σημεία παραλαβής με τους κωδικούς από LinkTwist;"
             },
             {
                 "id": "passwordCanBeChangedOnlyByAccountOwner",

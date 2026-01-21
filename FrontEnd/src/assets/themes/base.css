@@ -1,6 +1,9 @@
 * {
     --color-accent: #ffa500;
     --color-border: #ff0000;
-    --color-datepicker-calendar: #ffffff;
+    --color-green: #8fbc8f;
+    --color-orange: #ff8c00;
     --color-primary: #5298C5;
+    --color-row-selected-or-hover: #7BB7DD;
+    --color-table-edit-cell: #ffcba8;
 }

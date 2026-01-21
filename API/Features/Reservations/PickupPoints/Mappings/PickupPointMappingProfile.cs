@@ -8,6 +8,7 @@ namespace API.Features.Reservations.PickupPoints {
 
         public PickupPointMappingProfile() {
             CreateMap<PickupPoint, PickupPointListVM>()
+                .ForMember(x => x.LinkTwistAlias, x => x.MapFrom(x => x.LinkTwistAlias != "" ? x.LinkTwistAlias : " "))
                 .ForMember(x => x.CoachRoute, x => x.MapFrom(x => new PickupPointListCoachRouteVM {
                     Id = x.CoachRoute.Id,
                     Abbreviation = x.CoachRoute.Abbreviation

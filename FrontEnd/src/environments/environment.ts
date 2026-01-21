@@ -3,13 +3,13 @@
 export const environment = {
     apiUrl: 'https://localhost:5001/api',
     url: 'https://localhost:5001',
-    appName: 'Corfu Cruises',
+    appName: 'Benitses Demo',
     clientUrl: 'https://localhost:4200',
     defaultLanguage: 'en-GB',
     featuresIconDirectory: 'assets/images/features/',
     nationalitiesIconDirectory: 'assets/images/nationalities/',
     portStopOrdersDirectory: 'assets/images/port-stop-orders/',
-    cssUserSelect: 'none',
+    cssUserSelect: 'text',
     minWidth: 1280,
     login: {
         username: 'john',
