@@ -13,7 +13,7 @@ namespace API.Features.Reservations.PickupPoints {
             entity.Property(x => x.CoachRouteId).IsRequired(true);
             // Fields
             entity.Property(x => x.Description).HasMaxLength(128).IsRequired(true);
-            entity.Property(x => x.LinkTwistAlias).HasMaxLength(256).IsRequired(true);
+            entity.Property(x => x.LinkTwistAlias).HasDefaultValue("").HasMaxLength(256);
             entity.Property(x => x.ExactPoint).HasMaxLength(128).IsRequired(true);
             entity.Property(x => x.Time).HasMaxLength(5).IsRequired(true);
             entity.Property(x => x.Remarks).HasMaxLength(2048);

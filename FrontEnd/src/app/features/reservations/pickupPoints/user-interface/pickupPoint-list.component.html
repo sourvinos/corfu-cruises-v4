@@ -17,7 +17,6 @@
                         <th class="no-border-bottom width-18" pSortableColumn="linkTwistAlias">{{ getLabel("headerLinkTwistAlias") }}</th>
                         <th class="no-border-bottom width-10" pSortableColumn="exactPoint">{{ getLabel("headerExactPoint") }}</th>
                         <th class="no-border-bottom width-5" pSortableColumn="time">{{ getLabel("headerTime") }}</th>
-                        <th class="width-3"></th>
                     </tr>
                     <tr>
                         <th class="no-border-top width-5"><p-columnFilter field="isActive" type="boolean"></p-columnFilter></th>
@@ -51,7 +50,6 @@
                         <th class="no-border-top width-18"><input (input)="table.filter($event.target.value, 'linkTwistAlias', 'contains')" [value]="$any(table).filters['linkTwistAlias']?.value" class="p-inputtext"></th>
                         <th class="no-border-top width-10"><input (input)="table.filter($event.target.value, 'exactPoint', 'contains')" [value]="$any(table).filters['exactPoint']?.value" class="p-inputtext"></th>
                         <th class="no-border-top width-5"><input (input)="table.filter($event.target.value, 'time', 'contains')" [value]="$any(table).filters['time']?.value" class="p-inputtext center no-overflow"></th>
-                        <th class="width-3"></th>
                     </tr>
                 </ng-template>
                 <ng-template let-editing="editing" let-index="rowIndex" let-record pTemplate="body">
@@ -60,26 +58,9 @@
                         <td class="width-8"><span class="center no-overflow">{{ record.coachRoute.abbreviation }}</span></td>
                         <td class="width-8"><span class="center no-overflow">{{ record.port.abbreviation }}</span></td>
                         <td class="width-18"><span>{{ record.description }}</span></td>
-                        <td class="width-18">
-                            <p-cellEditor>
-                                <ng-template pTemplate="input">
-                                    <input pInputText [(ngModel)]="record.linkTwistAlias">
-                                </ng-template>
-                                <ng-template pTemplate="output">
-                                    {{ record.linkTwistAlias }}
-                                </ng-template>
-                            </p-cellEditor>
-                            <!-- <span>{{ record.linkTwistAlias }}</span> -->
-                        </td>
+                        <td class="width-18"><span>{{ record.linkTwistAlias }}</span></td>
                         <td class="width-10"><span>{{ record.exactPoint }}</span></td>
                         <td class="width-5"><span class="center no-overflow">{{ record.time }}</span></td>
-                        <td class="width-3">
-                            <span class="edit-buttons center">
-                                <div *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(record)"><span class="editable-row-button material-symbols-outlined">stylus</span></div>
-                                <div *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(record)"><span class="editable-row-button material-symbols-outlined">done</span></div>
-                                <div *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(record, index)"><span class="editable-row-button material-symbols-outlined">undo</span></div>
-                            </span>
-                        </td>
                     </tr>
                 </ng-template>
             </p-table>

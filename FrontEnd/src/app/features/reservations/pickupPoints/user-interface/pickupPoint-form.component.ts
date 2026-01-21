@@ -175,7 +175,7 @@ export class PickupPointFormComponent {
             coachRoute: ['', [Validators.required, ValidationService.RequireAutocomplete]],
             port: ['', [Validators.required, ValidationService.RequireAutocomplete]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
-            linkTwistAlias: ['', [Validators.required, Validators.maxLength(256)]],
+            linkTwistAlias: ['', [Validators.maxLength(256)]],
             exactPoint: ['', [Validators.required, Validators.maxLength(128)]],
             time: ['', [Validators.required, ValidationService.isTime]],
             remarks: ['', Validators.maxLength(2048)],

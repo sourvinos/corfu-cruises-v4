@@ -11,7 +11,7 @@ namespace API.Features.Reservations.PickupPoints {
             RuleFor(x => x.PortId).NotEmpty();
             // Fields
             RuleFor(x => x.Description).NotEmpty().MaximumLength(128);
-            RuleFor(x => x.LinkTwistAlias).NotEmpty().MaximumLength(256);
+            RuleFor(x => x.LinkTwistAlias).MaximumLength(256);
             RuleFor(x => x.ExactPoint).NotEmpty().MaximumLength(128);
             RuleFor(x => x.Time).Must(TimeHelpers.BeValidTime);
             RuleFor(x => x.Remarks).MaximumLength(2048);
