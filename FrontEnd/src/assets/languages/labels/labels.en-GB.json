@@ -89,6 +89,10 @@
                 "description": "Επωνυμία"
             },
             {
+                "id": "linkTwistReferer",
+                "description": "LinkTwist"
+            },
+            {
                 "id": "vatNumber",
                 "description": "ΑΦΜ"
             },
@@ -4066,6 +4070,22 @@
             {
                 "id": "headerPickupPoint",
                 "description": "Σημείο παραλαβής"
+            },
+            {
+                "id": "headerAdults",
+                "description": "Ε"
+            },
+            {
+                "id": "headerKids",
+                "description": "Π"
+            },
+            {
+                "id": "headerFree",
+                "description": "Δ"
+            },
+            {
+                "id": "headerTotal",
+                "description": "Pax"
             }
         ]
     }

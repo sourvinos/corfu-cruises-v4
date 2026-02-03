@@ -18,30 +18,84 @@
         <ng-template [ngIf]="records.length > 0" [ngIfElse]="noData">
             <div id="table-wrapper">
                 <p-contextMenu #contextMenu [model]="menuItems"></p-contextMenu>
-                <p-table #table (onFilter)="onFilterRecords($event)" [(contextMenuSelection)]="selectedRecord" [contextMenu]="contextMenu" [scrollable]="true" [(selection)]="selectedRecords" [value]="records" [virtualScrollItemSize]="32" [virtualScroll]="true" dataKey="invoiceId" scrollHeight="flex" selectionMode="single" sortMode="multiple">
+                <p-table #table (onFilter)="onFilterRecords($event)" [(contextMenuSelection)]="selectedRecord" [contextMenu]="contextMenu" [scrollable]="true" [(selection)]="selectedRecords" [value]="records" [virtualScrollItemSize]="32" [virtualScroll]="true" dataKey="code" scrollHeight="flex" selectionMode="single" sortMode="multiple">
                     <ng-template pTemplate="header">
                         <tr>
                             <th class="no-border-bottom width-3"></th>
-                            <th class="no-border-bottom width-11" pSortableColumn="code">{{ getLabel("headerCode") }}</th>
-                            <th class="no-border-bottom width-11" pSortableColumn="destination">{{ getLabel("headerDestination") }}</th>
-                            <th class="no-border-bottom width-11" pSortableColumn="customer">{{ getLabel("headerCustomer") }}</th>
-                            <th class="no-border-bottom width-11" pSortableColumn="pickupPoint">{{ getLabel('headerPickupPoint') }}</th>
+                            <th class="no-border-bottom width-4" pSortableColumn="date">{{ getLabel("headerDate") }}</th>
+                            <th class="no-border-bottom width-4" pSortableColumn="code">{{ getLabel("headerCode") }}</th>
+                            <th class="no-border-bottom width-11" pSortableColumn="destination.description">{{ getLabel("headerDestination") }}</th>
+                            <th class="no-border-bottom width-11" pSortableColumn="customer.description">{{ getLabel("headerCustomer") }}</th>
+                            <th class="no-border-bottom width-11" pSortableColumn="pickupPoint.description">{{ getLabel('headerPickupPoint') }}</th>
+                            <th class="no-border-bottom width-2" pSortableColumn="adults">{{ getLabel('headerAdults') }}</th>
+                            <th class="no-border-bottom width-2" pSortableColumn="kids">{{ getLabel('headerKids') }}</th>
+                            <th class="no-border-bottom width-2" pSortableColumn="free">{{ getLabel('headerFree') }}</th>
+                            <th class="no-border-bottom width-2" pSortableColumn="totalPax">{{ getLabel('headerTotal') }}</th>
+                            <th class="no-border-bottom width-5" pSortableColumn="status.description">{{ getLabel('headerStatus') }}</th>
                         </tr>
                         <tr>
                             <th class="no-border-top width-3"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
-                            <th class="no-border-top width-11"><input (input)="table.filter($event.target.value, 'code', 'contains')" [value]="$any(table).filters['code']?.value" class="p-inputtext"></th>
-                            <th class="no-border-top width-11"><input (input)="table.filter($event.target.value, 'destination', 'contains')" [value]="$any(table).filters['destination']?.value" class="p-inputtext"></th>
-                            <th class="no-border-top width-11"><input (input)="table.filter($event.target.value, 'customer', 'contains')" [value]="$any(table).filters['customer']?.value" class="p-inputtext"></th>
+                            <th class="no-border-top width-4"></th>
+                            <th class="no-border-top width-4"><input (input)="table.filter($event.target.value, 'code', 'contains')" [value]="$any(table).filters['code']?.value" class="p-inputtext"></th>
+                            <th class="no-border-top width-11">
+                                <p-columnFilter [showMenu]="false" field="destination" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctDestinations" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-11">
+                                <p-columnFilter [showMenu]="false" field="customer" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctCustomers" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
                             <th class="no-border-top width-11"><input (input)="table.filter($event.target.value, 'pickupPoint', 'contains')" [value]="$any(table).filters['pickupPoint']?.value" class="p-inputtext"></th>
+                            <th class="no-border-top width-2"></th>
+                            <th class="no-border-top width-2"></th>
+                            <th class="no-border-top width-2"></th>
+                            <th class="no-border-top width-2"></th>
+                            <th class="no-border-top width-5">
+                                <p-columnFilter [showMenu]="false" field="status" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctStatuses" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
                         </tr>
                     </ng-template>
                     <ng-template let-record pTemplate="body">
-                        <tr (click)="onHighlightRow(record.invoiceId)" (contextmenu)="onHighlightRow(record.invoiceId)" (dblclick)="editRecord(record.invoiceId)" [attr.id]=record.invoiceId style="height: 32px;" [pContextMenuRow]="record">
+                        <tr (click)="onHighlightRow(record.code)" (contextmenu)="onHighlightRow(record.code)" (dblclick)="onLoadRecord(record.code)" style="height: 32px;" [attr.id]=record.code [pContextMenuRow]="record">
                             <td class="width-3"><span class="center no-overflow" style="padding-top: 0.25rem !important;"><p-tableCheckbox [value]="record"></p-tableCheckbox></span></td>
-                            <td class="width-11"><span>{{ record.code }}</span></td>
-                            <td class="width-11"><span>{{ record.destination }}</span></td>
-                            <td class="width-11"><span>{{ record.customer }}</span></td>
-                            <td class="width-11"><span>{{ record.pickupPoint[0].description }}</span></td>
+                            <td class="width-4"><span class="center no-overflow">{{ formatDateToLocale(record.date) }}</span></td>
+                            <td class="width-4"><span class="center no-overflow">{{ record.code }}</span></td>
+                            <td class="width-11"><span>{{ record.destination.description }}</span></td>
+                            <td class="width-11"><span>{{ record.customer.description }}</span></td>
+                            <td class="width-11"><span>{{ record.pickupPoint.description }}</span></td>
+                            <td class="width-2"><span class="right with-right-padding">{{ record.adults | replaceZero }}</span></td>
+                            <td class="width-2"><span class="right with-right-padding">{{ record.kids | replaceZero }}</span></td>
+                            <td class="width-2"><span class="right with-right-padding">{{ record.free | replaceZero }}</span></td>
+                            <td class="width-2"><span class="right with-right-padding">{{ record.totalPax }}</span></td>
+                            <td class="width-5"><span>{{ record.status.description }}</span></td>
                         </tr>
                     </ng-template>
                 </p-table>

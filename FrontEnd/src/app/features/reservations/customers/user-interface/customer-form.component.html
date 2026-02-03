@@ -12,7 +12,7 @@
                     <div id="general-tab">
                         <div class="group-input-field">
                             <!-- Description -->
-                            <mat-form-field style="width: 30%;">
+                            <mat-form-field style="width: 50%;">
                                 <mat-label>{{ getLabel('description') }}</mat-label>
                                 <input [inputTabStop]="input" dataTabIndex="1" formControlName="description" matInput>
                                 <mat-error *ngIf="description.hasError('required')">{{ getHint("required") }}</mat-error>
@@ -23,18 +23,24 @@
                                 <input [inputTabStop]="input" dataTabIndex="2" formControlName="fullDescription" matInput>
                                 <mat-error *ngIf="fullDescription.hasError('required')">{{ getHint("required") }}</mat-error>
                             </mat-form-field>
+                            <!-- LinkTwist -->
+                            <mat-form-field style="width: 50%;">
+                                <mat-label>{{ getLabel('linkTwistReferer') }}</mat-label>
+                                <input [inputTabStop]="input" dataTabIndex="3" formControlName="linkTwistReferer" matInput type="text">
+                                <mat-error *ngIf="linkTwistReferer.hasError('maxlength')">{{ getHint("maxLength", linkTwistReferer.errors.maxlength.requiredLength) }}</mat-error>
+                            </mat-form-field>
                         </div>
                         <div class="group-input-field">
                             <!-- VatNumber -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('vatNumber') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="3" formControlName="vatNumber" matInput>
+                                <input [inputTabStop]="input" dataTabIndex="4" formControlName="vatNumber" matInput>
                                 <mat-error *ngIf="vatNumber.hasError('required')">{{ getHint("required") }}</mat-error>
                             </mat-form-field>
                             <!-- TaxOffice -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('taxOffice') }}</mat-label>
-                                <input #inputAutoComplete #triggerTaxOffice="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="taxOffices" dataTabIndex="4" formControlName="taxOffice" matInput>
+                                <input #inputAutoComplete #triggerTaxOffice="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="taxOffices" dataTabIndex="5" formControlName="taxOffice" matInput>
                                 <div matSuffix style="display:flex">
                                     <button (click)="openOrCloseAutoComplete(triggerTaxOffice, 'taxOffice')" mat-icon-button type="button">
                                         <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
@@ -48,28 +54,28 @@
                             <!-- VatPercent -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('vatPercent') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="5" formControlName="vatPercent" matInput type="number">
+                                <input [inputTabStop]="input" dataTabIndex="6" formControlName="vatPercent" matInput type="number">
                                 <mat-error *ngIf="vatPercent.hasError('required')">{{ getHint("required") }}</mat-error>
                                 <mat-error *ngIf="!vatPercent.hasError('required') && vatPercent.hasError('min') || vatPercent.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
                             </mat-form-field>
                             <!-- VatPercentId -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('vatPercentId') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="6" formControlName="vatPercentId" matInput type="number">
+                                <input [inputTabStop]="input" dataTabIndex="7" formControlName="vatPercentId" matInput type="number">
                                 <mat-error *ngIf="vatPercentId.hasError('required')">{{ getHint("required") }}</mat-error>
                                 <mat-error *ngIf="!vatPercentId.hasError('required') && vatPercentId.hasError('min') || vatPercentId.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
                             </mat-form-field>
                             <!-- VatExemptionId -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('vatExemptionId') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="7" formControlName="vatExemptionId" matInput type="number">
+                                <input [inputTabStop]="input" dataTabIndex="8" formControlName="vatExemptionId" matInput type="number">
                                 <mat-error *ngIf="vatExemptionId.hasError('required')">{{ getHint("required") }}</mat-error>
                                 <mat-error *ngIf="!vatExemptionId.hasError('required') && vatExemptionId.hasError('min') || vatExemptionId.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
                             </mat-form-field>
                             <!-- Branch -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('branch') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="8" formControlName="branch" matInput type="number">
+                                <input [inputTabStop]="input" dataTabIndex="9" formControlName="branch" matInput type="number">
                                 <mat-error *ngIf="branch.hasError('required')">{{ getHint("required") }}</mat-error>
                                 <mat-error *ngIf="branch.hasError('min') || branch.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
                             </mat-form-field>
@@ -77,36 +83,36 @@
                         <!-- Profession -->
                         <mat-form-field>
                             <mat-label>{{ getLabel('profession') }}</mat-label>
-                            <input [inputTabStop]="input" dataTabIndex="9" formControlName="profession" matInput>
+                            <input [inputTabStop]="input" dataTabIndex="10" formControlName="profession" matInput>
                             <mat-error *ngIf="profession.hasError('required')">{{ getHint("required") }}</mat-error>
                         </mat-form-field>
                         <div class="group-input-field">
                             <!-- Street -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('street') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="10" formControlName="street" matInput>
+                                <input [inputTabStop]="input" dataTabIndex="11" formControlName="street" matInput>
                             </mat-form-field>
                             <!-- Number -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('number') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="11" formControlName="number" matInput>
+                                <input [inputTabStop]="input" dataTabIndex="12" formControlName="number" matInput>
                             </mat-form-field>
                             <!-- City -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('city') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="12" formControlName="city" matInput>
+                                <input [inputTabStop]="input" dataTabIndex="13" formControlName="city" matInput>
                                 <mat-error *ngIf="city.hasError('required')">{{ getHint("required") }}</mat-error>
                             </mat-form-field>
                             <!-- Postal code -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('postalCode') }}</mat-label>
-                                <input [inputTabStop]="input" dataTabIndex="13" formControlName="postalCode" matInput>
+                                <input [inputTabStop]="input" dataTabIndex="14" formControlName="postalCode" matInput>
                                 <mat-error *ngIf="postalCode.hasError('required')">{{ getHint("required") }}</mat-error>
                             </mat-form-field>
                             <!-- Nationality -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('nationality') }}</mat-label>
-                                <input #inputAutoComplete #triggerNationality="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="nationalities" dataTabIndex="14" formControlName="nationality" matInput>
+                                <input #inputAutoComplete #triggerNationality="matAutocompleteTrigger" (keydown)="enableOrDisableAutoComplete($event)" (keyup)="checkForEmptyAutoComplete($event)" [inputTabStop]="input" [matAutocompleteDisabled]="isAutoCompleteDisabled" [matAutocomplete]="nationalities" dataTabIndex="15" formControlName="nationality" matInput>
                                 <div matSuffix style="display:flex">
                                     <button (click)="openOrCloseAutoComplete(triggerNationality, 'nationality')" mat-icon-button type="button">
                                         <mat-icon class="input-suffix material-icons-outlined">expand_more</mat-icon>
@@ -116,19 +122,18 @@
                                 <mat-error *ngIf="!nationality.hasError('required') && nationality.hasError('incorrect')">{{ getHint("invalid") }}</mat-error>
                             </mat-form-field>
                         </div>
-
                         <div class="group-input-field">
                             <!-- Balance limit -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('balanceLimit') }}</mat-label>
-                                <input [inputTabStop]="input" currencyMask dataTabIndex="15" formControlName="balanceLimit" matInput>
+                                <input [inputTabStop]="input" currencyMask dataTabIndex="16" formControlName="balanceLimit" matInput>
                                 <mat-error *ngIf="balanceLimit.hasError('required')">{{ getHint("required") }}</mat-error>
                                 <mat-error *ngIf="balanceLimit.hasError('min') || balanceLimit.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
                             </mat-form-field>
                             <!-- Pax limit -->
                             <mat-form-field>
                                 <mat-label>{{ getLabel('paxLimit') }}</mat-label>
-                                <input [inputTabStop]="input" class="right" dataTabIndex="16" formControlName="paxLimit" matInput type="number">
+                                <input [inputTabStop]="input" class="right" dataTabIndex="17" formControlName="paxLimit" matInput type="number">
                                 <mat-error *ngIf="paxLimit.hasError('required')">{{ getHint("required") }}</mat-error>
                                 <mat-error *ngIf="paxLimit.hasError('min') || paxLimit.hasError('max')">{{ getHint("invalidRange") }}</mat-error>
                             </mat-form-field>

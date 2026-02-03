@@ -15,6 +15,10 @@ export class ReservationImportHttpDataService extends HttpDataService {
         super(httpClient, environment.apiUrl)
     }
 
+    public getByCode(code: string): Observable<any> {
+        return this.http.get<any>(environment.apiUrl + '/reservationsLinkTwist/' + code)
+    }
+
     public getForList(criteria: ReservationImportListCriteriaVM): Observable<ReservationImportListVM[]> {
         return this.http.request<ReservationImportListVM[]>('post', environment.apiUrl + '/reservationsLinkTwist', { body: criteria })
     }

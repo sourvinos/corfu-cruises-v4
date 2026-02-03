@@ -62,19 +62,19 @@
                                 </ng-template>
                             </p-columnFilter>
                         </th>
-                        <th class="no-border-top width-6">
-                            <p-columnFilter [showMenu]="false" field="destination" matchMode="in">
-                                <ng-template let-filter="filterCallback" let-value pTemplate="filter">
-                                    <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctDestinations" [placeholder]="getEmoji('wildcard')" optionLabel="description">
-                                        <ng-template let-option pTemplate="item">
-                                            <div class="p-multiselect-option">
-                                                <span>{{ option.description }}</span>
-                                            </div>
-                                        </ng-template>
-                                    </p-multiSelect>
-                                </ng-template>
-                            </p-columnFilter>
-                        </th>
+                            <th class="no-border-top width-6">
+                                <p-columnFilter [showMenu]="false" field="destination" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctDestinations" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
                         <th class="no-border-top width-5">
                             <p-columnFilter [showMenu]="false" field="coachRoute" matchMode="in">
                                 <ng-template let-filter="filterCallback" let-value pTemplate="filter">

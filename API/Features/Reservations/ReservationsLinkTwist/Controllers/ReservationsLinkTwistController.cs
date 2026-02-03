@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Features.Reservations.Reservations {
+namespace API.Features.Reservations.LinkTwist {
 
     [Route("api/[controller]")]
     public class ReservationsLinkTwistController : ControllerBase {

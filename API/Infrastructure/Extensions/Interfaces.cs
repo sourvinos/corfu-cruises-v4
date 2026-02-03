@@ -37,6 +37,7 @@ using Microsoft.Extensions.DependencyInjection;
 using API.Infrastructure.Account;
 using API.Infrastructure.EmailServices;
 using API.Features.Reservations.PickupPointsLinkTwist;
+using API.Features.Reservations.LinkTwist;
 
 namespace API.Infrastructure.Extensions {
 

@@ -14,6 +14,7 @@ export interface CustomerReadDto extends Metadata {
     vatPercentId: number
     vatExemptionId: number
     description: string
+    linkTwistReferer: string
     fullDescription: string
     vatNumber: string
     branch: number

@@ -16,6 +16,7 @@ namespace API.Features.Reservations.Customers {
             entity.Property(x => x.VatPercentId).IsRequired(true);
             entity.Property(x => x.VatExemptionId).IsRequired(true);
             entity.Property(x => x.Description).HasMaxLength(128).IsRequired(true);
+            entity.Property(x => x.LinkTwistReferer).HasDefaultValue("").HasMaxLength(128);
             entity.Property(x => x.FullDescription).HasMaxLength(512).IsRequired(true);
             entity.Property(x => x.VatNumber).HasMaxLength(36).IsRequired(true);
             entity.Property(x => x.Branch).IsRequired(true);

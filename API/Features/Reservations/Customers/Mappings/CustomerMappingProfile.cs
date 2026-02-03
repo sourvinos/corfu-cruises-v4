@@ -14,6 +14,7 @@ namespace API.Features.Reservations.Customers {
                 .ForMember(x => x.Nationality, x => x.MapFrom(x => new SimpleEntity { Id = x.Nationality.Id, Description = x.Nationality.Description }));
             CreateMap<CustomerWriteDto, Customer>()
                 .ForMember(x => x.Description, x => x.MapFrom(x => x.Description.Trim()))
+                .ForMember(x => x.LinkTwistReferer, x => x.MapFrom(x => x.LinkTwistReferer.Trim()))
                 .ForMember(x => x.FullDescription, x => x.MapFrom(x => x.FullDescription.Trim()))
                 .ForMember(x => x.VatNumber, x => x.MapFrom(x => x.VatNumber.Trim()))
                 .ForMember(x => x.Profession, x => x.MapFrom(x => x.Profession.Trim()))

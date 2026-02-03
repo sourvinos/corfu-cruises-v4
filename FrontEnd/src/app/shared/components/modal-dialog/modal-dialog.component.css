@@ -19,7 +19,7 @@
     font-weight: var(--font-weight-dialog-content) !important;
     justify-content: center;
     line-height: 2rem;
-    overflow: hidden;
+    overflow-y: hidden;
     text-align: center;
 }
 

@@ -14,6 +14,7 @@ namespace API.Features.Reservations.Customers {
         CustomerValidVM GetCustomerData(Customer x);
         Task<Customer> GetByIdAsync(int id, bool includeTables);
         Task<IList<CustomerListVM>> GetForBalanceSheetAsync();
+        Task<Customer> GetByLinkTwistRefererAsync(string referer);
 
     }
 

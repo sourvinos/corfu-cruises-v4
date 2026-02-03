@@ -30,6 +30,7 @@ using API.Infrastructure.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using API.Features.Reservations.LinkTwist;
 
 namespace API.Infrastructure.Classes {
 
@@ -57,6 +58,7 @@ namespace API.Infrastructure.Classes {
         public DbSet<Ship> Ships { get; set; }
         public DbSet<ShipCrew> ShipCrews { get; set; }
         public DbSet<ShipOwner> ShipOwners { get; set; }
+        public DbSet<LinkTwistStatus> LinkTwistStatuses { get; set; }
 
         #endregion
 

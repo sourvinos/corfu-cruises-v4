@@ -50,6 +50,12 @@ namespace API.Features.Reservations.Destinations {
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Destination> GetByLinkTwistAsync(string description) {
+            return await context.Destinations
+                .AsNoTracking()
+                .SingleOrDefaultAsync(x => x.LinkTwistAlias == description);
+        }
+
     }
 
 }

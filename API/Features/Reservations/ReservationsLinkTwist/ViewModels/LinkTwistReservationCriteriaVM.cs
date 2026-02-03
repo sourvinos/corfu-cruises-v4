@@ -1,4 +1,4 @@
-namespace API.Features.Reservations.Reservations {
+namespace API.Features.Reservations.LinkTwist {
 
     public class LinkTwistReservationCriteriaVM {
 

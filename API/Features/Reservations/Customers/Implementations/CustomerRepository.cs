@@ -81,6 +81,12 @@ namespace API.Features.Reservations.Customers {
             return mapper.Map<IEnumerable<Customer>, IList<CustomerListVM>>(customers);
         }
 
+        public async Task<Customer> GetByLinkTwistRefererAsync(string referer) {
+            return await context.Customers
+                .AsNoTracking()
+                .SingleOrDefaultAsync(x => x.LinkTwistReferer.Equals(referer, System.StringComparison.CurrentCultureIgnoreCase));
+        }
+
     }
 
 }

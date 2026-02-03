@@ -11,6 +11,7 @@ namespace API.Features.Reservations.Destinations {
         Task<IEnumerable<DestinationBrowserVM>> GetForBrowserAsync();
         Task<IEnumerable<SimpleEntity>> GetForCriteriaAsync();
         Task<Destination> GetByIdAsync(int id);
+        Task<Destination> GetByLinkTwistAsync(string description);
 
     }
 

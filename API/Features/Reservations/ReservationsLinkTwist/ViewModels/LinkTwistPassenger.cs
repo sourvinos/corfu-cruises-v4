@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace API.Features.Reservations.Reservations {
+namespace API.Features.Reservations.LinkTwist {
 
     public class LinkTwistPassenger {
 

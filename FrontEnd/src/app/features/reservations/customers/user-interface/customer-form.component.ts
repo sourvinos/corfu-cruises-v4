@@ -185,6 +185,7 @@ export class CustomerFormComponent {
             vatPercentId: this.form.value.vatPercentId,
             vatExemptionId: this.form.value.vatExemptionId,
             description: this.form.value.description,
+            linkTwistReferer: this.form.value.linkTwistReferer,
             fullDescription: this.form.value.fullDescription,
             vatNumber: this.form.value.vatNumber,
             branch: this.form.value.branch,
@@ -238,6 +239,7 @@ export class CustomerFormComponent {
             vatPercentId: [2, [Validators.required, Validators.min(1), Validators.max(9)]],
             vatExemptionId: [0, [Validators.required, Validators.min(0), Validators.max(30)]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
+            linkTwistReferer: ['', [Validators.maxLength(128)]],
             fullDescription: ['', [Validators.required, Validators.maxLength(512)]],
             vatNumber: ['', [Validators.required, Validators.maxLength(36)]],
             branch: [0, [Validators.required, Validators.min(0), Validators.max(10)]],
@@ -288,6 +290,7 @@ export class CustomerFormComponent {
                 vatPercentId: this.record.vatPercentId,
                 vatExemptionId: this.record.vatExemptionId,
                 description: this.record.description,
+                linkTwistReferer: this.record.linkTwistReferer,
                 fullDescription: this.record.fullDescription,
                 vatNumber: this.record.vatNumber,
                 branch: this.record.branch,
@@ -369,6 +372,10 @@ export class CustomerFormComponent {
 
     get description(): AbstractControl {
         return this.form.get('description')
+    }
+
+    get linkTwistReferer(): AbstractControl {
+        return this.form.get('linkTwistReferer')
     }
 
     get fullDescription(): AbstractControl {

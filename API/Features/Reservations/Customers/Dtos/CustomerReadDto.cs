@@ -15,6 +15,7 @@ namespace API.Features.Reservations.Customers {
         public int VatPercentId { get; set; }
         public int VatExemptionId { get; set; }
         public string Description { get; set; }
+        public string LinkTwistReferer { get; set; }
         public string FullDescription { get; set; }
         public string VatNumber { get; set; }
         public int Branch { get; set; }

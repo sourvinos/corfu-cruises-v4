@@ -52,6 +52,12 @@ namespace API.Features.Reservations.PickupPoints {
                     .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<PickupPoint> GetByLinkTwistAsync(string description) {
+            return await context.PickupPoints
+                .AsNoTracking()
+                .SingleOrDefaultAsync(x => x.LinkTwistAlias == description);
+        }
+
     }
 
 }

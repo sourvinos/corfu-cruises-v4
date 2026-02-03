@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MenuItem } from 'primeng/api'
-import { Router } from '@angular/router'
 import { Table } from 'primeng/table'
 // Custom
 import { CriteriaDateRangeDialogComponent } from './../../../../../shared/components/criteria-date-range-dialog/criteria-date-range-dialog.component'
 import { DateHelperService } from '../../../../../shared/services/date-helper.service'
+import { DebugDialogService } from '../../../availability/classes/services/debug-dialog.service'
 import { DialogService } from '../../../../../shared/services/modal-dialog.service'
 import { EmojiService } from '../../../../../shared/services/emoji.service'
 import { HelperService } from '../../../../../shared/services/helper.service'
@@ -16,6 +16,7 @@ import { ReservationImportHttpDataService } from '../../classes/services/reserva
 import { ReservationImportListCriteriaVM } from '../../classes/view-models/criteria/reservations-import-list-criteria-vm'
 import { ReservationImportListVM } from '../../classes/view-models/list/reservation-import-list-vm'
 import { SessionStorageService } from '../../../../../shared/services/session-storage.service'
+import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
 
 @Component({
     selector: 'reservation-import-list',
@@ -45,12 +46,9 @@ export class ReservationImportListComponent {
 
     //#region dropdown filters
 
-    public dropdownDates = []
-    public dropdownCustomers = []
-    public dropdownDestinations = []
-    public dropdownDocumentTypes = []
-    public dropdownShipOwners = []
-    public dropdownShips = []
+    public distinctCustomers: SimpleEntity[] = []
+    public distinctDestinations: SimpleEntity[] = []
+    public distinctStatuses: SimpleEntity[] = []
 
     //#endregion
 
@@ -61,71 +59,21 @@ export class ReservationImportListComponent {
 
     //#endregion
 
-    constructor(
-        private dateHelperService: DateHelperService,
-        private dialogService: DialogService,
-        private emojiService: EmojiService,
-        private helperService: HelperService,
-        private interactionService: InteractionService,
-        private messageDialogService: MessageDialogService,
-        private messageLabelService: MessageLabelService,
-        private reservationImportHttpService: ReservationImportHttpDataService,
-        private router: Router,
-        private sessionStorageService: SessionStorageService,
-        public dialog: MatDialog
-    ) { }
+    constructor(private dateHelperService: DateHelperService, private debugDialogService: DebugDialogService, private dialogService: DialogService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private reservationImportHttpService: ReservationImportHttpDataService, private sessionStorageService: SessionStorageService, public dialog: MatDialog) { }
 
     //#region lifecycle hooks
 
     ngOnInit(): void {
         this.setTabTitle()
         this.subscribeToInteractionService()
-        this.buildCriteriaVM(this.criteria).then((response) => {
-            this.loadRecords(response).then(() => {
-                this.doVirtualTableTasks()
-            })
-        })
     }
 
     //#endregion
 
     //#region public methods
 
-    public editRecord(id: string): void {
-        this.storeScrollTop()
-        this.storeSelectedId(id)
-        this.navigateToRecord(id)
-    }
-
-    public onClearFilterTasks(): void {
-        this.clearFilters()
-        this.deleteStoredFilters()
-        this.clearSelectedRecords()
-        this.initFilteredRecordsCount()
-    }
-
-    public onFilter(event: any, column: string, matchMode: string): void {
-        if (event) this.table.filter(event, column, matchMode)
-    }
-
-    public onFilterRecords(event: any): void {
-        setTimeout(() => {
-            this.sessionStorageService.saveItem(this.feature + '-' + 'filters', JSON.stringify(this.table.filters))
-            this.recordsFiltered = event.filteredValue
-            this.recordsFilteredCount = event.filteredValue.length
-        }, 500)
-    }
-
-    public onRefreshList(): void {
-        this.buildCriteriaVM(this.criteria).then((response) => {
-            this.loadRecords(response).then(() => {
-                this.initFilteredRecordsCount()
-                this.filterTableFromStoredFilters()
-                this.populateDropdownFilters()
-                this.clearSelectedRecords()
-                this.doVirtualTableTasks()
-            })
-        })
+    public formatDateToLocale(date: string): string {
+        return this.dateHelperService.formatISODateToLocale(date)
     }
 
     public getCriteria(): string {
@@ -144,14 +92,51 @@ export class ReservationImportListComponent {
         return this.messageLabelService.getDescription(this.feature, id)
     }
 
-    public onHighlightRow(id: any): void {
-        this.helperService.highlightRow(id)
+    public onClearFilterTasks(): void {
+        this.clearFilters()
+        this.deleteStoredFilters()
+        this.clearSelectedRecords()
+        this.initFilteredRecordsCount()
+    }
+
+    public onFilter(event: any, column: string, matchMode: string): void {
+        if (event) this.table.filter(event, column, matchMode)
+    }
+
+    public onHighlightRow(code: any): void {
+        this.helperService.highlightRow(code)
     }
 
     public onImportRecords(): void {
         if (this.isAnyRowSelected()) {
-            this.router.navigate([this.url + '/new'])
+            // this.router.navigate([this.url + '/new'])
         }
+    }
+
+    public onFilterRecords(event: any): void {
+        setTimeout(() => {
+            this.sessionStorageService.saveItem(this.feature + '-' + 'filters', JSON.stringify(this.table.filters))
+            this.recordsFiltered = event.filteredValue
+            this.recordsFilteredCount = event.filteredValue.length
+        }, 500)
+    }
+
+    public onLoadRecord(code: string): void {
+        this.reservationImportHttpService.getByCode(code).subscribe(response => {
+            this.debugDialogService.open(response, '', ['ok'])
+        })
+    }
+
+    public onRefreshList(): void {
+        this.buildCriteriaVM(this.criteria).then((response) => {
+            this.loadRecords(response).then(() => {
+                this.initFilteredRecordsCount()
+                this.filterTableFromStoredFilters()
+                this.populateDropdownFilters()
+                this.clearSelectedRecords()
+                this.doVirtualTableTasks()
+            })
+        })
     }
 
     public onShowCriteriaDialog(): void {
@@ -223,20 +208,16 @@ export class ReservationImportListComponent {
         const filters = this.sessionStorageService.getFilters(this.feature + '-' + 'filters')
         if (filters) {
             setTimeout(() => {
-                this.filterColumn(filters.date, 'date', 'in')
-                this.filterColumn(filters.customer, 'customer', 'in')
-                this.filterColumn(filters.destination, 'destination', 'in')
-                this.filterColumn(filters.ship, 'ship', 'in')
-                this.filterColumn(filters.shipOwner, 'shipOwner', 'in')
-                this.filterColumn(filters.documentType, 'documentType', 'in')
-                this.filterColumn(filters.invoiceNo, 'invoiceNo', 'contains')
-                this.filterColumn(filters.grossAmount, 'grossAmount', 'contains')
+                // this.filterColumn(filters.date, 'date', 'in')
+                // this.filterColumn(filters.customer, 'customer', 'in')
+                // this.filterColumn(filters.destination, 'destination', 'in')
+                // this.filterColumn(filters.ship, 'ship', 'in')
+                // this.filterColumn(filters.shipOwner, 'shipOwner', 'in')
+                // this.filterColumn(filters.documentType, 'documentType', 'in')
+                // this.filterColumn(filters.invoiceNo, 'invoiceNo', 'contains')
+                // this.filterColumn(filters.grossAmount, 'grossAmount', 'contains')
             }, 1000)
         }
-    }
-
-    private formatDateToLocale(date: string): string {
-        return this.dateHelperService.formatISODateToLocale(date)
     }
 
     private getStoredCriteria(): void {
@@ -278,22 +259,16 @@ export class ReservationImportListComponent {
         return new Promise((resolve) => {
             this.reservationImportHttpService.getForList(criteria).subscribe(response => {
                 this.records = response
+                this.helperService.sortArray(this.records, 'date')
                 resolve(this.records)
             })
         })
     }
 
-    private navigateToRecord(id: any): void {
-        this.router.navigate([this.url, id])
-    }
-
     private populateDropdownFilters(): void {
-        this.dropdownDates = this.helperService.getDistinctRecords(this.records, 'date', 'description')
-        this.dropdownCustomers = this.helperService.getDistinctRecords(this.records, 'customer', 'description')
-        this.dropdownDestinations = this.helperService.getDistinctRecords(this.records, 'destination', 'description')
-        this.dropdownDocumentTypes = this.helperService.getDistinctRecords(this.records, 'documentType', 'description')
-        this.dropdownShipOwners = this.helperService.getDistinctRecords(this.records, 'shipOwner', 'description')
-        this.dropdownShips = this.helperService.getDistinctRecords(this.records, 'ship', 'description')
+        this.distinctCustomers = this.helperService.getDistinctRecords(this.records, 'customer', 'description')
+        this.distinctDestinations = this.helperService.getDistinctRecords(this.records, 'destination', 'description')
+        this.distinctStatuses = this.helperService.getDistinctRecords(this.records, 'status', 'description')
     }
 
     private scrollToSavedPosition(): void {
@@ -302,14 +277,6 @@ export class ReservationImportListComponent {
 
     private setTabTitle(): void {
         this.helperService.setTabTitle(this.feature)
-    }
-
-    private storeSelectedId(id: string): void {
-        this.sessionStorageService.saveItem(this.feature + '-id', id.toString())
-    }
-
-    private storeScrollTop(): void {
-        this.sessionStorageService.saveItem(this.feature + '-scrollTop', this.virtualElement.scrollTop)
     }
 
     private subscribeToInteractionService(): void {
