@@ -4,7 +4,6 @@ using System.Linq;
 using API.Features.Reservations.Reservations;
 using API.Infrastructure.Users;
 using API.Infrastructure.Classes;
-using API.Infrastructure.Helpers;
 using API.Infrastructure.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +14,13 @@ namespace API.Features.Reservations.Statistics {
 
     public class StatisticsRepository : Repository<Reservation>, IStatisticsRepository {
 
-
         public StatisticsRepository(AppDbContext appDbContext, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) { }
 
-        public IEnumerable<StatisticsVM> Get(int year) {
+        public IEnumerable<StatisticsVM> Get(StatisticsCriteriaVM criteria) {
             var x = context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Passengers)
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day))
+                .Where(x => x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
                 .GroupBy(x => new { x.Date.Year })
                 .Select(x => new StatisticsVM {
                     Pax = x.Sum(x => x.TotalPax),
@@ -36,12 +34,12 @@ namespace API.Features.Reservations.Statistics {
             return x;
         }
 
-        public IEnumerable<StatisticsVM> GetPerDestination(int year) {
+        public IEnumerable<StatisticsVM> GetPerCustomer(StatisticsCriteriaVM criteria) {
             var x = context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Passengers)
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day))
-                .GroupBy(x => new { x.Date.Year, x.Destination.Id, x.Destination.Description })
+                .Where(x => x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
+                .GroupBy(x => new { x.Date.Year, x.Customer.Id, x.Customer.Description })
                 .OrderBy(x => x.Key.Description)
                 .Select(x => new StatisticsVM {
                     Id = x.Key.Id,
@@ -57,12 +55,12 @@ namespace API.Features.Reservations.Statistics {
             return x;
         }
 
-        public IEnumerable<StatisticsVM> GetPerCustomer(int year) {
+        public IEnumerable<StatisticsVM> GetPerDestination(StatisticsCriteriaVM criteria) {
             var x = context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Passengers)
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day))
-                .GroupBy(x => new { x.Customer.Id, x.Customer.Description })
+                .Where(x => x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
+                .GroupBy(x => new { x.Destination.Id, x.Destination.Description })
                 .OrderBy(x => x.Key.Description)
                 .Select(x => new StatisticsVM {
                     Id = x.Key.Id,
@@ -78,12 +76,12 @@ namespace API.Features.Reservations.Statistics {
             return x;
         }
 
-        public IEnumerable<StatisticsVM> GetPerDriver(int year) {
+        public IEnumerable<StatisticsVM> GetPerDriver(StatisticsCriteriaVM criteria) {
             var x = context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Passengers)
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day) && x.DriverId != null)
-                .GroupBy(x => new { x.Date.Year, x.Driver.Id, x.Driver.Description })
+                .Where(x => x.DriverId != null && x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
+                .GroupBy(x => new { x.Driver.Id, x.Driver.Description })
                 .OrderBy(x => x.Key.Description)
                 .Select(x => new StatisticsVM {
                     Id = x.Key.Id,
@@ -99,12 +97,12 @@ namespace API.Features.Reservations.Statistics {
             return x;
         }
 
-        public IEnumerable<StatisticsVM> GetPerPort(int year) {
+        public IEnumerable<StatisticsVM> GetPerPort(StatisticsCriteriaVM criteria) {
             var x = context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Passengers)
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day))
-                .GroupBy(x => new { x.Date.Year, x.Port.Id, x.Port.Description })
+                .Where(x => x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
+                .GroupBy(x => new { x.Port.Id, x.Port.Description })
                 .OrderBy(x => x.Key.Description)
                 .Select(x => new StatisticsVM {
                     Id = x.Key.Id,
@@ -120,12 +118,12 @@ namespace API.Features.Reservations.Statistics {
             return x;
         }
 
-        public IEnumerable<StatisticsVM> GetPerShip(int year) {
+        public IEnumerable<StatisticsVM> GetPerShip(StatisticsCriteriaVM criteria) {
             var x = context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Passengers)
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day) && x.ShipId != null)
-                .GroupBy(x => new { x.Date.Year, x.Ship.Id, x.Ship.Description })
+                .Where(x => x.ShipId != null && x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
+                .GroupBy(x => new { x.Ship.Id, x.Ship.Description })
                 .OrderBy(x => x.Key.Description)
                 .Select(x => new StatisticsVM {
                     Id = x.Key.Id,
@@ -141,27 +139,11 @@ namespace API.Features.Reservations.Statistics {
             return x;
         }
 
-        public IEnumerable<StatisticsUserVM> GetPerUser(int year) {
-            var x = context.Reservations
-                .AsNoTracking()
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day))
-                .GroupBy(x => new { x.Date.Year, x.PostUser })
-                .Select(x => new StatisticsUserVM {
-                    PostUser = x.Key.PostUser,
-                    Reservations = x.Count()
-                }).OrderByDescending(x => x.Reservations).ToList();
-            x.Add(new StatisticsUserVM {
-                PostUser = "",
-                Reservations = x.Count
-            });
-            return x;
-        }
-
-        public IEnumerable<StatisticsNationalityVM> GetPerNationality(int year) {
+        public IEnumerable<StatisticsNationalityVM> GetPerNationality(StatisticsCriteriaVM criteria) {
             var x = context.Reservations
                 .AsNoTracking()
                 .Include(x => x.Passengers)
-                .Where(x => x.Date >= new DateTime(year, 1, 1) && x.Date <= new DateTime(year, DateHelpers.GetLocalDateTime().Month, DateHelpers.GetLocalDateTime().Day))
+                .Where(x => x.Date >= Convert.ToDateTime(criteria.FromDate) && x.Date <= Convert.ToDateTime(criteria.ToDate))
                 .SelectMany(x => x.Passengers)
                 .GroupBy(x => new { x.NationalityId, x.Nationality.Code, x.Nationality.Description })
                 .OrderBy(x => x.Key.Description)

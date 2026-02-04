@@ -17,52 +17,46 @@ namespace API.Features.Reservations.Statistics {
             this.statisticsRepo = statisticsRepo;
         }
 
-        [HttpGet("ytd/year/{year}")]
+        [HttpPost("ytd")]
         [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsVM> Get([FromRoute] int year) {
-            return statisticsRepo.Get(year);
+        public IEnumerable<StatisticsVM> Get([FromBody] StatisticsCriteriaVM criteria) {
+            return statisticsRepo.Get(criteria);
         }
 
-        [HttpGet("customers/year/{year}")]
+        [HttpPost("customers")]
         [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsVM> GetPerCustomer([FromRoute] int year) {
-            return statisticsRepo.GetPerCustomer(year);
+        public IEnumerable<StatisticsVM> GetPerCustomer([FromBody] StatisticsCriteriaVM criteria) {
+            return statisticsRepo.GetPerCustomer(criteria);
         }
 
-        [HttpGet("destinations/year/{year}")]
+        [HttpPost("destinations")]
         [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsVM> GetPerDestination([FromRoute] int year) {
-            return statisticsRepo.GetPerDestination(year);
+        public IEnumerable<StatisticsVM> GetPerDestination([FromBody] StatisticsCriteriaVM criteria) {
+            return statisticsRepo.GetPerDestination(criteria);
         }
 
-        [HttpGet("drivers/year/{year}")]
+        [HttpPost("drivers")]
         [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsVM> GetPerDriver([FromRoute] int year) {
-            return statisticsRepo.GetPerDriver(year);
+        public IEnumerable<StatisticsVM> GetPerDriver([FromBody] StatisticsCriteriaVM criteria) {
+            return statisticsRepo.GetPerDriver(criteria);
         }
 
-        [HttpGet("ports/year/{year}")]
+        [HttpPost("ports")]
         [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsVM> GetPerPort([FromRoute] int year) {
-            return statisticsRepo.GetPerPort(year);
+        public IEnumerable<StatisticsVM> GetPerPort([FromBody] StatisticsCriteriaVM criteria) {
+            return statisticsRepo.GetPerPort(criteria);
         }
 
-        [HttpGet("ships/year/{year}")]
+        [HttpPost("ships")]
         [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsVM> GetPerShip([FromRoute] int year) {
-            return statisticsRepo.GetPerShip(year);
+        public IEnumerable<StatisticsVM> GetPerShips([FromBody] StatisticsCriteriaVM criteria) {
+            return statisticsRepo.GetPerShip(criteria);
         }
 
-        [HttpGet("nationalities/year/{year}")]
+        [HttpPost("nationalities")]
         [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsVM> GetPerNationality([FromRoute] int year) {
-            return statisticsRepo.GetPerNationality(year);
-        }
-
-        [HttpGet("users/year/{year}")]
-        [Authorize(Roles = "admin")]
-        public IEnumerable<StatisticsUserVM> GetPerUser([FromRoute] int year) {
-            return statisticsRepo.GetPerUser(year);
+        public IEnumerable<StatisticsVM> GetPerNationalities([FromBody] StatisticsCriteriaVM criteria) {
+            return statisticsRepo.GetPerNationality(criteria);
         }
 
     }
