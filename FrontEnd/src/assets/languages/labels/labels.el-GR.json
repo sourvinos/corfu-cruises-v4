@@ -2372,6 +2372,27 @@
         ]
     },
     {
+        "feature": "statistics-criteria",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Κριτήρια"
+            },
+            {
+                "id": "subHeader",
+                "description": "Επιλέξτε τα κριτήρια με τα οποία θα γίνει η αναζήτηση."
+            },
+            {
+                "id": "cancelButton",
+                "description": "Ακυρο"
+            },
+            {
+                "id": "okButton",
+                "description": "Συνεχεια"
+            }
+        ]
+    },
+    {
         "feature": "statistics",
         "labels": [
             {
@@ -2384,7 +2405,7 @@
             },
             {
                 "id": "ytd",
-                "description": "YTD"
+                "description": "Ζητούμενη περίοδος"
             },
             {
                 "id": "destinations",

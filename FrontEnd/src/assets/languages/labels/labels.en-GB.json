@@ -2372,6 +2372,27 @@
         ]
     },
     {
+        "feature": "statistics-criteria",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Criteria"
+            },
+            {
+                "id": "subHeader",
+                "description": "Select the criteria to be used for the search."
+            },
+            {
+                "id": "cancelButton",
+                "description": "Cancel"
+            },
+            {
+                "id": "okButton",
+                "description": "Continue"
+            }
+        ]
+    },
+    {
         "feature": "statistics",
         "labels": [
             {
@@ -2384,7 +2405,7 @@
             },
             {
                 "id": "ytd",
-                "description": "YTD"
+                "description": "Requested period"
             },
             {
                 "id": "destinations",

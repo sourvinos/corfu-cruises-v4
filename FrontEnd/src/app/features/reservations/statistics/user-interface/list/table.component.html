@@ -1,0 +1,41 @@
+<p-table #table [scrollable]="true" [value]="array" dataKey="id" [scrollHeight]=getTableHeight() selectionMode="single" sortMode="multiple">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="description">{{ getLabel('description') }}</th>
+            <th pSortableColumn="pax">{{ getLabel('pax') }}</th>
+            <th pSortableColumn="actualPax">{{ getLabel('actual-pax') }}</th>
+            <th pSortableColumn="percentage">%</th>
+            <th pSortableColumn="noShow">{{ getLabel('no-show') }}</th>
+        </tr>
+        <tr>
+            <th><input (input)="table.filter($event.target.value, 'description', 'contains')" [value]="$any(table).filters['description']?.value" class="p-inputtext"></th>
+            <th class="width-5"></th>
+            <th class="width-5"></th>
+            <th class="width-5"></th>
+            <th class="width-5"></th>
+        </tr>
+    </ng-template>
+    <ng-template let-record pTemplate="body">
+        <tr style="height: 32px;">
+            <td>
+                <span class="flag fill" style="width: 100%; --fill: {{ record.percentage }}%;">
+                    <img *ngIf="isNationality(record)" [src]="getNationalityIcon(record)" class="flag-with-border" />
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ record.description }}</span>
+                </span>
+            </td>
+            <td><span class="monotype right with-right-padding">{{ formatNumberToLocale(record.pax) }}</span></td>
+            <td><span class="monotype right with-right-padding">{{ formatNumberToLocale(record.actualPax) }}</span></td>
+            <td><span class="monotype right with-right-padding">{{ record.percentage }}</span></td>
+            <td><span class="monotype right with-right-padding">{{ formatNumberToLocale(record.noShow) }}</span></td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <tr style="height: 32px;">
+            <td><span>{{ totals ? totals.description : "" }}</span></td>
+            <td class="right "><span class="monotype with-right-padding">{{ totals ? formatNumberToLocale(totals.pax) : 0 }}</span></td>
+            <td class="right "><span class="monotype with-right-padding">{{ totals ? formatNumberToLocale(totals.actualPax) : 0 }}</span></td>
+            <td class="right "><span class="monotype with-right-padding">{{ totals ? totals.percentage : 0 }}</span></td>
+            <td class="right "><span class="monotype with-right-padding">{{ totals ? formatNumberToLocale(totals.noShow) : 0 }}</span></td>
+        </tr>
+    </ng-template>
+</p-table>

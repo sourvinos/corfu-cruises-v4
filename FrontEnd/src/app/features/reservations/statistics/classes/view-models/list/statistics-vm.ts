@@ -1,6 +1,5 @@
-export interface StatisticsVM {
+export interface StatisticVM {
 
-    year: number
     id: number
     description: string
     pax: number
