@@ -4,7 +4,7 @@
     </button>
 </div>
 
-<mat-menu #languages="matMenu" class="primary">
+<mat-menu #languages="matMenu" class="primary" yPosition="above">
     <ng-container *ngTemplateOutlet="languagesMenu"></ng-container>
 </mat-menu>
 
@@ -19,24 +19,6 @@
         <div class="content">
             <img src="/assets/images/languages/en-GB.svg">
             <span>English</span>
-        </div>
-    </button>
-    <button (click)="onChangelanguage('de-DE')" mat-menu-item>
-        <div class="content">
-            <img src="/assets/images/languages/de-DE.svg">
-            <span>Deutsch</span>
-        </div>
-    </button>
-    <button (click)="onChangelanguage('cs-CZ')" mat-menu-item>
-        <div class="content">
-            <img src="/assets/images/languages/cs-CZ.svg">
-            <span>Česky</span>
-        </div>
-    </button>
-    <button (click)="onChangelanguage('fr-FR')" mat-menu-item>
-        <div class="content">
-            <img src="/assets/images/languages/fr-FR.svg">
-            <span>Française</span>
         </div>
     </button>
 </ng-template>
