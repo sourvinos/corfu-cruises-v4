@@ -12,5 +12,7 @@ export interface ReservationImportListVM {
     totalPax: number
     pickupPoint: string
     status: string
+    isValidPrimary: boolean
+    isValidSecondary: boolean
 
 }

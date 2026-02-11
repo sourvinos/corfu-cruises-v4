@@ -128,6 +128,10 @@ ul {
     color: var(--color-orange);
 }
 
+.red {
+    color: var(--color-orange);
+}
+
 ::-webkit-scrollbar {
     height: 0;
     width: 0.25rem;

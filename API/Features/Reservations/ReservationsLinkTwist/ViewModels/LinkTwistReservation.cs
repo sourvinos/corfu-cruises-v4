@@ -36,6 +36,9 @@ namespace API.Features.Reservations.LinkTwist {
 
         public SimpleEntity PickupPoint { get; set; }
 
+        public bool IsValidPrimary { get; set; }
+        public bool IsValidSecondary { get; set; }
+
     }
 
 }

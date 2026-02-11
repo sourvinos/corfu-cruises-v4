@@ -62,6 +62,8 @@ namespace API.Features.Reservations.LinkTwist {
             x.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(x.Details.FirstOrDefault().Date));
             x.TotalPax = x.Adults + x.Kids + x.Free;
             x.Status = GetStatus(x.BookingStatus);
+            x.IsValidPrimary = ValidateReservation(x);
+            x.IsValidSecondary = ValidatePassengers(x.Details);
             return x;
         }
 
@@ -80,6 +82,8 @@ namespace API.Features.Reservations.LinkTwist {
                 item.Free = item.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Infant"));
                 item.TotalPax = item.Adults + item.Kids + item.Free;
                 item.Status = GetStatus(item.BookingStatus);
+                item.IsValidPrimary = ValidateReservation(item);
+                item.IsValidSecondary = ValidatePassengers(item.Details);
             }
             return x;
         }
@@ -129,6 +133,33 @@ namespace API.Features.Reservations.LinkTwist {
                 APIKey = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoAPIKey : parameters.LinkTwistLiveAPIKey,
                 APIUrl = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoUrl : parameters.LinkTwistLiveUrl
             };
+        }
+
+        private static bool ValidateReservation(LinkTwistReservation reservation) {
+            if (reservation.Destination.Description != "" && reservation.Customer.Description != "" && reservation.PickupPoint.Description != "" && reservation.TotalPax > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        private static bool ValidatePassengers(List<LinkTwistReservationDetails> details) {
+            var x = true;
+            foreach (var item in details) {
+                if (item.Passenger.Lastname == "" || item.Passenger.Firstname == "" || ValidateAge(item.Passenger) == false || item.Passenger.Birthdate == "" || item.Passenger.Nationality == "" || item.Passenger.Gender == "") {
+                    x = false;
+                    break;
+                }
+            }
+            return x;
+        }
+
+        private static bool ValidateAge(LinkTwistPassenger passenger) {
+            if (passenger.Age.StartsWith("Adult") || passenger.Age.StartsWith("Child") || passenger.Age.StartsWith("Infant")) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }
