@@ -11,7 +11,7 @@
     display: flex;
     gap: 0.5rem;
     justify-content: flex-end;
-    margin: 0 1rem 0 0;
+    margin: 0 0 0 0;
 }
 
 #general-tab, #passengers-tab {
