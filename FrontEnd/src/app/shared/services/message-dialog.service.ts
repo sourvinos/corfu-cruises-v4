@@ -83,6 +83,8 @@ export class MessageDialogService {
     public checkInAfterDepartureIsNotAllowed(): string { return this.getDescription(this.feature, 'checkInAfterDepartureIsNotAllowed') }
     public customerDataIsInvalid(): string { return this.getDescription(this.feature, 'customerDataIsInvalid') }
     public customerVatNumberIsDuplicate(): string { return this.getDescription(this.feature, 'customerVatNumberIsDuplicate') }
+    public invalidReservationsToImport(): string { return this.getDescription(this.feature, 'invalidReservationsToImport') }
+    public validReservationsToImport(): string { return this.getDescription(this.feature, 'validReservationsToImport') }
 
     public filterResponse(error: any, feature = 'snackbarMessages'): string {
         let returnValue = ''

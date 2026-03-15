@@ -10,8 +10,8 @@ export interface ReservationImportListVM {
     kids: number
     free: number
     totalPax: number
-    pickupPoint: string
-    status: string
+    pickupPoint: SimpleEntity
+    status: SimpleEntity
     isValidPrimary: boolean
     isValidSecondary: boolean
 

@@ -12,9 +12,11 @@ import { HelperService } from '../../../../../shared/services/helper.service'
 import { InteractionService } from '../../../../../shared/services/interaction.service'
 import { MessageDialogService } from '../../../../../shared/services/message-dialog.service'
 import { MessageLabelService } from '../../../../../shared/services/message-label.service'
+import { ReservationImportDto } from '../../classes/dtos/reservation-import-dto'
 import { ReservationImportHttpDataService } from '../../classes/services/reservation-list-http-data.service'
 import { ReservationImportListCriteriaVM } from '../../classes/view-models/criteria/reservations-import-list-criteria-vm'
 import { ReservationImportListVM } from '../../classes/view-models/list/reservation-import-list-vm'
+import { ReservationImportService } from '../../classes/services/reservation-import.service'
 import { SessionStorageService } from '../../../../../shared/services/session-storage.service'
 import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
 
@@ -59,7 +61,7 @@ export class ReservationImportListComponent {
 
     //#endregion
 
-    constructor(private dateHelperService: DateHelperService, private debugDialogService: DebugDialogService, private dialogService: DialogService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private reservationImportHttpService: ReservationImportHttpDataService, private sessionStorageService: SessionStorageService, public dialog: MatDialog) { }
+    constructor(private dateHelperService: DateHelperService, private debugDialogService: DebugDialogService, private dialogService: DialogService, private emojiService: EmojiService, private helperService: HelperService, private interactionService: InteractionService, private messageDialogService: MessageDialogService, private messageLabelService: MessageLabelService, private reservationImportService: ReservationImportService, private reservationImportHttpService: ReservationImportHttpDataService, private sessionStorageService: SessionStorageService, public dialog: MatDialog) { }
 
     //#region lifecycle hooks
 
@@ -109,7 +111,13 @@ export class ReservationImportListComponent {
 
     public onImportRecords(): void {
         if (this.isAnyRowSelected()) {
-            // this.router.navigate([this.url + '/new'])
+            if (!this.areSelectedRowsValid()) {
+                this.dialogService.open(this.messageDialogService.invalidReservationsToImport(), 'error', ['ok'])
+            } else {
+                this.processReservations(this.reservationImportService.buildReservations(this.selectedRecords))
+            }
+        } else {
+            this.dialogService.open(this.messageDialogService.noRecordsSelected(), 'error', ['ok'])
         }
     }
 
@@ -166,6 +174,21 @@ export class ReservationImportListComponent {
 
     //#region private methods
 
+    private areSelectedRowsValid(): boolean {
+        let x = 0
+        this.selectedRecords.forEach(row => {
+            if (row.customer.description == '' || row.destination.description == '' || row.pickupPoint.description == '' || row.totalPax == 0) {
+                return false
+            } else {
+                x++
+            }
+        })
+        if (this.selectedRecords.length == x) {
+            return true
+        }
+        return false
+    }
+
     private buildCriteriaVM(event: ReservationImportListCriteriaVM): Promise<any> {
         return new Promise((resolve) => {
             this.criteria = {
@@ -198,12 +221,6 @@ export class ReservationImportListComponent {
         }, 1000)
     }
 
-    private filterColumn(element: any, field: string, matchMode: string): void {
-        if (element != undefined && (element.value != null || element.value != undefined)) {
-            this.table.filter(element.value, field, matchMode)
-        }
-    }
-
     private filterTableFromStoredFilters(): void {
         const filters = this.sessionStorageService.getFilters(this.feature + '-' + 'filters')
         if (filters) {
@@ -220,21 +237,6 @@ export class ReservationImportListComponent {
         }
     }
 
-    private getStoredCriteria(): void {
-        const storedCriteria: any = this.sessionStorageService.getItem('reservationImportListCriteria') ? JSON.parse(this.sessionStorageService.getItem('reservationImportListCriteria')) : ''
-        if (storedCriteria) {
-            this.criteria = {
-                fromDate: storedCriteria.fromDate,
-                toDate: storedCriteria.toDate
-            }
-        } else {
-            this.criteria = {
-                fromDate: this.dateHelperService.formatDateToIso(new Date()),
-                toDate: this.dateHelperService.formatDateToIso(new Date())
-            }
-        }
-    }
-
     private getVirtualElement(): void {
         this.virtualElement = document.getElementsByClassName('p-scroller-inline')[0]
     }
@@ -248,11 +250,7 @@ export class ReservationImportListComponent {
     }
 
     private isAnyRowSelected(): boolean {
-        if (this.selectedRecords.length == 0) {
-            this.dialogService.open(this.messageDialogService.noRecordsSelected(), 'error', ['ok'])
-            return false
-        }
-        return true
+        return this.selectedRecords.length != 0
     }
 
     private loadRecords(criteria: ReservationImportListCriteriaVM): Promise<ReservationImportListVM[]> {
@@ -269,6 +267,19 @@ export class ReservationImportListComponent {
         this.distinctCustomers = this.helperService.getDistinctRecords(this.records, 'customer', 'description')
         this.distinctDestinations = this.helperService.getDistinctRecords(this.records, 'destination', 'description')
         this.distinctStatuses = this.helperService.getDistinctRecords(this.records, 'status', 'description')
+    }
+
+    private processReservations(x: ReservationImportDto[]): void {
+        x.forEach(z => {
+            this.reservationImportHttpService.saveReservation(z).subscribe({
+                next: (response) => {
+                    console.log(response)
+                },
+                error: (errorFromInterceptor) => {
+                    this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
+                }
+            })
+        })
     }
 
     private scrollToSavedPosition(): void {

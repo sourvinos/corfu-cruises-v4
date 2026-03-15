@@ -36,7 +36,7 @@ export class AppComponent {
 
     //#region listeners
 
-    @HostListener('window:beforeunload', ['$event']) beforeUnloadHander(): any {
+    @HostListener('window:beforeunload') beforeUnloadHander(): any {
         this.accountService.logout()
     }
 
@@ -74,7 +74,7 @@ export class AppComponent {
     }
 
     private setBackgroundImage(): void {
-        document.getElementById('wrapper').style.backgroundImage = 'url(../../assets/images/themes/background.svg'
+        // document.getElementById('wrapper').style.backgroundImage = 'url(../../assets/images/themes/background.svg'
     }
 
     private setUserSelect(): void {
