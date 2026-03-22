@@ -1,3 +1,4 @@
+import { PassengerImportDto } from '../../dtos/passenger-import-dto'
 import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
 
 export interface ReservationImportListVM {
@@ -11,6 +12,7 @@ export interface ReservationImportListVM {
     free: number
     totalPax: number
     pickupPoint: SimpleEntity
+    details: PassengerImportDto[]
     status: SimpleEntity
     isValidPrimary: boolean
     isValidSecondary: boolean

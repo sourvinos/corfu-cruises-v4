@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 // Custom
+import { PassengerImportDto } from '../dtos/passenger-import-dto'
 import { ReservationImportDto } from '../dtos/reservation-import-dto'
 import { ReservationImportListVM } from '../view-models/list/reservation-import-list-vm'
 
@@ -24,11 +25,15 @@ export class ReservationImportService {
                 kids: z.kids,
                 free: z.free,
                 remarks: '',
-                passengers: [],
+                passengers: this.buildPassengers(z.details),
             }
             i.push(user)
         })
         return i
+    }
+
+    private buildPassengers(passengers: PassengerImportDto[]): PassengerImportDto[] {
+        return passengers
     }
 
 }

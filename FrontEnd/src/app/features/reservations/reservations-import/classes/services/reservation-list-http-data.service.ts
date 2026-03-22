@@ -24,7 +24,7 @@ export class ReservationImportHttpDataService extends HttpDataService {
     }
 
     public saveReservation(formData: any): Observable<any> {
-        return this.http.post<any>(environment.apiUrl + '/' + 'reservations', formData)
+        return this.http.post<any>(environment.apiUrl + '/reservationsLinkTwist/', formData)
     }
 
 }

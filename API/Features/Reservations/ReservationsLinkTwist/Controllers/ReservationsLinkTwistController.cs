@@ -29,6 +29,12 @@ namespace API.Features.Reservations.LinkTwist {
             return await linkTwist.GetReservationsAsync(criteria);
         }
 
+        [HttpPost("saveRange")]
+        [Authorize(Roles = "admin")]
+        public async Task<LinkTwistReservation[]> GetByDateRange([FromBody] LinkTwistReservationCriteriaVM criteria) {
+            return await linkTwist.GetReservationsAsync(criteria);
+        }
+
     }
 
 }
