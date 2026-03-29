@@ -3,8 +3,9 @@ import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
 
 export interface ReservationImportListVM {
 
-    code: string
     date: string
+    code: string
+    bookingCode: string
     destination: SimpleEntity
     customer: SimpleEntity
     adults: number

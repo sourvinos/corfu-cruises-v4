@@ -215,7 +215,7 @@
             },
             {
                 "id": "headerLinkTwistAlias",
-                "description": "Συντ. LinkTwist"
+                "description": "LinkTwist"
             },
             {
                 "id": "newRecord",
@@ -4074,6 +4074,10 @@
             },
             {
                 "id": "headerCode",
+                "description": "LinkTwist"
+            },
+            {
+                "id": "headerBookingCode",
                 "description": "Κωδικός"
             },
             {

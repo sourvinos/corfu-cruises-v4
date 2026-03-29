@@ -215,7 +215,7 @@
             },
             {
                 "id": "headerLinkTwistAlias",
-                "description": "Abbr. LinkTwist"
+                "description": "LinkTwist"
             },
             {
                 "id": "newRecord",
@@ -4074,6 +4074,10 @@
             },
             {
                 "id": "headerCode",
+                "description": "LinkTwist"
+            },
+            {
+                "id": "headerBookingCode",
                 "description": "Κωδικός"
             },
             {
@@ -4107,6 +4111,10 @@
             {
                 "id": "headerTotal",
                 "description": "Pax"
+            },
+            {
+                "id": "headerStatus",
+                "description": "Κατάσταση"
             }
         ]
     }

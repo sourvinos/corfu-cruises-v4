@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { MenuItem } from 'primeng/api'
 import { Table } from 'primeng/table'
 // Custom
-import { CriteriaDateRangeDialogComponent } from './../../../../../shared/components/criteria-date-range-dialog/criteria-date-range-dialog.component'
+import { CriteriaDateRangeDialogComponent } from '../../../../../shared/components/criteria-date-range-dialog/criteria-date-range-dialog.component'
 import { DateHelperService } from '../../../../../shared/services/date-helper.service'
 import { DebugDialogService } from '../../../availability/classes/services/debug-dialog.service'
 import { DialogService } from '../../../../../shared/services/modal-dialog.service'
@@ -92,6 +92,10 @@ export class ReservationImportListComponent {
 
     public getLabel(id: string): string {
         return this.messageLabelService.getDescription(this.feature, id)
+    }
+
+    public getPickupPointDescription(pickupPoint: SimpleEntity): string {
+        return pickupPoint.id != 9999 ? pickupPoint.description : this.emojiService.getEmoji('warning')
     }
 
     public onClearFilterTasks(): void {

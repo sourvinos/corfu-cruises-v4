@@ -6,15 +6,19 @@ namespace API.Features.Reservations.LinkTwist {
 
     public class LinkTwistReservation {
 
+        public string Date { get; set; }
+
         [JsonPropertyName("code")]
         public string Code { get; set; }
 
-        public string Date { get; set; }
-        public SimpleEntity Destination { get; set; }
+        [JsonPropertyName("channel_booking_code")]
+        public string BookingCode { get; set; }
 
         [JsonPropertyName("referer")]
         public string Referer { get; set; }
+
         public SimpleEntity Customer { get; set; }
+        public SimpleEntity Destination { get; set; }
 
         public int Adults { get; set; }
         public int Kids { get; set; }

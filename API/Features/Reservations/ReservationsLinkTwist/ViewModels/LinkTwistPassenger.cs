@@ -10,9 +10,6 @@ namespace API.Features.Reservations.LinkTwist {
         [JsonPropertyName("name")]
         public string Firstname { get; set; } = "";
 
-        [JsonPropertyName("type")]
-        public string Age { get; set; } = "0";
-
         [JsonPropertyName("date_of_birth")]
         public string Birthdate { get; set; } = "";
 

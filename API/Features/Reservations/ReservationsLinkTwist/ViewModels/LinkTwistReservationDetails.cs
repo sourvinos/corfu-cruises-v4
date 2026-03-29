@@ -7,6 +7,9 @@ namespace API.Features.Reservations.LinkTwist {
         [JsonPropertyName("activity_date_time")]
         public string Date { get; set; }
 
+        [JsonPropertyName("participant_type_alias")]
+        public string Age { get; set; }
+
         [JsonPropertyName("product_channel_alias")]
         public string Destination { get; set; }
 

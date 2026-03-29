@@ -55,10 +55,11 @@ namespace API.Features.Reservations.LinkTwist {
             x.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(x.Details.FirstOrDefault().Date));
             x.Destination = GetDestination(x.Details.FirstOrDefault().Destination);
             x.Customer = GetCustomer(x.Referer);
+            x.BookingCode = x.BookingCode;
             x.PickupPoint = GetPickupPoint(x);
-            x.Adults = x.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Adult"));
-            x.Kids = x.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Child"));
-            x.Free = x.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Infant"));
+            x.Adults = x.Details.Count(x => x.Age.Contains("adult"));
+            x.Kids = x.Details.Count(x => x.Age.Contains("child"));
+            x.Free = x.Details.Count(x => x.Age.Contains("infant"));
             x.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(x.Details.FirstOrDefault().Date));
             x.TotalPax = x.Adults + x.Kids + x.Free;
             x.Status = GetStatus(x.BookingStatus);
@@ -76,10 +77,11 @@ namespace API.Features.Reservations.LinkTwist {
                 item.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(item.Details.FirstOrDefault().Date));
                 item.Destination = GetDestination(item.Details.FirstOrDefault().Destination);
                 item.Customer = GetCustomer(item.Referer);
+                item.BookingCode = item.BookingCode;
                 item.PickupPoint = GetPickupPoint(item);
-                item.Adults = item.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Adult"));
-                item.Kids = item.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Child"));
-                item.Free = item.Details.Select(x => x.Passenger).Count(x => x.Age.Contains("Infant"));
+                item.Adults = item.Details.Count(x => x.Age.Contains("adult"));
+                item.Kids = item.Details.Count(x => x.Age.Contains("child"));
+                item.Free = item.Details.Count(x => x.Age.Contains("infant"));
                 item.TotalPax = item.Adults + item.Kids + item.Free;
                 item.Status = GetStatus(item.BookingStatus);
                 item.IsValidPrimary = ValidateReservation(item);
@@ -108,13 +110,13 @@ namespace API.Features.Reservations.LinkTwist {
             if (reservation.Extras.Count > 0) {
                 var x = pickupPointRepo.GetByLinkTwistAsync(reservation.Extras[0].Description).Result;
                 return new SimpleEntity {
-                    Id = x != null ? x.Id : 0,
-                    Description = x != null ? x.Description : "",
+                    Id = x != null ? x.Id : 9999,
+                    Description = x != null ? x.Description : "(NOT GIVEN)",
                 };
             } else {
                 return new SimpleEntity {
-                    Id = 0,
-                    Description = "",
+                    Id = 9999,
+                    Description = "(NOT GIVEN)",
                 };
             }
         }
@@ -146,7 +148,7 @@ namespace API.Features.Reservations.LinkTwist {
         private static bool ValidatePassengers(List<LinkTwistReservationDetails> details) {
             var x = true;
             foreach (var item in details) {
-                if (item.Passenger.Lastname == "" || item.Passenger.Firstname == "" || ValidateAge(item.Passenger) == false || item.Passenger.Birthdate == "" || item.Passenger.Nationality == "" || item.Passenger.Gender == "") {
+                if (item.Passenger.Lastname == "" || item.Passenger.Firstname == "" || ValidateAge(item) == false || item.Passenger.Birthdate == "" || item.Passenger.Nationality == "" || item.Passenger.Gender == "") {
                     x = false;
                     break;
                 }
@@ -154,8 +156,8 @@ namespace API.Features.Reservations.LinkTwist {
             return x;
         }
 
-        private static bool ValidateAge(LinkTwistPassenger passenger) {
-            if (passenger.Age.StartsWith("Adult") || passenger.Age.StartsWith("Child") || passenger.Age.StartsWith("Infant")) {
+        private static bool ValidateAge(LinkTwistReservationDetails details) {
+            if (details.Age.StartsWith("adult") || details.Age.StartsWith("child") || details.Age.StartsWith("infant")) {
                 return true;
             } else {
                 return false;
