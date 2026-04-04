@@ -419,6 +419,10 @@
                 "description": "Active"
             },
             {
+                "id": "isTemp",
+                "description": "Exclusive use for linkTwist"
+            },
+            {
                 "id": "post",
                 "description": "Initial entry"
             },

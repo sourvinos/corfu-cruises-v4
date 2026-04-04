@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Features.Reservations.Reservations;
 using API.Infrastructure.Classes;
@@ -42,8 +41,8 @@ namespace API.Features.Reservations.LinkTwist {
         public async Task<LinkTwistReservation> GetByCode(string code) {
             return await linkTwist.GetReservationAsync(code);
         }
-
         [HttpPost()]
+
         [Authorize(Roles = "admin")]
         public async Task<LinkTwistReservation[]> GetByDateRange([FromBody] LinkTwistReservationCriteriaVM criteria) {
             return await linkTwist.GetReservationsAsync(criteria);

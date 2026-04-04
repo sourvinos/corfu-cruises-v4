@@ -65,11 +65,23 @@
                                     </ng-template>
                                 </p-columnFilter>
                             </th>
-                            <th class="no-border-top width-6"><input (input)="table.filter($event.target.value, 'pickupPoint', 'contains')" [value]="$any(table).filters['pickupPoint']?.value" class="p-inputtext"></th>
-                            <th class="no-border-top width-1"></th>
-                            <th class="no-border-top width-1"></th>
-                            <th class="no-border-top width-1"></th>
-                            <th class="no-border-top width-1"></th>
+                            <th class="no-border-top width-6">
+                                <p-columnFilter [showMenu]="false" field="pickupPoint" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctPickupPoints" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-1"><input (input)="table.filter($event.target.value, 'adults', 'equals')" [value]="$any(table).filters['adults']?.value" class="p-inputtext"></th>
+                            <th class="no-border-top width-1"><input (input)="table.filter($event.target.value, 'kids', 'equals')" [value]="$any(table).filters['kids']?.value" class="p-inputtext"></th>
+                            <th class="no-border-top width-1"><input (input)="table.filter($event.target.value, 'free', 'equals')" [value]="$any(table).filters['free']?.value" class="p-inputtext"></th>
+                            <th class="no-border-top width-1"><input (input)="table.filter($event.target.value, 'totalPax', 'equals')" [value]="$any(table).filters['totalPax']?.value" class="p-inputtext"></th>
                             <th class="no-border-top width-5">
                                 <p-columnFilter [showMenu]="false" field="status" matchMode="in">
                                     <ng-template let-filter="filterCallback" let-value pTemplate="filter">

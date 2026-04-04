@@ -3,7 +3,6 @@
     "compilerOptions": {
         "baseUrl": "./",
         "declaration": false,
-        "downlevelIteration": true,
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
@@ -17,7 +16,6 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitOverride": true,
         "noPropertyAccessFromIndexSignature": false,
-        "outDir": "./dist/out-tsc",
         "resolveJsonModule": true,
         "sourceMap": true,
         "strict": false,
@@ -29,7 +27,6 @@
         "useDefineForClassFields": false
     },
     "angularCompilerOptions": {
-        "fullTemplateTypeCheck": true,
         "strictDomEventTypes": false,
         "strictInjectionParameters": true,
         "strictTemplates": true

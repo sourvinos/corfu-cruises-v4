@@ -415,6 +415,10 @@
                 "description": "Σχόλια"
             },
             {
+                "id": "isTemp",
+                "description": "Μόνο για χρήση linkTwist"
+            },
+            {
                 "id": "isActive",
                 "description": "Ενεργό"
             },

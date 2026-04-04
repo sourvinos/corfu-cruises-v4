@@ -10,6 +10,7 @@ namespace API.Features.Reservations.PickupPoints {
         Task<IEnumerable<PickupPointBrowserVM>> GetForBrowserAsync();
         Task<PickupPoint> GetByIdAsync(int id, bool includeTables);
         Task<PickupPoint> GetByLinkTwistAsync(string description);
+        Task<PickupPoint> GetTempAsync(string description);
 
     }
 

@@ -181,6 +181,7 @@ export class PickupPointListComponent {
             exactPoint: record.exactPoint,
             time: record.time,
             remarks: record.remarks,
+            isTemp: record.isTemp,
             isActive: record.isActive,
             putAt: record.putAt
         }

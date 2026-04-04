@@ -1,18 +1,15 @@
 export interface PickupPointWriteDto {
 
-    // PK
     id: number
-    // FKs
     coachRouteId: number
     portId: number
-    // Fields
     description: string
     linkTwistAlias: string
     exactPoint: string
     time: string
     remarks: string
+    isTemp: boolean
     isActive: boolean
-    // Rowversion
     putAt: string
 
 }

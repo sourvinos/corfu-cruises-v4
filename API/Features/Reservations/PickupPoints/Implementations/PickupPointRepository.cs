@@ -58,6 +58,14 @@ namespace API.Features.Reservations.PickupPoints {
                 .SingleOrDefaultAsync(x => x.LinkTwistAlias == description);
         }
 
+        public async Task<PickupPoint> GetTempAsync(string description) {
+            var pickupPoints = await context.PickupPoints
+                .AsNoTracking()
+                .Where(x => x.IsTemp && x.Description.Contains(description, System.StringComparison.CurrentCultureIgnoreCase))
+                .FirstOrDefaultAsync();
+            return pickupPoints;
+        }
+
     }
 
 }

@@ -68,6 +68,10 @@
                 <mat-hint class="right">{{ getHint("remainingCharacters", +input.getAttribute('maxlength') - getRemarksLength()) }}</mat-hint>
             </mat-form-field>
             <div class="stacked-checkboxes">
+                <!-- Temp -->
+                <mat-checkbox formControlName="isTemp">
+                    <span>{{ getLabel("isTemp") }}</span>
+                </mat-checkbox>
                 <!-- Active -->
                 <mat-checkbox formControlName="isActive">
                     <span>{{ getLabel("isActive") }}</span>

@@ -15,6 +15,7 @@ namespace API.Features.Reservations.PickupPoints {
         public string ExactPoint { get; set; }
         public string Time { get; set; }
         public string Remarks { get; set; }
+        public bool IsTemp { get; set; }
         public bool IsActive { get; set; }
         // Metadata
         public string PostAt { get; set; }

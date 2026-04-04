@@ -26,7 +26,7 @@ namespace API.Features.Reservations.LinkTwist {
         public int TotalPax { get; set; }
 
         [JsonPropertyName("comments")]
-        public object Comments { get; set; }
+        public string Comments { get; set; }
 
         [JsonPropertyName("booking_status")]
         public string BookingStatus { get; set; }

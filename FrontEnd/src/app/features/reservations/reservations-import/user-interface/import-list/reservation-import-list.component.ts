@@ -18,7 +18,7 @@ import { ReservationImportListCriteriaVM } from '../../classes/view-models/crite
 import { ReservationImportListVM } from '../../classes/view-models/list/reservation-import-list-vm'
 import { ReservationImportService } from '../../classes/services/reservation-import.service'
 import { SessionStorageService } from '../../../../../shared/services/session-storage.service'
-import { SimpleEntity } from 'src/app/shared/classes/simple-entity'
+import { SimpleEntity } from '../../../../../shared/classes/simple-entity'
 
 @Component({
     selector: 'reservation-import-list',
@@ -50,6 +50,7 @@ export class ReservationImportListComponent {
 
     public distinctCustomers: SimpleEntity[] = []
     public distinctDestinations: SimpleEntity[] = []
+    public distinctPickupPoints: SimpleEntity[] = []
     public distinctStatuses: SimpleEntity[] = []
 
     //#endregion
@@ -270,6 +271,7 @@ export class ReservationImportListComponent {
     private populateDropdownFilters(): void {
         this.distinctCustomers = this.helperService.getDistinctRecords(this.records, 'customer', 'description')
         this.distinctDestinations = this.helperService.getDistinctRecords(this.records, 'destination', 'description')
+        this.distinctPickupPoints = this.helperService.getDistinctRecords(this.records, 'pickupPoint', 'description')
         this.distinctStatuses = this.helperService.getDistinctRecords(this.records, 'status', 'description')
     }
 

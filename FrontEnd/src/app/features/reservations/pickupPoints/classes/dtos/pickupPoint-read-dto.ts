@@ -15,6 +15,7 @@ export interface PickupPointReadDto extends Metadata {
     exactPoint: string
     time: string
     remarks: string
+    isTemp: boolean
     isActive: boolean
 
 }

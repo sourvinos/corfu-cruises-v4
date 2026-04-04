@@ -62,6 +62,7 @@ namespace API.Features.Reservations.LinkTwist {
             x.Free = x.Details.Count(x => x.Age.Contains("infant"));
             x.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(x.Details.FirstOrDefault().Date));
             x.TotalPax = x.Adults + x.Kids + x.Free;
+            x.Comments = x.Comments != null ? x.Comments.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
             x.Status = GetStatus(x.BookingStatus);
             x.IsValidPrimary = ValidateReservation(x);
             x.IsValidSecondary = ValidatePassengers(x.Details);
@@ -83,6 +84,7 @@ namespace API.Features.Reservations.LinkTwist {
                 item.Kids = item.Details.Count(x => x.Age.Contains("child"));
                 item.Free = item.Details.Count(x => x.Age.Contains("infant"));
                 item.TotalPax = item.Adults + item.Kids + item.Free;
+                item.Comments = item.Comments != null ? item.Comments.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
                 item.Status = GetStatus(item.BookingStatus);
                 item.IsValidPrimary = ValidateReservation(item);
                 item.IsValidSecondary = ValidatePassengers(item.Details);
@@ -109,14 +111,32 @@ namespace API.Features.Reservations.LinkTwist {
         private SimpleEntity GetPickupPoint(LinkTwistReservation reservation) {
             if (reservation.Extras.Count > 0) {
                 var x = pickupPointRepo.GetByLinkTwistAsync(reservation.Extras[0].Description).Result;
+                var z = pickupPointRepo.GetTempAsync("- transfer").Result;
                 return new SimpleEntity {
-                    Id = x != null ? x.Id : 9999,
-                    Description = x != null ? x.Description : "(NOT GIVEN)",
+                    Id = x != null ? x.Id : z != null ? z.Id : 9999,
+                    Description = x != null ? x.Description : z != null ? z.Description : "(ERROR)",
                 };
             } else {
+                if (reservation.Destination.Description.Contains("- no transfer", StringComparison.CurrentCultureIgnoreCase)) {
+                    var x = pickupPointRepo.GetTempAsync("- no transfer").Result;
+                    if (x != null) {
+                        return new SimpleEntity {
+                            Id = x.Id,
+                            Description = x.Description,
+                        };
+                    }
+                } else {
+                    var x = pickupPointRepo.GetTempAsync("- transfer").Result;
+                    if (x != null) {
+                        return new SimpleEntity {
+                            Id = x.Id,
+                            Description = x.Description,
+                        };
+                    }
+                }
                 return new SimpleEntity {
                     Id = 9999,
-                    Description = "(NOT GIVEN)",
+                    Description = "(ERROR)",
                 };
             }
         }
