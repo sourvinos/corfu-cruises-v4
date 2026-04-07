@@ -18,14 +18,14 @@ export class ReservationImportService {
                 customerId: reservation.customer.id,
                 destinationId: reservation.destination.id,
                 pickupPointId: reservation.pickupPoint.id,
-                ticketNo: 'xxx',
+                ticketNo: reservation.bookingCode,
                 email: '',
                 phones: '',
                 adults: reservation.adults,
                 kids: reservation.kids,
                 free: reservation.free,
                 remarks: '',
-                passengers: this.buildPassengers(reservation.details),
+                passengers: [],
             }
             reservations.push(z)
         })

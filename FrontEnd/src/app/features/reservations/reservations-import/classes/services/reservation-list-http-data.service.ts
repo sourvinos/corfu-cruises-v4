@@ -23,8 +23,8 @@ export class ReservationImportHttpDataService extends HttpDataService {
         return this.http.request<ReservationImportListVM[]>('post', environment.apiUrl + '/reservationsLinkTwist', { body: criteria })
     }
 
-    public saveReservation(formData: any): Observable<any> {
-        return this.http.post<any>(environment.apiUrl + '/reservationsLinkTwist/', formData)
+    public saveReservations(formData: any): Observable<any> {
+        return this.http.post<any>(environment.apiUrl + '/reservationsLinkTwist/saveRange', formData)
     }
 
 }

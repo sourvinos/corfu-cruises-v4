@@ -276,15 +276,13 @@ export class ReservationImportListComponent {
     }
 
     private processReservations(x: ReservationImportDto[]): void {
-        x.forEach(z => {
-            this.reservationImportHttpService.saveReservation(z).subscribe({
-                next: (response) => {
-                    console.log(response)
-                },
-                error: (errorFromInterceptor) => {
-                    this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
-                }
-            })
+        this.reservationImportHttpService.saveReservations(x).subscribe({
+            next: () => {
+                this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, false)
+            },
+            error: (errorFromInterceptor) => {
+                this.dialogService.open(this.messageDialogService.filterResponse(errorFromInterceptor), 'error', ['ok'])
+            }
         })
     }
 
