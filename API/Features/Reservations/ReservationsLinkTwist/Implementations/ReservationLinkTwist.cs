@@ -18,6 +18,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using API.Features.Reservations.Reservations;
+using API.Features.Reservations.Ports;
 
 namespace API.Features.Reservations.LinkTwist {
 
@@ -28,15 +29,17 @@ namespace API.Features.Reservations.LinkTwist {
         private readonly ICustomerRepository customerRepo;
         private readonly IDestinationRepository destinationRepo;
         private readonly IPickupPointRepository pickupPointRepo;
+        private readonly IPortRepository portRepo;
         private readonly IReservationParametersRepository parametersRepo;
 
         #endregion
 
-        public ReservationLinkTwist(AppDbContext appDbContext, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) {
+        public ReservationLinkTwist(AppDbContext appDbContext, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, IPickupPointRepository pickupPointRepo, IPortRepository portRepo, IReservationParametersRepository parametersRepo, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) {
             this.customerRepo = customerRepo;
             this.destinationRepo = destinationRepo;
             this.parametersRepo = parametersRepo;
             this.pickupPointRepo = pickupPointRepo;
+            this.portRepo = portRepo;
         }
 
         public async Task<IEnumerable<LinkTwistStatus>> GetAsync() {
@@ -54,6 +57,7 @@ namespace API.Features.Reservations.LinkTwist {
             var x = JsonSerializer.Deserialize<LinkTwistReservation>(await httpClient.GetStringAsync(GetParameters().APIUrl + "/bookings/" + code));
             x.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(x.Details.FirstOrDefault().Date));
             x.Destination = GetDestination(x.Details.FirstOrDefault().Destination);
+            x.Port = GetPort(x.Details.FirstOrDefault().Port);
             x.Customer = GetCustomer(x.Referer);
             x.BookingCode = x.BookingCode;
             x.PickupPoint = GetPickupPoint(x);
@@ -102,6 +106,14 @@ namespace API.Features.Reservations.LinkTwist {
 
         private SimpleEntity GetDestination(string destination) {
             var x = destinationRepo.GetByLinkTwistAsync(destination).Result;
+            return new SimpleEntity {
+                Id = x != null ? x.Id : 0,
+                Description = x != null ? x.Description : "",
+            };
+        }
+
+        private SimpleEntity GetPort(string port) {
+            var x = portRepo.GetByLinkTwistAsync(port).Result;
             return new SimpleEntity {
                 Id = x != null ? x.Id : 0,
                 Description = x != null ? x.Description : "",

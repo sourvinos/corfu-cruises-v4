@@ -50,6 +50,14 @@ namespace API.Features.Reservations.Ports {
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Port> GetByLinkTwistAsync(string description) {
+            var z = description.Split(' ').Skip(1).FirstOrDefault().ToLower();
+            var x = await context.Ports
+                .AsNoTracking()
+                .SingleOrDefaultAsync(x => x.Description.Contains(z, System.StringComparison.CurrentCultureIgnoreCase));
+            return x;
+        }
+
     }
 
 }

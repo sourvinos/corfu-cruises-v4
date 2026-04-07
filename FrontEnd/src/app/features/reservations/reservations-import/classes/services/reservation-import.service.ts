@@ -9,27 +9,27 @@ import { ReservationImportListVM } from '../view-models/list/reservation-import-
 export class ReservationImportService {
 
     public buildReservations(x: ReservationImportListVM[]): ReservationImportDto[] {
-        const i: ReservationImportDto[] = []
-        x.forEach(z => {
-            const user: ReservationImportDto = {
+        const reservations: ReservationImportDto[] = []
+        x.forEach(reservation => {
+            const z: ReservationImportDto = {
                 reservationId: null,
-                linkTwistId: z.code,
-                date: z.date,
-                customerId: z.customer.id,
-                destinationId: z.destination.id,
-                pickupPointId: z.pickupPoint.id,
+                linkTwistId: reservation.code,
+                date: reservation.date,
+                customerId: reservation.customer.id,
+                destinationId: reservation.destination.id,
+                pickupPointId: reservation.pickupPoint.id,
                 ticketNo: 'xxx',
                 email: '',
                 phones: '',
-                adults: z.adults,
-                kids: z.kids,
-                free: z.free,
+                adults: reservation.adults,
+                kids: reservation.kids,
+                free: reservation.free,
                 remarks: '',
-                passengers: this.buildPassengers(z.details),
+                passengers: this.buildPassengers(reservation.details),
             }
-            i.push(user)
+            reservations.push(z)
         })
-        return i
+        return reservations
     }
 
     private buildPassengers(passengers: PassengerImportDto[]): PassengerImportDto[] {

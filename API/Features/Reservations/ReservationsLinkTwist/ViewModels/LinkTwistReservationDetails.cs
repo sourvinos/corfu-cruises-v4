@@ -13,6 +13,9 @@ namespace API.Features.Reservations.LinkTwist {
         [JsonPropertyName("product_channel_alias")]
         public string Destination { get; set; }
 
+        [JsonPropertyName("product_option_title")]
+        public string Port { get; set; }
+
         [JsonPropertyName("contact_data")]
         public LinkTwistPassenger Passenger { get; set; }
 

@@ -6,6 +6,7 @@
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
+        "ignoreDeprecations": "5.0",
         "importHelpers": true,
         "lib": [
             "ES2022",
