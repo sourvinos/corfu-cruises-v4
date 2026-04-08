@@ -82,6 +82,7 @@ namespace API.Features.Reservations.LinkTwist {
                 i.PutAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime());
                 i.PutUser = Identity.GetConnectedUserDetails(userManager, Identity.GetConnectedUserId(httpContextAccessor)).UserName;
                 i.TicketNo = x.LinkTwistId;
+                i.Notes = x.Notes ?? "";
                 i.Passengers = MapPassengers(x.Passengers);
                 z.Add(i);
             }

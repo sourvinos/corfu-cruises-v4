@@ -82,7 +82,8 @@ export class ReservationCalendarComponent {
     }
 
     public dayHasSchedule(day: DayVM): boolean {
-        return day.destinations?.length >= 1
+        // return day.destinations?.length >= 1
+        return true
     }
 
     public doSelectedPeriodTasks(identifier: string): void {

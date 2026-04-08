@@ -42,7 +42,7 @@
     </div>
 
     <div id="footer">
-        <div class="passenger-count-wrapper">
+        <div class="passenger-count-wrapper" (click)="showNotes()">
             <span class="material-icons-outlined primary">group</span>
             <span class="passenger-count">{{ passengers != null ? passengers.length : 0 }}</span>
         </div>

@@ -108,6 +108,7 @@ export class ReservationHelperService {
             refNo: form.refNo,
             email: form.email,
             phones: form.phones,
+            notes: form.notes,
             remarks: form.remarks,
             adults: form.adults,
             kids: form.kids,

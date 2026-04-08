@@ -9,7 +9,7 @@ export interface PassengerImportDto {
     lastname: string
     firstname: string
     birthdate: string
-    remarks: string
+    notes: string
     specialCare: string
     isBoarded: boolean
 

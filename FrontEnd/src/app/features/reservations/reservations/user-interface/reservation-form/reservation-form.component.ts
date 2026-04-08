@@ -465,6 +465,7 @@ export class ReservationFormComponent {
             ticketNo: ['', [Validators.required, Validators.maxLength(128)]],
             email: ['', [Validators.maxLength(128), Validators.email]],
             phones: ['', Validators.maxLength(128)],
+            notes: ['', Validators.maxLength(4096)],
             remarks: ['', Validators.maxLength(128)],
             imageBase64: '',
             passengers: [[]],
@@ -520,6 +521,7 @@ export class ReservationFormComponent {
             ticketNo: this.record.ticketNo,
             email: this.record.email,
             phones: this.record.phones,
+            notes: this.record.notes,
             remarks: this.record.remarks,
             imageBase64: '',
             passengers: this.record.passengers,
@@ -685,6 +687,10 @@ export class ReservationFormComponent {
 
     get remarks(): AbstractControl {
         return this.reservationForm.get('remarks')
+    }
+
+    get notes(): AbstractControl {
+        return this.reservationForm.get('notes')
     }
 
     get driver(): AbstractControl {

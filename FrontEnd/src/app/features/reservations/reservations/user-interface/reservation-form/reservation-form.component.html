@@ -199,7 +199,7 @@
                 </mat-tab>
                 <mat-tab label="{{ getLabel('tab2') }}">
                     <div id="passengers-tab">
-                        <passenger-list [passengers]="reservationForm.value.passengers" [reservationId]="reservationForm.value.reservationId" [totalPax]="reservationForm.value.totalPax" (outputPassengerCount)="getPassengerDifferenceColor()" (outputPassengers)="doTasksAfterPassengerFormIsClosed($event)"></passenger-list>
+                        <passenger-list [notes]="reservationForm.value.notes" [passengers]="reservationForm.value.passengers" [reservationId]="reservationForm.value.reservationId" [totalPax]="reservationForm.value.totalPax" (outputPassengerCount)="getPassengerDifferenceColor()" (outputPassengers)="doTasksAfterPassengerFormIsClosed($event)"></passenger-list>
                     </div>
                 </mat-tab>
             </mat-tab-group>

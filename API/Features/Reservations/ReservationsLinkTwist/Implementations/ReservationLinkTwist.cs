@@ -66,7 +66,7 @@ namespace API.Features.Reservations.LinkTwist {
             x.Free = x.Details.Count(x => x.Age.Contains("infant"));
             x.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(x.Details.FirstOrDefault().Date));
             x.TotalPax = x.Adults + x.Kids + x.Free;
-            x.Comments = x.Comments != null ? x.Comments.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
+            x.Notes = x.Notes != null ? x.Notes.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
             x.Status = GetStatus(x.BookingStatus);
             x.IsValidPrimary = ValidateReservation(x);
             x.IsValidSecondary = ValidatePassengers(x.Details);
@@ -88,7 +88,7 @@ namespace API.Features.Reservations.LinkTwist {
                 item.Kids = item.Details.Count(x => x.Age.Contains("child"));
                 item.Free = item.Details.Count(x => x.Age.Contains("infant"));
                 item.TotalPax = item.Adults + item.Kids + item.Free;
-                item.Comments = item.Comments != null ? item.Comments.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
+                item.Notes = item.Notes != null ? item.Notes.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
                 item.Status = GetStatus(item.BookingStatus);
                 item.IsValidPrimary = ValidateReservation(item);
                 item.IsValidSecondary = ValidatePassengers(item.Details);

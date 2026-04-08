@@ -20,6 +20,7 @@ namespace API.Features.Reservations.Reservations {
         public string TicketNo { get; set; }
         public string Email { get; set; }
         public string Phones { get; set; }
+        public string Notes { get; set; }
         public string Remarks { get; set; }
         public List<PassengerReadDto> Passengers { get; set; }
         // Metadata

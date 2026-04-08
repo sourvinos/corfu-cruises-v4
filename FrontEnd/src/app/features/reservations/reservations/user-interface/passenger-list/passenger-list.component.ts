@@ -9,6 +9,7 @@ import { MessageLabelService } from 'src/app/shared/services/message-label.servi
 import { PassengerFormComponent } from '../passenger-form/passenger-form.component'
 import { PassengerReadDto } from '../../classes/dtos/form/passenger-read-dto'
 import { environment } from 'src/environments/environment'
+import { DebugDialogService } from '../../../availability/classes/services/debug-dialog.service'
 
 @Component({
     selector: 'passenger-list',
@@ -22,6 +23,7 @@ export class PassengerListComponent {
 
     @ViewChild('table') table: Table | undefined
 
+    @Input() notes: string
     @Input() passengers: PassengerReadDto[] = []
     @Input() reservationId: Guid
     @Input() totalPax: number
@@ -31,7 +33,7 @@ export class PassengerListComponent {
 
     //#endregion
 
-    constructor(private dialog: MatDialog, private emojiService: EmojiService, private helperService: HelperService, private messageLabelService: MessageLabelService) { }
+    constructor(private debugDialogService: DebugDialogService, private dialog: MatDialog, private emojiService: EmojiService, private helperService: HelperService, private messageLabelService: MessageLabelService) { }
 
     //#region public methods
 
@@ -80,6 +82,10 @@ export class PassengerListComponent {
 
     public newRow(): void {
         this.showPassengerForm()
+    }
+
+    public showNotes(): void {
+        this.debugDialogService.open(this.notes, '', ['ok'])
     }
 
     //#endregion

@@ -21,6 +21,7 @@ export interface ReservationReadDto extends Metadata {
     refNo: string
     email: string
     phones: string
+    notes: string
     remarks: string
     adults: number
     kids: number

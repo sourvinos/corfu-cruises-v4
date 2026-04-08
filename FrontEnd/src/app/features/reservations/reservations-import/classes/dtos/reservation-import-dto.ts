@@ -16,7 +16,7 @@ export interface ReservationImportDto {
     adults: number
     kids: number
     free: number
-    remarks: string
+    notes: string
     passengers: PassengerImportDto[]
 
 }

@@ -34,6 +34,7 @@ namespace API.Features.Reservations.Reservations {
         public string Email { get; set; }
         public string Phones { get; set; }
         public string Remarks { get; set; }
+        public string Notes { get; set; }
         public List<Passenger> Passengers { get; set; }
         // Metadata
         public string PostAt { get; set; }

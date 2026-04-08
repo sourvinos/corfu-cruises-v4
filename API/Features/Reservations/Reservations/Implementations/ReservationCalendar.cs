@@ -36,7 +36,7 @@ namespace API.Features.Reservations.Reservations {
         ///     A list of ScheduleVM objects
         /// </returns>
         private IList<ScheduleVM> GetSchedules(string fromDate, string toDate) {
-            return context.Schedules
+            var x = context.Schedules
                 .Include(x => x.Destination)
                 .Where(x => x.Date >= DateTime.Parse(fromDate) && x.Date <= DateTime.Parse(toDate))
                 .GroupBy(x => new { x.Date, x.DestinationId, x.Destination.Abbreviation, x.Destination.Description })
@@ -49,6 +49,7 @@ namespace API.Features.Reservations.Reservations {
                         Description = x.Key.Description
                     }
                 }).ToList();
+            return x;
         }
 
         /// <summary>

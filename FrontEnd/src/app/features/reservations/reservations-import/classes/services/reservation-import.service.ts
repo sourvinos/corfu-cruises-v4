@@ -24,7 +24,7 @@ export class ReservationImportService {
                 adults: reservation.adults,
                 kids: reservation.kids,
                 free: reservation.free,
-                remarks: '',
+                notes: reservation.notes,
                 passengers: [],
             }
             reservations.push(z)

@@ -27,6 +27,7 @@ namespace API.Features.Reservations.Reservations {
         public int Adults { get; set; }
         public int Kids { get; set; }
         public int Free { get; set; }
+        public string Notes { get; set; }
         public string Remarks { get; set; }
         // Metadata
         public string PostAt { get; set; }

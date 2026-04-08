@@ -98,7 +98,7 @@ namespace API.Features.Reservations.Reservations {
                 var x when x == !await IsValidNationality(reservation) => 456,
                 var x when x == !await IsValidGenderAsync(reservation) => 457,
                 var x when x == !IsCorrectPassengerCount(reservation) => 455,
-                var x when x == !await PortHasDepartureForDateAndDestinationAsync(reservation) => 410,
+                // var x when x == !await PortHasDepartureForDateAndDestinationAsync(reservation) => 410,
                 var x when x == !SimpleUserHasGivenCorrectCustomerId(reservation) => 413,
                 var x when x == await IsSimpleUserCausingOverbooking(reservation) => 433,
                 var x when x == await SimpleUserHasNightRestrictions(reservation) => 459,

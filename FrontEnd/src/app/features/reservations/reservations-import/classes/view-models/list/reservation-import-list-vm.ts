@@ -14,6 +14,7 @@ export interface ReservationImportListVM {
     totalPax: number
     pickupPoint: SimpleEntity
     details: PassengerImportDto[]
+    notes: string
     status: SimpleEntity
     isValidPrimary: boolean
     isValidSecondary: boolean
