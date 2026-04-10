@@ -51,9 +51,17 @@ namespace API.Features.Reservations.Destinations {
         }
 
         public async Task<Destination> GetByLinkTwistAsync(string description) {
-            return await context.Destinations
+            var x = await context.Destinations
                 .AsNoTracking()
                 .SingleOrDefaultAsync(x => x.LinkTwistAlias == description);
+            return x;
+        }
+
+        public async Task<Destination> GetByLinkedIdAsync(int linkedId) {
+            var x = await context.Destinations
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.LinkedId == linkedId);
+            return x;
         }
 
     }

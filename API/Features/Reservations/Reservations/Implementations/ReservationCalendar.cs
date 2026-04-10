@@ -101,14 +101,14 @@ namespace API.Features.Reservations.Reservations {
         /// </returns>
         private IList<ReservationVM> GetReservationsFromAllUsers(string fromDate, string toDate) {
             return context.Reservations
-            .Where(x => x.Date >= DateTime.Parse(fromDate) && x.Date <= DateTime.Parse(toDate))
-            .GroupBy(x => new { x.Date, x.DestinationId, x.Destination.Description, x.Destination.Abbreviation })
-            .OrderBy(x => x.Key.Date).ThenBy(x => x.Key.DestinationId)
-            .Select(x => new ReservationVM {
-                Date = DateHelpers.DateToISOString(x.Key.Date),
-                DestinationId = x.Key.DestinationId,
-                Pax = x.Sum(x => x.TotalPax)
-            }).ToList();
+                .Where(x => x.Date >= DateTime.Parse(fromDate) && x.Date <= DateTime.Parse(toDate))
+                .GroupBy(x => new { x.Date, x.DestinationId, x.Destination.Description, x.Destination.Abbreviation })
+                .OrderBy(x => x.Key.Date).ThenBy(x => x.Key.DestinationId)
+                .Select(x => new ReservationVM {
+                    Date = DateHelpers.DateToISOString(x.Key.Date),
+                    DestinationId = x.Key.DestinationId,
+                    Pax = x.Sum(x => x.TotalPax)
+                }).ToList();
         }
 
         /// <summary>

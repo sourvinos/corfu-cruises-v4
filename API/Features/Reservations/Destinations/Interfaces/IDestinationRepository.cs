@@ -12,6 +12,7 @@ namespace API.Features.Reservations.Destinations {
         Task<IEnumerable<SimpleEntity>> GetForCriteriaAsync();
         Task<Destination> GetByIdAsync(int id);
         Task<Destination> GetByLinkTwistAsync(string description);
+        Task<Destination> GetByLinkedIdAsync(int linkedId);
 
     }
 

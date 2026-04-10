@@ -19,6 +19,7 @@ namespace API.Features.Reservations.LinkTwist {
 
         public SimpleEntity Customer { get; set; }
         public SimpleEntity Destination { get; set; }
+        public SimpleEntity OurDestination { get; set; }
         public SimpleEntity Port { get; set; }
 
         public int Adults { get; set; }

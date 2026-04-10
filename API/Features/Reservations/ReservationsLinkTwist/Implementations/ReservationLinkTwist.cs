@@ -57,6 +57,7 @@ namespace API.Features.Reservations.LinkTwist {
             var x = JsonSerializer.Deserialize<LinkTwistReservation>(await httpClient.GetStringAsync(GetParameters().APIUrl + "/bookings/" + code));
             x.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(x.Details.FirstOrDefault().Date));
             x.Destination = GetDestination(x.Details.FirstOrDefault().Destination);
+            x.OurDestination = GetOurDestination(x.Details.FirstOrDefault().Destination);
             x.Port = GetPort(x.Details.FirstOrDefault().Port);
             x.Customer = GetCustomer(x.Referer);
             x.BookingCode = x.BookingCode;
@@ -81,6 +82,7 @@ namespace API.Features.Reservations.LinkTwist {
             foreach (var item in x) {
                 item.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(item.Details.FirstOrDefault().Date));
                 item.Destination = GetDestination(item.Details.FirstOrDefault().Destination);
+                item.OurDestination = GetOurDestination(item.Details.FirstOrDefault().Destination);
                 item.Customer = GetCustomer(item.Referer);
                 item.BookingCode = item.BookingCode;
                 item.PickupPoint = GetPickupPoint(item);
@@ -109,6 +111,14 @@ namespace API.Features.Reservations.LinkTwist {
             return new SimpleEntity {
                 Id = x != null ? x.Id : 0,
                 Description = x != null ? x.Description : "",
+            };
+        }
+
+        private SimpleEntity GetOurDestination(string destination) {
+            var z = destinationRepo.GetByLinkedIdAsync(destinationRepo.GetByLinkTwistAsync(destination).Result.LinkedId).Result;
+            return new SimpleEntity {
+                Id = z != null ? z.Id : 0,
+                Description = z != null ? z.Description : "",
             };
         }
 
