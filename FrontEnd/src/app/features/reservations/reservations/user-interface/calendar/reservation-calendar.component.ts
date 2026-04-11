@@ -50,7 +50,7 @@ export class ReservationCalendarComponent {
 
     //#region listeners
 
-    @HostListener('window:resize', ['$event']) onResize(): void {
+    @HostListener('window:resize', []) onResize(): void {
         this.storeDatePeriod().then(() => {
             this.isSizeChanged = true
         })
@@ -82,7 +82,7 @@ export class ReservationCalendarComponent {
     }
 
     public dayHasSchedule(day: DayVM): boolean {
-        // return day.destinations?.length >= 1
+        return day.destinations?.length >= 1
         return true
     }
 

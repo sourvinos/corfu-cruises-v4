@@ -50,6 +50,7 @@ export class ReservationImportListComponent {
 
     public distinctCustomers: SimpleEntity[] = []
     public distinctDestinations: SimpleEntity[] = []
+    public distinctOurDestinations: SimpleEntity[] = []
     public distinctPickupPoints: SimpleEntity[] = []
     public distinctStatuses: SimpleEntity[] = []
 
@@ -271,6 +272,7 @@ export class ReservationImportListComponent {
     private populateDropdownFilters(): void {
         this.distinctCustomers = this.helperService.getDistinctRecords(this.records, 'customer', 'description')
         this.distinctDestinations = this.helperService.getDistinctRecords(this.records, 'destination', 'description')
+        this.distinctOurDestinations = this.helperService.getDistinctRecords(this.records, 'ourDestination', 'description')
         this.distinctPickupPoints = this.helperService.getDistinctRecords(this.records, 'pickupPoint', 'description')
         this.distinctStatuses = this.helperService.getDistinctRecords(this.records, 'status', 'description')
     }

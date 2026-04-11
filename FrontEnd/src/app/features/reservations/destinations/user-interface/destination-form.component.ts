@@ -91,6 +91,7 @@ export class DestinationFormComponent {
             id: this.form.value.id,
             abbreviation: this.form.value.abbreviation,
             description: this.form.value.description,
+            linkedId: this.form.value.linkedId,
             isLinkTwist: this.form.value.isLinkTwist,
             linkTwistAlias: this.form.value.linkTwistAlias,
             isActive: this.form.value.isActive,
@@ -128,6 +129,7 @@ export class DestinationFormComponent {
             id: 0,
             abbreviation: ['', [Validators.required, Validators.maxLength(5)]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
+            linkedId: [0, [Validators.required, Validators.min(1), Validators.max(99)]],
             linkTwistAlias: ['', [Validators.maxLength(128)]],
             isLinkTwist: false,
             isActive: true,
@@ -144,6 +146,7 @@ export class DestinationFormComponent {
                 id: this.record.id,
                 abbreviation: this.record.abbreviation,
                 description: this.record.description,
+                linkedId: this.record.linkedId,
                 linkTwistAlias: this.record.linkTwistAlias,
                 isLinkTwist: this.record.isLinkTwist,
                 isActive: this.record.isActive,
@@ -166,7 +169,9 @@ export class DestinationFormComponent {
                     'id': parseInt(response.id),
                     'abbreviation': destination.abbreviation,
                     'description': destination.description,
+                    'linkedId': destination.linkedId,
                     'isLinkTwist': destination.isLinkTwist,
+                    'linkTwistAlias': destination.linkTwistAlias,
                     'isActive': destination.isActive
                 })
                 this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, true)
@@ -193,6 +198,10 @@ export class DestinationFormComponent {
 
     get description(): AbstractControl {
         return this.form.get('description')
+    }
+
+    get linkedId(): AbstractControl {
+        return this.form.get('linkedId')
     }
 
     get linkTwistAlias(): AbstractControl {

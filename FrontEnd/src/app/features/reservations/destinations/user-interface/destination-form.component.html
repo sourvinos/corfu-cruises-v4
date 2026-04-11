@@ -21,10 +21,17 @@
                 <mat-error *ngIf="description.hasError('required')">{{ getHint("required") }}</mat-error>
                 <mat-error *ngIf="description.hasError('maxlength')">{{ getHint("maxLength", description.errors.maxlength.requiredLength) }}</mat-error>
             </mat-form-field>
+            <!-- LinkedId -->
+            <mat-form-field>
+                <mat-label>{{ getLabel('linkedId') }}</mat-label>
+                <input [inputTabStop]="input" dataTabIndex="3" formControlName="linkedId" matInput type="number">
+                <mat-error *ngIf="linkedId.hasError('required')">{{ getHint("required") }}</mat-error>
+                <mat-error *ngIf="linkedId.hasError('maxlength')">{{ getHint("maxLength", linkedId.errors.maxlength.requiredLength) }}</mat-error>
+            </mat-form-field>
             <!-- LinkTwist -->
             <mat-form-field>
                 <mat-label>{{ getLabel('linkTwistAlias') }}</mat-label>
-                <input [inputTabStop]="input" dataTabIndex="3" formControlName="linkTwistAlias" matInput type="text">
+                <input [inputTabStop]="input" dataTabIndex="4" formControlName="linkTwistAlias" matInput type="text">
                 <mat-error *ngIf="linkTwistAlias.hasError('required')">{{ getHint("required") }}</mat-error>
                 <mat-error *ngIf="linkTwistAlias.hasError('maxlength')">{{ getHint("maxLength", linkTwistAlias.errors.maxlength.requiredLength) }}</mat-error>
             </mat-form-field>

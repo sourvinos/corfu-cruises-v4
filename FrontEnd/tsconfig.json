@@ -1,7 +1,6 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "./",
         "declaration": false,
         "esModuleInterop": true,
         "experimentalDecorators": true,
@@ -13,10 +12,15 @@
             "dom"
         ],
         "module": "ES2022",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "noFallthroughCasesInSwitch": true,
         "noImplicitOverride": true,
         "noPropertyAccessFromIndexSignature": false,
+        "paths": {
+            "*": [
+                "./*"
+            ]
+        },
         "resolveJsonModule": true,
         "sourceMap": true,
         "strict": false,

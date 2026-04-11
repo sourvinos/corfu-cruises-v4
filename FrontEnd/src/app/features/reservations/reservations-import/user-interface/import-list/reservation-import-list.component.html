@@ -26,6 +26,7 @@
                             <th class="no-border-bottom width-4" pSortableColumn="date">{{ getLabel("headerDate") }}</th>
                             <th class="no-border-bottom width-4" pSortableColumn="bookingCode">{{ getLabel("headerBookingCode") }}</th>
                             <th class="no-border-bottom width-11" pSortableColumn="destination.description">{{ getLabel("headerDestination") }}</th>
+                            <th class="no-border-bottom width-11" pSortableColumn="ourDestination.description">{{ getLabel("headerOurDestination") }}</th>
                             <th class="no-border-bottom width-8" pSortableColumn="customer.description">{{ getLabel("headerCustomer") }}</th>
                             <th class="no-border-bottom width-6" pSortableColumn="pickupPoint.description">{{ getLabel('headerPickupPoint') }}</th>
                             <th class="no-border-bottom width-1" pSortableColumn="adults">{{ getLabel('headerAdults') }}</th>
@@ -43,6 +44,19 @@
                                 <p-columnFilter [showMenu]="false" field="destination" matchMode="in">
                                     <ng-template let-filter="filterCallback" let-value pTemplate="filter">
                                         <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctDestinations" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-option">
+                                                    <span>{{ option.description }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th class="no-border-top width-11">
+                                <p-columnFilter [showMenu]="false" field="ourDestination" matchMode="in">
+                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctOurDestinations" [placeholder]="getEmoji('wildcard')" optionLabel="description">
                                             <ng-template let-option pTemplate="item">
                                                 <div class="p-multiselect-option">
                                                     <span>{{ option.description }}</span>
@@ -104,6 +118,7 @@
                             <td class="width-4"><span class="center no-overflow">{{ formatDateToLocale(record.date) }}</span></td>
                             <td class="width-4"><span class="center no-overflow">{{ record.bookingCode }}</span></td>
                             <td class="width-11"><span>{{ record.destination.description }}</span></td>
+                            <td class="width-11"><span>{{ record.ourDestination.description }}</span></td>
                             <td class="width-8"><span>{{ record.customer.description }}</span></td>
                             <td class="width-6"><span>{{ getPickupPointDescription(record.pickupPoint) }}</span></td>
                             <td class="width-1"><span class="right with-right-padding">{{ record.adults | replaceZero }}</span></td>

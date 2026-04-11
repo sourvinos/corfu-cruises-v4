@@ -16,7 +16,7 @@ export class ReservationImportService {
                 linkTwistId: reservation.code,
                 date: reservation.date,
                 customerId: reservation.customer.id,
-                destinationId: reservation.destination.id,
+                destinationId: reservation.ourDestination.id,
                 pickupPointId: reservation.pickupPoint.id,
                 ticketNo: reservation.bookingCode,
                 email: '',

@@ -239,6 +239,10 @@
                 "description": "Description"
             },
             {
+                "id": "linkedId",
+                "description": "Linked destination code"
+            },
+            {
                 "id": "linkTwistAlias",
                 "description": "LinkTwist"
             },
@@ -4090,6 +4094,10 @@
             },
             {
                 "id": "headerDestination",
+                "description": "Προορισμός"
+            },
+            {
+                "id": "headerOurDestination",
                 "description": "Προορισμός"
             },
             {

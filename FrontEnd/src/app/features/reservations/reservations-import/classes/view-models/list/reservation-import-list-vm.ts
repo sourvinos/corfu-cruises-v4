@@ -7,6 +7,7 @@ export interface ReservationImportListVM {
     code: string
     bookingCode: string
     destination: SimpleEntity
+    ourDestination: SimpleEntity
     customer: SimpleEntity
     adults: number
     kids: number
