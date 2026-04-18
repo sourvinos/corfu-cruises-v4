@@ -8,6 +8,7 @@ namespace API.Features.Reservations.Reservations {
 
         IQueryable<ReservationListVM> GetByDateAsync(string date);
         IQueryable<ReservationListVM> GetByRefNoAsync(string refNo);
+        Task<string> GetByCodeAsync(string ticketNo);
         Task<ReservationDriverGroupVM> GetByDateAndDriverAsync(string date, int driverId);
         Task<Reservation> GetByIdAsync(string reservationId, bool includeTables);
         Task<Reservation> GetByIdForPatchEmailSent(string reservationId);

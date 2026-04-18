@@ -1,6 +1,7 @@
 using System;
 using API.Infrastructure.Auth;
 using API.Infrastructure.Classes;
+using API.Infrastructure.EmailServices;
 using API.Infrastructure.Extensions;
 using API.Infrastructure.Helpers;
 using API.Infrastructure.Middleware;
@@ -97,7 +98,7 @@ namespace API {
             services.Configure<EmailUserSettings>(options => Configuration.GetSection("EmailUserSettings").Bind(options));
             services.Configure<TokenSettings>(options => Configuration.GetSection("TokenSettings").Bind(options));
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
-            // services.AddHostedService<EmailQueueService>();
+            services.AddHostedService<EmailQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

@@ -60,7 +60,7 @@ namespace API.Features.Reservations.Destinations {
         public async Task<Destination> GetByLinkedIdAsync(int linkedId) {
             var x = await context.Destinations
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.LinkedId == linkedId);
+                .FirstOrDefaultAsync(x => x.Id == linkedId);
             return x;
         }
 

@@ -31,23 +31,17 @@ namespace API.Features.Reservations.LinkTwist {
         private readonly IPickupPointRepository pickupPointRepo;
         private readonly IPortRepository portRepo;
         private readonly IReservationParametersRepository parametersRepo;
+        private readonly IReservationReadRepository reservationReadRepo;
 
         #endregion
 
-        public ReservationLinkTwist(AppDbContext appDbContext, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, IPickupPointRepository pickupPointRepo, IPortRepository portRepo, IReservationParametersRepository parametersRepo, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) {
+        public ReservationLinkTwist(AppDbContext appDbContext, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, IPickupPointRepository pickupPointRepo, IPortRepository portRepo, IReservationParametersRepository parametersRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) {
             this.customerRepo = customerRepo;
             this.destinationRepo = destinationRepo;
             this.parametersRepo = parametersRepo;
             this.pickupPointRepo = pickupPointRepo;
             this.portRepo = portRepo;
-        }
-
-        public async Task<IEnumerable<LinkTwistStatus>> GetAsync() {
-            List<LinkTwistStatus> statuses = await context.LinkTwistStatuses
-                .AsNoTracking()
-                .OrderBy(x => x.Description)
-                .ToListAsync();
-            return statuses;
+            this.reservationReadRepo = reservationReadRepo;
         }
 
         public async Task<LinkTwistReservation> GetReservationAsync(string code) {
@@ -96,6 +90,36 @@ namespace API.Features.Reservations.LinkTwist {
                 item.IsValidSecondary = ValidatePassengers(item.Details);
             }
             return x;
+        }
+
+        public async Task<List<LinkTwistReservation>> GetFreshReservationsAsync(LinkTwistReservationCriteriaVM criteria) {
+            using HttpClient httpClient = new();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
+            var x = JsonSerializer.Deserialize<LinkTwistReservation[]>(await httpClient.GetStringAsync($"{GetParameters().APIUrl}/bookings?activity_date_time_from={criteria.FromDate}&activity_date_time_to={criteria.ToDate}"));
+            var import = new List<LinkTwistReservation>();
+            foreach (var item in x) {
+                if (item.BookingStatus.Equals("completed", StringComparison.CurrentCultureIgnoreCase)) {
+                    if (reservationReadRepo.GetByCodeAsync(item.Code).Result == null) {
+                        item.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(item.Details.FirstOrDefault().Date));
+                        item.Destination = GetDestination(item.Details.FirstOrDefault().Destination);
+                        item.OurDestination = GetOurDestination(item.Details.FirstOrDefault().Destination);
+                        item.Customer = GetCustomer(item.Referer);
+                        item.BookingCode = item.BookingCode;
+                        item.PickupPoint = GetPickupPoint(item);
+                        item.Adults = item.Details.Count(x => x.Age.Contains("adult"));
+                        item.Kids = item.Details.Count(x => x.Age.Contains("child"));
+                        item.Free = item.Details.Count(x => x.Age.Contains("infant"));
+                        item.TotalPax = item.Adults + item.Kids + item.Free;
+                        item.Notes = item.Notes != null ? item.Notes.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
+                        item.Status = GetStatus(item.BookingStatus);
+                        item.IsValidPrimary = ValidateReservation(item);
+                        item.IsValidSecondary = ValidatePassengers(item.Details);
+                        import.Add(item);
+                    }
+                }
+            }
+            return import;
         }
 
         private SimpleEntity GetCustomer(string referer) {

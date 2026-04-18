@@ -48,6 +48,15 @@ namespace API.Features.Reservations.Reservations {
             }
         }
 
+        public async Task<string> GetByCodeAsync(string code) {
+            var x = await context.Reservations
+                .AsNoTracking()
+                .Where(x => x.LinkTwistId == code)
+                .Select(x => x.LinkTwistId)
+                .FirstOrDefaultAsync();
+            return x;
+        }
+
         public async Task<ReservationDriverGroupVM> GetByDateAndDriverAsync(string date, int driverId) {
             var driver = await GetDriverAsync(driverId);
             var reservations = await GetReservationsByDateAndDriverAsync(date, driverId);
