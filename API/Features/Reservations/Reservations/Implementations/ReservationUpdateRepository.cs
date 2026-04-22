@@ -81,8 +81,8 @@ namespace API.Features.Reservations.Reservations {
             }
         }
 
-        public string AssignRefNoToNewDto(ReservationWriteDto reservation) {
-            return GetDestinationAbbreviation(reservation) + DateHelpers.GetTrimmedUnixTime();
+        public string AssignRefNoToNewDto(int destinationId) {
+            return GetDestinationAbbreviation(destinationId) + DateHelpers.GetTrimmedUnixTime();
         }
 
         public void DeleteRange(string[] ids) {
@@ -101,10 +101,10 @@ namespace API.Features.Reservations.Reservations {
             }
         }
 
-        private string GetDestinationAbbreviation(ReservationWriteDto reservation) {
+        private string GetDestinationAbbreviation(int destinationId) {
             var destination = context.Destinations
                 .AsNoTracking()
-                .Where(x => x.Id == reservation.DestinationId)
+                .Where(x => x.Id == destinationId)
                 .SingleOrDefault();
             return destination.Abbreviation;
         }

@@ -7,7 +7,7 @@ namespace API.Features.Reservations.Reservations {
 
         bool IsUserOwner(int customerId);
         Task<bool> IsKeyUnique(ReservationWriteDto reservation);
-        int GetPortIdFromPickupPointId(ReservationWriteDto reservation);
+        int GetPortIdFromPickupPointId(int pickupPointId);
         int OverbookedPax(string date, int destinationId);
         Task<int> IsValidAsync(Reservation x, ReservationWriteDto reservation, IScheduleRepository scheduleRepo);
 

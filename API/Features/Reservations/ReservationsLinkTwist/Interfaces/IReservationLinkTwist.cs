@@ -7,7 +7,7 @@ namespace API.Features.Reservations.LinkTwist {
 
         Task<LinkTwistReservation> GetReservationAsync(string code);
         Task<LinkTwistReservation[]> GetReservationsAsync(LinkTwistReservationCriteriaVM criteria);
-        Task<List<LinkTwistReservation>> GetFreshReservationsAsync(LinkTwistReservationCriteriaVM criteria);
+        Task GetFreshReservationsAsync(LinkTwistReservationCriteriaVM criteria);
 
     }
 

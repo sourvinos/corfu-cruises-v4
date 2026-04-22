@@ -52,16 +52,26 @@ namespace API.Features.Reservations.PickupPoints {
                     .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<PickupPoint> GetByLinkTwistAsync(string description) {
-            return await context.PickupPoints
-                .AsNoTracking()
-                .SingleOrDefaultAsync(x => x.LinkTwistAlias == description);
+        public async Task<PickupPoint> GetByDescriptionAsync(string description) {
+            if (description.Contains("corfu port", System.StringComparison.CurrentCultureIgnoreCase)) {
+                var x = await context.PickupPoints
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Description.Contains("corfu port", System.StringComparison.CurrentCultureIgnoreCase));
+                return x;
+            }
+            if (description.Contains("lefkimmi port", System.StringComparison.CurrentCultureIgnoreCase)) {
+                var x = await context.PickupPoints
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Description.Contains("lefkimmi port", System.StringComparison.CurrentCultureIgnoreCase));
+                return x;
+            }
+            return null;
         }
 
         public async Task<PickupPoint> GetTempAsync(string description) {
             var pickupPoints = await context.PickupPoints
                 .AsNoTracking()
-                .Where(x => x.IsTemp && x.Description.Contains(description, System.StringComparison.CurrentCultureIgnoreCase))
+                .Where(x => x.Description.Contains(description, System.StringComparison.CurrentCultureIgnoreCase))
                 .FirstOrDefaultAsync();
             return pickupPoints;
         }

@@ -100,7 +100,7 @@ namespace API.Features.Reservations.Reservations {
             UpdateDriverIdWithNull(reservation);
             UpdateShipIdWithNull(reservation);
             AttachPortIdToDto(reservation);
-            AttachNewRefNoToDto(reservation);
+            reservation.RefNo = AttachNewRefNoToDto(reservation.DestinationId);
             var z = reservationValidation.IsValidAsync(null, reservation, scheduleRepo);
             if (await z == 200) {
                 var x = reservationUpdateRepo.Create(mapper.Map<ReservationWriteDto, Reservation>((ReservationWriteDto)reservationUpdateRepo.AttachMetadataToPostDto(reservation)));
@@ -263,14 +263,14 @@ namespace API.Features.Reservations.Reservations {
         }
 
         private ReservationWriteDto AttachPortIdToDto(ReservationWriteDto reservation) {
-            reservation.PortId = reservationValidation.GetPortIdFromPickupPointId(reservation);
+            reservation.PortId = reservationValidation.GetPortIdFromPickupPointId(reservation.PickupPointId);
             reservation.PortAlternateId = reservation.PortId;
             return reservation;
         }
 
-        private ReservationWriteDto AttachNewRefNoToDto(ReservationWriteDto reservation) {
-            reservation.RefNo = reservationUpdateRepo.AssignRefNoToNewDto(reservation);
-            return reservation;
+        private string AttachNewRefNoToDto(int destinationId) {
+            var x = reservationUpdateRepo.AssignRefNoToNewDto(destinationId);
+            return x;
         }
 
         private static ReservationWriteDto UpdateDriverIdWithNull(ReservationWriteDto reservation) {

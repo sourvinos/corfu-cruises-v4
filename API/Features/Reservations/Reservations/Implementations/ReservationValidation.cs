@@ -66,10 +66,10 @@ namespace API.Features.Reservations.Reservations {
                     x.ReservationId != reservation.ReservationId);
         }
 
-        public int GetPortIdFromPickupPointId(ReservationWriteDto reservation) {
+        public int GetPortIdFromPickupPointId(int pickupPointId) {
             PickupPoint pickupPoint = context.PickupPoints
                 .AsNoTracking()
-                .SingleOrDefault(x => x.Id == reservation.PickupPointId);
+                .SingleOrDefault(x => x.Id == pickupPointId);
             return pickupPoint != null ? pickupPoint.PortId : 0;
         }
 
@@ -112,7 +112,7 @@ namespace API.Features.Reservations.Reservations {
         private async Task<bool> PortHasDepartureForDateAndDestinationAsync(ReservationWriteDto reservation) {
             var schedule = await context.Schedules
                 .AsNoTracking()
-                .Where(x => x.Date.ToString() == reservation.Date && x.DestinationId == reservation.DestinationId && x.PortId == GetPortIdFromPickupPointId(reservation) && x.IsActive)
+                .Where(x => x.Date.ToString() == reservation.Date && x.DestinationId == reservation.DestinationId && x.PortId == GetPortIdFromPickupPointId(reservation.PickupPointId) && x.IsActive)
                 .ToListAsync();
             return schedule.Count != 0;
         }
@@ -340,7 +340,7 @@ namespace API.Features.Reservations.Reservations {
         }
 
         private async Task<DateTime> GetScheduleDepartureTimeAsync(ReservationWriteDto reservation) {
-            var portId = GetPortIdFromPickupPointId(reservation).ToString();
+            var portId = GetPortIdFromPickupPointId(reservation.PickupPointId).ToString();
             var schedule = await context.Schedules
                 .AsNoTracking()
                 .Where(x => x.Date.ToString() == reservation.Date && x.DestinationId == reservation.DestinationId && x.PortId.ToString() == portId)

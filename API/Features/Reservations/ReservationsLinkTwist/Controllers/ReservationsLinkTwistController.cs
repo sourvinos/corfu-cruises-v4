@@ -18,12 +18,12 @@ namespace API.Features.Reservations.LinkTwist {
 
         #region variables
 
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IReservationLinkTwist linkTwist;
         private readonly IReservationUpdateRepository reservationUpdateRepo;
         private readonly IReservationValidation reservationValidation;
-        protected readonly AppDbContext context;
         private readonly UserManager<UserExtended> userManager;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        protected readonly AppDbContext context;
 
         #endregion
 
@@ -51,8 +51,8 @@ namespace API.Features.Reservations.LinkTwist {
 
         [HttpPost("getFreshByDateRange")]
         [Authorize(Roles = "admin")]
-        public async Task<List<LinkTwistReservation>> GetFreshReservationsAsync([FromBody] LinkTwistReservationCriteriaVM criteria) {
-            return await linkTwist.GetFreshReservationsAsync(criteria);
+        public async Task GetFreshReservationsAsync([FromBody] LinkTwistReservationCriteriaVM criteria) {
+            await linkTwist.GetFreshReservationsAsync(criteria);
         }
 
         [HttpPost("saveRange")]
@@ -62,7 +62,7 @@ namespace API.Features.Reservations.LinkTwist {
                 UpdateDriverIdWithNull(x);
                 UpdateShipIdWithNull(x);
                 AttachPortIdToDto(x);
-                AttachNewRefNoToDto(x);
+                AttachNewRefNoToDto(x.DestinationId);
             }
             using var transaction = context.Database.BeginTransaction();
             var z = new List<Reservation>();
@@ -132,14 +132,14 @@ namespace API.Features.Reservations.LinkTwist {
         }
 
         private ReservationWriteDto AttachPortIdToDto(ReservationWriteDto reservation) {
-            reservation.PortId = reservationValidation.GetPortIdFromPickupPointId(reservation);
+            reservation.PortId = reservationValidation.GetPortIdFromPickupPointId(reservation.PickupPointId);
             reservation.PortAlternateId = reservation.PortId;
             return reservation;
         }
 
-        private ReservationWriteDto AttachNewRefNoToDto(ReservationWriteDto reservation) {
-            reservation.RefNo = reservationUpdateRepo.AssignRefNoToNewDto(reservation);
-            return reservation;
+        private string AttachNewRefNoToDto(int destinationId) {
+            var x = reservationUpdateRepo.AssignRefNoToNewDto(destinationId);
+            return x;
         }
 
     }

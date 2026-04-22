@@ -50,7 +50,7 @@ namespace API.Features.Reservations.Ports {
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Port> GetByLinkTwistAsync(string description) {
+        public async Task<Port> GetByPartialDescriptionAsync(string description) {
             var z = description.Split(' ').Skip(1).FirstOrDefault().ToLower();
             var x = await context.Ports
                 .AsNoTracking()

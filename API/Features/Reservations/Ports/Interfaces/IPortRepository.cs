@@ -11,7 +11,7 @@ namespace API.Features.Reservations.Ports {
         Task<IEnumerable<PortBrowserVM>> GetForBrowserAsync();
         Task<IEnumerable<SimpleEntity>> GetForCriteriaAsync();
         Task<Port> GetByIdAsync(int id);
-        Task<Port> GetByLinkTwistAsync(string description);
+        Task<Port> GetByPartialDescriptionAsync(string description);
 
     }
 

@@ -4,6 +4,7 @@ using API.Infrastructure.Classes;
 using API.Infrastructure.EmailServices;
 using API.Infrastructure.Extensions;
 using API.Infrastructure.Helpers;
+using API.Infrastructure.LinkTwistServices;
 using API.Infrastructure.Middleware;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -99,6 +100,7 @@ namespace API {
             services.Configure<TokenSettings>(options => Configuration.GetSection("TokenSettings").Bind(options));
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
             services.AddHostedService<EmailQueueService>();
+            services.AddHostedService<LinkTwistQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

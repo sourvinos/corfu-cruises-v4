@@ -20,7 +20,7 @@ export class ReservationImportHttpDataService extends HttpDataService {
     }
 
     public getForList(criteria: ReservationImportListCriteriaVM): Observable<ReservationImportListVM[]> {
-        return this.http.request<ReservationImportListVM[]>('post', environment.apiUrl + '/reservationsLinkTwist', { body: criteria })
+        return this.http.request<ReservationImportListVM[]>('post', environment.apiUrl + '/reservationsLinkTwist/getFreshByDateRange', { body: criteria })
     }
 
     public saveReservations(formData: any): Observable<any> {
