@@ -1,6 +1,6 @@
 namespace API.Features.Reservations.LinkTwist {
 
-    public class LinkTwistQueue {
+    public class ReservationQueue {
 
         public int Id { get; set; }
         public string Code { get; set; }

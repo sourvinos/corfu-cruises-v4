@@ -8,7 +8,6 @@ export interface PickupPointWriteDto {
     exactPoint: string
     time: string
     remarks: string
-    isTemp: boolean
     isActive: boolean
     putAt: string
 

@@ -76,6 +76,7 @@ export class ReservationParametersComponent {
             phones: this.form.value.phones,
             email: this.form.value.email,
             linkTwistIsDemo: this.form.value.linkTwistIsDemo,
+            linkTwistIsActive: this.form.value.linkTwistIsActive,
             linkTwistDemoUrl: this.form.value.linkTwistDemoUrl,
             linkTwistDemoAPIKey: this.form.value.linkTwistDemoAPIKey,
             linkTwistLiveUrl: this.form.value.linkTwistLiveUrl,
@@ -114,7 +115,8 @@ export class ReservationParametersComponent {
             closingTime: ['00:00', [Validators.required, ValidationService.isTime]],
             phones: ['', [Validators.required, Validators.maxLength(128)]],
             email: ['', [Validators.required, Validators.maxLength(128)]],
-            linkTwistIsDemo: true,
+            linkTwistIsDemo: false,
+            linkTwistIsActive: false,
             linkTwistDemoUrl: ['', [Validators.maxLength(256)]],
             linkTwistDemoAPIKey: ['', [Validators.maxLength(256)]],
             linkTwistLiveUrl: ['', [Validators.maxLength(256)]],
@@ -134,6 +136,7 @@ export class ReservationParametersComponent {
                 phones: this.record.phones,
                 email: this.record.email,
                 linkTwistIsDemo: this.record.linkTwistIsDemo,
+                linkTwistIsActive: this.record.linkTwistIsActive,
                 linkTwistDemoUrl: this.record.linkTwistDemoUrl,
                 linkTwistDemoAPIKey: this.record.linkTwistDemoAPIKey,
                 linkTwistLiveUrl: this.record.linkTwistLiveUrl,
@@ -184,6 +187,7 @@ export class ReservationParametersComponent {
     get linkTwistDemoUrl(): AbstractControl {
         return this.form.get('linkTwistDemoUrl')
     }
+
     get linkTwistDemoAPIKey(): AbstractControl {
         return this.form.get('linkTwistDemoAPIKey')
     }

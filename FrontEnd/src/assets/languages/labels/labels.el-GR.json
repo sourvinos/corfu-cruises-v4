@@ -419,10 +419,6 @@
                 "description": "Σχόλια"
             },
             {
-                "id": "isTemp",
-                "description": "Μόνο για χρήση linkTwist"
-            },
-            {
                 "id": "isActive",
                 "description": "Ενεργό"
             },
@@ -2310,6 +2306,10 @@
             {
                 "id": "linkTwistIsDemo",
                 "description": "Λειτουργία δοκιμών"
+            },
+            {
+                "id": "linkTwistIsActive",
+                "description": "Αυτόματη εισαγωγή εγγραφών"
             },
             {
                 "id": "linkTwistDemoUrl",

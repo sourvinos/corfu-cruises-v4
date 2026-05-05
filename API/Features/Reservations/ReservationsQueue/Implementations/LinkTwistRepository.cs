@@ -11,19 +11,19 @@ using Microsoft.Extensions.Options;
 
 namespace API.Features.Reservations.LinkTwist {
 
-    public class LinkTwistRepository : Repository<LinkTwistQueue>, ILinkTwistRepository {
+    public class LinkTwistRepository : Repository<ReservationQueue>, ILinkTwistRepository {
 
         public LinkTwistRepository(AppDbContext appDbContext, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) {
         }
 
-        public async Task<LinkTwistQueue> GetByCode(string code) {
+        public async Task<ReservationQueue> GetByCode(string code) {
             var x = await context.LinkTwistQueues
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Code == code);
             return x;
         }
 
-        public async Task<IEnumerable<LinkTwistQueue>> GetAsync() {
+        public async Task<IEnumerable<ReservationQueue>> GetAsync() {
             var x = await context.LinkTwistQueues
                 .AsNoTracking()
                 .OrderBy(x => x.Code)

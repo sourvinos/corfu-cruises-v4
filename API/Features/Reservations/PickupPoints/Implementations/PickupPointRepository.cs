@@ -65,6 +65,12 @@ namespace API.Features.Reservations.PickupPoints {
                     .FirstOrDefaultAsync(x => x.Description.Contains("lefkimmi port", System.StringComparison.CurrentCultureIgnoreCase));
                 return x;
             }
+            if (description.Contains("benitses port", System.StringComparison.CurrentCultureIgnoreCase)) {
+                var x = await context.PickupPoints
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Description.Contains("benitses port", System.StringComparison.CurrentCultureIgnoreCase));
+                return x;
+            }
             return null;
         }
 

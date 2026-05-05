@@ -38,7 +38,7 @@ using API.Infrastructure.Account;
 using API.Infrastructure.EmailServices;
 using API.Features.Reservations.PickupPointsLinkTwist;
 using API.Features.Reservations.LinkTwist;
-using API.Infrastructure.LinkTwistServices;
+using API.Infrastructure.ReservationQueueServices;
 
 namespace API.Infrastructure.Extensions {
 
@@ -68,7 +68,7 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IPickupPointRepository, PickupPointRepository>();
             services.AddTransient<IPickupPointValidation, PickupPointValidation>();
             services.AddTransient<IPickupPointLinkTwist, PickupPointLinkTwist>();
-            services.AddTransient<ILinkTwistQueueRepository, LinkTwistQueueRepository>();
+            services.AddTransient<IReservationUpdateQueueRepository, ReservationUpdateQueueRepository>();
             services.AddTransient<ILinkTwistRepository, LinkTwistRepository>();
             services.AddTransient<IPortRepository, PortRepository>();
             services.AddTransient<IPortValidation, PortValidation>();

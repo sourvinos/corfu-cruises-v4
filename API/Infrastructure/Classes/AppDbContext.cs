@@ -59,7 +59,7 @@ namespace API.Infrastructure.Classes {
         public DbSet<ShipCrew> ShipCrews { get; set; }
         public DbSet<ShipOwner> ShipOwners { get; set; }
         public DbSet<LinkTwistStatus> LinkTwistStatuses { get; set; }
-        public DbSet<LinkTwistQueue> LinkTwistQueues { get; set; }
+        public DbSet<ReservationQueue> LinkTwistQueues { get; set; }
 
         #endregion
 

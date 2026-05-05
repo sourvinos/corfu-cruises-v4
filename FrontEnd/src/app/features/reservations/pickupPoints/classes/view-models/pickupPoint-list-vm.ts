@@ -12,7 +12,6 @@ export interface PickupPointListVM {
     time: string
     remarks: string
     putAt: string
-    isTemp: boolean
     isActive: boolean
 
 }

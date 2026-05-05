@@ -423,10 +423,6 @@
                 "description": "Active"
             },
             {
-                "id": "isTemp",
-                "description": "Exclusive use for linkTwist"
-            },
-            {
                 "id": "post",
                 "description": "Initial entry"
             },
@@ -2314,6 +2310,10 @@
             {
                 "id": "linkTwistDemoUrl",
                 "description": "Url δοκιμών"
+            },
+            {
+                "id": "linkTwistIsActive",
+                "description": "Αυτόματη εισαγωγή εγγραφών"
             },
             {
                 "id": "linkTwistDemoAPIKey",

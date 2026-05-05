@@ -139,7 +139,6 @@ export class PickupPointFormComponent {
             exactPoint: this.form.value.exactPoint,
             time: this.form.value.time,
             remarks: this.form.value.remarks,
-            isTemp: this.form.value.isTemp,
             isActive: this.form.value.isActive,
             putAt: this.form.value.putAt
         }
@@ -180,7 +179,6 @@ export class PickupPointFormComponent {
             exactPoint: ['', [Validators.required, Validators.maxLength(128)]],
             time: ['', [Validators.required, ValidationService.isTime]],
             remarks: ['', Validators.maxLength(2048)],
-            isTemp: false,
             isActive: true,
             postAt: [''],
             postUser: [''],
@@ -212,7 +210,6 @@ export class PickupPointFormComponent {
                 exactPoint: this.record.exactPoint,
                 time: this.record.time,
                 remarks: this.record.remarks,
-                isTemp: this.record.isTemp,
                 isActive: this.record.isActive,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,

@@ -109,7 +109,7 @@ namespace API.Features.Reservations.LinkTwist {
         }
 
         private void UpdateQueue(string code) {
-            var x = new LinkTwistQueue {
+            var x = new ReservationQueue {
                 Code = code,
                 PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime())
             };

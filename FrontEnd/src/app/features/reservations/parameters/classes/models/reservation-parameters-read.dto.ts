@@ -6,10 +6,11 @@ export interface ReservationParametersReadDto extends Metadata {
     closingTime: string
     phones: string
     email: string
-    linkTwistIsDemo: boolean
     linkTwistDemoUrl: string
     linkTwistDemoAPIKey: string
     linkTwistLiveUrl: string
     linkTwistLiveAPIKey: string
+    linkTwistIsDemo: boolean
+    linkTwistIsActive: boolean
 
 }

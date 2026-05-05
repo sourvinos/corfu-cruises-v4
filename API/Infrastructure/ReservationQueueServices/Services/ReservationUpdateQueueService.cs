@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,63 +12,73 @@ using API.Features.Reservations.Parameters;
 using API.Features.Reservations.PickupPoints;
 using API.Features.Reservations.Reservations;
 using API.Infrastructure.Classes;
-using API.Infrastructure.Extensions;
 using API.Infrastructure.Helpers;
 using API.Infrastructure.Responses;
-using API.Infrastructure.Users;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace API.Infrastructure.LinkTwistServices {
+namespace API.Infrastructure.ReservationQueueServices {
 
-    public class LinkTwistQueueService : BackgroundService {
+    public class ReservationUpdateQueueService : BackgroundService {
 
         #region variables
 
         private readonly EnvironmentSettings environmentSettings;
         private readonly ICustomerRepository customerRepo;
         private readonly IDestinationRepository destinationRepo;
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly ILinkTwistQueueRepository linkTwistQueueRepo;
+        private readonly IReservationUpdateQueueRepository linkTwistQueueRepo;
         private readonly IMapper mapper;
         private readonly IPickupPointRepository pickupPointRepo;
         private readonly IReservationParametersRepository parametersRepo;
         private readonly IReservationUpdateRepository reservationUpdateRepo;
         private readonly IReservationValidation reservationValidation;
-        private readonly UserManager<UserExtended> userManager;
 
         #endregion
 
-        public LinkTwistQueueService(ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IHttpContextAccessor httpContextAccessor, ILinkTwistQueueRepository linkTwistQueueRepo, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation, UserManager<UserExtended> userManager) {
+        public ReservationUpdateQueueService(ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IReservationUpdateQueueRepository linkTwistQueueRepo, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation) {
             this.customerRepo = customerRepo;
             this.destinationRepo = destinationRepo;
             this.environmentSettings = environmentSettings.Value;
-            this.httpContextAccessor = httpContextAccessor;
             this.linkTwistQueueRepo = linkTwistQueueRepo;
             this.mapper = mapper;
             this.parametersRepo = parametersRepo;
             this.pickupPointRepo = pickupPointRepo;
             this.reservationUpdateRepo = reservationUpdateRepo;
             this.reservationValidation = reservationValidation;
-            this.userManager = userManager;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
-                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
-                var x = await linkTwistQueueRepo.GetFirstNotCompleted();
-                if (x != null) {
-                    await ImportReservation(x);
+                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsUpdateQueueSecondsDelay), stoppingToken);
+                await UpdateLinkTwistQueue();
+            }
+        }
+
+        private async Task UpdateLinkTwistQueue() {
+            if (GetParameters().LinkTwistIsActive) {
+                var fromDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime());
+                var toDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(10));
+                using HttpClient httpClient = new();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
+                var x = JsonSerializer.Deserialize<LinkTwistReservation[]>(await httpClient.GetStringAsync($"{GetParameters().APIUrl}/bookings?activity_date_time_from={fromDate}&activity_date_time_to={toDate}"));
+                x?.OrderBy(x => x.Details.Select(x => x.Date));
+                foreach (var item in x) {
+                    if (item.BookingStatus == "completed") {
+                        if (linkTwistQueueRepo.GetByCode(item.Code).Result == null) {
+                            linkTwistQueueRepo.Create(new ReservationQueue {
+                                Code = item.Code,
+                                IsImported = false,
+                                PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime())
+                            });
+                        }
+                    }
                 }
             }
         }
 
-        private async Task<ResponseWithBody> ImportReservation(LinkTwistQueue linkTwistQueue) {
-            var fromDate = DateHelpers.GetLocalDateTime();
-            var toDate = DateHelpers.GetLocalDateTime().AddDays(10);
+        private async Task<ResponseWithBody> ImportReservation(ReservationQueue linkTwistQueue) {
             using HttpClient httpClient = new();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
@@ -87,27 +96,28 @@ namespace API.Infrastructure.LinkTwistServices {
             x.Notes = x.Notes != null ? x.Notes.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
             x.IsValidPrimary = ValidateReservation(x);
             if (x.IsValidPrimary) {
-                var i = new ReservationWriteDto();
-                i.RefNo = AttachNewRefNoToDto(x.Destination.Id);
-                i.PickupPointId = x.PickupPoint.Id;
-                i.TicketNo = x.Code;
-                i.CustomerId = x.Customer.Id;
-                i.Date = x.Date;
-                i.DestinationId = x.OurDestination.Id;
-                i.DriverId = null;
-                i.Email = "x.Email";
-                i.Adults = x.Adults;
-                i.Kids = x.Kids;
-                i.Free = x.Free;
-                i.LinkTwistId = x.Code;
-                i.Phones = "";
+                var i = new ReservationWriteDto {
+                    RefNo = AttachNewRefNoToDto(x.Destination.Id),
+                    PickupPointId = x.PickupPoint.Id,
+                    TicketNo = x.Code,
+                    CustomerId = x.Customer.Id,
+                    Date = x.Date,
+                    DestinationId = x.OurDestination.Id,
+                    DriverId = null,
+                    Email = "x.Email",
+                    Adults = x.Adults,
+                    Kids = x.Kids,
+                    Free = x.Free,
+                    LinkTwistId = x.Code,
+                    Phones = ""
+                };
                 i.PortId = AttachPortIdToDto(i.PickupPointId);
                 i.PortAlternateId = AttachPortIdToDto(i.PickupPointId);
                 i.Remarks = "";
                 i.PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime());
-                i.PostUser = "system";
+                i.PostUser = "linktwist";
                 i.PutAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime());
-                i.PutUser = "system";
+                i.PutUser = "linktwist";
                 i.Notes = x.Notes ?? "";
                 reservationUpdateRepo.Create(mapper.Map<ReservationWriteDto, Reservation>(i));
                 linkTwistQueue.IsImported = true;
@@ -128,20 +138,19 @@ namespace API.Infrastructure.LinkTwistServices {
         }
 
         private string AttachNewRefNoToDto(int destinationId) {
-            var x = reservationUpdateRepo.AssignRefNoToNewDto(destinationId);
-            return x;
+            return reservationUpdateRepo.AssignRefNoToNewDto(destinationId);
         }
 
         private int AttachPortIdToDto(int pickupPointId) {
-            var x = reservationValidation.GetPortIdFromPickupPointId(pickupPointId);
-            return x;
+            return reservationValidation.GetPortIdFromPickupPointId(pickupPointId);
         }
 
         private ReservationParametersVM GetParameters() {
             var parameters = parametersRepo.GetAsync().Result;
             return new ReservationParametersVM {
                 APIKey = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoAPIKey : parameters.LinkTwistLiveAPIKey,
-                APIUrl = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoUrl : parameters.LinkTwistLiveUrl
+                APIUrl = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoUrl : parameters.LinkTwistLiveUrl,
+                LinkTwistIsActive = parameters.LinkTwistIsActive
             };
         }
 
@@ -204,25 +213,6 @@ namespace API.Infrastructure.LinkTwistServices {
 
         private static bool ValidateReservation(LinkTwistReservation reservation) {
             if (reservation.Destination.Description != "" && reservation.Customer.Description != "" && reservation.PickupPoint.Description != "" && reservation.TotalPax > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        private static bool ValidatePassengers(List<LinkTwistReservationDetails> details) {
-            var x = true;
-            foreach (var item in details) {
-                if (item.Passenger.Lastname == "" || item.Passenger.Firstname == "" || ValidateAge(item) == false || item.Passenger.Birthdate == "" || item.Passenger.Nationality == "" || item.Passenger.Gender == "") {
-                    x = false;
-                    break;
-                }
-            }
-            return x;
-        }
-
-        private static bool ValidateAge(LinkTwistReservationDetails details) {
-            if (details.Age.StartsWith("adult") || details.Age.StartsWith("child") || details.Age.StartsWith("infant")) {
                 return true;
             } else {
                 return false;
