@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using API.Infrastructure.Classes;
 
-namespace API.Features.Reservations.LinkTwist {
+namespace API.Infrastructure.ReservationQueueServices {
 
-    public class LinkTwistReservation {
+    public class ReservationLinkTwist {
 
         public string Date { get; set; }
 
@@ -38,7 +38,7 @@ namespace API.Features.Reservations.LinkTwist {
         public List<LinkTwistReservationDetails> Details { get; set; }
 
         [JsonPropertyName("extras")]
-        public List<LinkTwistPickupPoint> Extras { get; set; }
+        public List<ReservationLinkTwistPickupPoint> Extras { get; set; }
 
         public SimpleEntity PickupPoint { get; set; }
 

@@ -37,7 +37,6 @@ using Microsoft.Extensions.DependencyInjection;
 using API.Infrastructure.Account;
 using API.Infrastructure.EmailServices;
 using API.Features.Reservations.PickupPointsLinkTwist;
-using API.Features.Reservations.LinkTwist;
 using API.Infrastructure.ReservationQueueServices;
 
 namespace API.Infrastructure.Extensions {
@@ -65,21 +64,20 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<ILedgerRepository, LedgerRepository>();
             services.AddTransient<IManifestRepository, ManifestRepository>();
             services.AddTransient<INationalityRepository, NationalityRepository>();
+            services.AddTransient<IPickupPointLinkTwist, PickupPointLinkTwist>();
             services.AddTransient<IPickupPointRepository, PickupPointRepository>();
             services.AddTransient<IPickupPointValidation, PickupPointValidation>();
-            services.AddTransient<IPickupPointLinkTwist, PickupPointLinkTwist>();
-            services.AddTransient<IReservationUpdateQueueRepository, ReservationUpdateQueueRepository>();
-            services.AddTransient<ILinkTwistRepository, LinkTwistRepository>();
             services.AddTransient<IPortRepository, PortRepository>();
             services.AddTransient<IPortValidation, PortValidation>();
             services.AddTransient<IReservationCalculatePaxLimit, ReservationCalculatePaxLimit>();
             services.AddTransient<IReservationCalendar, ReservationCalendar>();
             services.AddTransient<IReservationCloneRepository, ReservationCloneRepository>();
-            services.AddTransient<IReservationLinkTwist, ReservationLinkTwist>();
             services.AddTransient<IReservationParameterValidation, ParameterValidation>();
             services.AddTransient<IReservationParametersRepository, ParametersRepository>();
+            services.AddTransient<IReservationProcessQueueRepository, ReservationProcessQueueRepository>();
             services.AddTransient<IReservationReadRepository, ReservationReadRepository>();
             services.AddTransient<IReservationSendToEmail, ReservationSendToEmail>();
+            services.AddTransient<IReservationUpdateQueueRepository, ReservationUpdateQueueRepository>();
             services.AddTransient<IReservationUpdateRepository, ReservationUpdateRepository>();
             services.AddTransient<IReservationValidation, ReservationValidation>();
             services.AddTransient<IScheduleRepository, ScheduleRepository>();

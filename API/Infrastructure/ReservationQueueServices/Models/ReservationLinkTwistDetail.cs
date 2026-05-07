@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace API.Features.Reservations.LinkTwist {
+namespace API.Infrastructure.ReservationQueueServices {
 
     public class LinkTwistReservationDetails {
 
@@ -17,7 +17,7 @@ namespace API.Features.Reservations.LinkTwist {
         public string Port { get; set; }
 
         [JsonPropertyName("contact_data")]
-        public LinkTwistPassenger Passenger { get; set; }
+        public ReservationLinkTwistPassenger Passenger { get; set; }
 
     }
 

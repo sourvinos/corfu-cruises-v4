@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace API.Features.Reservations.LinkTwist {
+namespace API.Infrastructure.ReservationQueueServices {
 
-    public class LinkTwistPickupPoint {
+    public class ReservationLinkTwistPickupPoint {
 
         [JsonPropertyName("extra_alias")]
         public string Description { get; set; }

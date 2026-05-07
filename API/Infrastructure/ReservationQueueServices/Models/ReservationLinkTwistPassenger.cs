@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace API.Features.Reservations.LinkTwist {
+namespace API.Infrastructure.ReservationQueueServices {
 
-    public class LinkTwistPassenger {
+    public class ReservationLinkTwistPassenger {
 
         [JsonPropertyName("surname")]
         public string Lastname { get; set; } = "";

@@ -30,7 +30,7 @@ using API.Infrastructure.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using API.Features.Reservations.LinkTwist;
+using API.Infrastructure.ReservationQueueServices;
 
 namespace API.Infrastructure.Classes {
 
@@ -54,12 +54,11 @@ namespace API.Infrastructure.Classes {
         public DbSet<Port> Ports { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ReservationParameter> ReservationParameters { get; set; }
+        public DbSet<ReservationQueue> ReservationQueues { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Ship> Ships { get; set; }
         public DbSet<ShipCrew> ShipCrews { get; set; }
         public DbSet<ShipOwner> ShipOwners { get; set; }
-        public DbSet<LinkTwistStatus> LinkTwistStatuses { get; set; }
-        public DbSet<ReservationQueue> LinkTwistQueues { get; set; }
 
         #endregion
 

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 // dotnet watch run --environment LocalDevelopment | LocalTesting | ProductionDemo | ProductionLive
 // dotnet publish /p:Configuration=Release /p:EnvironmentName=ProductionDemo | ProductionLive
@@ -99,8 +100,10 @@ namespace API {
             services.Configure<EmailUserSettings>(options => Configuration.GetSection("EmailUserSettings").Bind(options));
             services.Configure<TokenSettings>(options => Configuration.GetSection("TokenSettings").Bind(options));
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
+            services.Configure<HostOptions>(hostOptions => { hostOptions.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
             services.AddHostedService<EmailQueueService>();
             services.AddHostedService<ReservationUpdateQueueService>();
+            services.AddHostedService<ReservationProcessQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {
