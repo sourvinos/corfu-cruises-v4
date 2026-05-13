@@ -25,6 +25,7 @@
                     <tr>
                         <th class="no-border-bottom width-3"></th>
                         <th class="no-border-bottom width-1"></th>
+                        <th class="no-border-bottom width-1"></th>
                         <th class="no-border-bottom width-4" pSortableColumn="date">{{ getLabel('headerDate') }}</th>
                         <th class="no-border-bottom width-5" pSortableColumn="refNo">{{ getLabel('headerRefNo') }}</th>
                         <th class="no-border-bottom width-8" pSortableColumn="ticketNo">{{ getLabel('headerTicketNo') }}</th>
@@ -46,6 +47,7 @@
                     <tr>
                         <th class="no-border-top width-3"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
                         <th class="no-border-top width-1"></th>
+                        <th class="no-border-top width-1"></th>
                         <th class="no-border-top width-4"></th>
                         <th class="no-border-top width-5"><input (input)=" table.filter($event.target.value, 'refNo' , 'contains' )" [disabled]="isFilterDisabled()" [value]="$any(table).filters['refNo']?.value" class="p-inputtext"></th>
                         <th class="no-border-top width-8"><input (input)="table.filter($event.target.value, 'ticketNo', 'contains')" [disabled]="isFilterDisabled()" [value]="$any(table).filters['ticketNo']?.value" class="p-inputtext"></th>
@@ -62,19 +64,19 @@
                                 </ng-template>
                             </p-columnFilter>
                         </th>
-                            <th class="no-border-top width-6">
-                                <p-columnFilter [showMenu]="false" field="destination" matchMode="in">
-                                    <ng-template let-filter="filterCallback" let-value pTemplate="filter">
-                                        <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctDestinations" [placeholder]="getEmoji('wildcard')" optionLabel="description">
-                                            <ng-template let-option pTemplate="item">
-                                                <div class="p-multiselect-option">
-                                                    <span>{{ option.description }}</span>
-                                                </div>
-                                            </ng-template>
-                                        </p-multiSelect>
-                                    </ng-template>
-                                </p-columnFilter>
-                            </th>
+                        <th class="no-border-top width-6">
+                            <p-columnFilter [showMenu]="false" field="destination" matchMode="in">
+                                <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                                    <p-multiSelect (onChange)="filter($event.value)" [ngModel]="value" [options]="distinctDestinations" [placeholder]="getEmoji('wildcard')" optionLabel="description">
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="p-multiselect-option">
+                                                <span>{{ option.description }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </th>
                         <th class="no-border-top width-5">
                             <p-columnFilter [showMenu]="false" field="coachRoute" matchMode="in">
                                 <ng-template let-filter="filterCallback" let-value pTemplate="filter">
@@ -165,6 +167,10 @@
                     <tr (click)="onHighlightRow(record.reservationId)" (contextmenu)="onHighlightRow(record.id)" (dblclick)="onEditRecord(record.reservationId)" [attr.id]=record.reservationId [pContextMenuRow]="record" style="height: 32px;">
                         <td class="width-3"><span class="center no-overflow" style="padding-top: 0.25rem !important;"><p-tableCheckbox (click)="calculateSelectedPax()" [value]="record"></p-tableCheckbox></span></td>
                         <td class="width-1"><span [ngClass]="reservationYearIsSelectedYear(record.date) ? 'blue' : 'orange'" class="center icon material-symbols-outlined no-overflow">{{ reservationYearIsSelectedYear(record.date) ? 'schedule' : 'device_reset' }}</span></td>
+                        <td class="width-1">
+                            <span *ngIf="record.postUser == 'linktwist'" class="center no-overflow" style="font-size: 0.7rem; padding-top: 0 !important;">{{ getEmoji('linktwist') }}</span>
+                            <span *ngIf="record.postUser != 'linktwist'" class="center no-overflow" style="font-size: 0.7rem; padding-top: 0 !important;">{{ getEmoji('empty') }}</span>
+                        </td>
                         <td class="width-4"><span class="center no-overflow">{{ formatDateToLocale(record.date,false,false) }}</span></td>
                         <td class="width-5"><span class="center no-overflow">{{ record.refNo }}</span></td>
                         <td class="width-8"><span>{{ record.ticketNo }}</span></td>

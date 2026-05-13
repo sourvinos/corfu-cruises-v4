@@ -26,5 +26,6 @@ export interface ReservationListVM {
     ship: ReservationListShipVM
     time: string
     passengerCount: number
+    postUser: string
 
 }

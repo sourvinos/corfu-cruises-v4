@@ -157,7 +157,8 @@ namespace API.Features.Reservations.Reservations {
                         Description = x.Ship != null ? x.Ship.Description : "(EMPTY)"
                     },
                     PassengerCount = x.Passengers.Count,
-                    PassengerDifference = x.TotalPax - x.Passengers.Count
+                    PassengerDifference = x.TotalPax - x.Passengers.Count,
+                    PostUser = x.PostUser
                 });
         }
 

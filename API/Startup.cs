@@ -103,7 +103,7 @@ namespace API {
             services.Configure<HostOptions>(hostOptions => { hostOptions.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
             services.AddHostedService<EmailQueueService>();
             services.AddHostedService<ReservationUpdateQueueService>();
-            services.AddHostedService<ReservationProcessQueueService>();
+            // services.AddHostedService<ReservationProcessQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

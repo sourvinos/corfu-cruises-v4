@@ -21,8 +21,8 @@ namespace API.Infrastructure.ReservationQueueServices {
     public class ReservationProcessQueueService : BackgroundService {
 
         #region variables
-        protected readonly AppDbContext context;
 
+        protected readonly AppDbContext context;
         private readonly EnvironmentSettings environmentSettings;
         private readonly ICustomerRepository customerRepo;
         private readonly IDestinationRepository destinationRepo;
@@ -49,7 +49,7 @@ namespace API.Infrastructure.ReservationQueueServices {
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
-                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsProcessQueueSecondsDelay), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsUpdateQueueSecondsDelay + 9), stoppingToken);
                 await ProcessQueue();
             }
         }
@@ -82,7 +82,7 @@ namespace API.Infrastructure.ReservationQueueServices {
                         Date = i.Date,
                         DestinationId = i.OurDestination.Id,
                         DriverId = null,
-                        Email = "x.Email",
+                        Email = "",
                         Adults = i.Adults,
                         Kids = i.Kids,
                         Free = i.Free,
@@ -97,7 +97,6 @@ namespace API.Infrastructure.ReservationQueueServices {
                         PutUser = "linktwist",
                         Notes = i.Notes ?? "",
                     };
-                    Console.WriteLine(x.Code);
                     var q = mapper.Map<ReservationWriteDto, Reservation>(z);
                     using var transaction = context.Database.BeginTransaction();
                     context.Add(q);

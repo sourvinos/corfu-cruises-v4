@@ -28,6 +28,8 @@ namespace API.Features.Reservations.Reservations {
         public int PassengerCount { get; set; }
         public int PassengerDifference { get; set; }
 
+        public string PostUser { get; set; }
+
     }
 
 }
