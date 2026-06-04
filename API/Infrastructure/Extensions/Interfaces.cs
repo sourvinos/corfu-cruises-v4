@@ -74,10 +74,9 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IReservationCloneRepository, ReservationCloneRepository>();
             services.AddTransient<IReservationParameterValidation, ParameterValidation>();
             services.AddTransient<IReservationParametersRepository, ParametersRepository>();
-            services.AddTransient<IReservationProcessQueueRepository, ReservationProcessQueueRepository>();
+            services.AddTransient<IReservationQueueRepository, ReservationQueueRepository>();
             services.AddTransient<IReservationReadRepository, ReservationReadRepository>();
             services.AddTransient<IReservationSendToEmail, ReservationSendToEmail>();
-            services.AddTransient<IReservationUpdateQueueRepository, ReservationUpdateQueueRepository>();
             services.AddTransient<IReservationUpdateRepository, ReservationUpdateRepository>();
             services.AddTransient<IReservationValidation, ReservationValidation>();
             services.AddTransient<IScheduleRepository, ScheduleRepository>();

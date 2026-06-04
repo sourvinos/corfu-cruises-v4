@@ -37,38 +37,34 @@ namespace API {
                 options.UseMySql(Configuration.GetConnectionString("LocalDevelopment"), new MySqlServerVersion(new Version(8, 0, 19)), builder => {
                     builder.EnableStringComparisonTranslations();
                     builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-                }));
+                }), ServiceLifetime.Transient);
             ConfigureServices(services);
         }
 
         public void ConfigureLocalTestingServices(IServiceCollection services) {
-            services.AddDbContextFactory<AppDbContext>(options => {
+            services.AddDbContextFactory<AppDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("LocalTesting"), new MySqlServerVersion(new Version(8, 0, 19)), builder => {
                     builder.EnableStringComparisonTranslations();
                     builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-                });
-                options.EnableSensitiveDataLogging();
-            });
+                }), ServiceLifetime.Transient);
             ConfigureServices(services);
         }
 
         public void ConfigureProductionDemoServices(IServiceCollection services) {
-            services.AddDbContextFactory<AppDbContext>(options => {
+            services.AddDbContextFactory<AppDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("ProductionDemo"), new MySqlServerVersion(new Version(8, 0, 19)), builder => {
                     builder.EnableStringComparisonTranslations();
                     builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-                });
-            });
+                }), ServiceLifetime.Transient);
             ConfigureServices(services);
         }
 
         public void ConfigureProductionLiveServices(IServiceCollection services) {
-            services.AddDbContextFactory<AppDbContext>(options => {
+            services.AddDbContextFactory<AppDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("ProductionLive"), new MySqlServerVersion(new Version(8, 0, 19)), builder => {
                     builder.EnableStringComparisonTranslations();
                     builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-                });
-            });
+                }), ServiceLifetime.Transient);
             ConfigureServices(services);
         }
 
@@ -102,8 +98,7 @@ namespace API {
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
             services.Configure<HostOptions>(hostOptions => { hostOptions.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
             services.AddHostedService<EmailQueueService>();
-            services.AddHostedService<ReservationUpdateQueueService>();
-            // services.AddHostedService<ReservationProcessQueueService>();
+            services.AddHostedService<ReservationQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

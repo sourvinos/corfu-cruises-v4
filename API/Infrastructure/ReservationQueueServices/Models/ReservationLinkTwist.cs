@@ -44,6 +44,7 @@ namespace API.Infrastructure.ReservationQueueServices {
 
         public bool IsValidPrimary { get; set; }
         public bool IsValidSecondary { get; set; }
+        public bool Exists { get; set; }
 
     }
 

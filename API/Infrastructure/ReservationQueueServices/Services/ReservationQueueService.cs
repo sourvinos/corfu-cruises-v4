@@ -18,39 +18,65 @@ using Microsoft.Extensions.Options;
 
 namespace API.Infrastructure.ReservationQueueServices {
 
-    public class ReservationProcessQueueService : BackgroundService {
+    public class ReservationQueueService : BackgroundService {
 
         #region variables
 
-        protected readonly AppDbContext context;
         private readonly EnvironmentSettings environmentSettings;
         private readonly ICustomerRepository customerRepo;
         private readonly IDestinationRepository destinationRepo;
         private readonly IMapper mapper;
         private readonly IPickupPointRepository pickupPointRepo;
         private readonly IReservationParametersRepository parametersRepo;
-        private readonly IReservationProcessQueueRepository reservationProcessQueueRepo;
+        private readonly IReservationQueueRepository reservationQueueRepo;
         private readonly IReservationUpdateRepository reservationUpdateRepo;
         private readonly IReservationValidation reservationValidation;
+        protected readonly AppDbContext context;
 
         #endregion
 
-        public ReservationProcessQueueService(AppDbContext context, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, IReservationProcessQueueRepository reservationProcessQueueRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation) {
+        public ReservationQueueService(AppDbContext context, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, IReservationQueueRepository reservationQueueRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation) {
             this.context = context; this.customerRepo = customerRepo;
             this.destinationRepo = destinationRepo;
             this.environmentSettings = environmentSettings.Value;
+            this.environmentSettings = environmentSettings.Value;
             this.mapper = mapper;
             this.parametersRepo = parametersRepo;
+            this.parametersRepo = parametersRepo;
             this.pickupPointRepo = pickupPointRepo;
-            this.reservationProcessQueueRepo = reservationProcessQueueRepo;
+            this.reservationQueueRepo = reservationQueueRepo;
             this.reservationUpdateRepo = reservationUpdateRepo;
             this.reservationValidation = reservationValidation;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
-                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsUpdateQueueSecondsDelay + 9), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
+                await UpdateQueue();
                 await ProcessQueue();
+            }
+        }
+
+        private async Task UpdateQueue() {
+            if (GetParameters().LinkTwistIsActive) {
+                var fromDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime());
+                var toDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(0));
+                using HttpClient httpClient = new();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
+                var x = JsonSerializer.Deserialize<ReservationLinkTwist[]>(await httpClient.GetStringAsync($"{GetParameters().APIUrl}/bookings?activity_date_time_from={fromDate}&activity_date_time_to={toDate}"));
+                x?.OrderBy(x => x.Details.Select(x => x.Date));
+                foreach (var item in x) {
+                    if (item.BookingStatus == "completed") {
+                        if (reservationQueueRepo.GetByCode(item.Code).Result == null) {
+                            reservationQueueRepo.Create(new ReservationQueue {
+                                Code = item.Code,
+                                IsImported = 0,
+                                PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime())
+                            });
+                        }
+                    }
+                }
             }
         }
 
@@ -58,55 +84,63 @@ namespace API.Infrastructure.ReservationQueueServices {
             using HttpClient httpClient = new();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
-            var x = await reservationProcessQueueRepo.GetFirstNotImported();
+            var x = await reservationQueueRepo.GetFirstNotImported();
             if (x != null) {
                 var i = JsonSerializer.Deserialize<ReservationLinkTwist>(await httpClient.GetStringAsync(GetParameters().APIUrl + "/bookings/" + x.Code));
                 i.Date = DateHelpers.DateToISOString(DateHelpers.StringToDate(i.Details.FirstOrDefault().Date));
                 i.Destination = GetDestination(i.Details.FirstOrDefault().Destination);
                 i.OurDestination = await GetOurDestinationAsync(i.Details.FirstOrDefault().Destination);
                 i.Customer = GetCustomer(i.Referer);
-                i.BookingCode = i.BookingCode;
+                i.BookingCode ??= x.Code;
                 i.PickupPoint = await GetPickupPointAsync(i);
                 i.Adults = i.Details.Count(x => x.Age.Contains("adult"));
                 i.Kids = i.Details.Count(x => x.Age.Contains("child"));
                 i.Free = i.Details.Count(x => x.Age.Contains("infant"));
                 i.TotalPax = i.Adults + i.Kids + i.Free;
                 i.Notes = i.Notes != null ? i.Notes.Replace("\n", "").Replace("<br/>", "").Replace("<p>", "").Replace("</p>", "") : "";
-                i.IsValidPrimary = ValidateReservation(i);
-                if (i.IsValidPrimary) {
-                    var z = new ReservationWriteDto {
-                        RefNo = AttachNewRefNoToDto(i.Destination.Id),
-                        PickupPointId = i.PickupPoint.Id,
-                        TicketNo = x.Code,
-                        CustomerId = i.Customer.Id,
-                        Date = i.Date,
-                        DestinationId = i.OurDestination.Id,
-                        DriverId = null,
-                        Email = "",
-                        Adults = i.Adults,
-                        Kids = i.Kids,
-                        Free = i.Free,
-                        LinkTwistId = x.Code,
-                        Phones = "",
-                        PortId = AttachPortIdToDto(i.PickupPoint.Id),
-                        PortAlternateId = AttachPortIdToDto(i.PickupPoint.Id),
-                        Remarks = "",
-                        PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime()),
-                        PostUser = "linktwist",
-                        PutAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime()),
-                        PutUser = "linktwist",
-                        Notes = i.Notes ?? "",
-                    };
-                    var q = mapper.Map<ReservationWriteDto, Reservation>(z);
-                    using var transaction = context.Database.BeginTransaction();
-                    context.Add(q);
-                    x.IsImported = 1;
-                    context.SaveChanges();
-                    transaction.Commit();
+                var alreadyExists = reservationQueueRepo.GetByDateAndTicketNoAsync(i.Date, i.BookingCode).Result;
+                if (alreadyExists == false) {
+                    i.IsValidPrimary = ValidateReservation(i);
+                    if (i.IsValidPrimary) {
+                        var z = new ReservationWriteDto {
+                            RefNo = AttachNewRefNoToDto(i.Destination.Id),
+                            PickupPointId = i.PickupPoint.Id,
+                            TicketNo = i.BookingCode,
+                            CustomerId = i.Customer.Id,
+                            Date = i.Date,
+                            DestinationId = i.OurDestination.Id,
+                            DriverId = null,
+                            Email = "",
+                            Adults = i.Adults,
+                            Kids = i.Kids,
+                            Free = i.Free,
+                            LinkTwistId = x.Code,
+                            Phones = "",
+                            PortId = AttachPortIdToDto(i.PickupPoint.Id),
+                            PortAlternateId = AttachPortIdToDto(i.PickupPoint.Id),
+                            Remarks = "",
+                            PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime()),
+                            PostUser = "linktwist",
+                            PutAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime()),
+                            PutUser = "linktwist",
+                            Notes = i.Notes ?? "",
+                        };
+                        var q = mapper.Map<ReservationWriteDto, Reservation>(z);
+                        using var transaction = await context.Database.BeginTransactionAsync();
+                        context.Add(q);
+                        x.IsImported = 1;
+                        await context.SaveChangesAsync();
+                        transaction.Commit();
+                    } else {
+                        using var transaction = await context.Database.BeginTransactionAsync();
+                        x.IsImported = 2;
+                        await context.SaveChangesAsync();
+                        transaction.Commit();
+                    }
                 } else {
-                    using var transaction = context.Database.BeginTransaction();
-                    x.IsImported = 2;
-                    context.SaveChanges();
+                    using var transaction = await context.Database.BeginTransactionAsync();
+                    x.IsImported = 3;
+                    await context.SaveChangesAsync();
                     transaction.Commit();
                 }
             }
@@ -118,15 +152,6 @@ namespace API.Infrastructure.ReservationQueueServices {
 
         private int AttachPortIdToDto(int pickupPointId) {
             return reservationValidation.GetPortIdFromPickupPointId(pickupPointId);
-        }
-
-        private ReservationParametersVM GetParameters() {
-            var parameters = parametersRepo.GetAsync().Result;
-            return new ReservationParametersVM {
-                APIKey = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoAPIKey : parameters.LinkTwistLiveAPIKey,
-                APIUrl = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoUrl : parameters.LinkTwistLiveUrl,
-                LinkTwistIsActive = parameters.LinkTwistIsActive
-            };
         }
 
         private SimpleEntity GetCustomer(string referer) {
@@ -186,8 +211,21 @@ namespace API.Infrastructure.ReservationQueueServices {
             }
         }
 
-        private static bool ValidateReservation(ReservationLinkTwist reservation) {
-            return reservation.Destination.Description != "" && reservation.Customer.Description != "" && reservation.PickupPoint.Description != "" && reservation.TotalPax > 0;
+        private bool ValidateReservation(ReservationLinkTwist reservation) {
+            var x = reservation.Destination.Description != "" &&
+                reservation.Customer.Description != "" &&
+                reservation.PickupPoint.Description != "" &&
+                reservation.TotalPax > 0;
+            return x;
+        }
+
+        private ReservationParametersVM GetParameters() {
+            var parameters = parametersRepo.GetAsync().Result;
+            return new ReservationParametersVM {
+                APIKey = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoAPIKey : parameters.LinkTwistLiveAPIKey,
+                APIUrl = parameters.LinkTwistIsDemo ? parameters.LinkTwistDemoUrl : parameters.LinkTwistLiveUrl,
+                LinkTwistIsActive = parameters.LinkTwistIsActive
+            };
         }
 
     }
