@@ -20,7 +20,7 @@ import { SessionStorageService } from 'src/app/shared/services/session-storage.s
 
 export class DestinationListComponent {
 
-    //#region common #9
+    //#region common
 
     @ViewChild('table') table: Table
 
@@ -59,7 +59,7 @@ export class DestinationListComponent {
 
     //#endregion
 
-    //#region public common methods #7
+    //#region public methods
 
     public editRecord(id: number): void {
         this.storeScrollTop()
@@ -96,7 +96,7 @@ export class DestinationListComponent {
 
     //#endregion
 
-    //#region private common methods #13
+    //#region private methods
 
     private enableDisableFilters(): void {
         this.records.length == 0 ? this.helperService.disableTableFilters() : this.helperService.enableTableFilters()

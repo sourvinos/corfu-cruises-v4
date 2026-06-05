@@ -88,21 +88,25 @@ export class LedgerCustomerReservationListComponent {
                 customer: {
                     id: this.customer.customer.id,
                     description: this.customer.customer.description,
+                    isShownInCriteria: true,
                     isActive: this.customer.customer.isActive
                 },
                 destination: {
                     id: this.selectedRecords[0].destination.id,
                     description: this.selectedRecords[0].destination.description,
+                    isShownInCriteria: true,
                     isActive: true
                 },
                 port: {
                     id: 1,
                     description: 'CP',
+                    isShownInCriteria: true,
                     isActive: true
                 },
                 ship: {
                     id: this.selectedRecords[0].ship.id,
                     description: this.selectedRecords[0].ship.description,
+                    isShownInCriteria: true,
                     isActive: true
                 },
                 adultsWithTransfer: 0,
@@ -118,21 +122,25 @@ export class LedgerCustomerReservationListComponent {
                 customer: {
                     id: this.customer.customer.id,
                     description: this.customer.customer.description,
+                    isShownInCriteria: true,
                     isActive: this.customer.customer.isActive
                 },
                 destination: {
                     id: this.selectedRecords[0].destination.id,
                     description: this.selectedRecords[0].destination.description,
+                    isShownInCriteria: true,
                     isActive: true
                 },
                 port: {
                     id: 2,
                     description: 'LP',
+                    isShownInCriteria: true,
                     isActive: true
                 },
                 ship: {
                     id: this.selectedRecords[0].ship.id,
                     description: this.selectedRecords[0].ship.description,
+                    isShownInCriteria: true,
                     isActive: true
                 },
                 adultsWithTransfer: 0,

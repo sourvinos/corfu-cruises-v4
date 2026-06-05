@@ -11,8 +11,8 @@ namespace API.Features.Reservations.Destinations {
             // Fields
             entity.Property(x => x.Abbreviation).HasMaxLength(5).IsRequired(true);
             entity.Property(x => x.Description).HasMaxLength(128).IsRequired(true);
-            entity.Property(x => x.IsLinkTwist);
             entity.Property(x => x.LinkTwistAlias).HasMaxLength(128);
+            entity.Property(x => x.IsShownInCriteria);
             entity.Property(x => x.IsActive);
             // Metadata
             entity.Property(x => x.PostAt).HasMaxLength(19).IsRequired(true);

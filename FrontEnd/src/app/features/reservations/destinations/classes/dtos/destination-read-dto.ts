@@ -6,8 +6,8 @@ export interface DestinationReadDto extends Metadata {
     abbreviation: string
     description: string
     linkedId: number
-    isLinkTwist: boolean
     linkTwistAlias: string
+    isShownInCriteria: boolean
     isActive: boolean
 
 }

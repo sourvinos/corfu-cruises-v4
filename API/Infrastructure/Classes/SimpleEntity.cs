@@ -4,6 +4,7 @@ namespace API.Infrastructure.Classes {
 
         public int Id { get; set; }
         public string Description { get; set; }
+        public bool IsShownInCriteria { get; set; }
 
     }
 

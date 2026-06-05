@@ -270,6 +270,7 @@ export class ReceiptListComponent {
             record.date = {
                 id: this.dateHelperService.convertIsoDateToUnixTime(record.date.toString()),
                 description: this.formatDateToLocale(record.date.toString()),
+                isShownInCriteria: true,
                 isActive: true
             }
         })

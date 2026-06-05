@@ -44,6 +44,10 @@
                 </mat-form-field>
             </div>
             <div class="stacked-checkboxes">
+                <!-- Criteria -->
+                <mat-checkbox formControlName="isShownInCriteria">
+                    <span>{{ getLabel("isShownInCriteria") }}</span>
+                </mat-checkbox>
                 <!-- Active -->
                 <mat-checkbox formControlName="isActive">
                     <span>{{ getLabel("isActive") }}</span>

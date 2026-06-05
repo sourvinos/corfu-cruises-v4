@@ -94,6 +94,7 @@ export class PortFormComponent {
             description: this.form.value.description,
             locode: this.form.value.locode,
             stopOrder: this.form.value.stopOrder,
+            isShownInCriteria: this.form.value.isShownInCriteria,
             isActive: this.form.value.isActive,
             putAt: this.form.value.putAt
         }
@@ -131,6 +132,7 @@ export class PortFormComponent {
             description: ['', [Validators.required, Validators.maxLength(128)]],
             locode: ['', [Validators.required, ValidationService.shouldBeFiveCapitalLetters, Validators.minLength(5), Validators.maxLength(5)]],
             stopOrder: [0, [Validators.required, Validators.min(1), Validators.max(9)]],
+            isShownInCriteria: true,
             isActive: true,
             postAt: [''],
             postUser: [''],
@@ -147,6 +149,7 @@ export class PortFormComponent {
                 description: this.record.description,
                 locode: this.record.locode,
                 stopOrder: this.record.stopOrder,
+                isShownInCriteria: this.record.isShownInCriteria,
                 isActive: this.record.isActive,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,

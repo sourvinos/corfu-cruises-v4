@@ -5,6 +5,7 @@ export interface DestinationViewModel {
     id: number
     description: string
     abbreviation: string
+    isShownInCriteria: boolean
     isActive: boolean
 
     ports: PortViewModel[]

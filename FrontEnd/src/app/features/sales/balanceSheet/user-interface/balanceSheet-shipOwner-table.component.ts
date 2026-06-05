@@ -18,7 +18,7 @@ export class BalanceSheetShipOwnerTableComponent {
     //#region variables
 
     @ViewChild('table') table: Table
-    
+
     @Input() records: BalanceSheetVM[]
     @Input() criteria: BalanceSheetCriteriaVM
 
@@ -54,8 +54,8 @@ export class BalanceSheetShipOwnerTableComponent {
 
     private calculateTotals(): void {
         this.totals = {
-            customer: { id: 0, description: '', isActive: true },
-            shipOwner: { id: 0, description: '', isActive: true },
+            customer: { id: 0, description: '', isShownInCriteria: true, isActive: true },
+            shipOwner: { id: 0, description: '', isShownInCriteria: true, isActive: true },
             previousBalance: this.records.reduce((sum: number, array: { previousBalance: number }) => sum + array.previousBalance, 0),
             debit: this.records.reduce((sum: number, array: { debit: number }) => sum + array.debit, 0),
             credit: this.records.reduce((sum: number, array: { credit: number }) => sum + array.credit, 0),

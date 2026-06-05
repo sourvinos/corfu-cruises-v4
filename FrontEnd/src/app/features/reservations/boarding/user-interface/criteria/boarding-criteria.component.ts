@@ -89,6 +89,7 @@ export class BoardingCriteriaComponent {
             x.push(new FormControl({
                 'id': element.id,
                 'description': element.description,
+                'isShownInCriteria': element.isShownInCriteria,
                 'isActive': element.isActive
             }))
         })
@@ -128,14 +129,14 @@ export class BoardingCriteriaComponent {
     }
 
     private populateDropdowns(): void {
-        this.populateDropdownFromDexieDB('destinationsCriteria', 'description')
-        this.populateDropdownFromDexieDB('portsCriteria', 'description')
-        this.populateDropdownFromDexieDB('shipsCriteria', 'description')
+        this.populateDropdownFromDexieDB('destinationsCriteria', true, 'description')
+        this.populateDropdownFromDexieDB('portsCriteria', true, 'description')
+        this.populateDropdownFromDexieDB('shipsCriteria', true, 'description')
     }
 
-    private populateDropdownFromDexieDB(dexieTable: string, orderBy: string): void {
+    private populateDropdownFromDexieDB(dexieTable: string, isShownCriteria: boolean, orderBy: string): void {
         this.dexieService.table(dexieTable).orderBy(orderBy).toArray().then((response) => {
-            this[dexieTable] = response
+            this[dexieTable] = isShownCriteria ? response.filter(x => x.isShownInCriteria) : response
         })
     }
 
@@ -145,7 +146,7 @@ export class BoardingCriteriaComponent {
             this.form.patchValue({
                 date: this.criteria.date,
                 selectedDestinations: this.addSelectedCriteriaFromStorage('selectedDestinations'),
-                selectedports: this.addSelectedCriteriaFromStorage('selectedPorts'),
+                selectedPorts: this.addSelectedCriteriaFromStorage('selectedPorts'),
                 selectedships: this.addSelectedCriteriaFromStorage('selectedShips'),
             })
         }

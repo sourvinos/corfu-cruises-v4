@@ -210,10 +210,6 @@
                 "description": "Περιγραφή"
             },
             {
-                "id": "headerIsLinkTwist",
-                "description": "LinkTwist"
-            },
-            {
                 "id": "headerLinkTwistAlias",
                 "description": "LinkTwist"
             },
@@ -247,8 +243,8 @@
                 "description": "LinkTwist"
             },
             {
-                "id": "isLinkTwist",
-                "description": "Αφορά LinkTwist"
+                "id": "isShownInCriteria",
+                "description": "Εμφανίζεται στα κριτήρια"
             },
             {
                 "id": "isActive",
@@ -487,6 +483,10 @@
             {
                 "id": "stopOrder",
                 "description": "Σειρά προσέγγισης"
+            },
+            {
+                "id": "isShownInCriteria",
+                "description": "Εμφανίζεται στα κριτήρια"
             },
             {
                 "id": "isActive",
@@ -1225,16 +1225,8 @@
                 "description": "Αρ. νηολογίου"
             },
             {
-                "id": "manager",
-                "description": "Δχστής"
-            },
-            {
-                "id": "managerInGreece",
-                "description": "Δχστής στην Ελλάδα"
-            },
-            {
-                "id": "agent",
-                "description": "Υπεύθυνοι ναυτικοί πράκτορες"
+                "id": "isShownInCriteria",
+                "description": "Εμφανίζεται στα κριτήρια"
             },
             {
                 "id": "isActive",

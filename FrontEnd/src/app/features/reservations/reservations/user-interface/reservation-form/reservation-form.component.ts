@@ -494,7 +494,7 @@ export class ReservationFormComponent {
 
     private populateDropdownFromDexieDB(form: string, dexieTable: string, filteredTable: string, formField: string, modelProperty: string, orderBy: string, excludeLinkTwist: boolean): void {
         this.dexieService.table(dexieTable).orderBy(orderBy).toArray().then((response) => {
-            this[dexieTable] = this.recordId == undefined ? excludeLinkTwist ? response.filter(x => x.isActive).filter(x => !x.isLinkTwist) : response.filter(x => x.isActive) : response
+            this[dexieTable] = this.recordId == undefined ? excludeLinkTwist ? response.filter(x => x.isActive) : response.filter(x => x.isActive) : response
             this[filteredTable] = this[form].get(formField).valueChanges.pipe(startWith(''), map(value => this.filterAutocomplete(dexieTable, modelProperty, value)))
         })
     }

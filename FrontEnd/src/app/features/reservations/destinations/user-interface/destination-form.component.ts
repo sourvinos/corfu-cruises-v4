@@ -92,8 +92,8 @@ export class DestinationFormComponent {
             abbreviation: this.form.value.abbreviation,
             description: this.form.value.description,
             linkedId: this.form.value.linkedId,
-            isLinkTwist: this.form.value.isLinkTwist,
             linkTwistAlias: this.form.value.linkTwistAlias,
+            isShownInCriteria: this.form.value.isShownInCriteria,
             isActive: this.form.value.isActive,
             putAt: this.form.value.putAt
         }
@@ -129,9 +129,9 @@ export class DestinationFormComponent {
             id: 0,
             abbreviation: ['', [Validators.required, Validators.maxLength(5)]],
             description: ['', [Validators.required, Validators.maxLength(128)]],
-            linkedId: [0, [Validators.required, Validators.min(1), Validators.max(99)]],
+            linkedId: [0, [Validators.required, Validators.min(0), Validators.max(99)]],
             linkTwistAlias: ['', [Validators.maxLength(128)]],
-            isLinkTwist: false,
+            isShownInCriteria: true,
             isActive: true,
             postAt: [''],
             postUser: [''],
@@ -148,7 +148,7 @@ export class DestinationFormComponent {
                 description: this.record.description,
                 linkedId: this.record.linkedId,
                 linkTwistAlias: this.record.linkTwistAlias,
-                isLinkTwist: this.record.isLinkTwist,
+                isShownInCriteria: this.record.isShownInCriteria,
                 isActive: this.record.isActive,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,
@@ -170,8 +170,8 @@ export class DestinationFormComponent {
                     'abbreviation': destination.abbreviation,
                     'description': destination.description,
                     'linkedId': destination.linkedId,
-                    'isLinkTwist': destination.isLinkTwist,
                     'linkTwistAlias': destination.linkTwistAlias,
+                    'isShownInCriteria': destination.isShownInCriteria,
                     'isActive': destination.isActive
                 })
                 this.helperService.doPostSaveFormTasks(this.messageDialogService.success(), 'ok', this.parentUrl, true)

@@ -210,10 +210,6 @@
                 "description": "Description"
             },
             {
-                "id": "headerIsLinkTwist",
-                "description": "LinkTwist"
-            },
-            {
                 "id": "headerLinkTwistAlias",
                 "description": "LinkTwist"
             },
@@ -247,8 +243,8 @@
                 "description": "LinkTwist"
             },
             {
-                "id": "isLinkTwist",
-                "description": "Refers to LinkTwist"
+                "id": "isShownInCriteria",
+                "description": "Shown in criteria"
             },
             {
                 "id": "isActive",
@@ -487,6 +483,10 @@
             {
                 "id": "stopOrder",
                 "description": "Approach order"
+            },
+            {
+                "id": "isShownInCriteria",
+                "description": "Shown in criteria"
             },
             {
                 "id": "isActive",
@@ -1225,16 +1225,8 @@
                 "description": "Registry no"
             },
             {
-                "id": "manager",
-                "description": "Manager"
-            },
-            {
-                "id": "managerInGreece",
-                "description": "Manager in Greece"
-            },
-            {
-                "id": "agent",
-                "description": "Shipping agents"
+                "id": "isShownInCriteria",
+                "description": "Εμφανίζεται στα κριτήρια"
             },
             {
                 "id": "isActive",

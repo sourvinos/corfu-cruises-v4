@@ -10,8 +10,8 @@ namespace API.Features.Reservations.Destinations {
         public string Abbreviation { get; set; }
         public string Description { get; set; }
         public int LinkedId { get; set; }
-        public bool IsLinkTwist { get; set; }
         public string LinkTwistAlias { get; set; }
+        public bool IsShownInCriteria { get; set; }
         public bool IsActive { get; set; }
         // Metadata
         public string PostAt { get; set; }

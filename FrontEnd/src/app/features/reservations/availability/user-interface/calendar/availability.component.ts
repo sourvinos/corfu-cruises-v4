@@ -1,5 +1,5 @@
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
-import { Component, HostListener } from '@angular/core'
+import { Component } from '@angular/core'
 import { DateAdapter } from '@angular/material/core'
 // Custom
 import { CryptoService } from 'src/app/shared/services/crypto.service'
@@ -50,16 +50,6 @@ export class AvailabilityComponent {
             }
         })
     }
-
-    //#region listeners
-
-    @HostListener('window:resize', ['$event']) onResize(): void {
-        this.storeDatePeriod().then(() => {
-            this.isSizeChanged = true
-        })
-    }
-
-    //#endregion
 
     //#region lifecycle hooks
 

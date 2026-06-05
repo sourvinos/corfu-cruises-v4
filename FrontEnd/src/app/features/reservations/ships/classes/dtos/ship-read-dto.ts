@@ -3,14 +3,12 @@ import { ShipOwnerBrowserStorageVM } from '../../../shipOwners/classes/view-mode
 
 export interface ShipReadDto extends Metadata {
 
-    // PK
     id: number
-    // Object fields
     shipOwner: ShipOwnerBrowserStorageVM
-    // Fields
     abbreviation: string
     description: string
     registryNo: string
+    isShownInCriteria: boolean
     isActive: boolean
 
 }

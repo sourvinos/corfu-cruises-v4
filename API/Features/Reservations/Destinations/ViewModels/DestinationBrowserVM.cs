@@ -4,7 +4,7 @@ namespace API.Features.Reservations.Destinations {
 
         public int Id { get; set; }
         public string Description { get; set; }
-        public bool IsLinkTwist { get; set; }
+        public bool IsShownInCriteria { get; set; }
         public bool IsActive { get; set; }
 
     }

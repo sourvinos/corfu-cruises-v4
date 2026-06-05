@@ -5,7 +5,6 @@ namespace API.Features.Reservations.Destinations {
         public int Id { get; set; }
         public string Abbreviation { get; set; }
         public string Description { get; set; }
-        public bool IsLinkTwist { get; set; }
         public string LinkTwistAlias { get; set; }
         public bool IsActive { get; set; }
 

@@ -4,8 +4,8 @@ export interface DestinationWriteDto {
     abbreviation: string
     description: string
     linkedId: number
-    isLinkTwist: boolean
     linkTwistAlias: string
+    isShownInCriteria: boolean
     isActive: boolean
     putAt: string
 

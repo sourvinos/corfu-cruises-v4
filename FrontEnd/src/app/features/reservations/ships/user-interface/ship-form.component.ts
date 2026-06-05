@@ -143,6 +143,7 @@ export class ShipFormComponent {
             abbreviation: this.form.value.abbreviation,
             shipOwnerId: this.form.value.shipOwner.id,
             registryNo: this.form.value.registryNo,
+            isShownInCriteria: this.form.value.isShownInCriteria,
             isActive: this.form.value.isActive,
             putAt: this.form.value.putAt
         }
@@ -180,6 +181,7 @@ export class ShipFormComponent {
             abbreviation: ['', [Validators.required, Validators.maxLength(5)]],
             shipOwner: ['', [Validators.required, ValidationService.RequireAutocomplete]],
             registryNo: ['', [Validators.maxLength(128)]],
+            isShownInCriteria: true,
             isActive: true,
             postAt: [''],
             postUser: [''],
@@ -208,6 +210,7 @@ export class ShipFormComponent {
                 shipOwner: { 'id': this.record.shipOwner.id, 'description': this.record.shipOwner.description },
                 registryNo: this.record.registryNo,
                 isActive: this.record.isActive,
+                isShownInCriteria: this.record.isShownInCriteria,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,
                 putAt: this.record.putAt,

@@ -1,14 +1,12 @@
 export interface PortWriteDto {
 
-    // PK
     id: number
-    // Fields
     abbreviation: string
     description: string
     locode: string
     stopOrder: number
+    isShownInCriteria: boolean
     isActive: boolean
-    // Rowversion
     putAt: string
 
 }

@@ -36,6 +36,10 @@
                 <mat-error *ngIf="!stopOrder.hasError('required') && stopOrder.hasError('min') || stopOrder.hasError('max')">{{ getHint("invalid") }}</mat-error>
             </mat-form-field>
             <div class="stacked-checkboxes">
+                <!-- Criteria -->
+                <mat-checkbox formControlName="isShownInCriteria">
+                    <span>{{ getLabel("isShownInCriteria") }}</span>
+                </mat-checkbox>
                 <!-- Active -->
                 <mat-checkbox formControlName="isActive">
                     <span>{{ getLabel("isActive") }}</span>

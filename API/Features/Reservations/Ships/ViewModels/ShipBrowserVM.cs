@@ -5,6 +5,7 @@ namespace API.Features.Reservations.Ships {
         public int Id { get; set; }
         public string Description { get; set; }
         public ShipOwnerBrowserVM ShipOwner { get; set; }
+        public bool IsShownInCriteria { get; set; }
         public bool IsActive { get; set; }
 
     }

@@ -97,6 +97,7 @@ export class ReservationHelperService {
                 port: {
                     id: form.port.id,
                     description: form.port.description,
+                    isShownInCriteria: true,
                     isActive: form.port.isActive
                 },
                 isActive: form.pickupPoint.isActive

@@ -54,7 +54,7 @@ export class RevenuesShipOwnerTableComponent {
 
     private calculateTotals(): void {
         this.totals = {
-            customer: { id: 0, description: '', isActive: true },
+            customer: { id: 0, description: '', isShownInCriteria: true, isActive: true },
             previous: this.records.reduce((sum: number, array: { previous: number }) => sum + array.previous, 0),
             debit: this.records.reduce((sum: number, array: { debit: number }) => sum + array.debit, 0),
             credit: this.records.reduce((sum: number, array: { credit: number }) => sum + array.credit, 0),

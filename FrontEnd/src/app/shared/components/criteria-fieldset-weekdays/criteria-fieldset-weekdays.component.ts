@@ -85,13 +85,13 @@ export class CriteriaFieldsetWeekdaysComponent {
 
     private populateWeekdays(): void {
         this.weekdays = [
-            { id: 0, description: this.messageCalendarService.getDescription('weekdays', '0'), isActive: true },
-            { id: 1, description: this.messageCalendarService.getDescription('weekdays', '1'), isActive: true },
-            { id: 2, description: this.messageCalendarService.getDescription('weekdays', '2'), isActive: true },
-            { id: 3, description: this.messageCalendarService.getDescription('weekdays', '3'), isActive: true },
-            { id: 4, description: this.messageCalendarService.getDescription('weekdays', '4'), isActive: true },
-            { id: 5, description: this.messageCalendarService.getDescription('weekdays', '5'), isActive: true },
-            { id: 6, description: this.messageCalendarService.getDescription('weekdays', '6'), isActive: true }
+            { id: 0, description: this.messageCalendarService.getDescription('weekdays', '0'), isShownInCriteria: true, isActive: true },
+            { id: 1, description: this.messageCalendarService.getDescription('weekdays', '1'), isShownInCriteria: true, isActive: true },
+            { id: 2, description: this.messageCalendarService.getDescription('weekdays', '2'), isShownInCriteria: true, isActive: true },
+            { id: 3, description: this.messageCalendarService.getDescription('weekdays', '3'), isShownInCriteria: true, isActive: true },
+            { id: 4, description: this.messageCalendarService.getDescription('weekdays', '4'), isShownInCriteria: true, isActive: true },
+            { id: 5, description: this.messageCalendarService.getDescription('weekdays', '5'), isShownInCriteria: true, isActive: true },
+            { id: 6, description: this.messageCalendarService.getDescription('weekdays', '6'), isShownInCriteria: true, isActive: true }
         ]
     }
 

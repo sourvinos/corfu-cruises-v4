@@ -36,9 +36,9 @@
                 <mat-error *ngIf="linkTwistAlias.hasError('maxlength')">{{ getHint("maxLength", linkTwistAlias.errors.maxlength.requiredLength) }}</mat-error>
             </mat-form-field>
             <div class="stacked-checkboxes">
-                <!-- IsLinkTwist -->
-                <mat-checkbox formControlName="isLinkTwist">
-                    <span>{{ getLabel("isLinkTwist") }}</span>
+                <!-- Criteria -->
+                <mat-checkbox formControlName="isShownInCriteria">
+                    <span>{{ getLabel("isShownInCriteria") }}</span>
                 </mat-checkbox>
                 <!-- Active -->
                 <mat-checkbox formControlName="isActive">

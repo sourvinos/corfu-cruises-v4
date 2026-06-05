@@ -60,7 +60,7 @@ namespace API.Infrastructure.ReservationQueueServices {
         private async Task UpdateQueue() {
             if (GetParameters().LinkTwistIsActive) {
                 var fromDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime());
-                var toDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(0));
+                var toDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(2));
                 using HttpClient httpClient = new();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
