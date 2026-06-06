@@ -165,6 +165,10 @@
                 "description": "Σχόλια"
             },
             {
+                "id": "isShownInCriteria",
+                "description": "Shown in criteria"
+            },
+            {
                 "id": "isActive",
                 "description": "Ενεργός"
             },

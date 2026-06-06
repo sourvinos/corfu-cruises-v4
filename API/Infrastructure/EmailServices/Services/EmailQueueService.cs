@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace API.Infrastructure.EmailServices {
 
@@ -69,6 +70,7 @@ namespace API.Infrastructure.EmailServices {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
                 await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.EmailSecondsDelay), stoppingToken);
+                Log.Information("Email Queue");
                 var x = await emailQueueRepo.GetFirstNotCompleted();
                 if (x != null) {
                     if (x.Initiator == "ResetPassword") { SendResetPassword(x); }

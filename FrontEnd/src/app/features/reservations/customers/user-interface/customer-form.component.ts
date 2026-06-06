@@ -200,6 +200,7 @@ export class CustomerFormComponent {
             balanceLimit: this.form.value.balanceLimit,
             paxLimit: this.form.value.paxLimit,
             remarks: this.form.value.remarks,
+            isShownInCriteria: this.form.value.isShownInCriteria,
             isActive: this.form.value.isActive,
             putAt: this.form.value.putAt
         }
@@ -254,6 +255,7 @@ export class CustomerFormComponent {
             balanceLimit: [0, [Validators.required, Validators.min(0), Validators.max(99999.99)]],
             paxLimit: [0, [Validators.required, Validators.min(0), Validators.max(999)]],
             remarks: ['', Validators.maxLength(2048)],
+            isShownInCriteria: true,
             isActive: true,
             postAt: [''],
             postUser: [''],
@@ -305,6 +307,7 @@ export class CustomerFormComponent {
                 balanceLimit: this.record.balanceLimit,
                 paxLimit: this.record.paxLimit,
                 remarks: this.record.remarks,
+                isShownInCriteria: this.record.isShownInCriteria,
                 isActive: this.record.isActive,
                 postAt: this.record.postAt,
                 postUser: this.record.postUser,
@@ -326,6 +329,7 @@ export class CustomerFormComponent {
                     'description': response.body.description,
                     'email': response.body.email,
                     'vatPercent': response.body.vatPercent,
+                    'isShownInCriteria': response.body.isShownInCriteria,
                     'isActive': response.body.isActive
                 })
                 this.helperService.doPostSaveFormTasks(

@@ -25,6 +25,7 @@ export interface CustomerWriteDto {
     balanceLimit: number
     paxLimit: number
     remarks: string
+    isShownInCriteria: boolean
     isActive: boolean
     // Metadata
     putAt: string

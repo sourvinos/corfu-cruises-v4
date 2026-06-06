@@ -110,7 +110,8 @@ export class BoardingCriteriaComponent {
         this.criteria[arrayName].forEach((element: any) => {
             x.push(new FormControl({
                 'id': element.id,
-                'description': element.description
+                'description': element.description,
+                'isShownInCriteria': element.isShownInCriteria
             }))
         })
     }

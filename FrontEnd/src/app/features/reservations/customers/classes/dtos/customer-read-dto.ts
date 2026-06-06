@@ -29,6 +29,7 @@ export interface CustomerReadDto extends Metadata {
     balanceLimit: number
     paxLimit: number
     remarks: string
+    isShownInCriteria: boolean
     isActive: boolean
     // Metadata
     postAt: string

@@ -15,6 +15,7 @@ using API.Infrastructure.Helpers;
 using AutoMapper;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace API.Infrastructure.ReservationQueueServices {
 
@@ -52,6 +53,7 @@ namespace API.Infrastructure.ReservationQueueServices {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
                 await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
+                Log.Information("Reservation Queue");
                 await UpdateQueue();
                 await ProcessQueue();
             }

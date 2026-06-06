@@ -30,6 +30,7 @@ namespace API.Features.Reservations.Customers {
         public decimal BalanceLimit { get; set; }
         public int PaxLimit { get; set; }
         public string Remarks { get; set; }
+        public bool IsShownInCriteria { get; set; }
         public bool IsActive { get; set; }
         // Metadata
         public string PostAt { get; set; }
