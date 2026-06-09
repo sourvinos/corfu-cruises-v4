@@ -98,7 +98,7 @@ namespace API {
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
             services.Configure<HostOptions>(hostOptions => { hostOptions.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
             services.AddHostedService<EmailQueueService>();
-            // services.AddHostedService<ReservationQueueService>();
+            services.AddHostedService<ReservationQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

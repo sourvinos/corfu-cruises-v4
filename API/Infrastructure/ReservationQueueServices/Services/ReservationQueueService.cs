@@ -23,25 +23,24 @@ namespace API.Infrastructure.ReservationQueueServices {
 
         #region variables
 
+        private readonly AppDbContext context;
+        private readonly IMapper mapper;
         private readonly EnvironmentSettings environmentSettings;
         private readonly ICustomerRepository customerRepo;
         private readonly IDestinationRepository destinationRepo;
-        private readonly IMapper mapper;
         private readonly IPickupPointRepository pickupPointRepo;
         private readonly IReservationParametersRepository parametersRepo;
         private readonly IReservationQueueRepository reservationQueueRepo;
         private readonly IReservationUpdateRepository reservationUpdateRepo;
         private readonly IReservationValidation reservationValidation;
-        protected readonly AppDbContext context;
 
         #endregion
 
-        public ReservationQueueService(AppDbContext context, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, IReservationQueueRepository reservationQueueRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation) {
+        public ReservationQueueService(AppDbContext context, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, IReservationQueueRepository reservationQueueRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation) {
             this.context = context; this.customerRepo = customerRepo;
-            this.destinationRepo = destinationRepo;
-            this.environmentSettings = environmentSettings.Value;
-            this.environmentSettings = environmentSettings.Value;
             this.mapper = mapper;
+            this.environmentSettings = environmentSettings.Value;
+            this.destinationRepo = destinationRepo;
             this.parametersRepo = parametersRepo;
             this.parametersRepo = parametersRepo;
             this.pickupPointRepo = pickupPointRepo;
