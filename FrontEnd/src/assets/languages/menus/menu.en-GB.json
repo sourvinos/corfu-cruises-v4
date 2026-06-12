@@ -132,7 +132,7 @@
         "description": "Εσοδα πωλήσεων"
     },
     {
-        "id": "sales-parameters",
+        "id": "sale-parameters",
         "description": "Παράμετροι"
     }
 ]

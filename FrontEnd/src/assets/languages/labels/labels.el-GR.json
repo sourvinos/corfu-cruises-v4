@@ -4125,5 +4125,34 @@
                 "description": "Κατάσταση"
             }
         ]
+    },
+    {
+        "feature": "saleparameters",
+        "labels": [
+            {
+                "id": "header",
+                "description": "Παράμετροι πωλήσεων"
+            },
+            {
+                "id": "tab1",
+                "description": "Γενικά"
+            },
+            {
+                "id": "emailInvoicesIsActive",
+                "description": "Αποστολή παραστατικών με email"
+            },
+            {
+                "id": "post",
+                "description": "Αρχική καταχώριση"
+            },
+            {
+                "id": "put",
+                "description": "Τελευταία ενημέρωση"
+            },
+            {
+                "id": "saveButton",
+                "description": "Αποθηκευση"
+            }
+        ]
     }
 ]

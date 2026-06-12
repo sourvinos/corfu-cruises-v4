@@ -22,7 +22,6 @@ using API.Features.Reservations.IdentityDocuments;
 using API.Features.Reservations.Ledgers;
 using API.Features.Reservations.Manifest;
 using API.Features.Reservations.Nationalities;
-using API.Features.Reservations.Parameters;
 using API.Features.Reservations.PickupPoints;
 using API.Features.Reservations.Ports;
 using API.Features.Reservations.Reservations;
@@ -38,6 +37,8 @@ using API.Infrastructure.Account;
 using API.Infrastructure.EmailServices;
 using API.Features.Reservations.PickupPointsLinkTwist;
 using API.Infrastructure.ReservationQueueServices;
+using API.Features.Reservations.Parameters;
+using API.Features.Sales.Parameters;
 
 namespace API.Infrastructure.Extensions {
 
@@ -72,8 +73,8 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IReservationCalculatePaxLimit, ReservationCalculatePaxLimit>();
             services.AddTransient<IReservationCalendar, ReservationCalendar>();
             services.AddTransient<IReservationCloneRepository, ReservationCloneRepository>();
-            services.AddTransient<IReservationParameterValidation, ParameterValidation>();
-            services.AddTransient<IReservationParametersRepository, ParametersRepository>();
+            services.AddTransient<IReservationParameterValidation, ReservationParameterValidation>();
+            services.AddTransient<IReservationParametersRepository, ReservationParametersRepository>();
             services.AddTransient<IReservationQueueRepository, ReservationQueueRepository>();
             services.AddTransient<IReservationReadRepository, ReservationReadRepository>();
             services.AddTransient<IReservationSendToEmail, ReservationSendToEmail>();
@@ -122,6 +123,8 @@ namespace API.Infrastructure.Extensions {
             services.AddTransient<IReceiptRepository, ReceiptRepository>();
             services.AddTransient<IReceiptValidation, ReceiptValidation>();
             services.AddTransient<IRevenuesRepository, RevenuesRepository>();
+            services.AddTransient<ISaleParameterValidation, SaleParameterValidation>();
+            services.AddTransient<ISaleParametersRepository, SaleParametersRepository>();
             services.AddTransient<ITaxOfficeRepository, TaxOfficeRepository>();
             services.AddTransient<ITaxOfficeValidation, TaxOfficeValidation>();
             #endregion

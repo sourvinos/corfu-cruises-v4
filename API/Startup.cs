@@ -1,10 +1,12 @@
 using System;
 using API.Infrastructure.Auth;
 using API.Infrastructure.Classes;
+using API.Infrastructure.EmailServices;
 using API.Infrastructure.Extensions;
 using API.Infrastructure.Helpers;
 using API.Infrastructure.Middleware;
 using API.Infrastructure.QueueServices;
+using API.Infrastructure.ReservationQueueServices;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -96,7 +98,8 @@ namespace API {
             services.Configure<TokenSettings>(options => Configuration.GetSection("TokenSettings").Bind(options));
             services.Configure<TestingEnvironment>(options => Configuration.GetSection("TestingEnvironment").Bind(options));
             services.Configure<HostOptions>(hostOptions => { hostOptions.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
-            services.AddHostedService<QueueService>();
+            services.AddHostedService<EmailQueueService>();
+            services.AddHostedService<ReservationQueueService>();
         }
 
         public void ConfigureLocalDevelopment(IApplicationBuilder app) {

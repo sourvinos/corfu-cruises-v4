@@ -9,9 +9,9 @@ using Microsoft.Extensions.Options;
 
 namespace API.Features.Reservations.Parameters {
 
-    public class ParametersRepository : Repository<ReservationParameter>, IReservationParametersRepository {
+    public class ReservationParametersRepository : Repository<ReservationParameter>, IReservationParametersRepository {
 
-        public ParametersRepository(AppDbContext appDbContext, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> boosettings, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, boosettings, userManager) { }
+        public ReservationParametersRepository(AppDbContext appDbContext, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> boosettings, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, boosettings, userManager) { }
 
         public async Task<ReservationParameter> GetAsync() {
             return await context.ReservationParameters

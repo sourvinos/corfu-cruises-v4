@@ -13,6 +13,7 @@ using API.Features.Reservations.Reservations;
 using API.Infrastructure.Classes;
 using API.Infrastructure.Helpers;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Serilog;
@@ -37,7 +38,8 @@ namespace API.Infrastructure.ReservationQueueServices {
         #endregion
 
         public ReservationQueueService(AppDbContext context, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, ICustomerRepository customerRepo, IDestinationRepository destinationRepo, IPickupPointRepository pickupPointRepo, IReservationParametersRepository parametersRepo, IReservationQueueRepository reservationQueueRepo, IReservationUpdateRepository reservationUpdateRepo, IReservationValidation reservationValidation) {
-            this.context = context; this.customerRepo = customerRepo;
+            this.context = context;
+            this.customerRepo = customerRepo;
             this.mapper = mapper;
             this.environmentSettings = environmentSettings.Value;
             this.destinationRepo = destinationRepo;
@@ -50,11 +52,13 @@ namespace API.Infrastructure.ReservationQueueServices {
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
-            while (!stoppingToken.IsCancellationRequested) {
-                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
-                Log.Information("Reservation Queue");
-                await UpdateQueue();
-                await ProcessQueue();
+            if (context.ReservationParameters.AsNoTracking().FirstOrDefault().LinkTwistIsActive) {
+                while (!stoppingToken.IsCancellationRequested) {
+                    await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
+                    Log.Information("Reservation Queue");
+                    await UpdateQueue();
+                    await ProcessQueue();
+                }
             }
         }
 

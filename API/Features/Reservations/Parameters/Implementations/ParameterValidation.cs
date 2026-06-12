@@ -7,9 +7,9 @@ using Microsoft.Extensions.Options;
 
 namespace API.Features.Reservations.Parameters {
 
-    public class ParameterValidation : Repository<ReservationParameter>, IReservationParameterValidation {
+    public class ReservationParameterValidation : Repository<ReservationParameter>, IReservationParameterValidation {
 
-        public ParameterValidation(AppDbContext appDbContext, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) { }
+        public ReservationParameterValidation(AppDbContext appDbContext, IHttpContextAccessor httpContext, IOptions<TestingEnvironment> settings, UserManager<UserExtended> userManager) : base(appDbContext, httpContext, settings, userManager) { }
 
         public int IsValid(ReservationParameter z, ParameterWriteDto parameter) {
             return true switch {

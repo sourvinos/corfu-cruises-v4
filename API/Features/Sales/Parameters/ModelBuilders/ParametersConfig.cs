@@ -1,17 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace API.Features.Reservations.Parameters {
+namespace API.Features.Sales.Parameters {
 
-    internal class ReservationParametersConfig : IEntityTypeConfiguration<ReservationParameter> {
+    internal class SaleParametersConfig : IEntityTypeConfiguration<SaleParameter> {
 
-        public void Configure(EntityTypeBuilder<ReservationParameter> entity) {
+        public void Configure(EntityTypeBuilder<SaleParameter> entity) {
             // PK
             entity.Property(x => x.Id).ValueGeneratedOnAdd();
-            // Fields
-            entity.Property(x => x.ClosingTime).HasMaxLength(5).IsRequired(true);
-            entity.Property(x => x.Phones).HasMaxLength(128).IsRequired(true);
-            entity.Property(x => x.Email).HasMaxLength(128).IsRequired(true);
             // Metadata
             entity.Property(x => x.PostAt).HasMaxLength(19).IsRequired(true);
             entity.Property(x => x.PostUser).HasMaxLength(255).IsRequired(true);

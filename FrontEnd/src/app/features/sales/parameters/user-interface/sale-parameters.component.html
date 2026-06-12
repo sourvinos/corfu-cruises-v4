@@ -1,0 +1,35 @@
+<div id="form-wrapper">
+
+    <div id="content">
+
+        <div id="header">
+            <home-button-and-title [feature]="feature" [featureIcon]="featureIcon" [icon]="icon" [parentUrl]="parentUrl"></home-button-and-title>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <mat-tab-group mat-stretch-tabs="false">
+                <mat-tab label="{{ getLabel('tab1') }}">
+                    <div class="stacked-checkboxes">
+                        <mat-checkbox formControlName="emailInvoicesIsActive">
+                            <span>{{ getLabel("emailInvoicesIsActive") }}</span>
+                        </mat-checkbox>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+            <div class="align-bottom">
+                <metadata-panel [feature]="feature" [postAt]="form.value.postAt" [postUser]="form.value.postUser" [putAt]="form.value.putAt" [putUser]="form.value.putUser"></metadata-panel>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <div id="align-right">
+            <button (click)="onSave()" [disabled]="!form.valid" class="primary" mat-flat-button>
+                <mat-icon *ngIf="!form.valid" class="material-icons-outlined">lock</mat-icon>
+                <span>{{ getLabel("saveButton") | uppercase }}</span>
+            </button>
+        </div>
+    </div>
+
+</div>

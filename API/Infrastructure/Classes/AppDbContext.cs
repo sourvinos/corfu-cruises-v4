@@ -31,6 +31,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using API.Infrastructure.ReservationQueueServices;
+using API.Features.Sales.Parameters;
 
 namespace API.Infrastructure.Classes {
 
@@ -73,6 +74,7 @@ namespace API.Infrastructure.Classes {
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
+        public DbSet<SaleParameter> SaleParameters { get; set; }
         public DbSet<TaxOffice> TaxOffices { get; set; }
         public DbSet<TransactionsBase> Transactions { get; set; }
 
@@ -99,7 +101,7 @@ namespace API.Infrastructure.Classes {
             modelBuilder.ApplyConfiguration(new DestinationsConfig());
             modelBuilder.ApplyConfiguration(new DriversConfig());
             modelBuilder.ApplyConfiguration(new IdentityDocumentsConfig());
-            modelBuilder.ApplyConfiguration(new ParametersConfig());
+            modelBuilder.ApplyConfiguration(new ReservationParametersConfig());
             modelBuilder.ApplyConfiguration(new PassengersConfig());
             modelBuilder.ApplyConfiguration(new PickupPointsConfig());
             modelBuilder.ApplyConfiguration(new PortsConfig());
@@ -117,7 +119,7 @@ namespace API.Infrastructure.Classes {
             modelBuilder.ApplyConfiguration(new InvoicesAadeConfig());
             modelBuilder.ApplyConfiguration(new InvoicesConfig());
             modelBuilder.ApplyConfiguration(new InvoicesPortsConfig());
-            modelBuilder.ApplyConfiguration(new ParametersConfig());
+            modelBuilder.ApplyConfiguration(new SaleParametersConfig());
             modelBuilder.ApplyConfiguration(new PaymentMethodsConfig());
             modelBuilder.ApplyConfiguration(new PricesConfig());
             modelBuilder.ApplyConfiguration(new ReceiptsConfig());

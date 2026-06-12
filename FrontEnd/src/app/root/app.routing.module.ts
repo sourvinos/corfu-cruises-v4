@@ -50,8 +50,9 @@ const appRoutes: Routes = [
     { path: 'paymentMethods', loadChildren: () => import('../features/sales/paymentMethods/classes/modules/paymentMethod.module').then(m => m.PaymentMethodModule) },
     { path: 'prices', loadChildren: () => import('../features/sales/prices/classes/modules/price.module').then(m => m.PriceModule) },
     { path: 'receipts', loadChildren: () => import('../features/sales/receipts/classes/modules/receipt.module').then(m => m.ReceiptModule) },
-    { path: 'taxOffices', loadChildren: () => import('../features/sales/taxOffices/classes/modules/taxOffice.module').then(m => m.TaxOfficeModule) },
     { path: 'revenues', loadChildren: () => import('../features/sales/revenues/classes/modules/revenues.module').then(m => m.RevenuesModule) },
+    { path: 'sale-parameters', loadChildren: () => import('../features/sales/parameters/classes/modules/sale-parameters.module').then(m => m.SaleParametersModule) },
+    { path: 'taxOffices', loadChildren: () => import('../features/sales/taxOffices/classes/modules/taxOffice.module').then(m => m.TaxOfficeModule) },
     // CheckIn
     { path: 'checkIn', loadChildren: () => import('../features/check-in/classes/modules/check-in.module').then(m => m.CheckInModule) },
     // Empty

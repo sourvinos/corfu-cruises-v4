@@ -10,6 +10,7 @@ using API.Features.Sales.Invoices;
 using API.Features.Sales.Ledgers;
 using API.Features.Sales.Receipts;
 using API.Infrastructure.Account;
+using API.Infrastructure.Classes;
 using API.Infrastructure.Helpers;
 using API.Infrastructure.Responses;
 using API.Infrastructure.Users;
@@ -27,6 +28,7 @@ namespace API.Infrastructure.EmailServices {
 
         #region variables
 
+        private readonly AppDbContext context;
         private readonly EnvironmentSettings environmentSettings;
         private readonly ICheckInSendToEmail checkInSendToEmail;
         private readonly IEmailAccountSender emailAccountSender;
@@ -47,7 +49,8 @@ namespace API.Infrastructure.EmailServices {
 
         #endregion
 
-        public EmailQueueService(ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailInvoiceSender emailInvoiceSender, IEmailQueueRepository queueRepo, IEmailReceiptSender emailReceiptSender, IEmailUserDetailsSender emailUserDetailsSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, IInvoiceUpdateRepository invoiceUpdateRepo, ILedgerEmailSender emailSender, ILedgerPdfBuilder ledgerPdfBuilder, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
+        public EmailQueueService(AppDbContext context, ICheckInSendToEmail checkInSendToEmail, IEmailAccountSender emailAccountSender, IEmailInvoiceSender emailInvoiceSender, IEmailQueueRepository queueRepo, IEmailReceiptSender emailReceiptSender, IEmailUserDetailsSender emailUserDetailsSender, IInvoicePdfRepository invoicePdfRepo, IInvoiceReadRepository invoiceReadRepo, IInvoiceUpdateRepository invoiceUpdateRepo, ILedgerEmailSender emailSender, ILedgerPdfBuilder ledgerPdfBuilder, IMapper mapper, IOptions<EnvironmentSettings> environmentSettings, IReceiptPdfRepository receiptPdfRepo, IReceiptRepository receiptRepo, IReservationReadRepository reservationReadRepo, UserManager<UserExtended> userManager) {
+            this.context = context;
             this.checkInSendToEmail = checkInSendToEmail;
             this.emailAccountSender = emailAccountSender;
             this.emailInvoiceSender = emailInvoiceSender;
@@ -68,17 +71,19 @@ namespace API.Infrastructure.EmailServices {
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
-            while (!stoppingToken.IsCancellationRequested) {
-                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.EmailSecondsDelay), stoppingToken);
-                Log.Information("Email Queue");
-                var x = await emailQueueRepo.GetFirstNotCompleted();
-                if (x != null) {
-                    if (x.Initiator == "ResetPassword") { SendResetPassword(x); }
-                    if (x.Initiator == "UserDetails") { await SendUserDetailsAsync(x); }
-                    if (x.Initiator == "CheckIn" || x.Initiator == "Reservation") { await SendReservationAsync(x); }
-                    if (x.Initiator == "Invoices") { await DoInvoiceTasks(x); }
-                    if (x.Initiator == "Receipts") { await DoReceiptTasks(x); }
-                    if (x.Initiator == "SaleLedgers") { await SendLedgerAsync(x); }
+            if (context.SaleParameters.AsNoTracking().FirstOrDefault().EmailInvoicesIsActive) {
+                while (!stoppingToken.IsCancellationRequested) {
+                    await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.EmailSecondsDelay), stoppingToken);
+                    Log.Information("Email Queue");
+                    var x = await emailQueueRepo.GetFirstNotCompleted();
+                    if (x != null) {
+                        if (x.Initiator == "ResetPassword") { SendResetPassword(x); }
+                        if (x.Initiator == "UserDetails") { await SendUserDetailsAsync(x); }
+                        if (x.Initiator == "CheckIn" || x.Initiator == "Reservation") { await SendReservationAsync(x); }
+                        if (x.Initiator == "Invoices") { await DoInvoiceTasks(x); }
+                        if (x.Initiator == "Receipts") { await DoReceiptTasks(x); }
+                        if (x.Initiator == "SaleLedgers") { await SendLedgerAsync(x); }
+                    }
                 }
             }
         }
