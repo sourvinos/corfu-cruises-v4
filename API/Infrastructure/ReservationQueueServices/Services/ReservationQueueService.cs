@@ -52,9 +52,9 @@ namespace API.Infrastructure.ReservationQueueServices {
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
-            if (context.ReservationParameters.AsNoTracking().FirstOrDefault().LinkTwistIsActive) {
-                while (!stoppingToken.IsCancellationRequested) {
-                    await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
+            while (!stoppingToken.IsCancellationRequested) {
+                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
+                if (context.ReservationParameters.AsNoTracking().FirstOrDefault().LinkTwistIsActive) {
                     Log.Information("Reservation Queue");
                     await UpdateQueue();
                     await ProcessQueue();

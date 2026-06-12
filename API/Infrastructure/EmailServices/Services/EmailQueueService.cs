@@ -71,9 +71,9 @@ namespace API.Infrastructure.EmailServices {
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
-            if (context.SaleParameters.AsNoTracking().FirstOrDefault().EmailInvoicesIsActive) {
-                while (!stoppingToken.IsCancellationRequested) {
-                    await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.EmailSecondsDelay), stoppingToken);
+            while (!stoppingToken.IsCancellationRequested) {
+                await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.EmailSecondsDelay), stoppingToken);
+                if (context.SaleParameters.AsNoTracking().FirstOrDefault().EmailInvoicesIsActive) {
                     Log.Information("Email Queue");
                     var x = await emailQueueRepo.GetFirstNotCompleted();
                     if (x != null) {
