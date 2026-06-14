@@ -17,7 +17,7 @@ namespace API.Infrastructure.ReservationQueueServices {
 
         public async Task<ReservationQueue> GetFirstNotImported() {
             return await context.ReservationQueues
-                .OrderBy(x => x.PostAt)
+                .OrderBy(x => x.Date)
                 .FirstOrDefaultAsync(x => x.IsImported == 0);
         }
 

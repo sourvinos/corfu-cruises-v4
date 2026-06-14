@@ -65,7 +65,7 @@ namespace API.Infrastructure.ReservationQueueServices {
         private async Task UpdateQueue() {
             if (GetParameters().LinkTwistIsActive) {
                 var fromDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime());
-                var toDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(2));
+                var toDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(150));
                 using HttpClient httpClient = new();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Add("API-Key", GetParameters().APIKey);
@@ -76,6 +76,7 @@ namespace API.Infrastructure.ReservationQueueServices {
                         if (reservationQueueRepo.GetByCode(item.Code).Result == null) {
                             reservationQueueRepo.Create(new ReservationQueue {
                                 Code = item.Code,
+                                Date = item.Details.FirstOrDefault().Date,
                                 IsImported = 0,
                                 PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime())
                             });
@@ -130,6 +131,7 @@ namespace API.Infrastructure.ReservationQueueServices {
                             PutUser = "linktwist",
                             Notes = i.Notes ?? "",
                         };
+                        // Reservation imported
                         var q = mapper.Map<ReservationWriteDto, Reservation>(z);
                         using var transaction = await context.Database.BeginTransactionAsync();
                         context.Add(q);
@@ -137,12 +139,14 @@ namespace API.Infrastructure.ReservationQueueServices {
                         await context.SaveChangesAsync();
                         transaction.Commit();
                     } else {
+                        // Reservation validation failed
                         using var transaction = await context.Database.BeginTransactionAsync();
                         x.IsImported = 2;
                         await context.SaveChangesAsync();
                         transaction.Commit();
                     }
                 } else {
+                    // Reservation already exists
                     using var transaction = await context.Database.BeginTransactionAsync();
                     x.IsImported = 3;
                     await context.SaveChangesAsync();

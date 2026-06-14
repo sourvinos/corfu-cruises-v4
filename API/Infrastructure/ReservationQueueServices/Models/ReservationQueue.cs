@@ -4,6 +4,7 @@ namespace API.Infrastructure.ReservationQueueServices {
 
         public int Id { get; set; }
         public string Code { get; set; }
+        public string Date { get; set; }
         public int IsImported { get; set; }
         public string PostAt { get; set; }
 
