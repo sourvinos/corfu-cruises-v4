@@ -57,10 +57,11 @@ namespace API.Features.Sales.Invoices {
             RazorLightEngine engine = new RazorLightEngineBuilder()
                 .UseEmbeddedResourcesProject(Assembly.GetEntryAssembly())
                 .Build();
-            return await engine.CompileRenderStringAsync("key", LoadEmailInvoiceTemplateFromFile(), new EmailInvoiceTemplateVM {
+            var x = await engine.CompileRenderStringAsync("key", LoadEmailInvoiceTemplateFromFile(), new EmailInvoiceTemplateVM {
                 Email = parametersRepo.GetAsync().Result.Email,
                 CompanyPhones = parametersRepo.GetAsync().Result.Phones,
             });
+            return x;
         }
 
         private static string LoadEmailInvoiceTemplateFromFile() {

@@ -54,17 +54,18 @@ namespace API.Infrastructure.ReservationQueueServices {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
                 await Task.Delay(TimeSpan.FromSeconds(value: environmentSettings.ReservationsSecondsDelay), stoppingToken);
-                if (context.ReservationParameters.AsNoTracking().FirstOrDefault().LinkTwistIsActive) {
-                    Log.Information("Reservation Queue");
-                    await UpdateQueue();
-                    await ProcessQueue();
+                if (DateHelpers.GetLocalDateTime().Hour < 8 && DateHelpers.GetLocalDateTime().Hour > 10) {
+                    if (context.ReservationParameters.AsNoTracking().FirstOrDefault().LinkTwistIsActive) {
+                        await UpdateQueue();
+                        await ProcessQueue();
+                    }
                 }
             }
         }
 
         private async Task UpdateQueue() {
             if (GetParameters().LinkTwistIsActive) {
-                var fromDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime());
+                var fromDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(-1));
                 var toDate = DateHelpers.DateToISOString(DateHelpers.GetLocalDateTime().AddDays(150));
                 using HttpClient httpClient = new();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -80,6 +81,7 @@ namespace API.Infrastructure.ReservationQueueServices {
                                 IsImported = 0,
                                 PostAt = DateHelpers.DateTimeToISOString(DateHelpers.GetLocalDateTime())
                             });
+                            Log.Information("Reservation queue updated");
                         }
                     }
                 }
@@ -138,12 +140,14 @@ namespace API.Infrastructure.ReservationQueueServices {
                         x.IsImported = 1;
                         await context.SaveChangesAsync();
                         transaction.Commit();
+                        Log.Information("Reservation queue processed with no errors");
                     } else {
                         // Reservation validation failed
                         using var transaction = await context.Database.BeginTransactionAsync();
                         x.IsImported = 2;
                         await context.SaveChangesAsync();
                         transaction.Commit();
+                        Log.Warning("Reservation queue processed with validtion errors " + x.Code);
                     }
                 } else {
                     // Reservation already exists
@@ -151,6 +155,7 @@ namespace API.Infrastructure.ReservationQueueServices {
                     x.IsImported = 3;
                     await context.SaveChangesAsync();
                     transaction.Commit();
+                    Log.Information("Reservation queue processed but reservation already exists");
                 }
             }
         }
